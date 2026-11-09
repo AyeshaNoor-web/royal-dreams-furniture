@@ -7,7 +7,6 @@ export const SITE = {
   instagramHandle: "@modern_furniture_interiors",
   instagramUrl: "https://www.instagram.com/modern_furniture_interiors",
   phones: [
-    { display: "050 597 2602", intl: "971505972602" },
     { display: "050 433 5872", intl: "971504335872" },
   ],
 } as const;
