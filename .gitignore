@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+
+# Client source photos (raw WhatsApp exports)
+WhatsApp*/
+
+# Local secrets and logs
+.env.local
+.env*.local
+*.log
+
+# Backup archives
+*.zip
