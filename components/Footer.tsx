@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-10">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 lg:gap-8">
           <div className="col-span-2 md:col-span-4">
-            <Image src="/brand/logo-lockup-gold.png" alt={SITE.name} width={458} height={434} className="h-32 w-auto mb-5" />
+            <Image src="/brand/logo-lockup-gold.png" alt={SITE.name} width={845} height={814} className="h-32 w-auto mb-5" />
             <p className="text-sm text-beige/55 leading-relaxed max-w-sm mb-6">
               Made-to-measure wall paneling, walk-in closets, fitted wardrobes and media walls, designed, built and installed for homes across the UAE.
             </p>
