@@ -1286,7 +1286,8 @@ export const categories: Category[] = [
       "src": "/images/dining-tables/dining-tables-01.jpg",
       "w": 1080,
       "h": 1350,
-      "alt": "Oval marble dining table with boucle chairs by the garden"
+      "alt": "Oval marble dining table with boucle chairs by the garden",
+          "type": "oval"
     },
     "images": [
       {
@@ -1299,111 +1300,130 @@ export const categories: Category[] = [
         "src": "/images/dining-tables/dining-tables-02.jpg",
         "w": 1080,
         "h": 1350,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Oval marble dining table with upholstered chairs",
+          "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-03.jpg",
         "w": 1079,
         "h": 1384,
-        "alt": "Oval marble dining table with vase styling"
+        "alt": "Oval marble dining table with vase styling",
+          "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-04.jpg",
         "w": 960,
         "h": 960,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Oval marble dining table with upholstered chairs",
+          "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-05.jpg",
         "w": 1080,
         "h": 1350,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Oval marble dining table with upholstered chairs",
+          "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-06.jpg",
         "w": 1024,
         "h": 1280,
-        "alt": "Round marble dining table with black fluted base"
+        "alt": "Round marble dining table with black fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-07.jpg",
         "w": 1026,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-08.jpg",
         "w": 1080,
         "h": 1350,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-09.jpg",
         "w": 1050,
         "h": 1400,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-10.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Oval marble dining table with upholstered chairs",
+          "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-11.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Oval marble dining table with upholstered chairs",
+          "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-12.jpg",
         "w": 1080,
         "h": 1350,
-        "alt": "Oval stone dining table with walnut chairs"
+        "alt": "Oval stone dining table with walnut chairs",
+          "type": "chairs"
       },
       {
         "src": "/images/dining-tables/dining-tables-13.jpg",
         "w": 1080,
         "h": 1343,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Upholstered dining chairs in boucle and walnut",
+          "type": "chairs"
       },
       {
         "src": "/images/dining-tables/dining-tables-14.jpg",
         "w": 1080,
         "h": 1350,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Upholstered dining chairs in boucle and walnut",
+          "type": "chairs"
       },
       {
         "src": "/images/dining-tables/dining-tables-15.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-16.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-17.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-18.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-19.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Marble-top dining table with upholstered chairs"
+        "alt": "Round stone dining table on a fluted base",
+          "type": "round"
       }
     ],
+    "types": [{"slug": "oval", "title": "Oval tables"}, {"slug": "round", "title": "Round tables"}, {"slug": "chairs", "title": "Dining chairs"}],
     "videos": []
   },
   {
@@ -1418,7 +1438,8 @@ export const categories: Category[] = [
       "src": "/images/curtains/curtains-01.jpg",
       "w": 1280,
       "h": 960,
-      "alt": "Wave curtains with sheer layer in a lit bedroom"
+      "alt": "Wave curtains with sheer layer in a lit bedroom",
+          "type": "wave"
     },
     "images": [
       {
@@ -1431,105 +1452,123 @@ export const categories: Category[] = [
         "src": "/images/curtains/curtains-02.jpg",
         "w": 1125,
         "h": 815,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Wave curtains fitted floor to ceiling",
+          "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-03.jpg",
         "w": 1094,
         "h": 1367,
-        "alt": "Pleated curtains on an arched window with pelmet"
+        "alt": "Pleated curtains on an arched window with pelmet",
+          "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-04.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Blue and beige curtains beneath a crystal chandelier"
+        "alt": "Blue and beige curtains beneath a crystal chandelier",
+          "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-05.jpg",
         "w": 1022,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Wave curtains fitted floor to ceiling",
+          "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-06.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Wave curtains fitted floor to ceiling",
+          "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-07.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-08.jpg",
         "w": 1024,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Pleated drapes with pelmet and tiebacks",
+          "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-09.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-10.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-11.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Wave curtains fitted floor to ceiling",
+          "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-12.jpg",
         "w": 1024,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Wave curtains fitted floor to ceiling",
+          "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-13.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-14.jpg",
         "w": 792,
         "h": 1024,
-        "alt": "Navy curtains with tiebacks and sheer panels"
+        "alt": "Navy curtains with tiebacks and sheer panels",
+          "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-15.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-16.jpg",
         "w": 1280,
         "h": 960,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-17.jpg",
         "w": 1024,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-18.jpg",
         "w": 960,
         "h": 1280,
-        "alt": "Floor-to-ceiling wave curtains with sheer layer"
+        "alt": "Sheer and blackout curtain layers on a ceiling track",
+          "type": "layered"
       }
     ],
+    "types": [{"slug": "wave", "title": "Wave curtains"}, {"slug": "layered", "title": "Sheer & blackout layers"}, {"slug": "classic", "title": "Classic drapes"}],
     "videos": [
       {
         "src": "/video/curtains/curtains-01.mp4",
@@ -1580,4 +1619,25 @@ export const featured = ["wall-paneling", "walk-in-closets", "tv-units", "fitted
 export const aboutImages = {
   primary: pick("wall-paneling", 2),
   secondary: pick("walk-in-closets", 0),
+};
+
+/** Tiles for a room: its collections, or one tile per sub-type when the room has a single collection. */
+export interface RoomTile {
+  key: string;
+  title: string;
+  short: string;
+  href: string;
+  image: GalleryImage;
+}
+export const roomTiles = (group: GroupSlug): RoomTile[] => {
+  const cats = categoriesInGroup(group);
+  if (cats.length >= 3 || !cats.some((c) => c.types?.length)) {
+    return cats.map((c) => ({ key: c.slug, title: c.title, short: c.short, href: "/collections/" + c.slug, image: c.cover }));
+  }
+  return cats.flatMap((c) =>
+    (c.types ?? []).map((t) => {
+      const image = c.images.find((img) => img.type === t.slug) ?? c.cover;
+      return { key: c.slug + "-" + t.slug, title: t.title, short: c.title, href: "/collections/" + c.slug + "?type=" + t.slug, image };
+    })
+  );
 };

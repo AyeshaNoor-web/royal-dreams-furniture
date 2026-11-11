@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { groups, categoriesInGroup } from "@/lib/gallery";
+import { groups, categoriesInGroup, roomTiles } from "@/lib/gallery";
 
 // Rooms with three or more collections take a full row; smaller rooms sit side by side.
 const rows: (typeof groups)[] = [];
@@ -31,7 +31,7 @@ export default function CategoryTiles() {
           {rows.map((row, ri) => (
             <div key={ri} className={row.length > 1 ? "grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-8" : ""}>
               {row.map((g) => {
-                const cats = categoriesInGroup(g.slug);
+                const tiles = roomTiles(g.slug);
                 const wide = row.length === 1;
                 return (
                   <div key={g.slug}>
@@ -39,15 +39,15 @@ export default function CategoryTiles() {
                       <h3 className="font-serif text-2xl text-charcoal">{g.title}</h3>
                       <p className="hidden text-[14px] text-taupe sm:block">{g.blurb}</p>
                     </div>
-                    <Stagger className={"grid gap-4 lg:gap-5 " + (wide ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5" : "grid-cols-1 sm:grid-cols-2")} stagger={0.06}>
-                      {cats.map((c) => (
-                        <StaggerItem key={c.slug}>
-                          <Link href={"/collections/" + c.slug} className="group block">
-                            <div className={"relative overflow-hidden bg-beige-dark " + (wide ? "aspect-[4/5]" : "aspect-[4/3]")}>
-                              <Image src={c.cover.src} alt={c.cover.alt} fill sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Stagger className={"grid gap-4 lg:gap-5 " + (wide ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5" : "grid-cols-2 sm:grid-cols-3")} stagger={0.06}>
+                      {tiles.map((t) => (
+                        <StaggerItem key={t.key}>
+                          <Link href={t.href} className="group block">
+                            <div className="relative aspect-[4/5] overflow-hidden bg-beige-dark">
+                              <Image src={t.image.src} alt={t.image.alt} fill sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                             </div>
-                            <p className="mt-4 font-serif text-lg text-charcoal leading-tight group-hover:text-gold-dark transition-colors">{c.title}</p>
-                            <p className="mt-1 text-[14px] text-taupe">{c.short}</p>
+                            <p className="mt-4 font-serif text-lg text-charcoal leading-tight group-hover:text-gold-dark transition-colors">{t.title}</p>
+                            <p className="mt-1 text-[14px] text-taupe">{t.short}</p>
                           </Link>
                         </StaggerItem>
                       ))}

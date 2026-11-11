@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/shared/PageHeader";
 import { CollectionCard } from "@/components/home/Collections";
 import CtaBand from "@/components/home/CtaBand";
-import { groups, categoriesInGroup } from "@/lib/gallery";
+import Image from "next/image";
+import Link from "next/link";
+import { groups, categoriesInGroup, roomTiles } from "@/lib/gallery";
 
 export const metadata: Metadata = {
   title: "Collections",
@@ -34,9 +36,23 @@ export default function CollectionsPage() {
                   <h2 className="font-serif text-display-md text-charcoal">{g.title}</h2>
                   <p className="text-[15px] text-taupe">{g.blurb}</p>
                 </div>
-                <div className={"grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 " + (row.length > 1 ? "" : "lg:grid-cols-3")}>
-                  {categoriesInGroup(g.slug).map((c, i) => <CollectionCard key={c.slug} item={c} priority={ri === 0 && i < 3} />)}
-                </div>
+                {row.length > 1 ? (
+                  <div className="grid grid-cols-3 gap-4 lg:gap-5">
+                    {roomTiles(g.slug).map((t) => (
+                      <Link key={t.key} href={t.href} className="group block">
+                        <div className="relative aspect-[3/4] overflow-hidden bg-beige-dark">
+                          <Image src={t.image.src} alt={t.image.alt} fill sizes="(min-width: 1024px) 16vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        </div>
+                        <p className="mt-3 font-serif text-xl group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{t.title}</p>
+                        <p className="text-[15px] text-taupe">{t.short}</p>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                    {categoriesInGroup(g.slug).map((c, i) => <CollectionCard key={c.slug} item={c} priority={ri === 0 && i < 3} />)}
+                  </div>
+                )}
               </div>
             ))}
           </div>
