@@ -27,7 +27,7 @@ export default function ContactPage() {
         intro="Send a photo or floor plan of the room and tell us what you have in mind. Our design team will reply within one working day with ideas, a time to measure and a quotation."
       />
 
-      <section className="pb-section">
+      <section className="pb-section pt-12 lg:pt-16">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
           {/* Left: the fastest route first, then every other way to reach us, then what to send */}
           <div className="flex flex-col gap-6 lg:col-span-5">
