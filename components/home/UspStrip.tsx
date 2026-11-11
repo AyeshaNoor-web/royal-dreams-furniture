@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-const DURATION = 3600;
+const DURATION = 4000;
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const items = [
   { title: "Made to measure", text: "Every piece produced for your room, floor to ceiling.", icon: "M4 20h16M6 20V8l6-4 6 4v12M10 20v-6h4v6" },
@@ -27,13 +28,23 @@ export default function UspStrip() {
   return (
     <section className="border-y border-border bg-beige-light" aria-label="Why choose us">
       <ol
-        className="relative mx-auto grid max-w-7xl grid-cols-2 px-6 lg:grid-cols-4 lg:px-10"
+        className="mx-auto grid max-w-7xl grid-cols-2 gap-2 px-4 py-3 lg:grid-cols-4 lg:gap-3 lg:px-8"
         onMouseLeave={() => setHeld(false)}
       >
         {items.map((it, i) => {
           const on = i === active;
           return (
             <li key={it.title} className="relative">
+              {/* Sliding highlight shared between items */}
+              {on && (
+                <motion.span
+                  layoutId="usp-highlight"
+                  transition={{ duration: 0.5, ease: EASE }}
+                  className="absolute inset-0 rounded-xl bg-beige/70 shadow-[inset_0_0_0_1px_rgba(212,184,168,0.6)]"
+                  aria-hidden="true"
+                />
+              )}
+
               <button
                 type="button"
                 onMouseEnter={() => { setActive(i); setHeld(true); }}
@@ -41,36 +52,59 @@ export default function UspStrip() {
                 onBlur={() => setHeld(false)}
                 onClick={() => { setActive(i); setHeld(true); }}
                 aria-pressed={on}
-                className={
-                  "group flex w-full items-start gap-4 py-6 pr-4 text-left transition-colors duration-500 lg:py-7 lg:pl-6 " +
-                  (i === 0 ? "lg:pl-0 " : "") +
-                  (on ? "text-charcoal" : "text-taupe hover:text-charcoal")
-                }
+                className={"relative flex w-full items-start gap-4 rounded-xl px-4 py-5 text-left transition-colors duration-500 lg:px-5 lg:py-6 " + (on ? "text-charcoal" : "text-taupe hover:text-charcoal")}
               >
-                <span
-                  className={
-                    "mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-all duration-500 " +
-                    (on ? "scale-105 border-gold bg-beige text-gold-dark shadow-[0_8px_20px_-12px_rgba(42,31,24,0.5)]" : "border-border bg-transparent text-taupe-light group-hover:border-gold")
-                  }
+                <motion.span
+                  animate={on ? { scale: 1.08, rotate: 0 } : { scale: 1, rotate: 0 }}
+                  whileHover={{ rotate: -6 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  className={"mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 " + (on ? "border-gold-dark bg-gold/40 text-charcoal" : "border-border text-taupe-light")}
                 >
                   <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d={it.icon} />
+                    {/* The active icon draws itself in */}
+                    <motion.path
+                      key={on ? "on" : "off"}
+                      d={it.icon}
+                      initial={on && !reduce ? { pathLength: 0, opacity: 0.4 } : { pathLength: 1, opacity: 1 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: "easeInOut" }}
+                    />
                   </svg>
-                </span>
+                </motion.span>
+
                 <span className="min-w-0">
-                  <span className="block font-dm text-[15px] font-medium leading-snug">{it.title}</span>
-                  <span className={"mt-1 block text-[13px] leading-relaxed transition-opacity duration-500 " + (on ? "opacity-100" : "opacity-70")}>{it.text}</span>
+                  <motion.span
+                    animate={{ y: on ? 0 : 2 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    className="block text-[15px] font-medium leading-snug"
+                  >
+                    {it.title}
+                  </motion.span>
+                  <motion.span
+                    animate={{ opacity: on ? 1 : 0.65, y: on ? 0 : 2 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    className="mt-1 block text-[13px] leading-relaxed"
+                  >
+                    {it.text}
+                  </motion.span>
                 </span>
               </button>
-              {/* Rail: a thin line under every item; the active one fills across its duration */}
-              <span className="absolute inset-x-0 bottom-0 h-px bg-border" aria-hidden="true" />
-              {on && (
-                <span
-                  key={active + (held ? "-held" : "")}
-                  className={"usp-progress absolute inset-x-0 bottom-0 h-[2px] bg-gold-dark " + (held ? "!animate-none !scale-x-100" : "")}
-                  aria-hidden="true"
-                />
-              )}
+
+              {/* Progress rail: fills across the item's time on screen, stays full while held */}
+              <span className="absolute inset-x-4 bottom-0 h-px bg-border lg:inset-x-5" aria-hidden="true" />
+              <AnimatePresence>
+                {on && (
+                  <motion.span
+                    key={held ? "held" : "run-" + active}
+                    initial={{ scaleX: held ? 1 : 0 }}
+                    animate={{ scaleX: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={held || reduce ? { duration: 0.3 } : { duration: DURATION / 1000, ease: "linear" }}
+                    className="absolute inset-x-4 bottom-0 h-[2px] origin-left bg-gold-dark lg:inset-x-5"
+                    aria-hidden="true"
+                  />
+                )}
+              </AnimatePresence>
             </li>
           );
         })}

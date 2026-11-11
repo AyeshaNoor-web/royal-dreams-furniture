@@ -166,13 +166,7 @@ h3, h4 { font-weight: 500; }
 }
 .hero-bg > * { position: relative; z-index: 1; }
 
-/* Trust flow: the four promises step through on their own; hover or tap takes over */
-.usp-progress {
-  transform-origin: left;
-  animation: usp-fill var(--usp-dur, 3600ms) linear forwards;
-}
-@keyframes usp-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@media (prefers-reduced-motion: reduce) { .usp-progress { animation: none; transform: scaleX(1); } }
+
 @keyframes hero-drift {
   from { transform: translateY(0); }
   to { transform: translateY(-50%); }
