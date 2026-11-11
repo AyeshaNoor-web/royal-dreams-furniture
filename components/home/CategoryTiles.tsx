@@ -29,24 +29,24 @@ function Tile({ t, sizes, className = "", priority = false }: { t: RoomTile; siz
 /** Full-width spread: heading and lead photo on one side, a cluster of smaller tiles on the other. */
 function Spread({ g, flip, first }: { g: Group; flip: boolean; first: boolean }) {
   const [lead, ...rest] = roomTiles(g.slug);
+  // Heading sits above the whole spread; below it the lead photo and the cluster share one height,
+  // so the two halves always finish on the same baseline.
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-      <div className={"flex flex-col lg:col-span-5 " + (flip ? "lg:order-2" : "")}>
-        <Reveal>
-          <h3 className="font-serif text-display-md text-charcoal">{g.title}</h3>
-          <p className="mt-2 max-w-sm text-[15px] text-taupe">{g.blurb}</p>
+    <div>
+      <Reveal className="mb-6">
+        <h3 className="font-serif text-display-md text-charcoal">{g.title}</h3>
+        <p className="mt-2 max-w-sm text-[15px] text-taupe">{g.blurb}</p>
+      </Reveal>
+      <div className="grid grid-cols-1 gap-4 lg:h-[640px] lg:grid-cols-12 lg:gap-6">
+        <Reveal delay={0.08} className={"lg:col-span-5 lg:h-full " + (flip ? "lg:order-2" : "")}>
+          <Tile t={lead} priority={first} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] lg:aspect-auto lg:h-full" />
         </Reveal>
-        <Reveal delay={0.08} className="mt-6 flex-1">
-          <Tile t={lead} priority={first} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] lg:h-full lg:min-h-[520px]" />
-        </Reveal>
-      </div>
-      <div className={"lg:col-span-7 " + (flip ? "lg:order-1" : "")}>
-        <div className="grid grid-cols-2 gap-4 lg:gap-6">
+        <div className={"grid grid-cols-2 gap-4 lg:col-span-7 lg:h-full lg:grid-rows-2 lg:gap-6 " + (flip ? "lg:order-1" : "")}>
           {rest.map((t, i) => {
             const wide = rest.length === 3 && i === 0;
             return (
-              <Reveal key={t.key} delay={0.12 + i * 0.06} className={wide ? "col-span-2" : ""}>
-                <Tile t={t} sizes="(min-width: 1024px) 30vw, 50vw" className={wide ? "aspect-[16/9]" : "aspect-[4/3]"} />
+              <Reveal key={t.key} delay={0.12 + i * 0.06} className={"lg:h-full " + (wide ? "col-span-2" : "")}>
+                <Tile t={t} sizes="(min-width: 1024px) 30vw, 50vw" className={"lg:aspect-auto lg:h-full " + (wide ? "aspect-[16/9]" : "aspect-[4/3]")} />
               </Reveal>
             );
           })}
@@ -65,13 +65,13 @@ function MiniSpread({ g }: { g: Group }) {
         <h3 className="font-serif text-display-md text-charcoal">{g.title}</h3>
         <p className="mt-2 max-w-sm text-[15px] text-taupe">{g.blurb}</p>
       </Reveal>
-      <div className="mt-6 grid grid-cols-12 gap-4 lg:gap-5">
-        <Reveal delay={0.08} className="col-span-7">
-          <Tile t={lead} sizes="(min-width: 1024px) 28vw, 58vw" className="aspect-[4/5]" />
+      <div className="mt-6 grid h-[460px] grid-cols-12 gap-4 sm:h-[520px] lg:gap-5">
+        <Reveal delay={0.08} className="col-span-7 h-full">
+          <Tile t={lead} sizes="(min-width: 1024px) 28vw, 58vw" className="h-full" />
         </Reveal>
-        <div className="col-span-5 grid grid-rows-2 gap-4 lg:gap-5">
+        <div className="col-span-5 grid h-full grid-rows-2 gap-4 lg:gap-5">
           {rest.map((t, i) => (
-            <Reveal key={t.key} delay={0.14 + i * 0.06} className="relative min-h-0">
+            <Reveal key={t.key} delay={0.14 + i * 0.06} className="h-full min-h-0">
               <Tile t={t} sizes="(min-width: 1024px) 20vw, 42vw" className="h-full" />
             </Reveal>
           ))}
