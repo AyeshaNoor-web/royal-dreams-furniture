@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import { categories } from "@/lib/gallery";
+import { pick } from "@/lib/gallery";
 
 const banners = [
-  { image: categories[1].images[2], eyebrow: "The Closet Edit", title: "Glass-front wardrobes with illuminated interiors", href: "/collections/walk-in-closets", cta: "Explore walk-in closets" },
-  { image: categories[4].images[0], eyebrow: "The Vanity Edit", title: "Dressing tables with mirrors and illuminated display", href: "/collections/dressing-tables", cta: "Explore dressing tables" },
+  { image: pick("sofas", 29), title: "Majlis seating made for the way you host", href: "/collections/sofas?type=majlis", cta: "Explore majlis & sofas" },
+  { image: pick("beds", 1), title: "Beds with the headboard wall built in", href: "/collections/beds", cta: "Explore beds" },
 ];
 
 export default function PromoBanners() {
@@ -19,9 +19,7 @@ export default function PromoBanners() {
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/75 via-charcoal/15 to-transparent" aria-hidden="true" />
               <div className="absolute inset-x-0 bottom-0 p-7 lg:p-9 text-beige-light">
                 <h3 className="font-serif text-2xl lg:text-3xl leading-tight max-w-md">{b.title}</h3>
-                <span className="btn-glass-light mt-5">
-                  {b.cta}
-                </span>
+                <span className="btn-glass-light mt-5">{b.cta}</span>
               </div>
             </Link>
           </Reveal>

@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Reveal from "@/components/motion/Reveal";
 import InstagramIcon from "@/components/icons/InstagramIcon";
-import { categories } from "@/lib/gallery";
+import { pick } from "@/lib/gallery";
 import { SITE } from "@/lib/site";
 
 const shots = [
-  categories[1].images[1],
-  categories[0].images[3],
-  categories[4].images[1],
-  categories[2].images[2],
-  categories[3].images[2],
-  categories[5].images[0],
+  pick("sofas", 23),
+  pick("beds", 4),
+  pick("dining-tables", 3),
+  pick("curtains", 3),
+  pick("walk-in-closets", 1),
+  pick("coffee-tables", 1),
 ];
 
 export default function InstagramStrip() {

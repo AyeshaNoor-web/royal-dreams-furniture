@@ -30,10 +30,16 @@ export const navLinks = [
 ];
 
 export const services = [
+  "Sofas & Majlis",
+  "Beds",
+  "Kids Beds",
+  "Dining Tables",
+  "Coffee Tables",
+  "Curtains",
+  "TV Units & Media Walls",
   "Wall Paneling",
   "Walk-in Closets",
   "Fitted Wardrobes",
-  "TV Units & Media Walls",
   "Dressing Tables",
   "Display Shelving",
   "Kitchen Cabinets",

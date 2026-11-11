@@ -1,40 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { categories, type GalleryImage } from "@/lib/gallery";
+import { pick, type GalleryImage } from "@/lib/gallery";
 import { APPOINTMENT_LINK } from "@/lib/site";
 
-interface Card {
-  image: GalleryImage;
-  label: string;
-  note: string;
-}
-
 // Two streams of project cards. Each list is rendered twice so the CSS loop is seamless.
-const streamA: Card[] = [
-  { image: categories[1].images[0], label: "Walk-in Closet", note: "Walnut, glass doors, island" },
-  { image: categories[0].images[0], label: "Wall Paneling", note: "Greige panels, stairwell" },
-  { image: categories[3].images[0], label: "Media Wall", note: "Backlit niches, floating console" },
-  { image: categories[4].images[0], label: "Dressing Unit", note: "Illuminated display cubes" },
-  { image: categories[2].images[1], label: "Fitted Wardrobe", note: "White lacquer, glass doors" },
+const streamA: GalleryImage[] = [
+  pick("sofas", 0),
+  pick("walk-in-closets", 0),
+  pick("beds", 0),
+  pick("tv-units", 0),
+  pick("dining-tables", 0),
+  pick("wall-paneling", 0),
 ];
 
-const streamB: Card[] = [
-  { image: categories[1].images[2], label: "Walk-in Closet", note: "Black-framed glass, LED interiors" },
-  { image: categories[2].images[0], label: "Fitted Wardrobe", note: "Fluted centre panel, taupe" },
-  { image: categories[0].images[3], label: "Wall Paneling", note: "Wainscoting, brass consoles" },
-  { image: categories[5].images[0], label: "Display Shelving", note: "Floating shelves, LED strips" },
-  { image: categories[3].images[1], label: "Media Wall", note: "Timber slats, lit console" },
+const streamB: GalleryImage[] = [
+  pick("curtains", 0),
+  pick("fitted-wardrobes", 0),
+  pick("sofas", 22),
+  pick("coffee-tables", 0),
+  pick("beds", 1),
+  pick("dressing-tables", 0),
 ];
 
-function Stream({ cards, down = false, className = "" }: { cards: Card[]; down?: boolean; className?: string }) {
+function Stream({ cards, down = false, className = "" }: { cards: GalleryImage[]; down?: boolean; className?: string }) {
   const list = [...cards, ...cards];
   return (
     <div className={"hero-stream " + (down ? "hero-stream-down " : "") + className} aria-hidden="true">
-      {list.map((c, i) => (
+      {list.map((img, i) => (
         <figure key={i} className="hero-card">
           <div className="relative aspect-[4/5] overflow-hidden bg-beige-dark">
-            <Image src={c.image.src} alt="" fill sizes="(min-width: 1024px) 18vw, 44vw" className="object-cover" />
+            <Image src={img.src} alt="" fill sizes="(min-width: 1024px) 18vw, 44vw" className="object-cover" />
           </div>
         </figure>
       ))}
@@ -51,7 +47,7 @@ export default function HeroEditorial() {
             Furniture designed for <em className="italic text-gold-text">your</em> room.
           </h1>
           <p className="mt-7 max-w-lg text-[17px] leading-relaxed text-taupe">
-            Wall paneling, walk-in closets, fitted wardrobes and media walls, designed in 3D, built in our
+            Sofas, beds, dining tables, curtains, wardrobes and media walls, designed in 3D, built in our
             Dubai workshop and installed by our own team in homes across the UAE.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

@@ -4,11 +4,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/shared/PageHeader";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
+import VideoGrid from "@/components/gallery/VideoGrid";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { categories, getCategory } from "@/lib/gallery";
+import { categories, categoriesInGroup, getCategory, groups } from "@/lib/gallery";
 import { whatsappLink } from "@/lib/site";
 
-interface Props { params: Promise<{ slug: string }> }
+interface Props {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ type?: string }>;
+}
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }));
@@ -21,18 +25,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: cat.title, description: cat.description, openGraph: { images: [{ url: cat.cover.src, alt: cat.cover.alt }] } };
 }
 
-export default async function CollectionPage({ params }: Props) {
+export default async function CollectionPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const { type } = await searchParams;
   const cat = getCategory(slug);
   if (!cat) notFound();
 
-  const others = categories.filter((c) => c.slug !== cat.slug).slice(0, 3);
-  const inquiry = whatsappLink("Hello! I am interested in your " + cat.title.toLowerCase() + ". Can we discuss my room?");
-  const images = cat.images.map((img) => ({ ...img, category: cat.slug, categoryTitle: cat.title }));
+  const group = groups.find((g) => g.slug === cat.group)!;
+  const siblings = categoriesInGroup(cat.group).filter((c) => c.slug !== cat.slug);
+  const others = [...siblings, ...categories.filter((c) => c.group !== cat.group)].slice(0, 3);
+  const inquiry = whatsappLink("Hello, I am interested in your " + cat.title.toLowerCase() + ". Could we discuss my room?");
+
+  // When a collection has sub-types (e.g. sofas), the grid filters by type instead of category
+  const hasTypes = Boolean(cat.types?.length);
+  const images = cat.images.map((img) => ({ ...img, category: hasTypes ? img.type ?? "other" : cat.slug, categoryTitle: cat.title }));
+  const initial = hasTypes && type && cat.types!.some((t) => t.slug === type) ? type : "all";
 
   return (
     <>
-      <PageHeader title={cat.title} intro={cat.description} />
+      <PageHeader eyebrow={group.title} title={cat.title} intro={cat.description} />
 
       <section className="pb-section">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -43,14 +54,16 @@ export default async function CollectionPage({ params }: Props) {
               Enquire about {cat.title.toLowerCase()}
             </a>
           </div>
-          <GalleryGrid images={images} />
+          <GalleryGrid images={images} initial={initial} filters={hasTypes ? cat.types : undefined} />
         </div>
       </section>
+
+      <VideoGrid videos={cat.videos} />
 
       <section className="border-t border-border bg-beige-light py-section-sm">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-8 flex items-end justify-between">
-            <h2 className="font-serif text-3xl">More collections</h2>
+            <h2 className="font-serif text-3xl">More for the {group.title.toLowerCase()}</h2>
             <Link href="/collections" className="text-link hover:text-gold-text">View all</Link>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">

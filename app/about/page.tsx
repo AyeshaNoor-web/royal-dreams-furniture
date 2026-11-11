@@ -3,12 +3,12 @@ import Image from "next/image";
 import PageHeader from "@/components/shared/PageHeader";
 import Process from "@/components/home/Process";
 import CtaBand from "@/components/home/CtaBand";
-import { categories } from "@/lib/gallery";
+import { pick } from "@/lib/gallery";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Modern Furniture Collection is a Dubai workshop and showroom creating made-to-measure wall paneling, walk-in closets, fitted wardrobes and media walls for homes across the UAE.",
+  description: "Modern Furniture Collection is a Dubai workshop and showroom creating made-to-measure sofas, beds, dining tables, curtains, wardrobes and media walls for homes across the UAE.",
 };
 
 const values = [
@@ -19,12 +19,12 @@ const values = [
 ];
 
 export default function AboutPage() {
-  const shots = [categories[0].images[1], categories[1].images[3], categories[3].images[1]];
+  const shots = [pick("sofas", 0), pick("beds", 0), pick("walk-in-closets", 3)];
   return (
     <>
       <PageHeader
         title="Furniture made for the room it lives in."
-        intro={SITE.name + " is a Dubai workshop and showroom specialising in made-to-measure interiors. We design, build and install wall paneling, walk-in closets, fitted wardrobes, media walls and dressing tables for villas and apartments across the UAE."}
+        intro={SITE.name + " is a Dubai workshop and showroom specialising in made-to-measure interiors. We design, build and install sofas, beds, dining tables, curtains, wardrobes, walk-in closets and media walls for villas and apartments across the UAE."}
       />
 
       <section className="pb-section">

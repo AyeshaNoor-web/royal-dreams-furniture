@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
-import { categories } from "@/lib/gallery";
+import { pick } from "@/lib/gallery";
 
 const edits = [
-  { image: categories[0].images[2], title: "The Paneling Edit", text: "Wainscoting, mouldings and full-height panels for majlis, corridors and living rooms.", href: "/gallery?c=wall-paneling" },
-  { image: categories[3].images[1], title: "The Light Edit", text: "Backlit niches, LED strips and glass doors, designed into the furniture from the first drawing.", href: "/gallery?c=tv-units" },
-  { image: categories[2].images[1], title: "The Storage Edit", text: "Floor-to-ceiling wardrobes that become part of the architecture.", href: "/gallery?c=fitted-wardrobes" },
+  { image: pick("dining-tables", 1), title: "The Dining Edit", text: "Marble and stone tables with upholstered chairs, sized for the guests you host.", href: "/gallery?c=dining-tables" },
+  { image: pick("curtains", 0), title: "The Curtain Edit", text: "Wave curtains with sheer and blackout layers, measured and fitted on site.", href: "/gallery?c=curtains" },
+  { image: pick("tv-units", 1), title: "The Light Edit", text: "Backlit niches, LED strips and glass doors, designed into the furniture from the first drawing.", href: "/gallery?c=tv-units" },
 ];
 
 export default function Inspiration() {

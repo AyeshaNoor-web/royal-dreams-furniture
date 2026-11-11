@@ -3,14 +3,14 @@ import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { categories } from "@/lib/gallery";
+import { getCategory, pick } from "@/lib/gallery";
 import { whatsappLink } from "@/lib/site";
 
 const picks = [
-  { cat: 0, i: 0, name: "Greige Paneled Stairwell", note: "Full-height panels beneath a cascading pendant" },
-  { cat: 1, i: 0, name: "Walnut Walk-in Closet", note: "Glass doors, illuminated shelving and island" },
-  { cat: 3, i: 0, name: "Backlit Media Wall", note: "Floating console with illuminated niches" },
-  { cat: 2, i: 0, name: "Fluted Fitted Wardrobe", note: "Handleless doors in taupe lacquer" },
+  { slug: "sofas", i: 0, name: "Cream U-shaped Sectional", note: "Marble coffee table, made to the room" },
+  { slug: "beds", i: 0, name: "Bed with Lit Headboard Wall", note: "Channel-tufted headboard, bedside sconces" },
+  { slug: "dining-tables", i: 0, name: "Oval Marble Dining Table", note: "Fluted base, boucle chairs" },
+  { slug: "walk-in-closets", i: 0, name: "Walnut Walk-in Closet", note: "Glass doors, illuminated shelving and island" },
 ];
 
 export default function TrendingNow() {
@@ -28,8 +28,8 @@ export default function TrendingNow() {
 
         <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6" stagger={0.07}>
           {picks.map((p) => {
-            const c = categories[p.cat];
-            const img = c.images[p.i];
+            const c = getCategory(p.slug)!;
+            const img = pick(p.slug, p.i);
             const ask = whatsappLink("Hello, I saw the " + p.name + " on your website and would like to discuss something similar for my home.");
             return (
               <StaggerItem key={p.name}>

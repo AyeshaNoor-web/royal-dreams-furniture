@@ -20,9 +20,9 @@ const body = Jost({
   display: "swap",
 });
 
-const title = SITE.name + " | Custom Furniture, Wardrobes & Wall Paneling in the UAE";
+const title = SITE.name + " | Made-to-Measure Furniture, Sofas, Beds & Wardrobes in the UAE";
 const description =
-  "We make new furniture to order. Wall paneling, walk-in closets, fitted wardrobes, TV media walls and dressing tables, designed, built and installed across Dubai, Abu Dhabi and all Emirates.";
+  "Made-to-measure sofas, beds, dining tables, curtains, wardrobes, walk-in closets and media walls, designed, built and installed across Dubai, Abu Dhabi and all Emirates.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

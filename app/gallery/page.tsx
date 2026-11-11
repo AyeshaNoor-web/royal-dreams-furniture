@@ -6,7 +6,7 @@ import { allImages, categories } from "@/lib/gallery";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Browse every installation by Modern Furniture Collection: paneling, closets, wardrobes, media walls and more across the UAE.",
+  description: "Browse every installation by Modern Furniture Collection: sofas, beds, dining tables, curtains, wardrobes, closets, media walls and paneling across the UAE.",
 };
 
 interface Props { searchParams: Promise<{ c?: string }> }

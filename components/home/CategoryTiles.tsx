@@ -2,34 +2,62 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
-import { categories } from "@/lib/gallery";
+import { groups, categoriesInGroup } from "@/lib/gallery";
+
+// Rooms with three or more collections take a full row; smaller rooms sit side by side.
+const rows: (typeof groups)[] = [];
+for (const g of groups) {
+  const n = categoriesInGroup(g.slug).length;
+  const last = rows[rows.length - 1];
+  if (n < 3 && last && last.every((x) => categoriesInGroup(x.slug).length < 3)) last.push(g);
+  else rows.push([g]);
+}
 
 export default function CategoryTiles() {
   return (
     <section className="py-16 lg:py-24 bg-beige">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Reveal className="flex items-end justify-between gap-6 mb-10">
+        <Reveal className="flex items-end justify-between gap-6 mb-12">
           <div>
-            <h2 className="font-serif text-display-md text-charcoal">Explore our collections</h2>
+            <h2 className="font-serif text-display-md text-charcoal">Explore by room</h2>
+            <p className="mt-3 max-w-lg text-[15px] text-taupe">Every piece below is made to measure. Choose a room, then a collection, to see completed projects.</p>
           </div>
           <Link href="/collections" className="hidden sm:inline-block text-link hover:text-gold-text">
             View all collections
           </Link>
         </Reveal>
 
-        <Stagger className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-5" stagger={0.06}>
-          {categories.map((c) => (
-            <StaggerItem key={c.slug}>
-              <Link href={"/collections/" + c.slug} className="group block">
-                <div className="relative aspect-[3/4] overflow-hidden bg-beige-dark">
-                  <Image src={c.cover.src} alt={c.cover.alt} fill sizes="(min-width: 1024px) 16vw, (min-width: 768px) 33vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                </div>
-                <p className="mt-4 font-serif text-lg text-charcoal leading-tight group-hover:text-gold-dark transition-colors">{c.title}</p>
-                <p className="mt-1 text-[14px] text-taupe">{c.short}</p>
-              </Link>
-            </StaggerItem>
+        <div className="flex flex-col gap-14">
+          {rows.map((row, ri) => (
+            <div key={ri} className={row.length > 1 ? "grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-8" : ""}>
+              {row.map((g) => {
+                const cats = categoriesInGroup(g.slug);
+                const wide = row.length === 1;
+                return (
+                  <div key={g.slug}>
+                    <div className="mb-5 flex items-baseline justify-between gap-4 border-b border-border pb-3">
+                      <h3 className="font-serif text-2xl text-charcoal">{g.title}</h3>
+                      <p className="hidden text-[14px] text-taupe sm:block">{g.blurb}</p>
+                    </div>
+                    <Stagger className={"grid gap-4 lg:gap-5 " + (wide ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5" : "grid-cols-1 sm:grid-cols-2")} stagger={0.06}>
+                      {cats.map((c) => (
+                        <StaggerItem key={c.slug}>
+                          <Link href={"/collections/" + c.slug} className="group block">
+                            <div className={"relative overflow-hidden bg-beige-dark " + (wide ? "aspect-[4/5]" : "aspect-[4/3]")}>
+                              <Image src={c.cover.src} alt={c.cover.alt} fill sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                            </div>
+                            <p className="mt-4 font-serif text-lg text-charcoal leading-tight group-hover:text-gold-dark transition-colors">{c.title}</p>
+                            <p className="mt-1 text-[14px] text-taupe">{c.short}</p>
+                          </Link>
+                        </StaggerItem>
+                      ))}
+                    </Stagger>
+                  </div>
+                );
+              })}
+            </div>
           ))}
-        </Stagger>
+        </div>
       </div>
     </section>
   );
