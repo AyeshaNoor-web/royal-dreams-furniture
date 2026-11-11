@@ -43,13 +43,24 @@ export default function GalleryGrid({ images, filters, initial = "all" }: Galler
         </div>
       )}
 
-      <div className="columns-2 gap-3 md:columns-3 xl:columns-4 [&>*]:mb-3">
-        {visible.map((img, idx) => (
-          <button key={img.src} type="button" onClick={() => setOpen(idx)} className="block w-full break-inside-avoid bg-beige-dark" aria-label={"Open " + img.alt}>
-            <Image src={img.src} alt={img.alt} width={img.w} height={img.h} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
-          </button>
-        ))}
-      </div>
+      {visible.length <= 6 ? (
+        // Small sets: an even grid that fills the width instead of a sparse masonry
+        <div className={"grid gap-3 lg:gap-5 " + (visible.length <= 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2 lg:grid-cols-3")}>
+          {visible.map((img, idx) => (
+            <button key={img.src} type="button" onClick={() => setOpen(idx)} className="relative block aspect-[4/5] w-full overflow-hidden bg-beige-dark" aria-label={"Open " + img.alt}>
+              <Image src={img.src} alt={img.alt} fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover" />
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="columns-2 gap-3 md:columns-3 xl:columns-4 [&>*]:mb-3">
+          {visible.map((img, idx) => (
+            <button key={img.src} type="button" onClick={() => setOpen(idx)} className="block w-full break-inside-avoid bg-beige-dark" aria-label={"Open " + img.alt}>
+              <Image src={img.src} alt={img.alt} width={img.w} height={img.h} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
+            </button>
+          ))}
+        </div>
+      )}
 
       <Lightbox images={visible} index={open} onClose={() => setOpen(null)} onChange={setOpen} />
     </div>

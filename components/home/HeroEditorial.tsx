@@ -44,11 +44,11 @@ export default function HeroEditorial() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-14 lg:min-h-[min(calc(100svh-7.5rem),860px)] lg:grid-cols-12 lg:gap-8 lg:py-0 lg:px-10">
         <div className="lg:col-span-6 lg:py-16">
           <h1 className="font-serif text-display-xl text-charcoal">
-            Furniture designed for <em className="italic text-gold-text">your</em> room.
+            Every piece, made to fit <em className="italic text-gold-text">your</em> home.
           </h1>
           <p className="mt-7 max-w-lg text-[17px] leading-relaxed text-taupe">
-            Sofas, beds, dining tables, curtains, wardrobes and media walls, designed in 3D, built in our
-            Dubai workshop and installed by our own team in homes across the UAE.
+            Sofas, beds, dining tables, curtains, wardrobes and media walls, designed in 3D around your
+            rooms, built in our Dubai workshop and fitted by our own team anywhere in the UAE.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href="/collections" className="btn-dark">Explore collections</Link>
@@ -58,9 +58,9 @@ export default function HeroEditorial() {
             </a>
           </div>
           <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-[14px] text-taupe">
-            <li>3D design approval</li>
-            <li>In-house workshop</li>
-            <li>Installation across the UAE</li>
+            <li>Free home consultation</li>
+            <li>3D design before production</li>
+            <li>Fitted by our own team</li>
           </ul>
         </div>
 

@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { title: "Made to measure", desc: "Every panel, door and shelf is produced for the room it will live in, so storage runs wall to wall and floor to ceiling with nothing wasted." },
-  { title: "Lighting designed in", desc: "LED strips, illuminated niches and glass-front doors are part of the drawings from day one, not added once the furniture is built." },
-  { title: "Finishes of your choosing", desc: "Walnut and oak veneers, painted lacquer in any shade, fluted panels, bronze or clear glass. Samples are reviewed in your home, under your own light." },
-  { title: "One team throughout", desc: "The people who measure your room design it, build it in our workshop and install it. There are no subcontractors in between." },
+  { title: "Made to your measurements", desc: "We measure your rooms before anything is drawn, so wardrobes run floor to ceiling, sofas fit the wall they were made for and nothing is forced into place." },
+  { title: "Designed in 3D first", desc: "You see the furniture in your own room before production begins, and you approve every dimension, finish and fabric." },
+  { title: "Finishes you choose", desc: "Walnut and oak veneers, lacquer in any colour, marble and stone tops, boucle, velvet and leather. Samples come to your home so you can judge them in your own light." },
+  { title: "One team, start to finish", desc: "The people who measure your room also design it, build it in our workshop and install it. No subcontractors, no hand-offs." },
 ];
 
 export default function AboutPage() {
@@ -23,8 +23,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        title="Furniture made for the room it lives in."
-        intro={SITE.name + " is a Dubai workshop and showroom specialising in made-to-measure interiors. We design, build and install sofas, beds, dining tables, curtains, wardrobes, walk-in closets and media walls for villas and apartments across the UAE."}
+        title="A Dubai workshop that builds around your home."
+        intro={SITE.name + " designs and makes furniture to order for villas and apartments across the UAE. Every sofa, bed, wardrobe and media wall begins with a visit to your home and a 3D design, and ends with our own team fitting it in place."}
       />
 
       <section className="pb-section">
@@ -58,7 +58,7 @@ export default function AboutPage() {
       <section className="py-section-sm">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-6 lg:px-10">
           <div>
-            <h2 className="max-w-xl font-serif text-display-md">See our latest installations on Instagram</h2>
+            <h2 className="max-w-xl font-serif text-display-md">Follow our latest installations</h2>
           </div>
           <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" className="btn-line">{SITE.instagramHandle}</a>
         </div>

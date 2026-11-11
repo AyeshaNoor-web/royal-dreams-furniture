@@ -41,7 +41,7 @@ export default function ContactForm() {
             <h3 className="font-serif text-3xl text-charcoal mb-3">Thank you, {form.name.split(" ")[0] || "friend"}.</h3>
             <p className="max-w-md text-[17px] text-taupe">
               {delivered
-                ? "Your enquiry has been sent. We usually reply within one working day."
+                ? "Your enquiry has been sent. Our design team will reply within one working day."
                 : "Your enquiry was received. Email delivery is not switched on yet, so please also reach us on WhatsApp for a fast reply."}
             </p>
             <a href={whatsappLink(waText)} target="_blank" rel="noopener noreferrer" className="btn-dark mt-7">
@@ -73,7 +73,7 @@ export default function ContactForm() {
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="message" className={label}>Message</label>
-              <textarea id="message" required rows={5} value={form.message} onChange={update("message")} className={field + " resize-y"} placeholder="Tell us about the room: size, finishes you like, timeline" />
+              <textarea id="message" required rows={5} value={form.message} onChange={update("message")} className={field + " resize-y"} placeholder="The room, roughly how big it is, finishes you like, and when you would like it done" />
             </div>
             <input type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={update("company")} className="hidden" aria-hidden="true" />
 

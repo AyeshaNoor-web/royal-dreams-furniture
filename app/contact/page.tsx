@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHeader title="Get in touch." intro="Share a photo or floor plan of your space and our design team will respond within one working day with ideas, a site-visit time and a quotation. WhatsApp is the fastest way to reach us." />
+      <PageHeader title="Let us talk about your home." intro="Send a photo or floor plan of the room and tell us what you have in mind. Our design team will reply within one working day with ideas, a time to measure and a quotation. WhatsApp is the quickest way to reach us." />
       <section className="pb-section">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-12 lg:gap-10 lg:px-10">
           <div className="lg:col-span-4">
@@ -30,12 +30,12 @@ export default function ContactPage() {
               </li>
               <li className="border-t border-border py-5 text-[17px]">
                 All seven Emirates
-                <span className="block text-[15px] text-taupe">Based in {SITE.location.split(",")[0]}. Site visits by appointment.</span>
+                <span className="block text-[15px] text-taupe">Workshop and showroom in {SITE.location.split(",")[0]}. Home visits by appointment.</span>
               </li>
             </ul>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
-            <h2 className="mb-8 font-serif text-3xl">Send an enquiry</h2>
+            <h2 className="mb-8 font-serif text-3xl">Prefer email? Send the details here.</h2>
             <ContactForm />
           </div>
         </div>
