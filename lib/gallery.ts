@@ -484,6 +484,8 @@ export const categories: Category[] = [
     ],
     "group": "living",
     "videos": [
+      {"src": "/video/tv-units/tv-units-08.mp4", "poster": "/video/tv-units/tv-units-08.jpg", "w": 576, "h": 1024, "duration": 8, "alt": "Backlit TV wall with timber slats"},
+      {"src": "/video/tv-units/tv-units-09.mp4", "poster": "/video/tv-units/tv-units-09.jpg", "w": 576, "h": 1024, "duration": 9, "alt": "Media wall with floating console and lit panel"},
       {
         "src": "/video/tv-units/tv-units-01.mp4",
         "poster": "/video/tv-units/tv-units-01.jpg",
@@ -678,7 +680,10 @@ export const categories: Category[] = [
       }
     ],
     "group": "living",
-    "videos": []
+    "videos": [
+      {"src": "/video/wall-paneling/wall-paneling-01.mp4", "poster": "/video/wall-paneling/wall-paneling-01.jpg", "w": 576, "h": 1024, "duration": 30, "alt": "Walkthrough of a villa with classical wall paneling"},
+      {"src": "/video/wall-paneling/wall-paneling-02.mp4", "poster": "/video/wall-paneling/wall-paneling-02.jpg", "w": 576, "h": 1024, "duration": 20, "alt": "Full-height wall paneling beneath a pendant"}
+    ]
   },
   {
     "slug": "display-shelving",
@@ -1103,6 +1108,8 @@ export const categories: Category[] = [
     ],
     "group": "bedroom",
     "videos": [
+      {"src": "/video/walk-in-closets/walk-in-closets-03.mp4", "poster": "/video/walk-in-closets/walk-in-closets-03.jpg", "w": 576, "h": 1024, "duration": 15, "alt": "Walk-in closet with island and glass-front doors"},
+      {"src": "/video/walk-in-closets/walk-in-closets-04.mp4", "poster": "/video/walk-in-closets/walk-in-closets-04.jpg", "w": 576, "h": 1024, "duration": 14, "alt": "Walnut walk-in closet with illuminated shelving"},
       {
         "src": "/video/walk-in-closets/walk-in-closets-01.mp4",
         "poster": "/video/walk-in-closets/walk-in-closets-01.jpg",
@@ -1215,7 +1222,9 @@ export const categories: Category[] = [
       }
     ],
     "group": "bedroom",
-    "videos": []
+    "videos": [
+      {"src": "/video/fitted-wardrobes/fitted-wardrobes-01.mp4", "poster": "/video/fitted-wardrobes/fitted-wardrobes-01.jpg", "w": 576, "h": 1024, "duration": 8, "alt": "White fitted wardrobes with glass doors and lit shelves"}
+    ]
   },
   {
     "slug": "dressing-tables",
@@ -1264,6 +1273,8 @@ export const categories: Category[] = [
     ],
     "group": "bedroom",
     "videos": [
+      {"src": "/video/dressing-tables/dressing-tables-02.mp4", "poster": "/video/dressing-tables/dressing-tables-02.jpg", "w": 576, "h": 1024, "duration": 8, "alt": "Dressing unit with coloured cubes beside a child's bed"},
+      {"src": "/video/dressing-tables/dressing-tables-03.mp4", "poster": "/video/dressing-tables/dressing-tables-03.jpg", "w": 576, "h": 1024, "duration": 4, "alt": "Illuminated dressing unit in pink and timber"},
       {
         "src": "/video/dressing-tables/dressing-tables-01.mp4",
         "poster": "/video/dressing-tables/dressing-tables-01.jpg",
