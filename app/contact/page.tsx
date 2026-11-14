@@ -49,10 +49,12 @@ export default function ContactPage() {
                 </div>
                 <div className="grid grid-cols-[110px_1fr] gap-4 py-5">
                   <dt className="text-[14px] text-taupe">Instagram</dt>
-                  <dd>
-                    <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[16px] text-charcoal hover:text-gold-text">
-                      <InstagramIcon className="h-4 w-4" /> {SITE.instagramHandle}
-                    </a>
+                  <dd className="flex flex-col gap-1.5">
+                    {SITE.instagramAccounts.map((ig) => (
+                      <a key={ig.handle} href={ig.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[16px] text-charcoal hover:text-gold-text">
+                        <InstagramIcon className="h-4 w-4" /> {ig.handle}
+                      </a>
+                    ))}
                   </dd>
                 </div>
                 <div className="grid grid-cols-[110px_1fr] gap-4 py-5">

@@ -13,6 +13,7 @@ const steps = [
     title: "Tell us about the room",
     text: "Send a few photos or a floor plan on WhatsApp. Within a working day you will have first ideas, a rough budget and a time for us to visit.",
     you: "You send photos",
+    where: "On WhatsApp",
     image: pick("curtains", 4),
     caption: "The room as it is",
     icon: "M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zm3 15h4M9 8h6",
@@ -22,6 +23,7 @@ const steps = [
     title: "We measure and design",
     text: "We measure every wall and opening, then show you the piece in 3D, in your own room. Change anything you like. Nothing is built until you approve.",
     you: "You approve the 3D design",
+    where: "At your home",
     image: { src: "/video/walk-in-closets/walk-in-closets-01.jpg", w: 576, h: 1024, alt: "Our designer measuring a client's walk-in closet" },
     caption: "Measured on site",
     icon: "M3 17l4-4 4 4 5-5 5 5M3 21h18M4 9V5a1 1 0 011-1h3M20 9V5a1 1 0 00-1-1h-3",
@@ -31,6 +33,7 @@ const steps = [
     title: "We build it",
     text: "Your furniture is made in our Dubai workshop in the veneer, lacquer, stone or fabric you chose, and we keep you informed while it is in production.",
     you: "You choose every finish",
+    where: "In our Dubai workshop",
     image: { src: "/images/process/workshop.jpg", w: 626, h: 417, alt: "Woodworking workshop with a CNC machine and stacked timber panels" },
     caption: "Made in our workshop",
     icon: "M14 6l4 4-9 9H5v-4l9-9zM12 8l4 4M4 20h16",
@@ -40,6 +43,7 @@ const steps = [
     title: "We fit it",
     text: "Our own team installs, aligns every door and light, and clears the packaging. You receive a finished room, not a delivery.",
     you: "You get a finished room",
+    where: "At your home",
     image: pick("sofas", 0),
     caption: "Fitted and finished",
     icon: "M5 12l4 4L19 6",
@@ -68,7 +72,10 @@ export default function HowItWorks() {
                 </span>
               </div>
               <div className="flex flex-1 flex-col pt-6">
-                <p className="font-serif text-xl text-gold-dark">{s.n}</p>
+                <p className="flex items-baseline gap-3">
+                  <span className="font-serif text-xl text-gold-dark">{s.n}</span>
+                  <span className="text-[13px] text-taupe">{s.where}</span>
+                </p>
                 <h3 className="mt-1 font-serif text-2xl text-charcoal">{s.title}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-taupe">{s.text}</p>
                 <div className="mt-auto pt-5">

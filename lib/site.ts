@@ -4,11 +4,22 @@ export const SITE = {
   tagline: "Made-to-measure interiors for homes across the UAE",
   url: "https://www.modernfurniturecollection.online",
   location: "Dubai, United Arab Emirates",
-  instagramHandle: "@modern_furniture_interiors",
-  instagramUrl: "https://www.instagram.com/modern_furniture_interiors",
+  instagramHandle: "@modern_furniture_collection",
+  instagramUrl: "https://www.instagram.com/modern_furniture_collection",
+  // Both accounts belong to the client; the first is the main one shown in headings.
+  instagramAccounts: [
+    { handle: "@modern_furniture_collection", url: "https://www.instagram.com/modern_furniture_collection" },
+    { handle: "@modern_furniture_interiors", url: "https://www.instagram.com/modern_furniture_interiors" },
+  ],
   phones: [
     { display: "050 433 5872", intl: "971504335872" },
   ],
+} as const;
+
+/** Where the team measures and installs. The workshop is in Dubai, so the first group gets the most visit slots. */
+export const areas = {
+  near: { title: "Nearest the workshop", places: ["Dubai", "Sharjah", "Ajman"] },
+  far: { title: "Further afield", places: ["Abu Dhabi", "Al Ain", "Ras Al Khaimah", "Umm Al Quwain", "Fujairah"] },
 } as const;
 
 export const whatsappLink = (message: string, number: string = SITE.phones[0].intl) =>

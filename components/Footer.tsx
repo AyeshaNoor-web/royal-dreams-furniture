@@ -30,10 +30,16 @@ export default function Footer() {
             <p className="text-sm text-beige/55 leading-relaxed max-w-sm mb-6">
               Made-to-measure sofas, beds, dining tables, curtains, wardrobes and media walls, designed, built and installed for homes across the UAE.
             </p>
-            <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" className="inline-flex items-center gap-3 text-beige/60 hover:text-gold transition-colors">
-              <span className="w-9 h-9 border border-beige/20 flex items-center justify-center"><InstagramIcon className="w-4 h-4" /></span>
-              <span className="text-[14px]">{SITE.instagramHandle}</span>
-            </a>
+            <ul className="flex flex-col gap-3">
+              {SITE.instagramAccounts.map((ig) => (
+                <li key={ig.handle}>
+                  <a href={ig.url} target="_blank" rel="noopener noreferrer" aria-label={"Follow " + ig.handle + " on Instagram"} className="inline-flex items-center gap-3 text-beige/60 hover:text-gold transition-colors">
+                    <span className="w-9 h-9 border border-beige/20 flex items-center justify-center"><InstagramIcon className="w-4 h-4" /></span>
+                    <span className="text-[14px]">{ig.handle}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="col-span-2 md:col-span-5 grid grid-cols-2 gap-8">

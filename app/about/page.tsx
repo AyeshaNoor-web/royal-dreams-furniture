@@ -60,7 +60,11 @@ export default function AboutPage() {
           <div>
             <h2 className="max-w-xl font-serif text-display-md">Follow our latest installations</h2>
           </div>
-          <a href={SITE.instagramUrl} target="_blank" rel="noopener noreferrer" className="btn-line">{SITE.instagramHandle}</a>
+          <div className="flex flex-wrap gap-3">
+            {SITE.instagramAccounts.map((ig) => (
+              <a key={ig.handle} href={ig.url} target="_blank" rel="noopener noreferrer" className="btn-line">{ig.handle}</a>
+            ))}
+          </div>
         </div>
       </section>
 
