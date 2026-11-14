@@ -2,7 +2,7 @@ export const SITE = {
   name: "Modern Furniture Collection",
   shortName: "MFC",
   tagline: "Made-to-measure interiors for homes across the UAE",
-  url: "https://modernfurniturecollection.online",
+  url: "https://www.modernfurniturecollection.online",
   location: "Dubai, United Arab Emirates",
   instagramHandle: "@modern_furniture_interiors",
   instagramUrl: "https://www.instagram.com/modern_furniture_interiors",

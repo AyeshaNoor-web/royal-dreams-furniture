@@ -8,17 +8,17 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [x] Next.js upgraded to 15.5.29, which closes the vulnerability Vercel was flagging.
 - [x] Unused components, old hero assets and leftover font files removed from the repository.
 - [x] Raw client media folders are git-ignored; only web-sized copies are committed.
-- [ ] Redeploy on Vercel so the upgraded Next.js version is live (push of this commit triggers it).
+- [x] Redeployed on Vercel; the live build carries the upgraded Next.js and the latest homepage.
 - [ ] Review remaining `npm audit` advisories. They are in the image library used at build time, not in anything served to visitors. Re-run `npm audit` after the next Next.js release.
 
 ## 2. Domain and hosting
 
-- [ ] Add the purchased domain to the Vercel project (Settings, Domains) and follow the DNS instructions shown there.
-- [ ] Confirm both `www` and the bare domain resolve, and that one redirects to the other.
-- [ ] **Needs decision:** which is canonical, `www` or bare. Tell me and I will set it in the code too.
-- [x] Site URL set to `https://modernfurniturecollection.online` in `lib/site.ts`. This drives the sitemap, canonical tags, Open Graph tags and social previews.
-- [ ] After DNS is live, open `/sitemap.xml` and `/robots.txt` on the real domain and confirm the URLs inside use the real domain.
-- [ ] Check that HTTPS is active (Vercel issues the certificate automatically once DNS resolves).
+- [x] Domain added to the Vercel project and DNS records set at the registrar.
+- [x] Both hosts resolve to Vercel. The bare domain redirects (308) to `www`, and plain HTTP redirects to HTTPS.
+- [x] Canonical is `www`, matching the Vercel redirect. Set in the code on 14 Nov.
+- [x] Site URL set to `https://www.modernfurniturecollection.online` in `lib/site.ts`. This drives the sitemap, canonical tags, Open Graph tags and social previews.
+- [x] `/sitemap.xml` and `/robots.txt` on the live domain list the real domain.
+- [x] HTTPS is active on both hosts with HSTS enabled.
 
 ## 3. Enquiries and email (the whole point of the site)
 
@@ -26,7 +26,7 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Add three environment variables in Vercel (Settings, Environment Variables), for Production: `RESEND_API_KEY`, `CONTACT_TO_EMAIL` (the inbox that should receive enquiries), `CONTACT_FROM_EMAIL`.
 - [ ] Verify the sending domain in Resend so emails are not marked as spam, or use their default sender for the first weeks.
 - [ ] Redeploy, submit the contact form on the live site, and confirm the email arrives with all fields (name, phone, email, interest, message).
-- [ ] Submit the homepage quick form and the footer newsletter box, and confirm both arrive.
+- [ ] Submit the homepage quick form and the footer newsletter box, and confirm both arrive. (Verified on 14 Nov that the API accepts valid input and rejects bad input on the live site; delivery still waits on the Resend keys.)
 - [ ] **Needs client:** confirm 050 433 5872 is the number that should receive WhatsApp enquiries, and that someone monitors it. Every button on the site points there.
 - [ ] Tap "Get a quote" on a phone and confirm WhatsApp opens with the pre-filled message.
 
@@ -49,7 +49,7 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 
 ## 6. Final checks on the live domain
 
-- [ ] Open every page on a phone: home, collections, each of the 11 collection pages, gallery with a filter applied, about, contact, and a wrong address for the 404 page.
+- [ ] Open every page on a phone: home, collections, each of the 11 collection pages, gallery with a filter applied, about, contact, and a wrong address for the 404 page. (All routes verified to return correctly on the live domain on 14 Nov; the visual check on a phone is still yours to do.)
 - [ ] Play one video on a phone over mobile data and confirm it loads in reasonable time.
 - [ ] Run Google PageSpeed Insights on the home and a collection page; fix anything scoring red.
 - [ ] Share the home link in a WhatsApp chat and confirm the preview card shows the logo and title.
