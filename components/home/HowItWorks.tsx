@@ -31,7 +31,7 @@ const steps = [
     title: "We build it",
     text: "Your furniture is made in our Dubai workshop in the veneer, lacquer, stone or fabric you chose, and we keep you informed while it is in production.",
     you: "You choose every finish",
-    image: { src: "/images/process/workshop.jpg", w: 1600, h: 1067, alt: "Woodworking workshop with a CNC machine and stacked timber panels" },
+    image: { src: "/images/process/workshop.jpg", w: 626, h: 417, alt: "Woodworking workshop with a CNC machine and stacked timber panels" },
     caption: "Made in our workshop",
     icon: "M14 6l4 4-9 9H5v-4l9-9zM12 8l4 4M4 20h16",
   },
