@@ -16,7 +16,7 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Add the purchased domain to the Vercel project (Settings, Domains) and follow the DNS instructions shown there.
 - [ ] Confirm both `www` and the bare domain resolve, and that one redirects to the other.
 - [ ] **Needs decision:** which is canonical, `www` or bare. Tell me and I will set it in the code too.
-- [ ] Replace the placeholder URL in `lib/site.ts` (`url: "https://modernfurniturecollection.ae"`) with the real domain. This drives the sitemap, canonical tags, Open Graph tags and social previews. One line, then push.
+- [x] Site URL set to `https://modernfurniturecollection.online` in `lib/site.ts`. This drives the sitemap, canonical tags, Open Graph tags and social previews.
 - [ ] After DNS is live, open `/sitemap.xml` and `/robots.txt` on the real domain and confirm the URLs inside use the real domain.
 - [ ] Check that HTTPS is active (Vercel issues the certificate automatically once DNS resolves).
 
