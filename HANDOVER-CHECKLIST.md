@@ -32,7 +32,7 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 
 ## 4. Content accuracy (needs client sign-off)
 
-- [ ] Two Instagram accounts are linked: `@modern_furniture_collection` (shown first, in headings) and `@modern_furniture_interiors`. Confirm both should stay, and which is the main one.
+- [ ] The Instagram links go to `@modern_furniture_collection` only; the earlier `@modern_furniture_interiors` account was removed on 15 Nov 2026 at the client's request. Confirm.
 - [ ] The homepage FAQ ("Common questions") and the "What shapes your quotation" section were written from the promises already on the site: free visit, 3D design, own workshop and fitters, samples brought to the home, reply within one working day, all seven Emirates. Read both and correct anything the team does not actually do.
 - [ ] "Where we work" lists Dubai, Sharjah and Ajman as nearest the workshop and Abu Dhabi, Al Ain, Ras Al Khaimah, Umm Al Quwain and Fujairah as further afield. Confirm.
 - [ ] Showroom line reads "Dubai, United Arab Emirates" and "visits by appointment". Confirm, or supply a street address and opening hours to add.

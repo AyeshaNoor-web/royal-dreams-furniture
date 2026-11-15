@@ -6,10 +6,9 @@ export const SITE = {
   location: "Dubai, United Arab Emirates",
   instagramHandle: "@modern_furniture_collection",
   instagramUrl: "https://www.instagram.com/modern_furniture_collection",
-  // Both accounts belong to the client; the first is the main one shown in headings.
+  // The client's one Instagram account. Kept as a list so the footer, contact and about pages can show more if another is added.
   instagramAccounts: [
     { handle: "@modern_furniture_collection", url: "https://www.instagram.com/modern_furniture_collection" },
-    { handle: "@modern_furniture_interiors", url: "https://www.instagram.com/modern_furniture_interiors" },
   ],
   phones: [
     { display: "050 433 5872", intl: "971504335872" },
