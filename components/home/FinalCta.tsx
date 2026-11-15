@@ -8,7 +8,7 @@ import { APPOINTMENT_LINK } from "@/lib/site";
 const promises = ["Free home consultation and site measurement", "3D design and a fixed quotation before production", "Built in our workshop, fitted by our own team"];
 
 export default function FinalCta() {
-  const photo = pick("beds", 2);
+  const photo = pick("beds", 4); // white boucle bed in a panelled bedroom
   return (
     <section className="bg-beige py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

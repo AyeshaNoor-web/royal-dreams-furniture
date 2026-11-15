@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 
 const shots = [
   pick("sofas", 23),
-  pick("beds", 4),
+  pick("beds", 2),
   pick("dining-tables", 3),
   pick("curtains", 3),
   pick("walk-in-closets", 1),
