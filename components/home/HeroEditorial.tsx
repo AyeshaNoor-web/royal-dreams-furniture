@@ -18,7 +18,7 @@ const streamB: GalleryImage[] = [
   pick("curtains", 0),
   pick("fitted-wardrobes", 0),
   pick("sofas", 22),
-  pick("coffee-tables", 0),
+  pick("display-shelving", 0),
   pick("beds", 1),
   pick("dressing-tables", 0),
 ];

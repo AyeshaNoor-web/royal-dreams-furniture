@@ -451,17 +451,47 @@ export const categories: Category[] = [
     "description": "Floating media walls with concealed cabling, soft backlighting, timber slat panels and lit display niches. Each unit is sized to your screen and sound system and finished to match the rest of the room.",
     "size": "wide",
     "cover": {
-      "src": "/images/tv-units/tv-units-01.jpg",
+      "src": "/images/tv-units/tv-units-05.jpg",
       "w": 960,
       "h": 1280,
-      "alt": "Backlit floating TV wall with lit display niches"
+      "alt": "Fluted beige media wall with backlit TV panel and floating console"
     },
     "images": [
+      {
+        "src": "/images/tv-units/tv-units-05.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Fluted beige media wall with backlit TV panel and floating console"
+      },
+      {
+        "src": "/images/tv-units/tv-units-06.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Travertine-effect TV wall with lit display niches and a long floating console"
+      },
+      {
+        "src": "/images/tv-units/tv-units-07.jpg",
+        "w": 1280,
+        "h": 960,
+        "alt": "Media wall with electric fireplace and lit shelving on both sides"
+      },
       {
         "src": "/images/tv-units/tv-units-01.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Backlit floating TV wall with lit display niches"
+      },
+      {
+        "src": "/images/tv-units/tv-units-08.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Panelled TV wall with backlit panels, fluted stone column and glass display cabinet"
+      },
+      {
+        "src": "/images/tv-units/tv-units-09.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Fluted media wall with floating console and backlit TV panel"
       },
       {
         "src": "/images/tv-units/tv-units-02.jpg",
@@ -470,10 +500,40 @@ export const categories: Category[] = [
         "alt": "TV media wall with timber slats and floating console unit"
       },
       {
+        "src": "/images/tv-units/tv-units-10.jpg",
+        "w": 1280,
+        "h": 960,
+        "alt": "TV wall with lit display niches either side and a floating console"
+      },
+      {
+        "src": "/images/tv-units/tv-units-11.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Media wall with electric fireplace beside lit display shelving"
+      },
+      {
         "src": "/images/tv-units/tv-units-03.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Backlit TV wall with timber slats and floating console"
+      },
+      {
+        "src": "/images/tv-units/tv-units-12.jpg",
+        "w": 1280,
+        "h": 960,
+        "alt": "Backlit panelled media wall with a low drawer console"
+      },
+      {
+        "src": "/images/tv-units/tv-units-13.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Television above a built-in electric fireplace"
+      },
+      {
+        "src": "/images/tv-units/tv-units-14.jpg",
+        "w": 1280,
+        "h": 960,
+        "alt": "Living room media wall with fireplace, lit shelving and floating base cabinets"
       },
       {
         "src": "/images/tv-units/tv-units-04.jpg",
@@ -484,8 +544,22 @@ export const categories: Category[] = [
     ],
     "group": "living",
     "videos": [
-      {"src": "/video/tv-units/tv-units-08.mp4", "poster": "/video/tv-units/tv-units-08.jpg", "w": 576, "h": 1024, "duration": 8, "alt": "Backlit TV wall with timber slats"},
-      {"src": "/video/tv-units/tv-units-09.mp4", "poster": "/video/tv-units/tv-units-09.jpg", "w": 576, "h": 1024, "duration": 9, "alt": "Media wall with floating console and lit panel"},
+      {
+        "src": "/video/tv-units/tv-units-08.mp4",
+        "poster": "/video/tv-units/tv-units-08.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 8,
+        "alt": "Backlit TV wall with timber slats"
+      },
+      {
+        "src": "/video/tv-units/tv-units-09.mp4",
+        "poster": "/video/tv-units/tv-units-09.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 9,
+        "alt": "Media wall with floating console and lit panel"
+      },
       {
         "src": "/video/tv-units/tv-units-01.mp4",
         "poster": "/video/tv-units/tv-units-01.jpg",
@@ -681,8 +755,22 @@ export const categories: Category[] = [
     ],
     "group": "living",
     "videos": [
-      {"src": "/video/wall-paneling/wall-paneling-01.mp4", "poster": "/video/wall-paneling/wall-paneling-01.jpg", "w": 576, "h": 1024, "duration": 30, "alt": "Walkthrough of a villa with classical wall paneling"},
-      {"src": "/video/wall-paneling/wall-paneling-02.mp4", "poster": "/video/wall-paneling/wall-paneling-02.jpg", "w": 576, "h": 1024, "duration": 20, "alt": "Full-height wall paneling beneath a pendant"}
+      {
+        "src": "/video/wall-paneling/wall-paneling-01.mp4",
+        "poster": "/video/wall-paneling/wall-paneling-01.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 30,
+        "alt": "Walkthrough of a villa with classical wall paneling"
+      },
+      {
+        "src": "/video/wall-paneling/wall-paneling-02.mp4",
+        "poster": "/video/wall-paneling/wall-paneling-02.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 20,
+        "alt": "Full-height wall paneling beneath a pendant"
+      }
     ]
   },
   {
@@ -693,12 +781,18 @@ export const categories: Category[] = [
     "description": "Floating shelves and display units with concealed LED strips, set over matching base cabinets. Ideal for living rooms, studies and majlis where books, ceramics and framed pieces deserve a stage.",
     "size": "narrow",
     "cover": {
-      "src": "/images/display-shelving/display-shelving-01.jpg",
-      "w": 1130,
-      "h": 1400,
-      "alt": "Floating shelves with LED strip lighting over base cabinets"
+      "src": "/images/display-shelving/display-shelving-04.jpg",
+      "w": 960,
+      "h": 1280,
+      "alt": "Lit display shelving unit beside a media wall"
     },
     "images": [
+      {
+        "src": "/images/display-shelving/display-shelving-04.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Lit display shelving unit beside a media wall"
+      },
       {
         "src": "/images/display-shelving/display-shelving-01.jpg",
         "w": 1130,
@@ -1108,8 +1202,22 @@ export const categories: Category[] = [
     ],
     "group": "bedroom",
     "videos": [
-      {"src": "/video/walk-in-closets/walk-in-closets-03.mp4", "poster": "/video/walk-in-closets/walk-in-closets-03.jpg", "w": 576, "h": 1024, "duration": 15, "alt": "Walk-in closet with island and glass-front doors"},
-      {"src": "/video/walk-in-closets/walk-in-closets-04.mp4", "poster": "/video/walk-in-closets/walk-in-closets-04.jpg", "w": 576, "h": 1024, "duration": 14, "alt": "Walnut walk-in closet with illuminated shelving"},
+      {
+        "src": "/video/walk-in-closets/walk-in-closets-03.mp4",
+        "poster": "/video/walk-in-closets/walk-in-closets-03.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 15,
+        "alt": "Walk-in closet with island and glass-front doors"
+      },
+      {
+        "src": "/video/walk-in-closets/walk-in-closets-04.mp4",
+        "poster": "/video/walk-in-closets/walk-in-closets-04.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 14,
+        "alt": "Walnut walk-in closet with illuminated shelving"
+      },
       {
         "src": "/video/walk-in-closets/walk-in-closets-01.mp4",
         "poster": "/video/walk-in-closets/walk-in-closets-01.jpg",
@@ -1223,7 +1331,14 @@ export const categories: Category[] = [
     ],
     "group": "bedroom",
     "videos": [
-      {"src": "/video/fitted-wardrobes/fitted-wardrobes-01.mp4", "poster": "/video/fitted-wardrobes/fitted-wardrobes-01.jpg", "w": 576, "h": 1024, "duration": 8, "alt": "White fitted wardrobes with glass doors and lit shelves"}
+      {
+        "src": "/video/fitted-wardrobes/fitted-wardrobes-01.mp4",
+        "poster": "/video/fitted-wardrobes/fitted-wardrobes-01.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 8,
+        "alt": "White fitted wardrobes with glass doors and lit shelves"
+      }
     ]
   },
   {
@@ -1234,17 +1349,29 @@ export const categories: Category[] = [
     "description": "Dressing tables and vanity units with integrated mirrors, soft-close drawers and illuminated display cubes. From a quiet round mirror beside a fluted wardrobe to a bold backlit feature wall in colour.",
     "size": "wide",
     "cover": {
-      "src": "/images/dressing-tables/dressing-tables-01.jpg",
+      "src": "/images/dressing-tables/dressing-tables-06.jpg",
       "w": 960,
       "h": 1280,
-      "alt": "Pink backlit dressing unit with timber display cubes"
+      "alt": "Dressing area with backlit round mirror, fluted floating vanity and lit shelving"
     },
     "images": [
+      {
+        "src": "/images/dressing-tables/dressing-tables-06.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Dressing area with backlit round mirror, fluted floating vanity and lit shelving"
+      },
       {
         "src": "/images/dressing-tables/dressing-tables-01.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Pink backlit dressing unit with timber display cubes"
+      },
+      {
+        "src": "/images/dressing-tables/dressing-tables-07.jpg",
+        "w": 960,
+        "h": 1280,
+        "alt": "Backlit round mirror over a fluted floating vanity"
       },
       {
         "src": "/images/dressing-tables/dressing-tables-02.jpg",
@@ -1273,8 +1400,22 @@ export const categories: Category[] = [
     ],
     "group": "bedroom",
     "videos": [
-      {"src": "/video/dressing-tables/dressing-tables-02.mp4", "poster": "/video/dressing-tables/dressing-tables-02.jpg", "w": 576, "h": 1024, "duration": 8, "alt": "Dressing unit with coloured cubes beside a child's bed"},
-      {"src": "/video/dressing-tables/dressing-tables-03.mp4", "poster": "/video/dressing-tables/dressing-tables-03.jpg", "w": 576, "h": 1024, "duration": 4, "alt": "Illuminated dressing unit in pink and timber"},
+      {
+        "src": "/video/dressing-tables/dressing-tables-02.mp4",
+        "poster": "/video/dressing-tables/dressing-tables-02.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 8,
+        "alt": "Dressing unit with coloured cubes beside a child's bed"
+      },
+      {
+        "src": "/video/dressing-tables/dressing-tables-03.mp4",
+        "poster": "/video/dressing-tables/dressing-tables-03.jpg",
+        "w": 576,
+        "h": 1024,
+        "duration": 4,
+        "alt": "Illuminated dressing unit in pink and timber"
+      },
       {
         "src": "/video/dressing-tables/dressing-tables-01.mp4",
         "poster": "/video/dressing-tables/dressing-tables-01.jpg",
@@ -1298,7 +1439,7 @@ export const categories: Category[] = [
       "w": 1080,
       "h": 1350,
       "alt": "Oval marble dining table with boucle chairs by the garden",
-          "type": "oval"
+      "type": "oval"
     },
     "images": [
       {
@@ -1312,129 +1453,142 @@ export const categories: Category[] = [
         "w": 1080,
         "h": 1350,
         "alt": "Oval marble dining table with upholstered chairs",
-          "type": "oval"
+        "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-03.jpg",
         "w": 1079,
         "h": 1384,
         "alt": "Oval marble dining table with vase styling",
-          "type": "oval"
+        "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-04.jpg",
         "w": 960,
         "h": 960,
         "alt": "Oval marble dining table with upholstered chairs",
-          "type": "oval"
+        "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-05.jpg",
         "w": 1080,
         "h": 1350,
         "alt": "Oval marble dining table with upholstered chairs",
-          "type": "oval"
+        "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-06.jpg",
         "w": 1024,
         "h": 1280,
         "alt": "Round marble dining table with black fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-07.jpg",
         "w": 1026,
         "h": 1280,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-08.jpg",
         "w": 1080,
         "h": 1350,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-09.jpg",
         "w": 1050,
         "h": 1400,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-10.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Oval marble dining table with upholstered chairs",
-          "type": "oval"
+        "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-11.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Oval marble dining table with upholstered chairs",
-          "type": "oval"
+        "type": "oval"
       },
       {
         "src": "/images/dining-tables/dining-tables-12.jpg",
         "w": 1080,
         "h": 1350,
         "alt": "Oval stone dining table with walnut chairs",
-          "type": "chairs"
+        "type": "chairs"
       },
       {
         "src": "/images/dining-tables/dining-tables-13.jpg",
         "w": 1080,
         "h": 1343,
         "alt": "Upholstered dining chairs in boucle and walnut",
-          "type": "chairs"
+        "type": "chairs"
       },
       {
         "src": "/images/dining-tables/dining-tables-14.jpg",
         "w": 1080,
         "h": 1350,
         "alt": "Upholstered dining chairs in boucle and walnut",
-          "type": "chairs"
+        "type": "chairs"
       },
       {
         "src": "/images/dining-tables/dining-tables-15.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-16.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-17.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-18.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       },
       {
         "src": "/images/dining-tables/dining-tables-19.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Round stone dining table on a fluted base",
-          "type": "round"
+        "type": "round"
       }
     ],
-    "types": [{"slug": "oval", "title": "Oval tables"}, {"slug": "round", "title": "Round tables"}, {"slug": "chairs", "title": "Dining chairs"}],
+    "types": [
+      {
+        "slug": "oval",
+        "title": "Oval tables"
+      },
+      {
+        "slug": "round",
+        "title": "Round tables"
+      },
+      {
+        "slug": "chairs",
+        "title": "Dining chairs"
+      }
+    ],
     "videos": []
   },
   {
@@ -1450,7 +1604,7 @@ export const categories: Category[] = [
       "w": 1280,
       "h": 960,
       "alt": "Wave curtains with sheer layer in a lit bedroom",
-          "type": "wave"
+      "type": "wave"
     },
     "images": [
       {
@@ -1464,122 +1618,135 @@ export const categories: Category[] = [
         "w": 1125,
         "h": 815,
         "alt": "Wave curtains fitted floor to ceiling",
-          "type": "wave"
+        "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-03.jpg",
         "w": 1094,
         "h": 1367,
         "alt": "Pleated curtains on an arched window with pelmet",
-          "type": "classic"
+        "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-04.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Blue and beige curtains beneath a crystal chandelier",
-          "type": "classic"
+        "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-05.jpg",
         "w": 1022,
         "h": 1280,
         "alt": "Wave curtains fitted floor to ceiling",
-          "type": "wave"
+        "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-06.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Wave curtains fitted floor to ceiling",
-          "type": "wave"
+        "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-07.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-08.jpg",
         "w": 1024,
         "h": 1280,
         "alt": "Pleated drapes with pelmet and tiebacks",
-          "type": "classic"
+        "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-09.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-10.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-11.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Wave curtains fitted floor to ceiling",
-          "type": "wave"
+        "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-12.jpg",
         "w": 1024,
         "h": 1280,
         "alt": "Wave curtains fitted floor to ceiling",
-          "type": "wave"
+        "type": "wave"
       },
       {
         "src": "/images/curtains/curtains-13.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-14.jpg",
         "w": 792,
         "h": 1024,
         "alt": "Navy curtains with tiebacks and sheer panels",
-          "type": "classic"
+        "type": "classic"
       },
       {
         "src": "/images/curtains/curtains-15.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-16.jpg",
         "w": 1280,
         "h": 960,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-17.jpg",
         "w": 1024,
         "h": 1280,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       },
       {
         "src": "/images/curtains/curtains-18.jpg",
         "w": 960,
         "h": 1280,
         "alt": "Sheer and blackout curtain layers on a ceiling track",
-          "type": "layered"
+        "type": "layered"
       }
     ],
-    "types": [{"slug": "wave", "title": "Wave curtains"}, {"slug": "layered", "title": "Sheer & blackout layers"}, {"slug": "classic", "title": "Classic drapes"}],
+    "types": [
+      {
+        "slug": "wave",
+        "title": "Wave curtains"
+      },
+      {
+        "slug": "layered",
+        "title": "Sheer & blackout layers"
+      },
+      {
+        "slug": "classic",
+        "title": "Classic drapes"
+      }
+    ],
     "videos": [
       {
         "src": "/video/curtains/curtains-01.mp4",

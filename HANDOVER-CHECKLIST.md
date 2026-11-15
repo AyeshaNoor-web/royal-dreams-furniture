@@ -40,7 +40,7 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Process claims on the homepage: free home consultation, 3D design before production, nothing built until approved, own fitters. Confirm each is true.
 - [ ] Collection descriptions mention walnut and oak veneers, lacquer, marble and stone tops, boucle, velvet and leather. Remove any the workshop does not offer.
 - [ ] Photo captions and alt text were written from what is visible in the photos. Correct any that misname a finish or a piece.
-- [ ] All 178 photos and 27 videos supplied so far are on the site. Confirm there is nothing the client would rather not show publicly, such as a photo with a person in it.
+- [ ] All 191 photos and 27 videos supplied so far are on the site. The third batch (15 Nov) was 13 new media-wall, shelving and dressing-area photos; one of them, `dressing-tables-07.jpg`, is a mirror selfie with a recognisable face, so ask whether it should stay. Confirm there is nothing the client would rather not show publicly, such as a photo with a person in it.
 
 ## 5. Brand and legal
 
