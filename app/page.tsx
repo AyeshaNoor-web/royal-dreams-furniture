@@ -6,6 +6,7 @@ import HowItWorks from "@/components/home/HowItWorks";
 import QuoteFactors from "@/components/home/QuoteFactors";
 import InquiryBand from "@/components/home/InquiryBand";
 import RecentWork from "@/components/home/RecentWork";
+import Reviews from "@/components/home/Reviews";
 import Workshop from "@/components/home/Workshop";
 import WhereWeWork from "@/components/home/WhereWeWork";
 import Faq from "@/components/home/Faq";
@@ -34,6 +35,7 @@ export default function HomePage() {
       <QuoteFactors />
       <InquiryBand />
       <RecentWork />
+      <Reviews />
       <Workshop />
       <WhereWeWork />
       <Faq />

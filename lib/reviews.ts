@@ -1,0 +1,18 @@
+/**
+ * Client reviews shown on the homepage. The section stays hidden while this list is empty.
+ *
+ * Only add words a real client actually wrote or said, with their permission. Good sources are WhatsApp
+ * messages after installation, Instagram comments and Google reviews. Keep the client's own wording;
+ * fix only spelling. `name` can be a first name or initials if they prefer, `area` is where the piece was
+ * fitted and `piece` is what was made for them.
+ */
+export interface Review {
+  quote: string;
+  name: string;
+  area: string;
+  piece: string;
+  /** Where the words came from, shown under the name so visitors can trust them. */
+  source: "WhatsApp" | "Instagram" | "Google";
+}
+
+export const reviews: Review[] = [];
