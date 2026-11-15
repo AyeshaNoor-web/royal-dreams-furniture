@@ -12,7 +12,7 @@ export default function Faq() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="border-y border-border bg-beige-light py-16 lg:py-24">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
         <Reveal className="lg:col-span-4">
           <h2 className="font-serif text-display-md text-charcoal">Common questions</h2>
@@ -35,7 +35,7 @@ export default function Faq() {
                       aria-expanded={on}
                       aria-controls={id}
                       onClick={() => setOpen(on ? null : i)}
-                      className="flex w-full items-center justify-between gap-6 py-5 text-left font-serif text-xl text-charcoal transition-colors hover:text-gold-text lg:text-2xl"
+                      className="flex w-full items-center justify-between gap-5 py-4 text-left font-serif text-lg leading-snug text-charcoal transition-colors hover:text-gold-text sm:py-5 sm:text-xl lg:text-2xl"
                     >
                       {f.q}
                       <motion.span
@@ -59,7 +59,7 @@ export default function Faq() {
                         transition={{ duration: 0.35, ease: EASE }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-2xl pb-6 text-[15px] leading-relaxed text-taupe">{f.a}</p>
+                        <p className="max-w-2xl pb-5 text-[15px] leading-relaxed text-taupe sm:pb-6">{f.a}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

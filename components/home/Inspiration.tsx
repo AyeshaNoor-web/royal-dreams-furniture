@@ -31,7 +31,7 @@ function EditTile({ e, sizes, lead = false }: { e: Edit; sizes: string; lead?: b
 export default function Inspiration() {
   const [lead, ...rest] = edits;
   return (
-    <section className="border-y border-border bg-beige-light py-16 lg:py-24">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-10 flex items-end justify-between gap-6">
           <h2 className="font-serif text-display-md text-charcoal">Ideas from recent projects</h2>

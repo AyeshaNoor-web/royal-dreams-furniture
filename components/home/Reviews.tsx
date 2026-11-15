@@ -6,7 +6,7 @@ import { reviews } from "@/lib/reviews";
 export default function Reviews() {
   if (reviews.length === 0) return null;
   return (
-    <section className="border-y border-border bg-beige-light py-16 lg:py-24" aria-labelledby="reviews-heading">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24" aria-labelledby="reviews-heading">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-10 max-w-2xl lg:mb-12">
           <h2 id="reviews-heading" className="font-serif text-display-md text-charcoal">What clients say</h2>

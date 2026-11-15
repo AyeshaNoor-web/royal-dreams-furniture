@@ -16,9 +16,9 @@ const work = [
 
 export default function RecentWork() {
   return (
-    <section className="bg-beige py-16 lg:py-24">
+    <section className="bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="mb-10 flex items-end justify-between gap-6">
+        <Reveal className="mb-8 flex items-end justify-between gap-6 sm:mb-10">
           <div>
             <h2 className="font-serif text-display-md text-charcoal">Recent work</h2>
             <p className="mt-3 max-w-lg text-[15px] text-taupe">Rooms we have finished for clients across the UAE.</p>
@@ -27,8 +27,8 @@ export default function RecentWork() {
         </Reveal>
 
         <Stagger className="grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-6" stagger={0.06}>
-          {work.map((w) => (
-            <StaggerItem key={w.image.src}>
+          {work.map((w, i) => (
+            <StaggerItem key={w.image.src} className={i >= 4 ? "hidden sm:block" : ""}>
               <Link href={"/gallery?c=" + w.slug} className="group block">
                 <div className="relative aspect-[4/5] overflow-hidden bg-beige-dark">
                   <Image src={w.image.src} alt={w.image.alt} fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]" />

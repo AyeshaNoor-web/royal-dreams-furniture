@@ -51,7 +51,7 @@ function Stream({ cards, down = false, preload = false, className = "" }: { card
 export default function HeroEditorial() {
   return (
     <section className="hero-bg relative overflow-hidden" aria-label="Introduction">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 py-14 lg:min-h-[min(calc(100svh-7.5rem),860px)] lg:grid-cols-12 lg:gap-8 lg:py-0 lg:px-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 py-10 sm:py-14 lg:min-h-[min(calc(100svh-7.5rem),860px)] lg:grid-cols-12 lg:gap-8 lg:py-0 lg:px-10">
         <div className="lg:col-span-6 lg:py-16">
           <h1 className="font-serif text-display-xl text-charcoal">
             Every piece, made to fit <em className="italic text-gold-text">your</em> home.
@@ -67,7 +67,7 @@ export default function HeroEditorial() {
               Book a free consultation
             </a>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-[14px] text-taupe">
+          <ul className="mt-10 hidden flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-[14px] text-taupe sm:flex">
             <li>Free home consultation</li>
             <li>3D design before production</li>
             <li>Fitted by our own team</li>

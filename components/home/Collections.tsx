@@ -6,12 +6,12 @@ export function CollectionCard({ item, priority = false }: { item: Category; pri
   return (
     <Link href={"/collections/" + item.slug} className="group block">
       <div className="relative aspect-[3/4] bg-beige-dark">
-        <Image src={item.cover.src} alt={item.cover.alt} fill priority={priority} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
+        <Image src={item.cover.src} alt={item.cover.alt} fill priority={priority} sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover" />
       </div>
-      <div className="mt-4 flex items-baseline justify-between gap-4">
-        <h2 className="font-serif text-[1.75rem] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{item.title}</h2>
+      <div className="mt-3 flex items-baseline justify-between gap-4 sm:mt-4">
+        <h2 className="font-serif text-xl leading-tight sm:text-[1.75rem] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{item.title}</h2>
       </div>
-      <p className="mt-1 text-[15px] text-taupe">{item.short}</p>
+      <p className="mt-1 text-[13px] text-taupe sm:text-[15px]">{item.short}</p>
     </Link>
   );
 }

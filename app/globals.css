@@ -61,7 +61,8 @@ h3, h4 { font-weight: 500; }
 .on-dark { --eyebrow: #D4B8A8; }
 
 /* ─── Hero: looping stream of project cards ─────────────────────────────────── */
-.hero-stage { height: 62svh; min-height: 440px; max-height: 760px; }
+.hero-stage { height: 50svh; min-height: 360px; max-height: 760px; }
+@media (min-width: 640px) { .hero-stage { height: 62svh; min-height: 440px; } }
 @media (min-width: 1024px) { .hero-stage { height: min(calc(100svh - 7.5rem), 860px); min-height: 620px; } }
 .hero-mask {
   height: 100%;

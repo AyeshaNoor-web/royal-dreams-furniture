@@ -52,33 +52,33 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-beige py-16 lg:py-24">
+    <section className="bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <Reveal className="mb-12 max-w-2xl lg:mb-16">
+        <Reveal className="mb-8 max-w-2xl sm:mb-12 lg:mb-16">
           <h2 className="font-serif text-display-md text-charcoal">Four steps from first message to finished room</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-taupe">
             One team handles everything, so you never chase a supplier, a carpenter and a fitter separately.
           </p>
         </Reveal>
 
-        <Stagger className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6" stagger={0.1}>
+        <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-6" stagger={0.1}>
           {steps.map((s, i) => (
-            <StaggerItem key={s.n} className="flex h-full flex-col">
-              <div className="relative aspect-[4/3] overflow-hidden bg-beige-dark">
+            <StaggerItem key={s.n} className="flex h-full gap-4 sm:flex-col sm:gap-0">
+              <div className="relative aspect-square w-24 shrink-0 overflow-hidden bg-beige-dark sm:aspect-[4/3] sm:w-auto">
                 <Image src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/60 to-transparent px-4 pb-3 pt-10 text-[13px] text-beige-light">{s.caption}</span>
-                <span className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-beige-light/90 text-charcoal shadow-[0_6px_16px_-8px_rgba(42,31,24,0.5)]">
+                <span className="absolute inset-x-0 bottom-0 hidden bg-gradient-to-t from-charcoal/60 to-transparent px-4 pb-3 pt-10 text-[13px] text-beige-light sm:block">{s.caption}</span>
+                <span className="absolute left-4 top-4 hidden h-11 w-11 items-center justify-center rounded-full bg-beige-light/90 text-charcoal shadow-[0_6px_16px_-8px_rgba(42,31,24,0.5)] sm:flex">
                   <DrawIcon d={s.icon} delay={0.3 + i * 0.15} />
                 </span>
               </div>
-              <div className="flex flex-1 flex-col pt-6">
+              <div className="flex min-w-0 flex-1 flex-col sm:pt-6">
                 <p className="flex items-baseline gap-3">
                   <span className="font-serif text-xl text-gold-dark">{s.n}</span>
                   <span className="text-[13px] text-taupe">{s.where}</span>
                 </p>
-                <h3 className="mt-1 font-serif text-2xl text-charcoal">{s.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-taupe">{s.text}</p>
-                <div className="mt-auto pt-5">
+                <h3 className="mt-1 font-serif text-xl text-charcoal sm:text-2xl">{s.title}</h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-taupe sm:mt-3 sm:text-[15px]">{s.text}</p>
+                <div className="mt-auto hidden pt-5 sm:block">
                   <p className="w-fit border border-border px-3 py-1.5 text-[13px] text-charcoal">{s.you}</p>
                 </div>
               </div>
@@ -86,8 +86,8 @@ export default function HowItWorks() {
           ))}
         </Stagger>
 
-        <Reveal className="mt-14 flex flex-col items-start gap-4 border-t border-border pt-10 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl font-serif text-2xl text-charcoal">The first visit and the 3D design are free, and nothing is built until you approve it.</p>
+        <Reveal className="mt-10 flex flex-col items-start gap-4 border-t border-border pt-8 sm:mt-14 sm:flex-row sm:items-center sm:justify-between sm:pt-10">
+          <p className="max-w-xl font-serif text-xl text-charcoal sm:text-2xl">The first visit and the 3D design are free, and nothing is built until you approve it.</p>
           <a href={APPOINTMENT_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark shrink-0">
             <WhatsAppIcon className="h-[18px] w-[18px]" /> Book a free consultation
           </a>

@@ -17,15 +17,21 @@ interface GalleryGridProps {
   paramKey?: string;
 }
 
+const PAGE = 24;
+
 export default function GalleryGrid({ images, filters, paramKey = "c" }: GalleryGridProps) {
   const [active, setActive] = useState<string>("all");
   const [open, setOpen] = useState<number | null>(null);
+  const [limit, setLimit] = useState(PAGE);
 
   useEffect(() => {
     const wanted = new URLSearchParams(window.location.search).get(paramKey);
     if (wanted && filters?.some((f) => f.slug === wanted)) setActive(wanted);
   }, [paramKey, filters]);
   const visible = useMemo(() => (active === "all" ? images : images.filter((i) => i.category === active)), [images, active]);
+  // Sets just over the page size are shown whole rather than leaving two or three photos behind a button.
+  const shown = visible.length > PAGE + 6 ? visible.slice(0, limit) : visible;
+  const select = (slug: string) => { setActive(slug); setLimit(PAGE); };
 
   return (
     <div>
@@ -39,7 +45,7 @@ export default function GalleryGrid({ images, filters, paramKey = "c" }: Gallery
                 type="button"
                 role="tab"
                 aria-selected={on}
-                onClick={() => setActive(f.slug)}
+                onClick={() => select(f.slug)}
                 className={"-mb-px min-h-[44px] border-b text-[15px] transition-colors duration-200 " + (on ? "border-charcoal text-charcoal" : "border-transparent text-taupe hover:text-charcoal")}
               >
                 {f.title}
@@ -60,11 +66,18 @@ export default function GalleryGrid({ images, filters, paramKey = "c" }: Gallery
         </div>
       ) : (
         <div className="columns-2 gap-3 md:columns-3 xl:columns-4 [&>*]:mb-3">
-          {visible.map((img, idx) => (
+          {shown.map((img, idx) => (
             <button key={img.src} type="button" onClick={() => setOpen(idx)} className="block w-full break-inside-avoid bg-beige-dark" aria-label={"Open " + img.alt}>
               <Image src={img.src} alt={img.alt} width={img.w} height={img.h} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
             </button>
           ))}
+        </div>
+      )}
+
+      {shown.length < visible.length && (
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <p className="text-[14px] text-taupe">Showing {shown.length} of {visible.length} photos</p>
+          <button type="button" onClick={() => setLimit((n) => n + PAGE)} className="btn-line">Show more</button>
         </div>
       )}
 

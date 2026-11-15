@@ -15,7 +15,7 @@ export default function PlanByRoom() {
   const count = categoriesInGroup(g.slug).length;
 
   return (
-    <section className="border-y border-border bg-beige-light py-16 lg:py-24">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 lg:mb-10">
           <h2 className="font-serif text-display-lg text-charcoal">Plan by room</h2>

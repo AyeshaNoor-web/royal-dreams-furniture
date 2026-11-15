@@ -15,10 +15,10 @@ const samples = ["Walnut veneer", "Oak veneer", "Lacquer", "Marble", "Stone", "B
 export default function Workshop() {
   const photo = pick("fitted-wardrobes", 0);
   return (
-    <section className="border-y border-border bg-beige-light py-16 lg:py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-10">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-10">
         <Reveal className="lg:col-span-5">
-          <div className="relative aspect-[3/4] overflow-hidden bg-beige-dark">
+          <div className="relative aspect-[4/3] overflow-hidden bg-beige-dark sm:aspect-[3/4]">
             <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/60 to-transparent px-5 pb-4 pt-12 text-[13px] text-beige-light">Fitted wardrobe on installation day</span>
           </div>
@@ -32,7 +32,7 @@ export default function Workshop() {
             </p>
           </Reveal>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:gap-6 sm:grid-cols-3">
             {points.map((p, i) => (
               <Reveal key={p.title} delay={0.06 * i} className="border-t border-border pt-4">
                 <h3 className="font-serif text-xl text-charcoal">{p.title}</h3>
@@ -41,7 +41,7 @@ export default function Workshop() {
             ))}
           </div>
 
-          <Reveal delay={0.2} className="mt-8">
+          <Reveal delay={0.2} className="mt-6 sm:mt-8">
             <p className="text-[14px] text-taupe">Samples we bring to your visit</p>
             <ul className="mt-3 flex flex-wrap gap-2">
               {samples.map((s) => (

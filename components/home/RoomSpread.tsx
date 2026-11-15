@@ -52,13 +52,13 @@ export default function Spread({ g, flip = false, first = false, heading = true 
       )}
       <div className="grid grid-cols-1 gap-4 lg:h-[640px] lg:grid-cols-12 lg:gap-6">
         <Reveal delay={0.08} className={"lg:col-span-5 lg:h-full " + (flip ? "lg:order-2" : "")}>
-          <Tile t={lead} priority={first} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] lg:aspect-auto lg:h-full" />
+          <Tile t={lead} priority={first} sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/3] sm:aspect-[4/5] lg:aspect-auto lg:h-full" />
         </Reveal>
-        <div className={"grid grid-cols-2 gap-x-4 gap-y-6 lg:col-span-7 lg:h-full lg:grid-rows-2 lg:gap-6 " + (flip ? "lg:order-1" : "")}>
+        <div className={"-mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-1 scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:col-span-7 lg:h-full lg:grid-rows-2 lg:gap-6 " + (flip ? "lg:order-1" : "")}>
           {rest.map((t, i) => {
             const wide = (rest.length === 3 && i === 0) || stacked;
             return (
-              <Reveal key={t.key} delay={0.12 + i * 0.06} className={"lg:h-full " + (wide ? "lg:col-span-2" : "")}>
+              <Reveal key={t.key} delay={0.12 + i * 0.06} className={"w-[60vw] shrink-0 snap-start sm:w-auto lg:h-full " + (wide ? "lg:col-span-2" : "")}>
                 <Tile t={t} overlay="lg" sizes="(min-width: 1024px) 30vw, 50vw" className={"lg:aspect-auto lg:h-full " + (wide && !stacked ? "aspect-[16/9]" : "aspect-[4/3]")} />
               </Reveal>
             );

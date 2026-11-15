@@ -7,7 +7,7 @@ import { categories } from "@/lib/gallery";
 /** Every collection at a glance. The first card runs wide so the eleven cards fill a four-column grid. */
 export default function WhatWeMake() {
   return (
-    <section className="bg-beige py-16 lg:py-24">
+    <section className="bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-10 flex items-end justify-between gap-6 lg:mb-12">
           <div>
@@ -17,13 +17,13 @@ export default function WhatWeMake() {
           <Link href="/collections" className="hidden text-link hover:text-gold-text sm:inline-block">View all collections</Link>
         </Reveal>
 
-        <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5" stagger={0.05}>
+        <Stagger className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-1 scroll-pl-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-5" stagger={0.05}>
           {categories.map((c, i) => {
             const wide = i === 0;
             return (
-              <StaggerItem key={c.slug} className={wide ? "col-span-2" : ""}>
+              <StaggerItem key={c.slug} className={"w-[64vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none " + (wide ? "sm:col-span-2" : "")}>
                 <Link href={"/collections/" + c.slug} className="group block h-full">
-                  <div className={"relative overflow-hidden bg-beige-dark " + (wide ? "aspect-[2/1] sm:aspect-[16/10] lg:aspect-[2/1]" : "aspect-square")}>
+                  <div className={"relative overflow-hidden bg-beige-dark " + (wide ? "aspect-square sm:aspect-[16/10] lg:aspect-[2/1]" : "aspect-square")}>
                     <Image
                       src={c.cover.src}
                       alt={c.cover.alt}
@@ -42,7 +42,7 @@ export default function WhatWeMake() {
           })}
         </Stagger>
 
-        <Link href="/collections" className="mt-8 inline-block text-link hover:text-gold-text sm:hidden">View all collections</Link>
+        <Link href="/collections" className="mt-6 inline-block text-link hover:text-gold-text sm:hidden">View all collections</Link>
       </div>
     </section>
   );
