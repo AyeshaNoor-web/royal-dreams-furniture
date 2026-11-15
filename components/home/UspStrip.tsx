@@ -52,13 +52,13 @@ export default function UspStrip() {
                 onBlur={() => setHeld(false)}
                 onClick={() => { setActive(i); setHeld(true); }}
                 aria-pressed={on}
-                className={"relative flex w-full items-start gap-4 rounded-xl px-4 py-5 text-left transition-colors duration-500 lg:px-5 lg:py-6 " + (on ? "text-charcoal" : "text-taupe hover:text-charcoal")}
+                className={"relative flex w-full flex-col items-start gap-3 rounded-xl px-4 py-5 text-left transition-colors duration-500 sm:flex-row sm:gap-4 lg:px-5 lg:py-6 " + (on ? "text-charcoal" : "text-taupe hover:text-charcoal")}
               >
                 <motion.span
                   animate={on ? { scale: 1.08, rotate: 0 } : { scale: 1, rotate: 0 }}
                   whileHover={{ rotate: -6 }}
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  className={"mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 " + (on ? "border-gold-dark bg-gold/40 text-charcoal" : "border-border text-taupe-light")}
+                  className={"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors duration-500 sm:mt-0.5 sm:h-11 sm:w-11 " + (on ? "border-gold-dark bg-gold/40 text-charcoal" : "border-border text-taupe-light")}
                 >
                   <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     {/* The active icon draws itself in */}
@@ -76,7 +76,7 @@ export default function UspStrip() {
                   <motion.span
                     animate={{ y: on ? 0 : 2 }}
                     transition={{ duration: 0.4, ease: EASE }}
-                    className="block text-[15px] font-medium leading-snug"
+                    className="block text-[14px] font-medium leading-snug sm:text-[15px]"
                   >
                     {it.title}
                   </motion.span>

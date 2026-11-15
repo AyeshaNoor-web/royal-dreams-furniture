@@ -11,7 +11,6 @@ import { whatsappLink } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ type?: string }>;
 }
 
 export function generateStaticParams() {
@@ -25,9 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: cat.title, description: cat.description, openGraph: { images: [{ url: cat.cover.src, alt: cat.cover.alt }] } };
 }
 
-export default async function CollectionPage({ params, searchParams }: Props) {
+export default async function CollectionPage({ params }: Props) {
   const { slug } = await params;
-  const { type } = await searchParams;
   const cat = getCategory(slug);
   if (!cat) notFound();
 
@@ -39,7 +37,6 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   // When a collection has sub-types (e.g. sofas), the grid filters by type instead of category
   const hasTypes = Boolean(cat.types?.length);
   const images = cat.images.map((img) => ({ ...img, category: hasTypes ? img.type ?? "other" : cat.slug, categoryTitle: cat.title }));
-  const initial = hasTypes && type && cat.types!.some((t) => t.slug === type) ? type : "all";
 
   return (
     <>
@@ -54,7 +51,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
               Enquire about {cat.title.toLowerCase()}
             </a>
           </div>
-          <GalleryGrid images={images} initial={initial} filters={hasTypes ? cat.types : undefined} />
+          <GalleryGrid images={images} paramKey="type" filters={hasTypes ? cat.types : undefined} />
         </div>
       </section>
 

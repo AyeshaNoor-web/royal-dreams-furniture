@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Lightbox from "@/components/motion/Lightbox";
 import type { GalleryImage } from "@/lib/gallery";
 
@@ -13,12 +13,18 @@ export interface GridImage extends GalleryImage {
 interface GalleryGridProps {
   images: GridImage[];
   filters?: { slug: string; title: string }[];
-  initial?: string;
+  /** Query-string key that pre-selects a filter, e.g. /gallery?c=sofas. Read on the client so the page itself stays static. */
+  paramKey?: string;
 }
 
-export default function GalleryGrid({ images, filters, initial = "all" }: GalleryGridProps) {
-  const [active, setActive] = useState<string>(initial);
+export default function GalleryGrid({ images, filters, paramKey = "c" }: GalleryGridProps) {
+  const [active, setActive] = useState<string>("all");
   const [open, setOpen] = useState<number | null>(null);
+
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get(paramKey);
+    if (wanted && filters?.some((f) => f.slug === wanted)) setActive(wanted);
+  }, [paramKey, filters]);
   const visible = useMemo(() => (active === "all" ? images : images.filter((i) => i.category === active)), [images, active]);
 
   return (

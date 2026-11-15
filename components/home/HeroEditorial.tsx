@@ -23,14 +23,24 @@ const streamB: GalleryImage[] = [
   pick("dressing-tables", 0),
 ];
 
-function Stream({ cards, down = false, className = "" }: { cards: GalleryImage[]; down?: boolean; className?: string }) {
+// The first two cards of each stream are on screen at load. `preload` marks stream A's as high priority; stream B's
+// are fetched eagerly but not preloaded, so the preload list stays short.
+function Stream({ cards, down = false, preload = false, className = "" }: { cards: GalleryImage[]; down?: boolean; preload?: boolean; className?: string }) {
   const list = [...cards, ...cards];
   return (
     <div className={"hero-stream " + (down ? "hero-stream-down " : "") + className} aria-hidden="true">
       {list.map((img, i) => (
         <figure key={i} className="hero-card">
           <div className="relative aspect-[4/5] overflow-hidden bg-beige-dark">
-            <Image src={img.src} alt="" fill sizes="(min-width: 1024px) 18vw, 44vw" className="object-cover" />
+            <Image
+              src={img.src}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 18vw, 44vw"
+              className="object-cover"
+              priority={preload && i < 2}
+              loading={i < 2 ? "eager" : undefined}
+            />
           </div>
         </figure>
       ))}
@@ -67,8 +77,8 @@ export default function HeroEditorial() {
         {/* Magazine stream: two columns of project cards drifting in opposite directions */}
         <div className="hero-stage lg:col-span-6">
           <div className="hero-mask grid grid-cols-2 gap-4 lg:gap-5">
-            <Stream cards={streamA} />
-            <Stream cards={streamB} down className="hidden sm:block" />
+            <Stream cards={streamA} preload />
+            <Stream cards={streamB} down />
           </div>
         </div>
       </div>

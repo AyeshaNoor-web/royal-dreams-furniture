@@ -53,7 +53,8 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 
 - [ ] Open every page on a phone: home, collections, each of the 11 collection pages, gallery with a filter applied, about, contact, and a wrong address for the 404 page. (All routes verified to return correctly on the live domain on 14 Nov; the visual check on a phone is still yours to do.)
 - [ ] Play one video on a phone over mobile data and confirm it loads in reasonable time.
-- [ ] Run Google PageSpeed Insights on the home and a collection page; fix anything scoring red.
+- [ ] Run Google PageSpeed Insights on the home and a collection page; fix anything scoring red. (15 Nov: gallery and collection pages are now static files served from the edge instead of being rendered per visit, optimised images are cached for a year in the browser and on Vercel, and images are served as WebP only because AVIF encoding was taking 4 to 19 seconds on first request.)
+- [ ] Rule for anyone adding photos later: never overwrite an image or video file in place. Browsers keep them for a year, so a changed picture needs a new file name.
 - [ ] Share the home link in a WhatsApp chat and confirm the preview card shows the logo and title.
 - [ ] Add the site to Google Search Console and submit the sitemap.
 - [ ] **Needs decision:** analytics. Vercel Analytics is a one-click add; Google Analytics needs a property ID. Tell me which and I will wire it in.

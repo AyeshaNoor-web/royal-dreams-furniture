@@ -72,6 +72,7 @@ h3, h4 { font-weight: 500; }
 .hero-stream {
   display: flex;
   flex-direction: column;
+  align-self: start; /* keep each column at its own content height so the -50% loop is seamless */
   gap: 1rem;
   will-change: transform;
   animation: hero-drift 46s linear infinite;

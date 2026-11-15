@@ -37,14 +37,14 @@ export default function CollectionsPage() {
                   <p className="text-[15px] text-taupe">{g.blurb}</p>
                 </div>
                 {row.length > 1 ? (
-                  <div className="grid grid-cols-3 gap-4 lg:gap-5">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
                     {roomTiles(g.slug).map((t) => (
                       <Link key={t.key} href={t.href} className="group block">
                         <div className="relative aspect-[3/4] overflow-hidden bg-beige-dark">
                           <Image src={t.image.src} alt={t.image.alt} fill sizes="(min-width: 1024px) 16vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         </div>
-                        <p className="mt-3 font-serif text-xl group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{t.title}</p>
-                        <p className="text-[15px] text-taupe">{t.short}</p>
+                        <p className="mt-2 font-serif text-base leading-tight group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4 sm:mt-3 sm:text-xl">{t.title}</p>
+                        <p className="mt-0.5 text-[13px] text-taupe sm:text-[15px]">{t.short}</p>
                       </Link>
                     ))}
                   </div>
