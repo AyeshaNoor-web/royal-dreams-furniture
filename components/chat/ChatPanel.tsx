@@ -21,18 +21,12 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
   const list = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
-  // Focus the panel, close on Escape, and stop the page scrolling behind the sheet on phones.
+  // Focus the panel and close on Escape. The page behind stays scrollable: the chat is a card, not a sheet.
   useEffect(() => {
     root.current?.focus();
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     document.addEventListener("keydown", onKey);
-    const lock = isPhone();
-    const prev = document.body.style.overflow;
-    if (lock) document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      if (lock) document.body.style.overflow = prev;
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [setOpen]);
 
   useEffect(() => {
@@ -80,7 +74,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.97 }}
       transition={{ duration: 0.3, ease: EASE }}
-      className="fixed inset-x-0 bottom-0 z-[70] flex h-[85svh] flex-col overflow-hidden rounded-t-2xl border border-border bg-beige shadow-2xl shadow-black/30 outline-none sm:inset-auto sm:bottom-6 sm:right-6 sm:h-[600px] sm:max-h-[calc(100svh-3rem)] sm:w-[380px] sm:rounded-2xl"
+      className="fixed bottom-4 left-4 right-4 z-[70] flex h-[min(64svh,540px)] flex-col overflow-hidden rounded-2xl border border-border bg-beige shadow-2xl shadow-black/30 outline-none sm:bottom-6 sm:left-auto sm:right-6 sm:h-[600px] sm:max-h-[calc(100svh-3rem)] sm:w-[380px]"
     >
       <div className="flex items-center justify-between gap-3 border-b border-border bg-beige-light px-4 py-3">
         <div>
