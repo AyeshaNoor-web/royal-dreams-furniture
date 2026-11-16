@@ -4,13 +4,14 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
+import ChatBoundary from "./ChatBoundary";
 import ChatTeaser, { TEASER_KEY } from "./ChatTeaser";
 import { useChat } from "./useChat";
 
 // The panel, matcher and lead form only load the first time someone opens the chat.
 const ChatPanel = dynamic(() => import("./ChatPanel"), { ssr: false });
 
-export default function ChatWidget() {
+function Widget() {
   const chat = useChat();
   const reduce = useReducedMotion();
   const bubble = useRef<HTMLButtonElement>(null);
@@ -71,5 +72,13 @@ export default function ChatWidget() {
       </AnimatePresence>
       <AnimatePresence>{chat.open && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
     </>
+  );
+}
+
+export default function ChatWidget() {
+  return (
+    <ChatBoundary>
+      <Widget />
+    </ChatBoundary>
   );
 }

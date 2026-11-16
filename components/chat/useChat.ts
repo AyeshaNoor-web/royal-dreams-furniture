@@ -34,7 +34,9 @@ export function useChat() {
       const raw = sessionStorage.getItem(KEY);
       if (raw) {
         const s = JSON.parse(raw) as Stored;
-        if (Array.isArray(s.messages) && s.messages.length > 0) {
+        // Only restore messages that look like ours; anything else (an older format, a corrupt value) starts fresh.
+        const ok = Array.isArray(s.messages) && s.messages.length > 0 && s.messages.every((m) => m && typeof m.id === "number" && (m.role === "bot" || m.role === "user") && typeof m.text === "string");
+        if (ok) {
           setMessages(s.messages);
           next.current = Math.max(...s.messages.map((m) => m.id)) + 1;
         }

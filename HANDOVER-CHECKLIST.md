@@ -13,6 +13,8 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 
 ## 2. Domain and hosting
 
+- [ ] **Check now:** on 17 Nov 2026 the live site answered every automated request with a Vercel "Security Checkpoint" (code 29), and a phone showed "Application error: a client-side exception" at the same time. Open the Vercel project, Firewall tab: if "Attack Challenge Mode" is switched on, switch it off, since it challenges the JavaScript requests real visitors' browsers make and the page then fails to load. Consider enabling Skew Protection (Settings, Advanced) so a phone that loaded the site before a deploy can still fetch the old scripts after it.
+
 - [x] Domain added to the Vercel project and DNS records set at the registrar.
 - [x] Both hosts resolve to Vercel. The bare domain redirects (308) to `www`, and plain HTTP redirects to HTTPS.
 - [x] Canonical is `www`, matching the Vercel redirect. Set in the code on 14 Nov.
