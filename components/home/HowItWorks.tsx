@@ -52,7 +52,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-beige py-12 sm:py-16 lg:py-24">
+    <section id="how-it-works" className="scroll-mt-24 bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 max-w-2xl sm:mb-12 lg:mb-16">
           <h2 className="font-serif text-display-md text-charcoal">Four steps from first message to finished room</h2>

@@ -3,7 +3,7 @@ import { Playfair_Display, Jost } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
+import ChatWidget from "@/components/chat/ChatWidget";
 import { SITE } from "@/lib/site";
 
 // Display: an elegant transitional serif that stays legible at card sizes. Body: geometric, quiet.
@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        <ChatWidget />
       </body>
     </html>
   );
