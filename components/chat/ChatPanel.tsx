@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { quickActions } from "@/lib/chatbot";
 import { WHATSAPP_CHAT } from "@/lib/chatbot-intents";
 import { SITE } from "@/lib/site";
 import ChatMessage from "./ChatMessage";
 import ChatLeadForm from "./ChatLeadForm";
+import ChatQuickActions from "./ChatQuickActions";
 import type { Chat } from "./useChat";
 
 const isPhone = () => typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
@@ -47,6 +47,17 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
   const last = messages[messages.length - 1];
   const lastQuestion = [...messages].reverse().find((m) => m.role === "user")?.text ?? "";
   const showLead = Boolean(last?.lead) && !leadDone && !typing;
+  // The WhatsApp message the lead card sends: the reply's own tailored text when it has one, otherwise the question.
+  const waBase = (() => {
+    const l = last?.link;
+    if (l?.external && l.href.startsWith("https://wa.me") && l.href !== WHATSAPP_CHAT.href) {
+      try {
+        const t = new URL(l.href).searchParams.get("text") ?? "";
+        if (t) return t.replace(/^hello[,!]?\s*/i, "");
+      } catch { /* fall through */ }
+    }
+    return `I asked on your website: "${lastQuestion}".`;
+  })();
   // A reply link is a full page load. Save the closed state first on phones so the sheet does not cover the new page.
   const onNavigate = () => {
     if (!isPhone()) return;
@@ -89,7 +100,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
       <div ref={list} className="flex-1 overflow-y-auto px-4 py-4">
         <ul className="flex flex-col gap-3" aria-live="polite" aria-relevant="additions">
           {messages.map((m) => (
-            <ChatMessage key={m.id} message={m} onChip={send} onNavigate={onNavigate} />
+            <ChatMessage key={m.id} message={m} onChip={send} onNavigate={onNavigate} hideLink={showLead && m.id === last.id} />
           ))}
           {typing && (
             <li className="flex items-center gap-1 px-4 py-3 text-taupe" aria-label="Typing">
@@ -99,24 +110,8 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
             </li>
           )}
         </ul>
-        {messages.length === 1 && !typing && (
-          <ul className="mt-4 flex flex-wrap gap-2" aria-label="Quick options">
-            {quickActions.map((q) => (
-              <li key={q.label}>
-                {q.action === "whatsapp" ? (
-                  <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[40px] items-center gap-2 rounded-full bg-charcoal px-4 font-dm text-[13px] font-medium text-beige-light transition-colors hover:bg-charcoal-light">
-                    <WhatsAppIcon className="h-4 w-4" /> {q.label}
-                  </a>
-                ) : (
-                  <button type="button" onClick={() => (q.action === "ask" ? input.current?.focus() : send(q.message ?? q.label))} className="inline-flex min-h-[40px] items-center rounded-full border border-charcoal/35 bg-beige-light px-4 font-dm text-[13px] font-medium text-charcoal transition-colors hover:border-charcoal">
-                    {q.label}
-                  </button>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-        {showLead && <ChatLeadForm question={lastQuestion} onDone={(r) => { setLeadDone(true); push(r); }} />}
+        {messages.length === 1 && !typing && <ChatQuickActions onSend={send} onAsk={() => input.current?.focus()} />}
+        {showLead && <ChatLeadForm question={lastQuestion} waBase={waBase} onDone={(r) => { setLeadDone(true); push(r); }} />}
       </div>
 
       <div className="flex items-center gap-2 border-t border-border bg-beige-light px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">

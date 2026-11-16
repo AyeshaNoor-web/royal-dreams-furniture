@@ -190,7 +190,7 @@ const extraIntents: Intent[] = [
 export const intents: Intent[] = [...extraIntents, ...faqIntents, ...productIntents, ...roomIntents];
 
 export const FALLBACK_ANSWER =
-  "I do not have an answer for that yet. I can only answer from what is on this site. Leave your name and number below and the team will call you back, or ask them directly on WhatsApp.";
+  "I do not have an answer for that yet. I can only answer from what is on this site. Send your question to the team on WhatsApp below and they will reply within a working day.";
 
 export const areaPlaces = areas;
 export const whatsappFor = WA;

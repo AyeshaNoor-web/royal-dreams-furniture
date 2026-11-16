@@ -2,20 +2,25 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import type { ChatMessage as Message } from "./useChat";
 
 interface Props {
   message: Message;
   onChip: (label: string) => void;
   onNavigate: () => void;
+  /** True while the lead card below this message already offers WhatsApp. */
+  hideLink?: boolean;
 }
 
-const linkClass =
-  "mt-2 inline-flex min-h-[44px] items-center gap-2 border border-charcoal/35 px-4 font-dm text-[13px] font-medium text-charcoal transition-colors [touch-action:manipulation] hover:border-charcoal hover:bg-beige";
+const linkClass = "mt-2 inline-flex min-h-[44px] items-center gap-2 px-4 font-dm text-[13px] font-medium transition-colors [touch-action:manipulation] ";
+const siteLink = linkClass + "border border-charcoal/35 text-charcoal hover:border-charcoal hover:bg-beige";
+const waLink = linkClass + "bg-[#25D366] text-white hover:bg-[#1ebe5b]";
 
-export default function ChatMessage({ message, onChip, onNavigate }: Props) {
+export default function ChatMessage({ message, onChip, onNavigate, hideLink = false }: Props) {
   const reduce = useReducedMotion();
   const bot = message.role === "bot";
+  const wa = Boolean(message.link?.external && message.link.href.startsWith("https://wa.me"));
   return (
     <motion.li
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
@@ -30,14 +35,15 @@ export default function ChatMessage({ message, onChip, onNavigate }: Props) {
         }
       >
         <p className="whitespace-pre-line">{message.text}</p>
-        {message.link && (
+        {message.link && !hideLink && (
           <a
             href={message.link.href}
             onClick={message.link.external ? undefined : onNavigate}
             target={message.link.external ? "_blank" : undefined}
             rel={message.link.external ? "noopener noreferrer" : undefined}
-            className={linkClass}
+            className={wa ? waLink : siteLink}
           >
+            {wa && <WhatsAppIcon className="h-4 w-4" />}
             {message.link.label}
             <span aria-hidden="true">&rarr;</span>
           </a>
