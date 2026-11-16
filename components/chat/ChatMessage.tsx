@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
 import type { ChatMessage as Message } from "./useChat";
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const linkClass =
-  "mt-2 inline-flex min-h-[40px] items-center gap-2 border border-charcoal/35 px-4 font-dm text-[13px] font-medium text-charcoal transition-colors hover:border-charcoal hover:bg-beige";
+  "mt-2 inline-flex min-h-[44px] items-center gap-2 border border-charcoal/35 px-4 font-dm text-[13px] font-medium text-charcoal transition-colors [touch-action:manipulation] hover:border-charcoal hover:bg-beige";
 
 export default function ChatMessage({ message, onChip, onNavigate }: Props) {
   const reduce = useReducedMotion();
@@ -31,24 +30,24 @@ export default function ChatMessage({ message, onChip, onNavigate }: Props) {
         }
       >
         <p className="whitespace-pre-line">{message.text}</p>
-        {message.link &&
-          (message.link.external ? (
-            <a href={message.link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              {message.link.label}
-              <span aria-hidden="true">&rarr;</span>
-            </a>
-          ) : (
-            <Link href={message.link.href} onClick={onNavigate} className={linkClass}>
-              {message.link.label}
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
-          ))}
+        {message.link && (
+          <a
+            href={message.link.href}
+            onClick={message.link.external ? undefined : onNavigate}
+            target={message.link.external ? "_blank" : undefined}
+            rel={message.link.external ? "noopener noreferrer" : undefined}
+            className={linkClass}
+          >
+            {message.link.label}
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        )}
       </div>
       {message.chips && message.chips.length > 0 && (
         <ul className="mt-2 flex max-w-[92%] flex-wrap gap-2" aria-label="Collections">
           {message.chips.map((c) => (
             <li key={c}>
-              <button type="button" onClick={() => onChip(c)} className="rounded-full border border-border bg-beige-light px-3 py-1.5 font-dm text-[13px] text-charcoal transition-colors hover:border-charcoal">
+              <button type="button" onClick={() => onChip(c)} className="min-h-[36px] rounded-full border border-border bg-beige-light px-3 py-1.5 font-dm text-[13px] text-charcoal transition-colors [touch-action:manipulation] hover:border-charcoal">
                 {c}
               </button>
             </li>

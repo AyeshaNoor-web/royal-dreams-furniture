@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Modern Furniture Collection is a Dubai workshop and showroom creating made-to-measure sofas, beds, dining tables, curtains, wardrobes and media walls for homes across the UAE.",
+  description: "Modern Furniture Collection is a Dubai workshop, with a showroom in Al Butina, Sharjah, creating made-to-measure sofas, beds, dining tables, curtains, wardrobes and media walls for homes across the UAE.",
 };
 
 const values = [

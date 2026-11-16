@@ -4,6 +4,13 @@ export const SITE = {
   tagline: "Made-to-measure interiors for homes across the UAE",
   url: "https://www.modernfurniturecollection.online",
   location: "Dubai, United Arab Emirates",
+  // Showroom area supplied by the client on 16 Nov 2026. Add the street, building and opening hours here when they arrive.
+  showroom: {
+    area: "Al Butina",
+    city: "Sharjah",
+    display: "Al Butina, Sharjah",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Al+Butina+Sharjah",
+  },
   instagramHandle: "@modern_furniture_collection",
   instagramUrl: "https://www.instagram.com/modern_furniture_collection",
   // The client's one Instagram account. Kept as a list so the footer, contact and about pages can show more if another is added.

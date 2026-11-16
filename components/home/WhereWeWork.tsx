@@ -8,7 +8,7 @@ export default function WhereWeWork() {
         <Reveal className="lg:col-span-5">
           <h2 className="font-serif text-display-md text-charcoal">Where we work</h2>
           <p className="mt-4 max-w-md text-[16px] leading-relaxed text-taupe">
-            Consultations, measuring and installation across all seven Emirates, from our workshop in Dubai. Showroom visits are by appointment.
+            Consultations, measuring and installation across all seven Emirates, from our workshop in Dubai. Our showroom is in Al Butina, Sharjah, and visits are by appointment.
           </p>
           <a href={whatsappLink("Hello, I would like to book a home visit. I am in ")} target="_blank" rel="noopener noreferrer" className="mt-6 inline-block text-link hover:text-gold-text">
             Ask about a visit in your area

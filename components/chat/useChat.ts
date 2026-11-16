@@ -12,6 +12,7 @@ export interface ChatMessage extends Partial<Reply> {
 interface Stored {
   messages: ChatMessage[];
   leadDone: boolean;
+  open?: boolean;
 }
 
 const KEY = "mfc-chat";
@@ -38,6 +39,7 @@ export function useChat() {
           next.current = Math.max(...s.messages.map((m) => m.id)) + 1;
         }
         setLeadDone(Boolean(s.leadDone));
+        if (s.open && !window.matchMedia("(max-width: 639px)").matches) setOpen(true);
       }
     } catch {
       // Private mode or blocked storage: the chat still works for this page view.
@@ -49,11 +51,11 @@ export function useChat() {
   useEffect(() => {
     if (!ready) return;
     try {
-      sessionStorage.setItem(KEY, JSON.stringify({ messages, leadDone } satisfies Stored));
+      sessionStorage.setItem(KEY, JSON.stringify({ messages, leadDone, open } satisfies Stored));
     } catch {
       // Ignore: storage is a convenience only.
     }
-  }, [messages, leadDone, ready]);
+  }, [messages, leadDone, open, ready]);
 
   const push = useCallback((m: Omit<ChatMessage, "id">) => {
     setMessages((ms) => [...ms, { ...m, id: next.current++ }]);

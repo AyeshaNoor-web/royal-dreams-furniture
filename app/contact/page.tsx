@@ -60,8 +60,9 @@ export default function ContactPage() {
                 <div className="grid grid-cols-[110px_1fr] gap-4 py-5">
                   <dt className="text-[14px] text-taupe">Showroom</dt>
                   <dd className="text-[16px] text-charcoal">
-                    {SITE.location}
+                    {SITE.showroom.display}
                     <span className="mt-1 block text-[14px] text-taupe">Visits by appointment. Home measurement across all seven Emirates.</span>
+                    <a href={SITE.showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-link text-[14px] hover:text-gold-text">Open in Google Maps</a>
                   </dd>
                 </div>
                 <div className="grid grid-cols-[110px_1fr] gap-4 py-5">

@@ -21,7 +21,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Which areas do you cover?",
-    a: "We measure and install across all seven Emirates. Dubai, Sharjah and Ajman are closest to the workshop and have the most visit slots; Abu Dhabi, Al Ain, Ras Al Khaimah, Umm Al Quwain and Fujairah are visited by arrangement.",
+    a: "We measure and install across all seven Emirates. Dubai, Sharjah and Ajman are closest to the workshop and have the most visit slots; Abu Dhabi, Al Ain, Ras Al Khaimah, Umm Al Quwain and Fujairah are visited by arrangement. Our showroom is in Al Butina, Sharjah, and visits there are by appointment.",
   },
   {
     q: "Can I choose the fabric and finish?",

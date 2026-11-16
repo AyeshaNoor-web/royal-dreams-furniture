@@ -73,8 +73,8 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="text-xs text-beige/40 mt-5">{SITE.location}</p>
-            <p className="text-xs text-beige/40">Showroom visits by appointment</p>
+            <p className="text-xs text-beige/40 mt-5">Showroom: {SITE.showroom.display}</p>
+            <p className="text-xs text-beige/40">Visits by appointment</p>
           </div>
         </div>
       </div>

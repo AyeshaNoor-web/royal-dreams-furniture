@@ -47,7 +47,17 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
   const last = messages[messages.length - 1];
   const lastQuestion = [...messages].reverse().find((m) => m.role === "user")?.text ?? "";
   const showLead = Boolean(last?.lead) && !leadDone && !typing;
-  const onNavigate = () => { if (isPhone()) setOpen(false); };
+  // A reply link is a full page load. Save the closed state first on phones so the sheet does not cover the new page.
+  const onNavigate = () => {
+    if (!isPhone()) return;
+    setOpen(false);
+    try {
+      const raw = sessionStorage.getItem("mfc-chat");
+      if (raw) sessionStorage.setItem("mfc-chat", JSON.stringify({ ...(JSON.parse(raw) as object), open: false }));
+    } catch {
+      // Storage is a convenience only.
+    }
+  };
 
   return (
     <motion.div

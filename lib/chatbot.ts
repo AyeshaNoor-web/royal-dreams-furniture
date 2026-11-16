@@ -79,7 +79,7 @@ const priceFor = (slug: string): Reply | null => {
 
 const areaFor = (text: string): string | null => {
   const t = text.toLowerCase();
-  for (const p of areaPlaces.near.places) if (t.includes(p.toLowerCase())) return `Yes, ${p} is among the nearest areas to the workshop, so it has the most visit slots. The home visit and measurement are free.`;
+  for (const p of areaPlaces.near.places) if (t.includes(p.toLowerCase())) return `Yes, ${p} is among the nearest areas to the workshop, so it has the most visit slots. The home visit and measurement are free.` + (p === "Sharjah" ? " Our showroom is in Al Butina, Sharjah, if you would like to see finishes in person. Visits are by appointment." : "");
   for (const p of areaPlaces.far.places) if (t.includes(p.toLowerCase()) || (p === "Ras Al Khaimah" && /\brak\b/.test(t))) return `Yes, we measure and install in ${p}. It is further from the Dubai workshop, so visits there are arranged by appointment. The home visit is still free.`;
   return null;
 };
