@@ -5,11 +5,12 @@ const root = fileURLToPath(new URL("./", import.meta.url));
 
 export default defineConfig({
   resolve: {
-    alias: {
-      "@": root,
+    alias: [
+      // Only "@/..." (the tsconfig path), never scoped packages such as @vitest/* or @upstash/*.
+      { find: /^@\//, replacement: root },
       // `server-only` throws outside a React Server Components bundle; tests import the server code directly.
-      "server-only": root + "tests/server-only-stub.ts",
-    },
+      { find: "server-only", replacement: root + "tests/server-only-stub.ts" },
+    ],
   },
   test: {
     environment: "node",

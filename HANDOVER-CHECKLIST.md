@@ -72,3 +72,15 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Domain registrar login stays with whoever will renew it; note the renewal date.
 - [ ] A one-page guide on how to update content: photos live in `public/images/<collection>/`, text in `lib/gallery.ts` and `lib/site.ts`, and any change pushed to `main` deploys automatically.
 - [ ] Confirm who will handle future changes and how to reach them.
+
+## 8. Budget estimator (branch feature/estimator-assistant)
+
+- [ ] **Needs client, blocks production:** real rates. Open `config/pricing.config.ts`. For each of the 11 collections set the three tiers' min and max AED per unit (seat, piece, metre, square metre or window), adjust the size bounds and the optional extras, then set `PLACEHOLDER_DATA = false`. Every number in the file today is a placeholder chosen only so the flow can be tested.
+- [ ] Confirm the tier descriptions (Standard, Premium, Bespoke), the "included" and "not included" lists, and whether price changes by emirate (`emiratePricing.enabled`, off by default).
+- [ ] Vercel environment variables: `ESTIMATOR_ENABLED=true` to show the /estimator page, the home section and the chat links. A production build fails while this is true and placeholders remain. Preview builds always pass.
+- [ ] Rate limiting: create an Upstash Redis database from the Vercel Marketplace and set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`. Without them a per-instance memory limiter runs and a warning is logged once.
+- [ ] Bot protection: create a Cloudflare Turnstile widget for the domain and set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`. Without them the widget is not shown and tokens are not checked.
+- [ ] `/api/contact` now answers 503 while the Resend keys are missing and the forms tell the visitor to use WhatsApp. Nothing is silently lost, but nothing is emailed either until section 3 is done.
+- [ ] Email deliverability once Resend is live: add the DNS records Resend shows for the sending domain. SPF: a TXT record on the sending subdomain, `v=spf1 include:amazonses.com ~all` (Resend's value, copy from their dashboard). DKIM: the three CNAME records Resend lists. DMARC: TXT on `_dmarc`, start with `v=DMARC1; p=none; rua=mailto:[REPORTS MAILBOX]`, move to `p=quarantine` after two clean weeks.
+- [ ] Legal drafts at /privacy-policy and /terms carry a DRAFT strip and `noindex`. Replace the [square bracket] items, have the lawyer review, then remove the strip, the `robots` line in each page and add both pages to `app/sitemap.ts`.
+- [ ] Knowledge for the assistant (Phase 2) lives in `content/knowledge.md`. Replace every PLACEHOLDER line before the AI is enabled.

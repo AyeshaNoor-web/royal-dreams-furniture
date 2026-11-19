@@ -3,6 +3,7 @@
 import { FALLBACK_ANSWER, WHATSAPP_CHAT, areaPlaces, intents, whatsappFor, type ChatLink, type Intent } from "./chatbot-intents";
 import { quoteFactors } from "./quote";
 import { categories } from "./gallery";
+import { estimatorEnabled } from "./flags";
 
 export interface Reply {
   text: string;
@@ -70,6 +71,12 @@ const priceFor = (slug: string): Reply | null => {
   const c = categories.find((x) => x.slug === slug);
   if (!q || !c) return null;
   const title = c.title.toLowerCase();
+  if (estimatorEnabled) {
+    return {
+      text: `We do not list fixed prices for ${title}, because each one is made to your sizes and finish. The price depends on: ${q.depends.join("; ").toLowerCase()}. The estimator gives you an indicative range now, and the team confirms a fixed quotation after the free site measurement.`,
+      link: { label: "Estimate " + title, href: "/estimator?c=" + slug },
+    };
+  }
   return {
     text: `We do not list prices for ${title}, because each one is made to your sizes and finish. The price depends on: ${q.depends.join("; ").toLowerCase()}. For a first estimate send ${q.send.charAt(0).toLowerCase() + q.send.slice(1)} The team replies within a working day with a rough budget, and the fixed quotation follows the free site measurement.`,
     link: whatsappFor(`Hello, I would like a quotation for made-to-measure ${title}. I will send ${q.send.charAt(0).toLowerCase() + q.send.slice(1)}`),

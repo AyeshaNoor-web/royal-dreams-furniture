@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { categories } from "@/lib/gallery";
+import { estimatorEnabled } from "@/lib/flags";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const pages = ["", "/collections", "/gallery", "/about", "/contact"].map((p) => ({
+  const pages = ["", "/collections", "/gallery", "/about", "/contact", ...(estimatorEnabled ? ["/estimator"] : [])].map((p) => ({
     url: SITE.url + p,
     lastModified: now,
   }));

@@ -4,6 +4,7 @@ import WhatWeMake from "@/components/home/WhatWeMake";
 import PlanByRoom from "@/components/home/PlanByRoom";
 import HowItWorks from "@/components/home/HowItWorks";
 import QuoteFactors from "@/components/home/QuoteFactors";
+import EstimatorTeaser from "@/components/home/EstimatorTeaser";
 import InquiryBand from "@/components/home/InquiryBand";
 import RecentWork from "@/components/home/RecentWork";
 import Reviews from "@/components/home/Reviews";
@@ -33,6 +34,7 @@ export default function HomePage() {
       <PlanByRoom />
       <HowItWorks />
       <QuoteFactors />
+      <EstimatorTeaser />
       <InquiryBand />
       <RecentWork />
       <Reviews />
