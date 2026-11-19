@@ -1,19 +1,20 @@
 "use client";
 
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { quickActions } from "@/lib/chatbot";
+import { quickActions, type QuickAction } from "@/lib/chatbot";
 import { WHATSAPP_CHAT } from "@/lib/chatbot-intents";
 
 interface Props {
+  actions?: QuickAction[];
   onSend: (message: string) => void;
   onAsk: () => void;
 }
 
-/** The four buttons under the welcome message. WhatsApp is green because it is the team's working channel. */
-export default function ChatQuickActions({ onSend, onAsk }: Props) {
+/** The buttons under the welcome message. WhatsApp is green because it is the team's working channel. */
+export default function ChatQuickActions({ actions = quickActions, onSend, onAsk }: Props) {
   return (
     <ul className="mt-4 flex flex-wrap gap-2" aria-label="Quick options">
-      {quickActions.map((q) => (
+      {actions.map((q) => (
         <li key={q.label}>
           {q.action === "whatsapp" ? (
             <a

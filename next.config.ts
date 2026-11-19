@@ -34,6 +34,8 @@ const security = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // The assistant reads content/knowledge.md at runtime; make sure the file is bundled with the route on Vercel.
+  outputFileTracingIncludes: { "/api/chat": ["./content/**"] },
   env: {
     // One flag, usable on the server and in the browser.
     NEXT_PUBLIC_ESTIMATOR_ENABLED: process.env.ESTIMATOR_ENABLED === "true" ? "true" : "false",

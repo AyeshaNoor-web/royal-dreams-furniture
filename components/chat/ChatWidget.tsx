@@ -11,33 +11,35 @@ import { useChat } from "./useChat";
 // The panel, matcher and lead form only load the first time someone opens the chat.
 const ChatPanel = dynamic(() => import("./ChatPanel"), { ssr: false });
 
-function Widget() {
-  const chat = useChat();
+function Widget({ ai }: { ai: boolean }) {
+  const chat = useChat(ai);
   const reduce = useReducedMotion();
   const bubble = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
+  const showPanel = chat.open && !chat.minimised;
   // Visitors who have not chatted yet get a slow pulse and the greeting card.
   const fresh = !chat.open && chat.messages.length === 1;
 
   const openChat = () => {
+    chat.setMinimised(false);
     chat.setOpen(true);
     try { sessionStorage.setItem(TEASER_KEY, "1"); } catch { /* ignore */ }
   };
 
   // Return focus to the bubble after the panel closes.
   useEffect(() => {
-    if (wasOpen.current && !chat.open) {
+    if (wasOpen.current && !showPanel) {
       const t = setTimeout(() => bubble.current?.focus(), 50);
       return () => clearTimeout(t);
     }
-    wasOpen.current = chat.open;
-  }, [chat.open]);
+    wasOpen.current = showPanel;
+  }, [showPanel]);
 
   return (
     <>
       <ChatTeaser active={fresh} onOpen={openChat} />
       <AnimatePresence>
-        {!chat.open && (
+        {!showPanel && (
           <motion.div
             key="bubble"
             initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
@@ -51,8 +53,9 @@ function Widget() {
               ref={bubble}
               type="button"
               onClick={openChat}
-              aria-label="Ask us a question"
+              aria-label={chat.minimised ? "Back to chat" : ai ? "Ask our AI assistant" : "Ask us a question"}
               aria-haspopup="dialog"
+              aria-expanded={showPanel}
               whileHover={reduce ? undefined : { scale: 1.05, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.95 }}
               transition={{ duration: 0.2, ease: EASE }}
@@ -65,20 +68,21 @@ function Widget() {
                 </svg>
                 {fresh && <span aria-hidden="true" className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-charcoal" />}
               </span>
-              <span className="hidden font-dm text-sm font-medium sm:block">Ask us</span>
+              <span className={"font-dm text-sm font-medium " + (chat.minimised ? "block" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask us"}</span>
             </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
-      <AnimatePresence>{chat.open && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
+      <AnimatePresence>{showPanel && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
     </>
   );
 }
 
-export default function ChatWidget() {
+/** `ai` is decided on the server: AI_CHAT_ENABLED and an API key. Off means the keyword matcher answers. */
+export default function ChatWidget({ ai = false }: { ai?: boolean }) {
   return (
     <ChatBoundary>
-      <Widget />
+      <Widget ai={ai} />
     </ChatBoundary>
   );
 }

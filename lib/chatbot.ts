@@ -123,7 +123,22 @@ export const answer = (text: string): Reply => {
 export const WELCOME =
   "Welcome to Modern Furniture Collection. I can answer questions about our collections, the free home visit, finishes, where we work and how to start. Everything is made to measure in our Dubai workshop.";
 
-export const quickActions: { label: string; message?: string; action?: "whatsapp" | "ask" }[] = [
+export const WELCOME_AI =
+  "Hello. I am Modern Furniture Collection's AI assistant. Tell me about the room you are planning and I will point you to the right pieces, give an indicative estimate, and hand you to a designer on WhatsApp whenever you like.";
+
+export interface QuickAction { label: string; message?: string; action?: "whatsapp" | "ask" }
+
+/** Openers for the AI assistant: each one starts the conversation with a room, so the first question is already answered. */
+export const aiQuickActions: QuickAction[] = [
+  { label: "Living room", message: "I am planning my living room." },
+  { label: "Bedroom", message: "I am planning a bedroom." },
+  { label: "Dining room", message: "I am planning my dining room." },
+  { label: "Curtains", message: "I need curtains made." },
+  { label: "Get an estimate", message: "I would like an indicative estimate." },
+  { label: "Talk to a designer", action: "whatsapp" },
+];
+
+export const quickActions: QuickAction[] = [
   { label: "Browse collections", message: "What do you make?" },
   { label: "Where we work", message: "Where are you located and which areas do you cover?" },
   { label: "Ask a question", action: "ask" },

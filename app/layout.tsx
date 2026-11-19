@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
 import DevBanner from "@/components/shared/DevBanner";
 import { SITE } from "@/lib/site";
+import { aiChatEnabled } from "@/lib/flags";
 
 // Display: an elegant transitional serif that stays legible at card sizes. Body: geometric, quiet.
 const display = Playfair_Display({
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
-        <ChatWidget />
+        <ChatWidget ai={aiChatEnabled && Boolean(process.env.ANTHROPIC_API_KEY)} />
       </body>
     </html>
   );
