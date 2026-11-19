@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
+import DevBanner from "@/components/shared/DevBanner";
 import { SITE } from "@/lib/site";
 
 // Display: an elegant transitional serif that stays legible at card sizes. Body: geometric, quiet.
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={display.variable + " " + body.variable}>
       <body className="bg-beige font-dm text-charcoal antialiased">
         <a href="#main" className="skip-link">Skip to content</a>
+        <DevBanner />
         <Navbar />
         <main id="main">{children}</main>
         <Footer />

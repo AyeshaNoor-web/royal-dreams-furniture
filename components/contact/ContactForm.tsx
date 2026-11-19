@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+import Turnstile from "@/components/shared/Turnstile";
 import { whatsappLink, services } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -12,7 +13,8 @@ const label = "block text-[15px] text-charcoal mb-2";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const [delivered, setDelivered] = useState(true);
+  const [errorText, setErrorText] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", email: "", interest: "", message: "", company: "" });
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -24,12 +26,12 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
-      const data = (await res.json()) as { ok: boolean; delivered?: boolean };
-      if (!res.ok || !data.ok) throw new Error("failed");
-      setDelivered(data.delivered !== false);
+      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, turnstileToken }) });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error || "failed");
       setStatus("success");
-    } catch {
+    } catch (e) {
+      setErrorText(e instanceof Error && e.message !== "failed" ? e.message : "");
       setStatus("error");
     }
   };
@@ -39,11 +41,7 @@ export default function ContactForm() {
         {status === "success" ? (
           <div className="border-t border-charcoal pt-8" role="status">
             <h3 className="font-serif text-3xl text-charcoal mb-3">Thank you, {form.name.split(" ")[0] || "friend"}.</h3>
-            <p className="max-w-md text-[17px] text-taupe">
-              {delivered
-                ? "Your enquiry has been sent. Our design team will reply within one working day."
-                : "Your enquiry was received. Email delivery is not switched on yet, so please also reach us on WhatsApp for a fast reply."}
-            </p>
+            <p className="max-w-md text-[17px] text-taupe">Your enquiry has been sent. Our design team will reply within one working day.</p>
             <a href={whatsappLink(waText)} target="_blank" rel="noopener noreferrer" className="btn-dark mt-7">
               <WhatsAppIcon className="w-4 h-4" /> Continue on WhatsApp
             </a>
@@ -78,9 +76,10 @@ export default function ContactForm() {
             <input type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={update("company")} className="hidden" aria-hidden="true" />
 
             {status === "error" && (
-              <p role="alert" className="sm:col-span-2 text-[15px] text-red-800">Something went wrong sending your message. Please try again or use WhatsApp below.</p>
+              <p role="alert" className="sm:col-span-2 text-[15px] text-red-800">{errorText || "Something went wrong sending your message. Please try again or use WhatsApp below."}</p>
             )}
 
+            <div className="sm:col-span-2"><Turnstile onToken={setTurnstileToken} /></div>
             <div className="sm:col-span-2 flex flex-col sm:flex-row gap-4 pt-2">
               <button type="submit" disabled={status === "submitting"} className="btn-dark disabled:opacity-60">
                 {status === "submitting" ? "Sending..." : "Send enquiry"}

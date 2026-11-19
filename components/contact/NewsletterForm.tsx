@@ -7,16 +7,18 @@ type Status = "idle" | "submitting" | "success" | "error";
 export default function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [errorText, setErrorText] = useState("");
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
     try {
       const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "newsletter", email }) });
-      const data = (await res.json()) as { ok: boolean };
-      if (!res.ok || !data.ok) throw new Error("failed");
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error || "failed");
       setStatus("success");
-    } catch {
+    } catch (e) {
+      setErrorText(e instanceof Error && e.message !== "failed" ? e.message : "");
       setStatus("error");
     }
   };
@@ -41,7 +43,7 @@ export default function NewsletterForm() {
       <button type="submit" disabled={status === "submitting"} className="px-6 py-3 bg-beige-light text-[14px] font-medium text-charcoal hover:bg-gold transition-colors disabled:opacity-60">
         {status === "submitting" ? "Joining" : "Subscribe"}
       </button>
-      {status === "error" && <p role="alert" className="sm:basis-full font-dm text-xs text-red-300">Please check the address and try again.</p>}
+      {status === "error" && <p role="alert" className="sm:basis-full font-dm text-xs text-red-300">{errorText || "Please check the address and try again."}</p>}
     </form>
   );
 }

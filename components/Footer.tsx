@@ -82,6 +82,10 @@ export default function Footer() {
       <div className="border-t border-beige/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-beige/30">&copy; {year} {SITE.name}. All rights reserved.</p>
+          <p className="flex gap-4 text-xs text-beige/40">
+            <Link href="/privacy-policy" className="hover:text-beige-light">Privacy policy</Link>
+            <Link href="/terms" className="hover:text-beige-light">Terms of use</Link>
+          </p>
           <p className="text-xs text-beige/25">Made to measure in Dubai</p>
         </div>
       </div>

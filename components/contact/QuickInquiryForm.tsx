@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+import Turnstile from "@/components/shared/Turnstile";
 import { whatsappLink, services } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -12,7 +13,8 @@ const label = "block text-[14px] text-charcoal mb-1.5";
 
 export default function QuickInquiryForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const [delivered, setDelivered] = useState(true);
+  const [errorText, setErrorText] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", interest: "", message: "", company: "" });
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -24,12 +26,12 @@ export default function QuickInquiryForm() {
     e.preventDefault();
     setStatus("submitting");
     try {
-      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, source: "homepage" }) });
-      const data = (await res.json()) as { ok: boolean; delivered?: boolean };
-      if (!res.ok || !data.ok) throw new Error("failed");
-      setDelivered(data.delivered !== false);
+      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, source: "homepage", turnstileToken }) });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error || "failed");
       setStatus("success");
-    } catch {
+    } catch (e) {
+      setErrorText(e instanceof Error && e.message !== "failed" ? e.message : "");
       setStatus("error");
     }
   };
@@ -38,9 +40,7 @@ export default function QuickInquiryForm() {
     return (
       <div className="bg-beige-light border border-border p-8 text-center" role="status">
         <h3 className="font-serif text-2xl text-charcoal mb-3">Thank you, {form.name.split(" ")[0] || "friend"}.</h3>
-        <p className="font-dm text-sm text-taupe">
-          {delivered ? "Our design team will call you within one working day." : "Your request has been received. Email delivery is not yet active, so please also message us on WhatsApp."}
-        </p>
+        <p className="font-dm text-sm text-taupe">Our design team will call you within one working day.</p>
         <a href={whatsappLink(waText)} target="_blank" rel="noopener noreferrer" className="btn-dark mt-6">
           <WhatsAppIcon className="w-4 h-4" /> Continue on WhatsApp
         </a>
@@ -74,7 +74,8 @@ export default function QuickInquiryForm() {
         <textarea id="q-message" rows={3} value={form.message} onChange={update("message")} className={field + " resize-y"} placeholder="Room size, finishes you like, timeline" />
       </div>
       <input type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={update("company")} className="hidden" aria-hidden="true" />
-      {status === "error" && <p role="alert" className="sm:col-span-2 font-dm text-sm text-red-700">Something went wrong. Please try again or use WhatsApp.</p>}
+      {status === "error" && <p role="alert" className="sm:col-span-2 font-dm text-sm text-red-700">{errorText || "Something went wrong. Please try again or use WhatsApp."}</p>}
+      <div className="sm:col-span-2"><Turnstile onToken={setTurnstileToken} /></div>
       <div className="sm:col-span-2 flex flex-col sm:flex-row gap-3 pt-1">
         <button type="submit" disabled={status === "submitting"} className="btn-dark disabled:opacity-60">
           {status === "submitting" ? "Sending..." : "Request callback"}
