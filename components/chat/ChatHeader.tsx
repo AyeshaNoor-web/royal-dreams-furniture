@@ -17,10 +17,10 @@ export default function ChatHeader({ ai, onReset, onClose, canReset }: Props) {
   return (
     <div className="flex items-center justify-between gap-3 border-b border-border bg-beige-light px-4 py-3">
       <div className="min-w-0">
-        <p className="truncate font-serif text-[17px] leading-tight text-charcoal">{SITE.name}</p>
-        <p className="mt-0.5 flex items-center gap-1.5 text-[12px] text-taupe">
-          {ai && <span className="rounded-sm border border-border px-1 py-px text-[10px] uppercase tracking-wider text-taupe">AI assistant</span>}
-          {ai ? "Answers from our website, checked by the team" : "Instant answers from our website"}
+        <p className="font-serif text-[16px] leading-tight text-charcoal sm:text-[17px]">{SITE.name}</p>
+        <p className="mt-1 flex items-center gap-1.5 text-[12px] leading-none text-taupe">
+          {ai && <span className="shrink-0 whitespace-nowrap rounded-sm border border-border px-1 py-0.5 text-[10px] uppercase tracking-wider text-taupe">AI assistant</span>}
+          <span className="truncate">{ai ? "Answers from our website" : "Instant answers from our website"}</span>
         </p>
       </div>
       <div className="flex shrink-0 items-center">
