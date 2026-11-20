@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
-// Palette from the client's swatch card:
-// #F9F3F0  #E8D5C4  #D4B8A8  #C4A090  #A08070
+// Palette: warm off-white surfaces (client request, 20 Nov 2026) with the original charcoal and gold accents.
+// Surfaces #FBF9F5 #F4EFE8 #E7DFD4, accents #C4A090 #A08070, text #2A1F18 #6E584A #765542.
 // Text tones are darkened versions of the two deepest swatches so body copy meets WCAG AA on beige.
 const config: Config = {
   content: [
@@ -12,14 +12,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        beige: { DEFAULT: "#E8D5C4", light: "#F9F3F0", dark: "#D4B8A8" },
+        beige: { DEFAULT: "#F4EFE8", light: "#FBF9F5", dark: "#E7DFD4" },
         charcoal: { DEFAULT: "#2A1F18", light: "#3D2F26" },
         frame: "#1C140F",
         door: "#2A1F18",
         gold: { DEFAULT: "#C4A090", dark: "#A08070", text: "#765542" },
-        lit: "#D4B8A8",
-        taupe: { DEFAULT: "#6E584A", light: "#A08070" },
-        border: "#D4B8A8",
+        lit: "#E7DFD4",
+        taupe: { DEFAULT: "#6E584A", light: "#826655" },
+        border: "#DDD3C7",
       },
       fontFamily: {
         serif: ["var(--font-display)", "Georgia", "Times New Roman", "serif"],

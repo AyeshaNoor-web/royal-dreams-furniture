@@ -40,7 +40,15 @@ export const WHATSAPP_LINK = whatsappLink(
 );
 
 export const APPOINTMENT_LINK = whatsappLink(
-  "Hello, I would like to book a complimentary consultation and site measurement."
+  "Hello, I would like to book a free site visit and measurement for my home."
+);
+
+/** "Book a free visit" buttons. Same as APPOINTMENT_LINK, named for what the button says. */
+export const VISIT_LINK = APPOINTMENT_LINK;
+
+/** "Get a quote" buttons. */
+export const QUOTE_LINK = whatsappLink(
+  "Hello, I would like a free quotation for made-to-measure furniture. I can send photos and sizes of the room."
 );
 
 export const navLinks = [

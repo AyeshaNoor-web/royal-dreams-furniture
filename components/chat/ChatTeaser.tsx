@@ -36,7 +36,7 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.96 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="fixed bottom-[86px] right-6 z-[69] w-[min(300px,calc(100vw-3rem))] rounded-2xl rounded-br-md border border-border bg-beige-light p-4 shadow-xl shadow-black/15"
+          className="fixed bottom-[86px] right-6 z-[69] hidden w-[min(300px,calc(100vw-3rem))] sm:block rounded-2xl rounded-br-md border border-border bg-beige-light p-4 shadow-xl shadow-black/15"
         >
           <button type="button" onClick={dismiss} aria-label="Dismiss" className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full text-taupe transition-colors hover:bg-beige hover:text-charcoal">
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>

@@ -77,6 +77,20 @@ export const estimatorNotes = {
   excluded: ["5% VAT", "Electrical work beyond connecting supplied lighting", "Removal of existing built-in furniture"],
 };
 
+/** Quick-start presets: a typical basket per home type. PLACEHOLDER sizes until the client confirms what they usually fit. */
+export interface Preset {
+  id: string;
+  label: string;
+  items: { collection: string; size: number; tier: Tier; extras?: string[] }[];
+}
+
+export const presets: Preset[] = [
+  { id: "1-bed", label: "1-bed apartment", items: [{ collection: "curtains", size: 3, tier: "standard" }, { collection: "fitted-wardrobes", size: 2.4, tier: "standard" }, { collection: "tv-units", size: 3, tier: "standard" }] },
+  { id: "2-bed", label: "2-bed apartment", items: [{ collection: "curtains", size: 5, tier: "standard" }, { collection: "fitted-wardrobes", size: 5, tier: "premium" }, { collection: "tv-units", size: 3.5, tier: "premium" }, { collection: "beds", size: 1, tier: "premium" }] },
+  { id: "3-bed", label: "3-bed townhouse", items: [{ collection: "curtains", size: 8, tier: "premium" }, { collection: "fitted-wardrobes", size: 8, tier: "premium" }, { collection: "tv-units", size: 4, tier: "premium" }, { collection: "sofas", size: 6, tier: "premium" }, { collection: "dining-tables", size: 6, tier: "standard" }] },
+  { id: "5-bed", label: "5-bed villa", items: [{ collection: "curtains", size: 14, tier: "premium" }, { collection: "walk-in-closets", size: 10, tier: "premium" }, { collection: "fitted-wardrobes", size: 10, tier: "premium" }, { collection: "tv-units", size: 5, tier: "bespoke", extras: ["lighting"] }, { collection: "sofas", size: 8, tier: "bespoke" }, { collection: "dining-tables", size: 10, tier: "bespoke" }, { collection: "wall-paneling", size: 30, tier: "premium" }] },
+];
+
 const lighting = (rate: Range): Extra => ({ id: "lighting", label: "Integrated lighting", per: "item", rate });
 
 // PLACEHOLDER rates throughout. Round numbers chosen only so the flow can be tested.

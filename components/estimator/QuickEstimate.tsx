@@ -59,7 +59,7 @@ export default function QuickEstimate({ catalogue }: { catalogue: PublicCatalogu
           {line && <p className="mt-3 text-[14px] text-taupe">{line.title}, {trimNumber(line.size)} {unitWords(line.size, line.unitLabel)}, {line.tierLabel.toLowerCase()}. {q.result?.disclaimer}</p>}
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          {q.result && <a href={wa} target="_blank" rel="noopener noreferrer" className="btn min-h-[48px] bg-[#25D366] text-white hover:bg-[#1ebe5b]"><WhatsAppIcon className="h-[18px] w-[18px]" /> Discuss on WhatsApp</a>}
+          {q.result && <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa min-h-[48px]"><WhatsAppIcon className="h-[18px] w-[18px]" /> Discuss on WhatsApp</a>}
           <Link href={"/estimator?c=" + q.slug} className="btn-line min-h-[48px]">Plan a whole room <span aria-hidden="true">&rarr;</span></Link>
         </div>
       </div>

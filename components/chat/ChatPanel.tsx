@@ -6,7 +6,7 @@ import { EASE } from "@/components/motion/Reveal";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { aiQuickActions, quickActions } from "@/lib/chatbot";
 import { WHATSAPP_CHAT } from "@/lib/chatbot-intents";
-import { SITE } from "@/lib/site";
+import { QUOTE_LINK, SITE, VISIT_LINK } from "@/lib/site";
 import ChatHeader from "./ChatHeader";
 import ChatMessage from "./ChatMessage";
 import ChatLeadForm from "./ChatLeadForm";
@@ -99,9 +99,13 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
       </div>
 
       <div className="border-t border-border bg-beige-light px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" className="mb-2 inline-flex min-h-[32px] items-center gap-1.5 text-[13px] text-taupe underline-offset-4 hover:text-charcoal hover:underline">
-          <WhatsAppIcon className="h-3.5 w-3.5 text-[#1ebe5b]" /> Talk to a designer
-        </a>
+        <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-taupe">
+          <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center gap-1.5 underline-offset-4 hover:text-charcoal hover:underline">
+            <WhatsAppIcon className="h-3.5 w-3.5 text-[#128C7E]" /> Talk to a designer
+          </a>
+          <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Book a free visit</a>
+          <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Get a quote</a>
+        </div>
         <div className="flex items-center gap-2">
           <label className="sr-only" htmlFor="chat-input">Type your question</label>
           <input

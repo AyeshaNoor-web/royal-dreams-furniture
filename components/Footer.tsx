@@ -67,7 +67,7 @@ export default function Footer() {
               {SITE.phones.map((p) => (
                 <li key={p.intl}>
                   <a href={whatsappLink("Hello, I would like to enquire about your furniture.", p.intl)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-beige-light hover:text-gold transition-colors">
-                    <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                    <WhatsAppIcon className="w-4 h-4 text-[#128C7E]" />
                     {p.display}
                   </a>
                 </li>

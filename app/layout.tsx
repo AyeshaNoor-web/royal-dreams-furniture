@@ -51,12 +51,12 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#E8D5C4" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#F4EFE8" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={display.variable + " " + body.variable}>
-      <body className="bg-beige font-dm text-charcoal antialiased">
+      <body className="bg-beige pb-[calc(76px+env(safe-area-inset-bottom))] font-dm text-charcoal antialiased sm:pb-0">
         <a href="#main" className="skip-link">Skip to content</a>
         <DevBanner />
         <Navbar />

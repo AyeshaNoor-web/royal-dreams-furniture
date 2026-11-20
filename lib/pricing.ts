@@ -1,6 +1,6 @@
 import "server-only";
 import { z } from "zod";
-import { emiratePricing, emirates, estimatorNotes, pricing, tiers, type CollectionPricing, type Range, type Tier } from "@/config/pricing.config";
+import { emiratePricing, emirates, estimatorNotes, presets, pricing, tiers, type CollectionPricing, type Range, type Tier } from "@/config/pricing.config";
 import { categories } from "@/lib/gallery";
 import { unitWords } from "@/lib/estimate-format";
 
@@ -132,6 +132,7 @@ export interface PublicCatalogue {
   tiers: typeof tiers;
   emirates: typeof emirates;
   emirateStep: boolean;
+  presets: typeof presets;
   vatPercent: number;
   included: string[];
   excluded: string[];
@@ -158,6 +159,7 @@ export function publicCatalogue(): PublicCatalogue {
     tiers,
     emirates,
     emirateStep: emiratePricing.enabled,
+    presets,
     vatPercent: estimatorNotes.vatPercent,
     included: estimatorNotes.included,
     excluded: estimatorNotes.excluded,

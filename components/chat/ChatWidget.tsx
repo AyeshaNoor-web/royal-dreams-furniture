@@ -9,6 +9,7 @@ import { SITE } from "@/lib/site";
 import ChatBoundary from "./ChatBoundary";
 import ChatTeaser, { TEASER_KEY } from "./ChatTeaser";
 import Mascot from "./Mascot";
+import MobileCtaBar from "./MobileCtaBar";
 import { useChat } from "./useChat";
 
 // The panel, matcher and lead form only load the first time someone opens the chat.
@@ -65,7 +66,7 @@ function Widget({ ai }: { ai: boolean }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="fixed bottom-6 right-6 z-[70]"
+            className="fixed bottom-6 right-6 z-[70] hidden sm:block"
           >
             {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-charcoal/35" />}
             <motion.button
@@ -89,6 +90,7 @@ function Widget({ ai }: { ai: boolean }) {
           </motion.div>
         )}
       </AnimatePresence>
+      {!showPanel && <MobileCtaBar onOpenChat={openChat} minimised={chat.minimised} />}
       <AnimatePresence>{showPanel && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
     </>
   );

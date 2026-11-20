@@ -88,10 +88,18 @@ export function useEstimator(catalogue: PublicCatalogue, initialCollection?: str
     setStep("result");
   };
   const addAnother = () => { setDraft(empty()); setStep("collection"); };
+  /** Quick start: replaces the basket with a typical home's pieces and shows the result. */
+  const applyPreset = (id: string) => {
+    const p = catalogue.presets.find((x) => x.id === id);
+    if (!p) return;
+    setItems(p.items.map((i) => ({ collection: i.collection, size: i.size, tier: i.tier, extras: i.extras ?? [] })));
+    setDraft(empty());
+    setStep("result");
+  };
   const remove = (index: number) => setItems((list) => list.filter((_, i) => i !== index));
   const reset = () => { setItems([]); setDraft(empty()); setStep("collection"); };
 
-  return { step, setStep, draft, collection, items, result, loading, error, choose, setSize, setTier, toggleExtra, setEmirate, next, back, finish, addAnother, remove, reset, retry: () => calculate(items) };
+  return { step, setStep, draft, collection, items, result, loading, error, choose, setSize, setTier, toggleExtra, setEmirate, next, back, finish, addAnother, applyPreset, remove, reset, retry: () => calculate(items) };
 }
 
 export type Estimator = ReturnType<typeof useEstimator>;

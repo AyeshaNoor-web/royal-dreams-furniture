@@ -5,7 +5,7 @@
 html { -webkit-text-size-adjust: 100%; }
 
 body {
-  background-color: #E8D5C4;
+  background-color: #F4EFE8;
   color: #2A1F18;
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 16px;
@@ -21,7 +21,7 @@ h1, h2, h3, h4 {
 }
 h3, h4 { font-weight: 500; }
 
-::selection { background-color: #2A1F18; color: #F9F3F0; }
+::selection { background-color: #2A1F18; color: #FBF9F5; }
 
 @layer components {
   .btn {
@@ -30,6 +30,8 @@ h3, h4 { font-weight: 500; }
   .btn-lit { @apply btn bg-gold text-charcoal hover:bg-gold-dark hover:text-beige-light; }
   .btn-dark { @apply btn bg-charcoal text-beige-light hover:bg-charcoal-light; }
   .btn-line { @apply btn border border-charcoal/35 text-charcoal hover:border-charcoal; }
+  /* WhatsApp: the brand teal, because white on the light green (#25D366) is only 2:1 and fails AA. */
+  .btn-wa { @apply btn bg-[#128C7E] text-white hover:bg-[#0f7a6d]; }
   .text-link {
     @apply font-dm text-[15px] underline decoration-1 underline-offset-[6px] transition-colors duration-200;
   }
@@ -40,7 +42,7 @@ h3, h4 { font-weight: 500; }
 .skip-link {
   position: fixed; top: 12px; left: 12px; z-index: 100;
   transform: translateY(-200%);
-  background: #2A1F18; color: #F9F3F0;
+  background: #2A1F18; color: #FBF9F5;
   padding: 12px 18px; font-size: 14px;
   transition: transform 0.2s ease;
 }
@@ -80,7 +82,7 @@ h3, h4 { font-weight: 500; }
   text-transform: uppercase;
   color: var(--eyebrow, #765542);
 }
-.on-dark { --eyebrow: #D4B8A8; }
+.on-dark { --eyebrow: #E7DFD4; }
 
 /* ─── Hero: looping stream of project cards ─────────────────────────────────── */
 .hero-stage { height: 50svh; min-height: 360px; max-height: 760px; }
@@ -107,17 +109,17 @@ h3, h4 { font-weight: 500; }
 .hero-card {
   flex: none;
   padding: 6px;
-  background: #F9F3F0;
-  border: 1px solid #D4B8A8;
+  background: #FBF9F5;
+  border: 1px solid #DDD3C7;
   box-shadow: 0 22px 44px -30px rgba(42, 31, 24, 0.5);
 }
 
 /* Hero background: layered beige light with a faint fluted-panel texture on the left */
 .hero-bg {
   background:
-    radial-gradient(55% 55% at 16% 28%, rgba(249, 243, 240, 0.95), rgba(249, 243, 240, 0) 70%),
-    radial-gradient(45% 60% at 88% 75%, rgba(196, 160, 144, 0.35), rgba(196, 160, 144, 0) 70%),
-    linear-gradient(135deg, #F3E8DE 0%, #E8D5C4 52%, #DFC9B6 100%);
+    radial-gradient(55% 55% at 16% 28%, rgba(251, 249, 245, 0.95), rgba(251, 249, 245, 0) 70%),
+    radial-gradient(45% 60% at 88% 75%, rgba(196, 160, 144, 0.22), rgba(196, 160, 144, 0) 70%),
+    linear-gradient(135deg, #FAF6F0 0%, #F4EFE8 52%, #EDE4D9 100%);
 }
 .hero-bg::before {
   content: "";

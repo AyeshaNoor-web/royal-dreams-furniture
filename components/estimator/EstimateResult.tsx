@@ -4,7 +4,7 @@ import { useState } from "react";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { aedRange, summaryText, trimNumber, unitWords } from "@/lib/estimate-format";
 import type { EstimateResult as Result, PublicCatalogue } from "@/lib/pricing";
-import { SITE, whatsappLink } from "@/lib/site";
+import { SITE, VISIT_LINK, whatsappLink } from "@/lib/site";
 import EstimateLeadForm from "./EstimateLeadForm";
 
 interface Props {
@@ -78,8 +78,9 @@ export default function EstimateResult({ result, loading, error, catalogue, onAd
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={wa} target="_blank" rel="noopener noreferrer" className="btn min-h-[48px] bg-[#25D366] text-white hover:bg-[#1ebe5b]"><WhatsAppIcon className="h-[18px] w-[18px]" /> Send on WhatsApp</a>
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="btn-wa min-h-[48px]"><WhatsAppIcon className="h-[18px] w-[18px]" /> Get a quote on WhatsApp</a>
             <button type="button" onClick={() => setShowForm((s) => !s)} className="btn-line min-h-[48px]" aria-expanded={showForm}>Send me this estimate</button>
+            <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[48px]">Book a free visit</a>
             <button type="button" onClick={onAddAnother} className="btn-line min-h-[48px]">Add another item</button>
           </div>
           {showForm && <EstimateLeadForm summary={summary} whatsapp={wa} />}

@@ -47,7 +47,7 @@ export default function EstimatorFlow({ catalogue }: { catalogue: PublicCatalogu
             transition={{ duration: 0.3, ease: EASE }}
             className="mt-8"
           >
-            {e.step === "collection" && <StepCollection catalogue={catalogue} onChoose={e.choose} />}
+            {e.step === "collection" && <StepCollection catalogue={catalogue} onChoose={e.choose} onPreset={(id) => { e.applyPreset(id); go("result"); }} />}
             {e.step === "size" && e.collection && <StepSize collection={e.collection} value={e.draft.size ?? NaN} onChange={e.setSize} onNext={e.next} onBack={e.back} />}
             {e.step === "tier" && <StepTier tiers={catalogue.tiers} value={e.draft.tier} onChange={e.setTier} onNext={() => (steps[index + 1] === "result" ? e.finish() : e.next())} onBack={e.back} />}
             {e.step === "extras" && e.collection && <StepExtras collection={e.collection} value={e.draft.extras} onToggle={e.toggleExtra} onNext={() => (steps[index + 1] === "result" ? e.finish() : e.next())} onBack={e.back} />}

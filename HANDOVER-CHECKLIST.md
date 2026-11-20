@@ -95,3 +95,10 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Before go-live run `node scripts/chat-redteam.mjs https://www.modernfurniturecollection.online` with the assistant enabled on a preview deployment. It sends 25 adversarial prompts and prints PASS or FAIL per case. Review any FAIL and tighten `lib/ai/prompt.ts`.
 - [ ] Test on a real iPhone: open the chat, tap the input, confirm the card lifts above the keyboard and the input stays visible; tap a collection link, confirm the page opens with a "Back to chat" pill; tap it, confirm the conversation is intact.
 
+## 10. Client-requested changes, 20 Nov 2026 (branch feature/estimator-assistant)
+
+- [ ] Theme moved to warm off-white (`tailwind.config.ts`: surfaces #FBF9F5, #F4EFE8, #E7DFD4; border #DDD3C7). Charcoal text and gold accents unchanged. WhatsApp buttons use the brand teal #128C7E because white on the light green fails WCAG AA (2:1). Confirm the client is happy with the lighter look.
+- [ ] "Book a free visit" and "Get a quote" buttons sit in the navbar, hero, every collection page, the estimator result and the chat card, plus a phone-only bottom bar. Both open WhatsApp with a pre-written message (`VISIT_LINK`, `QUOTE_LINK` in `lib/site.ts`). The visit message makes no promise about hours or coverage; add those to `lib/site.ts` and `content/knowledge.md` when the client supplies them.
+- [ ] Estimator quick-start presets (1-bed, 2-bed, 3-bed, 5-bed) are PLACEHOLDER baskets in `config/pricing.config.ts` (`presets`). Ask the client what a typical home of each size actually orders and replace the sizes.
+- [ ] "Custom or ready-made?" on the TV unit, fitted wardrobe and walk-in closet pages, and the four-step "How it goes" timeline on every collection page, are PLACEHOLDER copy in `lib/collection-notes.ts`, written in the site's voice from facts already on the site. The client should rewrite them in their own words. Both sections carry a `data-placeholder-copy` attribute until then.
+
