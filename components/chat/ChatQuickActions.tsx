@@ -21,7 +21,7 @@ export default function ChatQuickActions({ actions = quickActions, onSend, onAsk
               href={WHATSAPP_CHAT.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[40px] items-center gap-2 rounded-full bg-[#128C7E] px-4 font-dm text-[13px] font-medium text-white transition-colors [touch-action:manipulation] hover:bg-[#0f7a6d]"
+              className="inline-flex min-h-[40px] items-center gap-2 rounded-full bg-[#0E7566] px-4 font-dm text-[13px] font-medium text-white transition-colors [touch-action:manipulation] hover:bg-[#0B5F53]"
             >
               <WhatsAppIcon className="h-4 w-4" /> {q.label}
             </a>

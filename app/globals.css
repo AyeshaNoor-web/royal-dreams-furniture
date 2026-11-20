@@ -20,7 +20,7 @@ h1, h2, h3, h4 {
   line-height: 1.1;
 }
 h3, h4 { font-weight: 500; }
-h1, h2 { text-wrap: balance; }
+h2 { text-wrap: balance; }
 .tnum { font-variant-numeric: tabular-nums; }
 
 ::selection { background-color: #2A1F18; color: #FBF9F5; }
@@ -32,8 +32,8 @@ h1, h2 { text-wrap: balance; }
   .btn-lit { @apply btn bg-gold text-charcoal hover:bg-gold-dark hover:text-beige-light; }
   .btn-dark { @apply btn bg-charcoal text-beige-light hover:bg-charcoal-light; }
   .btn-line { @apply btn border border-charcoal/35 text-charcoal hover:border-charcoal; }
-  /* WhatsApp: the brand teal, because white on the light green (#25D366) is only 2:1 and fails AA. */
-  .btn-wa { @apply btn bg-[#128C7E] text-white hover:bg-[#0f7a6d]; }
+  /* WhatsApp: a dark teal, because white on the light green (#25D366) is 2:1 and on #128C7E only 4.1:1. #0E7566 gives 5.6:1. */
+  .btn-wa { @apply btn bg-[#0E7566] text-white hover:bg-[#0B5F53]; }
   /* Standalone text links: a 44px tall hit area without changing the type. Inline links inside sentences use .text-link-inline. */
   .text-link {
     @apply inline-flex min-h-[44px] items-center font-dm text-[15px] underline decoration-1 underline-offset-[6px] transition-colors duration-200;

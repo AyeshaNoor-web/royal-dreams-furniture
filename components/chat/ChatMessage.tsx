@@ -16,7 +16,7 @@ interface Props {
 
 const linkClass = "mt-2 mr-2 inline-flex min-h-[44px] items-center gap-2 px-4 font-dm text-[13px] font-medium transition-colors [touch-action:manipulation] ";
 const siteLink = linkClass + "border border-charcoal/35 text-charcoal hover:border-charcoal hover:bg-beige";
-const waLink = linkClass + "bg-[#128C7E] text-white hover:bg-[#0f7a6d]";
+const waLink = linkClass + "bg-[#0E7566] text-white hover:bg-[#0B5F53]";
 
 /** Links are rendered from structured data only; message text is always plain text. */
 function LinkButton({ link, onNavigate }: { link: ChatLink; onNavigate: () => void }) {

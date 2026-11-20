@@ -69,7 +69,7 @@ export default function ChatLeadForm({ question, waBase, onDone }: Props) {
         onClick={go}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 flex min-h-[46px] w-full items-center justify-center gap-2 bg-[#128C7E] px-4 font-dm text-[14px] font-medium text-white transition-colors [touch-action:manipulation] hover:bg-[#0f7a6d]"
+        className="mt-3 flex min-h-[46px] w-full items-center justify-center gap-2 bg-[#0E7566] px-4 font-dm text-[14px] font-medium text-white transition-colors [touch-action:manipulation] hover:bg-[#0B5F53]"
       >
         <WhatsAppIcon className="h-[18px] w-[18px]" /> Continue on WhatsApp
       </a>
