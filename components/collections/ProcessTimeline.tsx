@@ -1,8 +1,10 @@
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { processSteps } from "@/lib/collection-notes";
+import { showDraftCopy } from "@/lib/flags";
 
 /** Four stages from first message to finished room, as a compact timeline under each collection. */
 export default function ProcessTimeline() {
+  if (!showDraftCopy) return null;
   return (
     <section className="border-t border-border bg-beige-light py-12 sm:py-16 lg:py-20" aria-labelledby="process-timeline" data-placeholder-copy="client to confirm">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">

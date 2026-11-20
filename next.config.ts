@@ -21,7 +21,11 @@ const cspReportOnly = [
   "frame-ancestors 'none'",
 ].join("; ");
 
+const isProduction = process.env.VERCEL_ENV === "production";
+
 const security = [
+  // Preview and branch deployments must never be indexed: they can carry placeholder prices and draft copy.
+  ...(isProduction ? [] : [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }]),
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

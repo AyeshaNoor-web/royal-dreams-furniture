@@ -2,11 +2,12 @@ import Reveal from "@/components/motion/Reveal";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { readyMadeNotes } from "@/lib/collection-notes";
 import { VISIT_LINK } from "@/lib/site";
+import { showDraftCopy } from "@/lib/flags";
 
 /** Honest comparison for the collections where visitors weigh shop-bought against made-to-measure. Copy is a placeholder for the client. */
 export default function CustomOrReadyMade({ slug }: { slug: string }) {
   const note = readyMadeNotes.find((n) => n.slug === slug);
-  if (!note) return null;
+  if (!showDraftCopy || !note) return null;
   return (
     <section className="border-t border-border bg-beige py-12 sm:py-16 lg:py-20" data-placeholder-copy="client to rewrite">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">

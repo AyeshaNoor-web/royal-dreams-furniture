@@ -73,7 +73,7 @@ function Widget({ ai }: { ai: boolean }) {
               ref={bubble}
               type="button"
               onClick={openChat}
-              aria-label={chat.minimised ? "Back to chat with " + name : ai ? `Ask ${name}, our AI assistant` : `Ask ${name}`}
+              aria-label={(chat.minimised ? "Back to chat with " : "Chat with ") + (ai ? "our AI assistant" : "our automated assistant") + ", " + name}
               aria-haspopup="dialog"
               aria-expanded={showPanel}
               whileHover={reduce ? undefined : { scale: 1.05, y: -2 }}
@@ -83,6 +83,7 @@ function Widget({ ai }: { ai: boolean }) {
             >
               <span className="relative">
                 <Mascot className="h-11 w-11" />
+                <span aria-hidden="true" className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-sm bg-charcoal px-1 py-px font-dm text-[9px] font-semibold uppercase leading-none tracking-wider text-beige-light ring-1 ring-beige-light">{ai ? "AI" : "Bot"}</span>
                 {fresh && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-charcoal" />}
               </span>
               <span className={"font-dm text-sm font-medium " + (chat.minimised ? "block pr-3 sm:pr-0" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask " + name}</span>
@@ -90,7 +91,7 @@ function Widget({ ai }: { ai: boolean }) {
           </motion.div>
         )}
       </AnimatePresence>
-      {!showPanel && <MobileCtaBar onOpenChat={openChat} minimised={chat.minimised} />}
+      {!showPanel && <MobileCtaBar onOpenChat={openChat} minimised={chat.minimised} ai={ai} />}
       <AnimatePresence>{showPanel && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
     </>
   );
