@@ -26,9 +26,9 @@ const config: Config = {
         dm: ["var(--font-body)", "Futura", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.75rem, 5.6vw, 5.25rem)", { lineHeight: "1.06", letterSpacing: "-0.01em" }],
-        "display-lg": ["clamp(2.4rem, 4.4vw, 4rem)", { lineHeight: "1.08", letterSpacing: "-0.01em" }],
-        "display-md": ["clamp(1.9rem, 3vw, 2.75rem)", { lineHeight: "1.14", letterSpacing: "-0.005em" }],
+        "display-xl": ["clamp(2.9rem, 6vw, 5.75rem)", { lineHeight: "1.0", letterSpacing: "-0.025em" }],
+        "display-lg": ["clamp(2.5rem, 4.6vw, 4.25rem)", { lineHeight: "1.04", letterSpacing: "-0.02em" }],
+        "display-md": ["clamp(1.95rem, 3.1vw, 2.85rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
       },
       spacing: { section: "7rem", "section-sm": "4.5rem" },
       maxWidth: { "8xl": "88rem" },

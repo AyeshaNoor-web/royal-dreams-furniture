@@ -55,7 +55,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="scroll-mt-24 bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 max-w-2xl sm:mb-12 lg:mb-16">
-          <h2 className="font-serif text-display-md text-charcoal">Four steps from first message to finished room</h2>
+          <h2 className="ruled-heading font-serif text-display-md text-charcoal">Four steps from first message to finished room</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-taupe">
             One team handles everything, so you never chase a supplier, a carpenter and a fitter separately.
           </p>

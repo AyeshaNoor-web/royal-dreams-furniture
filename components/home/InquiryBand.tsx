@@ -14,7 +14,7 @@ export default function InquiryBand() {
     <section id="enquire" className="py-12 sm:py-16 lg:py-24 bg-charcoal text-beige-light on-dark scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
         <Reveal className="lg:col-span-5">
-          <h2 className="font-serif text-display-md text-beige-light mb-6">Tell us about your space</h2>
+          <h2 className="ruled-heading font-serif text-display-md text-beige-light mb-6">Tell us about your space</h2>
           <p className="font-dm text-sm text-beige/65 leading-relaxed max-w-md mb-7">
             Share a photo, a sketch or a floor plan. We will visit to measure, prepare a 3D design and provide a fixed quotation before any work begins.
           </p>

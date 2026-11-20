@@ -15,7 +15,7 @@ const samples = ["Walnut veneer", "Oak veneer", "Lacquer", "Marble", "Stone", "B
 export default function Workshop() {
   const photo = pick("fitted-wardrobes", 0);
   return (
-    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
+    <section className="section-rule section-rule-b bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-10">
         <Reveal className="lg:col-span-5">
           <div className="relative aspect-[4/3] overflow-hidden bg-beige-dark sm:aspect-[3/4]">
@@ -26,7 +26,7 @@ export default function Workshop() {
 
         <div className="lg:col-span-7">
           <Reveal>
-            <h2 className="font-serif text-display-md text-charcoal">Made in our own workshop</h2>
+            <h2 className="ruled-heading font-serif text-display-md text-charcoal">Made in our own workshop</h2>
             <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-taupe">
               Everything on this site was built in our workshop in Dubai, from the curtains to the walk-in closets. Working this way means the quotation is the maker&apos;s own price, and the person who measured your room is the one who makes sure the piece fits it.
             </p>

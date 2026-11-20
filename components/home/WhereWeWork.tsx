@@ -6,7 +6,7 @@ export default function WhereWeWork() {
     <section className="bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
         <Reveal className="lg:col-span-5">
-          <h2 className="font-serif text-display-md text-charcoal">Where we work</h2>
+          <h2 className="ruled-heading font-serif text-display-md text-charcoal">Where we work</h2>
           <p className="mt-4 max-w-md text-[16px] leading-relaxed text-taupe">
             Consultations, measuring and installation across all seven Emirates, from our workshop in Dubai. Our showroom is in Al Butina, Sharjah, and visits are by appointment.
           </p>

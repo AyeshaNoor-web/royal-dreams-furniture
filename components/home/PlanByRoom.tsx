@@ -15,10 +15,10 @@ export default function PlanByRoom() {
   const count = categoriesInGroup(g.slug).length;
 
   return (
-    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
+    <section className="section-rule section-rule-b bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 lg:mb-10">
-          <h2 className="font-serif text-display-lg text-charcoal">Plan by room</h2>
+          <h2 className="ruled-heading font-serif text-display-lg text-charcoal">Plan by room</h2>
           <p className="mt-3 max-w-lg text-[15px] text-taupe">Choose a room to see what we usually make for it.</p>
         </Reveal>
 

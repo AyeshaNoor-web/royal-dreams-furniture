@@ -57,7 +57,7 @@ export default function HeroEditorial() {
           <h1 className="font-serif text-display-xl text-charcoal">
             Every piece, made to fit <em className="italic text-gold-text">your</em> home.
           </h1>
-          <p className="mt-7 max-w-lg text-[17px] leading-relaxed text-taupe">
+          <p className="lede mt-7 max-w-lg text-taupe">
             Sofas, beds, dining tables, curtains, wardrobes and media walls, designed in 3D around your
             rooms, built in our Dubai workshop and fitted by our own team anywhere in the UAE.
           </p>

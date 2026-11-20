@@ -67,7 +67,7 @@ export default async function CollectionPage({ params }: Props) {
       <CustomOrReadyMade slug={cat.slug} />
       <ProcessTimeline />
 
-      <section className="border-t border-border bg-beige-light py-section-sm">
+      <section className="section-rule bg-beige-light py-section-sm">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="font-serif text-3xl">More for the {group.title.toLowerCase()}</h2>

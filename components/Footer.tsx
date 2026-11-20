@@ -10,7 +10,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal text-beige/80 on-dark">
+    <footer className="section-rule on-dark bg-charcoal text-beige/80">
       {/* Newsletter band */}
       <div className="border-b border-beige/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

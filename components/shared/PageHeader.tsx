@@ -14,8 +14,8 @@ export default function PageHeader({ eyebrow, title, intro }: PageHeaderProps) {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-10 lg:pt-16 lg:pb-14">
         <Reveal y={12}>
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
-          <h1 className="font-serif text-display-lg text-charcoal max-w-3xl">{title}</h1>
-          {intro && <p className="mt-6 max-w-xl font-dm text-base text-taupe leading-relaxed">{intro}</p>}
+          <h1 className="ruled-heading font-serif text-display-lg text-charcoal max-w-3xl">{title}</h1>
+          {intro && <p className="lede mt-6 max-w-xl font-dm text-taupe">{intro}</p>}
         </Reveal>
       </div>
     </section>

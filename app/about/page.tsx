@@ -37,7 +37,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-beige-light py-section">
+      <section className="section-rule section-rule-b bg-beige-light py-section">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:px-10">
           <div className="lg:col-span-4">
             <h2 className="font-serif text-display-md">What sets our work apart</h2>
@@ -58,7 +58,7 @@ export default function AboutPage() {
       <section className="py-section-sm">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-6 lg:px-10">
           <div>
-            <h2 className="max-w-xl font-serif text-display-md">Follow our latest installations</h2>
+            <h2 className="ruled-heading max-w-xl font-serif text-display-md">Follow our latest installations</h2>
           </div>
           <div className="flex flex-wrap gap-3">
             {SITE.instagramAccounts.map((ig) => (

@@ -6,9 +6,9 @@ import { showDraftCopy } from "@/lib/flags";
 export default function ProcessTimeline() {
   if (!showDraftCopy) return null;
   return (
-    <section className="border-t border-border bg-beige-light py-12 sm:py-16 lg:py-20" aria-labelledby="process-timeline" data-placeholder-copy="client to confirm">
+    <section className="section-rule bg-beige-light py-12 sm:py-16 lg:py-20" aria-labelledby="process-timeline" data-placeholder-copy="client to confirm">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <h2 id="process-timeline" className="font-serif text-display-md text-charcoal">How it goes</h2>
+        <h2 id="process-timeline" className="ruled-heading font-serif text-display-md text-charcoal">How it goes</h2>
         <p className="mt-3 max-w-xl text-[15px] text-taupe">The first visit and the 3D design are free, and nothing is built until you approve it.</p>
         <Stagger className="mt-8 grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((s, i) => (

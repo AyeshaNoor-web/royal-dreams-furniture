@@ -5,7 +5,7 @@ import type { Category } from "@/lib/gallery";
 export function CollectionCard({ item, priority = false }: { item: Category; priority?: boolean }) {
   return (
     <Link href={"/collections/" + item.slug} className="group block">
-      <div className="relative aspect-[3/4] bg-beige-dark">
+      <div className="mount relative aspect-[3/4] bg-beige-dark">
         <Image src={item.cover.src} alt={item.cover.alt} fill priority={priority} sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover" />
       </div>
       <div className="mt-3 flex items-baseline justify-between gap-4 sm:mt-4">

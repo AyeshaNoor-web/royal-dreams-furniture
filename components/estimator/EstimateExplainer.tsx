@@ -12,9 +12,9 @@ const steps = [
 export default function EstimateExplainer() {
   const factors = quoteFactors.slice(0, 6);
   return (
-    <section className="border-t border-border bg-beige-light py-12 sm:py-16 lg:py-20">
+    <section className="section-rule bg-beige-light py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <h2 className="font-serif text-display-md text-charcoal">Why a range, and what changes it</h2>
+        <h2 className="ruled-heading font-serif text-display-md text-charcoal">Why a range, and what changes it</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-3">
           {steps.map((s, i) => (
             <div key={s.title}>

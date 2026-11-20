@@ -33,7 +33,7 @@ export default function CollectionsPage() {
             {row.map((g) => (
               <div key={g.slug} id={g.slug} className="scroll-mt-24">
                 <div className="mb-8 flex flex-wrap items-baseline justify-between gap-4">
-                  <h2 className="font-serif text-display-md text-charcoal">{g.title}</h2>
+                  <h2 className="ruled-heading font-serif text-display-md text-charcoal">{g.title}</h2>
                   <p className="text-[15px] text-taupe">{g.blurb}</p>
                 </div>
                 {row.length > 1 ? (

@@ -46,7 +46,7 @@ export default function Spread({ g, flip = false, first = false, heading = true 
     <div>
       {heading && (
         <Reveal className="mb-6">
-          <h3 className="font-serif text-display-md text-charcoal">{g.title}</h3>
+          <h3 className="ruled-heading font-serif text-display-md text-charcoal">{g.title}</h3>
           <p className="mt-2 max-w-sm text-[15px] text-taupe">{g.blurb}</p>
         </Reveal>
       )}

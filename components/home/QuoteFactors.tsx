@@ -17,10 +17,10 @@ export default function QuoteFactors() {
   const ask = whatsappLink("Hello, I would like a quotation for a made-to-measure " + c.title.toLowerCase() + ". I can send photos and sizes.");
 
   return (
-    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
+    <section className="section-rule section-rule-b bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 max-w-2xl sm:mb-10">
-          <h2 className="font-serif text-display-md text-charcoal">What shapes your quotation</h2>
+          <h2 className="ruled-heading font-serif text-display-md text-charcoal">What shapes your quotation</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-taupe">
             Every piece is priced on its own measurements and finishes, so there is no price list. Choose a collection to see what changes the price and what to send us for a first estimate.
           </p>

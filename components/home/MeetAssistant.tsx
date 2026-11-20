@@ -17,12 +17,12 @@ const openers = [
 export default function MeetAssistant() {
   const { name, role } = SITE.assistant;
   return (
-    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-20" aria-labelledby="meet-assistant">
+    <section className="section-rule section-rule-b bg-beige-light py-12 sm:py-16 lg:py-20" aria-labelledby="meet-assistant">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
         <Reveal className="flex items-center gap-5 lg:col-span-4 lg:flex-col lg:items-start">
           <Mascot className="h-24 w-24 shrink-0 sm:h-28 sm:w-28 lg:h-40 lg:w-40" />
           <div>
-            <h2 id="meet-assistant" className="font-serif text-display-md text-charcoal">Meet {name}.</h2>
+            <h2 id="meet-assistant" className="ruled-heading font-serif text-display-md text-charcoal">Meet {name}.</h2>
             <p className="mt-2 text-[15px] text-taupe">{role.charAt(0).toUpperCase() + role.slice(1)} at {SITE.shortName}, here around the clock.</p>
           </div>
         </Reveal>
