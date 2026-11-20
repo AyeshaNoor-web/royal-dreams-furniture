@@ -4,6 +4,7 @@ import { FALLBACK_ANSWER, WHATSAPP_CHAT, areaPlaces, intents, whatsappFor, type 
 import { quoteFactors } from "./quote";
 import { categories } from "./gallery";
 import { estimatorEnabled } from "./flags";
+import { SITE } from "./site";
 
 export interface Reply {
   text: string;
@@ -121,10 +122,10 @@ export const answer = (text: string): Reply => {
 };
 
 export const WELCOME =
-  "Welcome to Modern Furniture Collection. I can answer questions about our collections, the free home visit, finishes, where we work and how to start. Everything is made to measure in our Dubai workshop.";
+  `Hi, I'm ${SITE.assistant.name}. Ask me about our collections, the free home visit, finishes, where we work or how to start. Everything is made to measure in our Dubai workshop.`;
 
 export const WELCOME_AI =
-  "Hello. I am Modern Furniture Collection's AI assistant. Tell me about the room you are planning and I will point you to the right pieces, give an indicative estimate, and hand you to a designer on WhatsApp whenever you like.";
+  `Hi, I'm ${SITE.assistant.name}, the design assistant here. Tell me about the room you are planning and I will point you to the right pieces, give you a budget range, and hand you to a designer on WhatsApp whenever you like.`;
 
 export interface QuickAction { label: string; message?: string; action?: "whatsapp" | "ask" }
 

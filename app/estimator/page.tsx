@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/shared/PageHeader";
 import EstimatorFlow from "@/components/estimator/EstimatorFlow";
+import EstimateExplainer from "@/components/estimator/EstimateExplainer";
 import { estimatorEnabled } from "@/lib/flags";
 import { publicCatalogue } from "@/lib/pricing";
 
@@ -22,6 +23,7 @@ export default function EstimatorPage() {
         intro="Choose a piece, its size and finish level, and see an indicative range in dirhams. Add more pieces to plan a whole room. The exact quotation follows the free site measurement and 3D design."
       />
       <EstimatorFlow catalogue={catalogue} />
+      <EstimateExplainer />
     </>
   );
 }

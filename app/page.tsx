@@ -5,6 +5,7 @@ import PlanByRoom from "@/components/home/PlanByRoom";
 import HowItWorks from "@/components/home/HowItWorks";
 import QuoteFactors from "@/components/home/QuoteFactors";
 import EstimatorTeaser from "@/components/home/EstimatorTeaser";
+import MeetAssistant from "@/components/home/MeetAssistant";
 import InquiryBand from "@/components/home/InquiryBand";
 import RecentWork from "@/components/home/RecentWork";
 import Reviews from "@/components/home/Reviews";
@@ -35,6 +36,7 @@ export default function HomePage() {
       <HowItWorks />
       <QuoteFactors />
       <EstimatorTeaser />
+      <MeetAssistant />
       <InquiryBand />
       <RecentWork />
       <Reviews />

@@ -4,8 +4,11 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
+import { CHAT_EVENT, type ChatOpenDetail } from "@/lib/chat-events";
+import { SITE } from "@/lib/site";
 import ChatBoundary from "./ChatBoundary";
 import ChatTeaser, { TEASER_KEY } from "./ChatTeaser";
+import Mascot from "./Mascot";
 import { useChat } from "./useChat";
 
 // The panel, matcher and lead form only load the first time someone opens the chat.
@@ -16,6 +19,8 @@ function Widget({ ai }: { ai: boolean }) {
   const reduce = useReducedMotion();
   const bubble = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
+  const sendRef = useRef(chat.send);
+  sendRef.current = chat.send;
   const showPanel = chat.open && !chat.minimised;
   // Visitors who have not chatted yet get a slow pulse and the greeting card.
   const fresh = !chat.open && chat.messages.length === 1;
@@ -25,6 +30,19 @@ function Widget({ ai }: { ai: boolean }) {
     chat.setOpen(true);
     try { sessionStorage.setItem(TEASER_KEY, "1"); } catch { /* ignore */ }
   };
+  const openRef = useRef(openChat);
+  openRef.current = openChat;
+
+  // Any section of the site can open the assistant with a first message (see lib/chat-events.ts).
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const detail = (e as CustomEvent<ChatOpenDetail>).detail;
+      openRef.current();
+      if (detail?.message) setTimeout(() => sendRef.current(detail.message!), 450);
+    };
+    window.addEventListener(CHAT_EVENT, onOpen);
+    return () => window.removeEventListener(CHAT_EVENT, onOpen);
+  }, []);
 
   // Return focus to the bubble after the panel closes.
   useEffect(() => {
@@ -35,6 +53,7 @@ function Widget({ ai }: { ai: boolean }) {
     wasOpen.current = showPanel;
   }, [showPanel]);
 
+  const name = SITE.assistant.name;
   return (
     <>
       <ChatTeaser active={fresh} onOpen={openChat} />
@@ -53,22 +72,19 @@ function Widget({ ai }: { ai: boolean }) {
               ref={bubble}
               type="button"
               onClick={openChat}
-              aria-label={chat.minimised ? "Back to chat" : ai ? "Ask our AI assistant" : "Ask us a question"}
+              aria-label={chat.minimised ? "Back to chat with " + name : ai ? `Ask ${name}, our AI assistant` : `Ask ${name}`}
               aria-haspopup="dialog"
               aria-expanded={showPanel}
               whileHover={reduce ? undefined : { scale: 1.05, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.95 }}
               transition={{ duration: 0.2, ease: EASE }}
-              className="relative flex items-center gap-3 rounded-full bg-charcoal py-3 pl-4 pr-4 text-beige-light shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-charcoal-light sm:pr-5"
+              className="relative flex items-center gap-2.5 rounded-full bg-charcoal py-1.5 pl-1.5 pr-1.5 text-beige-light shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-charcoal-light sm:pr-5"
             >
               <span className="relative">
-                <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v8a2.5 2.5 0 01-2.5 2.5H10l-4.5 3.5V17H6.5A2.5 2.5 0 014 14.5v-8z" />
-                  <path d="M8 9h8M8 12.5h5" />
-                </svg>
-                {fresh && <span aria-hidden="true" className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-charcoal" />}
+                <Mascot className="h-11 w-11" />
+                {fresh && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-charcoal" />}
               </span>
-              <span className={"font-dm text-sm font-medium " + (chat.minimised ? "block" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask us"}</span>
+              <span className={"font-dm text-sm font-medium " + (chat.minimised ? "block pr-3 sm:pr-0" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask " + name}</span>
             </motion.button>
           </motion.div>
         )}

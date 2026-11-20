@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { pick, type GalleryImage } from "@/lib/gallery";
+import { estimatorEnabled } from "@/lib/flags";
 import { APPOINTMENT_LINK } from "@/lib/site";
 
 // Two streams of project cards. Each list is rendered twice so the CSS loop is seamless.
@@ -66,6 +67,9 @@ export default function HeroEditorial() {
               <WhatsAppIcon className="h-[18px] w-[18px]" />
               Book a free consultation
             </a>
+            {estimatorEnabled && (
+              <Link href="/estimator" className="inline-flex min-h-[44px] items-center text-link text-charcoal hover:text-gold-text">Get an instant budget range <span aria-hidden="true">&nbsp;&rarr;</span></Link>
+            )}
           </div>
           <ul className="mt-10 hidden flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-[14px] text-taupe sm:flex">
             <li>Free home consultation</li>

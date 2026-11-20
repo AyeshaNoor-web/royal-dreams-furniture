@@ -58,6 +58,20 @@ h3, h4 { font-weight: 500; }
 .chat-pulse { animation: chat-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
 @media (prefers-reduced-motion: reduce) { .chat-pulse { animation: none; opacity: 0; } }
 
+/* Assistant mascot: a slow blink, and a small wave of the head on the greeting card */
+@keyframes mascot-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.08); }
+}
+.mascot-eyes { transform-box: fill-box; transform-origin: center; animation: mascot-blink 5.5s ease-in-out infinite; }
+@keyframes mascot-wave {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-7deg); }
+  60% { transform: rotate(6deg); }
+}
+.mascot-wave { transform-origin: 50% 80%; animation: mascot-wave 1.6s ease-in-out 0.4s 2; }
+@media (prefers-reduced-motion: reduce) { .mascot-eyes, .mascot-wave { animation: none; } }
+
 /* Small section label (used sparingly above headings) */
 .eyebrow {
   font-family: var(--font-body), system-ui, sans-serif;

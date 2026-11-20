@@ -87,6 +87,7 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 
 ## 9. AI assistant (branch feature/estimator-assistant, Phase 2)
 
+- [ ] **Needs client:** the assistant's name. It is "Noor" as a placeholder, set once in `lib/site.ts` (`SITE.assistant`) and used by the bubble, the greeting card, the chat header, the "Meet Noor" home section and the AI's own introduction. The face is an original SVG in `components/chat/Mascot.tsx`; change the colours or swap it for a commissioned illustration there. Whatever the name, the assistant says it is an AI assistant whenever someone asks, which is both the brief and good practice under UAE consumer rules.
 - [ ] Off by default. The same bubble runs the keyword matcher until two Vercel variables are set: `AI_CHAT_ENABLED=true` and `ANTHROPIC_API_KEY`. `CHAT_MODEL` defaults to `claude-haiku-5-5`. The assistant also falls back to the matcher by itself if the API answers 503, and shows a WhatsApp fallback on any timeout or error.
 - [ ] **Needs client, before enabling:** replace every PLACEHOLDER line in `content/knowledge.md` (showroom hours and street, lead email, support hours, brand voice, what is not included). The assistant is told not to state placeholder lines, but the answers are better with the facts in.
 - [ ] **Cost:** this is a metered API. The client was told the chatbot has no monthly cost, so agree a budget first. Each reply is capped at 400 output tokens and each visitor at 20 messages a minute; the knowledge text is sent with every call.
