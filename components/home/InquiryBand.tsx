@@ -28,7 +28,7 @@ export default function InquiryBand() {
           </ul>
           <div className="flex flex-col gap-3">
             {SITE.phones.map((p) => (
-              <a key={p.intl} href={whatsappLink("Hello! I would like a free consultation for custom furniture.", p.intl)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-serif text-2xl text-beige-light hover:text-gold transition-colors">
+              <a key={p.intl} href={whatsappLink("Hello! I would like a free consultation for custom furniture.", p.intl)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-3 font-serif text-2xl text-beige-light hover:text-gold transition-colors">
                 <WhatsAppIcon className="w-5 h-5 text-[#128C7E]" />
                 {p.display}
               </a>

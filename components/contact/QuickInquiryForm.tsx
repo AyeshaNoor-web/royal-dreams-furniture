@@ -8,7 +8,7 @@ import { whatsappLink, services } from "@/lib/site";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const field =
-  "w-full bg-beige-light border border-border px-4 py-3 font-dm text-sm text-charcoal placeholder:text-taupe-light focus:outline-none focus:border-gold-dark transition-colors";
+  "w-full bg-beige-light border border-border px-4 py-3 font-dm text-sm text-charcoal placeholder:text-taupe-light focus:border-gold-dark transition-colors";
 const label = "block text-[14px] text-charcoal mb-1.5";
 
 export default function QuickInquiryForm() {
@@ -20,7 +20,7 @@ export default function QuickInquiryForm() {
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const waText = "Hello! My name is " + (form.name || "...") + ". I am interested in " + (form.interest || "custom furniture") + ". " + form.message;
+  const waText = "Hello! My name is " + (form.name || "\u2026") + ". I am interested in " + (form.interest || "custom furniture") + ". " + form.message;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,11 +55,11 @@ export default function QuickInquiryForm() {
       </div>
       <div>
         <label htmlFor="q-name" className={label}>Name</label>
-        <input id="q-name" required value={form.name} onChange={update("name")} className={field} placeholder="Your name" autoComplete="name" />
+        <input id="q-name" name="name" required value={form.name} onChange={update("name")} className={field} placeholder="Your name" autoComplete="name" />
       </div>
       <div>
         <label htmlFor="q-phone" className={label}>Phone / WhatsApp</label>
-        <input id="q-phone" required type="tel" value={form.phone} onChange={update("phone")} className={field} placeholder="050 000 0000" autoComplete="tel" />
+        <input id="q-phone" name="phone" required type="tel" value={form.phone} onChange={update("phone")} className={field} placeholder="050 000 0000" autoComplete="tel" />
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="q-interest" className={label}>Interest</label>
@@ -78,7 +78,7 @@ export default function QuickInquiryForm() {
       <div className="sm:col-span-2"><Turnstile onToken={setTurnstileToken} /></div>
       <div className="sm:col-span-2 flex flex-col sm:flex-row gap-3 pt-1">
         <button type="submit" disabled={status === "submitting"} className="btn-dark disabled:opacity-60">
-          {status === "submitting" ? "Sending..." : "Request callback"}
+          {status === "submitting" ? "Sending\u2026" : "Request callback"}
         </button>
         <a href={whatsappLink(waText)} target="_blank" rel="noopener noreferrer" className="btn-line">
           <WhatsAppIcon className="w-4 h-4" /> WhatsApp instead

@@ -81,7 +81,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
     >
       <ChatHeader ai={ai} canReset={messages.length > 1} onReset={reset} onClose={() => setOpen(false)} />
 
-      <div ref={list} className="flex-1 overflow-y-auto px-4 py-4">
+      <div ref={list} className="flex-1 overflow-y-auto px-4 py-4 [overscroll-behavior:contain]">
         <ul className="flex flex-col gap-3" aria-live="polite" aria-relevant="additions text">
           {messages.map((m) => (
             <ChatMessage key={m.id} message={m} onChip={send} onNavigate={onNavigate} hideLink={showLead && m.id === last.id} />
@@ -104,12 +104,13 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
             <WhatsAppIcon className="h-3.5 w-3.5 text-[#128C7E]" /> Talk to a designer
           </a>
           <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Book a free visit</a>
-          <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Get a quote</a>
+          <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Get a free quote</a>
         </div>
         <div className="flex items-center gap-2">
           <label className="sr-only" htmlFor="chat-input">Type your question</label>
           <input
             id="chat-input"
+            name="message"
             ref={input}
             value={draft}
             maxLength={1000}
@@ -118,7 +119,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
             placeholder={ai ? "Tell me about your room" : "Type a question, e.g. sofa, curtains, areas"}
             autoComplete="off"
             enterKeyHint="send"
-            className="min-h-[44px] flex-1 border border-border bg-beige px-3 font-dm text-[16px] text-charcoal placeholder:text-taupe-light transition-colors focus:border-gold-dark focus:outline-none sm:text-[14px]"
+            className="min-h-[44px] flex-1 border border-border bg-beige px-3 font-dm text-[16px] text-charcoal placeholder:text-taupe-light transition-colors focus:border-gold-dark sm:text-[14px]"
           />
           <button type="button" onClick={submit} aria-label="Send" disabled={!draft.trim() || typing} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-charcoal text-beige-light transition-colors hover:bg-charcoal-light disabled:opacity-40">
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>

@@ -30,10 +30,10 @@ export default function Footer() {
             <p className="text-sm text-beige/55 leading-relaxed max-w-sm mb-6">
               Made-to-measure sofas, beds, dining tables, curtains, wardrobes and media walls, designed, built and installed for homes across the UAE.
             </p>
-            <ul className="flex flex-col gap-3">
+            <ul className="flex flex-col gap-0">
               {SITE.instagramAccounts.map((ig) => (
                 <li key={ig.handle}>
-                  <a href={ig.url} target="_blank" rel="noopener noreferrer" aria-label={"Follow " + ig.handle + " on Instagram"} className="inline-flex items-center gap-3 text-beige/60 hover:text-gold transition-colors">
+                  <a href={ig.url} target="_blank" rel="noopener noreferrer" aria-label={"Follow " + ig.handle + " on Instagram"} className="inline-flex min-h-[44px] items-center gap-3 text-beige/60 hover:text-gold transition-colors">
                     <span className="w-9 h-9 border border-beige/20 flex items-center justify-center"><InstagramIcon className="w-4 h-4" /></span>
                     <span className="text-[14px]">{ig.handle}</span>
                   </a>
@@ -46,9 +46,9 @@ export default function Footer() {
             {groups.map((g) => (
               <div key={g.slug}>
                 <p className="text-[13px] text-beige/45 mb-4">{g.title}</p>
-                <ul className="flex flex-col gap-2.5">
+                <ul className="flex flex-col gap-0">
                   {categoriesInGroup(g.slug).map((c) => (
-                    <li key={c.slug}><Link href={"/collections/" + c.slug} className="text-sm text-beige/60 hover:text-gold transition-colors">{c.title}</Link></li>
+                    <li key={c.slug}><Link href={"/collections/" + c.slug} className="inline-flex min-h-[44px] min-w-[44px] items-center text-sm text-beige/60 hover:text-gold transition-colors">{c.title}</Link></li>
                   ))}
                 </ul>
               </div>
@@ -57,16 +57,16 @@ export default function Footer() {
 
           <div className="md:col-span-3">
             <p className="text-[13px] text-beige/45 mb-4">Company</p>
-            <ul className="flex flex-col gap-2.5 mb-8">
+            <ul className="mb-8 flex flex-col gap-0">
               {navLinks.map((l) => (
-                <li key={l.href}><Link href={l.href} className="text-sm text-beige/60 hover:text-gold transition-colors">{l.label}</Link></li>
+                <li key={l.href}><Link href={l.href} className="inline-flex min-h-[44px] min-w-[44px] items-center text-sm text-beige/60 hover:text-gold transition-colors">{l.label}</Link></li>
               ))}
             </ul>
             <p className="text-[13px] text-beige/45 mb-4">Talk to us</p>
-            <ul className="flex flex-col gap-2.5">
+            <ul className="flex flex-col gap-0">
               {SITE.phones.map((p) => (
                 <li key={p.intl}>
-                  <a href={whatsappLink("Hello, I would like to enquire about your furniture.", p.intl)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-beige-light hover:text-gold transition-colors">
+                  <a href={whatsappLink("Hello, I would like to enquire about your furniture.", p.intl)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-2 text-sm text-beige-light hover:text-gold transition-colors">
                     <WhatsAppIcon className="w-4 h-4 text-[#128C7E]" />
                     {p.display}
                   </a>
@@ -82,9 +82,9 @@ export default function Footer() {
       <div className="border-t border-beige/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-beige/30">&copy; {year} {SITE.name}. All rights reserved.</p>
-          <p className="flex gap-4 text-xs text-beige/40">
-            <Link href="/privacy-policy" className="hover:text-beige-light">Privacy policy</Link>
-            <Link href="/terms" className="hover:text-beige-light">Terms of use</Link>
+          <p className="flex gap-2 text-xs text-beige/40">
+            <Link href="/privacy-policy" className="inline-flex min-h-[44px] items-center px-2 hover:text-beige-light">Privacy policy</Link>
+            <Link href="/terms" className="inline-flex min-h-[44px] items-center px-2 hover:text-beige-light">Terms of use</Link>
           </p>
           <p className="text-xs text-beige/25">Made to measure in Dubai</p>
         </div>

@@ -32,7 +32,7 @@ export default function EstimatorFlow({ catalogue }: { catalogue: PublicCatalogu
         <ol className="flex flex-wrap gap-x-4 gap-y-1 text-[13px]" aria-label="Steps">
           {steps.map((s, i) => (
             <li key={s} className={"flex items-center gap-1.5 " + (i === index ? "text-charcoal" : "text-taupe")} aria-current={i === index ? "step" : undefined}>
-              <span className={"flex h-5 w-5 items-center justify-center rounded-full border text-[11px] " + (i <= index ? "border-charcoal bg-charcoal text-beige-light" : "border-border")}>{i + 1}</span>
+              <span className={"flex h-5 w-5 items-center justify-center rounded-full border text-[12px] " + (i <= index ? "border-charcoal bg-charcoal text-beige-light" : "border-border")}>{i + 1}</span>
               {labels[s]}
             </li>
           ))}

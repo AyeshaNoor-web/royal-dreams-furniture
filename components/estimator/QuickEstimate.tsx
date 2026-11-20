@@ -8,7 +8,7 @@ import { SITE, whatsappLink } from "@/lib/site";
 import { useQuickEstimate } from "./useQuickEstimate";
 
 const label = "block text-[13px] uppercase tracking-wider text-taupe";
-const field = "mt-2 w-full border border-border bg-beige-light px-3 py-3 font-dm text-[16px] text-charcoal focus:border-gold-dark focus:outline-none";
+const field = "mt-2 w-full border border-border bg-beige-light px-3 py-3 font-dm text-[16px] text-charcoal focus:border-gold-dark";
 
 /** Three controls and a live range. Everything else (basket, extras, lead form) lives on /estimator. */
 export default function QuickEstimate({ catalogue }: { catalogue: PublicCatalogue }) {
@@ -30,7 +30,7 @@ export default function QuickEstimate({ catalogue }: { catalogue: PublicCatalogu
           <label htmlFor="qe-size" className={label}>2. Size, in {q.collection.unitLabel}</label>
           <div className="mt-2 flex items-center gap-4">
             <input id="qe-size" type="range" min={min} max={max} step={step} value={Number.isFinite(q.size) ? q.size : min} onChange={(e) => q.setSize(Number(e.target.value))} className="h-11 flex-1 cursor-pointer accent-charcoal" />
-            <input aria-label={"Size in " + q.collection.unitLabel} type="number" inputMode="decimal" min={min} max={max} step={step} value={Number.isFinite(q.size) ? q.size : ""} onChange={(e) => q.setSize(e.target.value === "" ? NaN : Number(e.target.value))} onBlur={() => Number.isFinite(q.size) && q.setSize(Math.min(max, Math.max(min, q.size)))} className="w-24 border border-border bg-beige-light px-3 py-2.5 font-dm text-[16px] text-charcoal focus:border-gold-dark focus:outline-none" />
+            <input aria-label={"Size in " + q.collection.unitLabel} type="number" inputMode="decimal" min={min} max={max} step={step} value={Number.isFinite(q.size) ? q.size : ""} onChange={(e) => q.setSize(e.target.value === "" ? NaN : Number(e.target.value))} onBlur={() => Number.isFinite(q.size) && q.setSize(Math.min(max, Math.max(min, q.size)))} className="w-24 border border-border bg-beige-light px-3 py-2.5 font-dm text-[16px] text-charcoal focus:border-gold-dark" />
           </div>
           <p className="mt-1 text-[13px] text-taupe">{q.collection.hint} {trimNumber(min)} to {trimNumber(max)} {q.collection.unitLabel}.</p>
         </div>
@@ -52,8 +52,8 @@ export default function QuickEstimate({ catalogue }: { catalogue: PublicCatalogu
           {q.error ? (
             <p role="alert" className="mt-3 text-[15px] text-charcoal">{q.error}</p>
           ) : (
-            <p className={"mt-2 font-serif text-[2rem] leading-none text-charcoal sm:text-[2.5rem] " + (q.loading ? "opacity-50" : "")}>
-              {q.result ? aedRange(q.result.total.min, q.result.total.max) : "Calculating..."}
+            <p className={"tnum mt-2 font-serif text-[2rem] leading-none text-charcoal sm:text-[2.5rem] " + (q.loading ? "opacity-50" : "")}>
+              {q.result ? aedRange(q.result.total.min, q.result.total.max) : "Calculating\u2026"}
             </p>
           )}
           {line && <p className="mt-3 text-[14px] text-taupe">{line.title}, {trimNumber(line.size)} {unitWords(line.size, line.unitLabel)}, {line.tierLabel.toLowerCase()}. {q.result?.disclaimer}</p>}

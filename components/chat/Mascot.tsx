@@ -5,17 +5,10 @@
  */
 export default function Mascot({ className = "h-12 w-12", wave = false }: { className?: string; wave?: boolean }) {
   return (
-    <svg viewBox="0 0 96 96" className={className + (wave ? " mascot-wave" : "")} aria-hidden="true" focusable="false">
-      <defs>
-        <clipPath id="mascot-clip">
-          <circle cx="48" cy="48" r="45" />
-        </clipPath>
-      </defs>
+    <svg viewBox="0 0 96 96" className={"rounded-full " + className + (wave ? " mascot-wave" : "")} aria-hidden="true" focusable="false" style={{ overflow: "hidden" }}>
       <circle cx="48" cy="48" r="46" fill="#F9F3F0" stroke="#C4A090" strokeWidth="2" />
-      <g clipPath="url(#mascot-clip)">
-        <path d="M14 98c3-18 16-28 34-28s31 10 34 28z" fill="#2A1F18" />
-        <path d="M41 70l7 9 7-9" fill="none" stroke="#C4A090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </g>
+      <path d="M14 98c3-18 16-28 34-28s31 10 34 28z" fill="#2A1F18" />
+      <path d="M41 70l7 9 7-9" fill="none" stroke="#C4A090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <rect x="42" y="55" width="12" height="14" rx="5" fill="#D4B8A8" />
       <circle cx="65" cy="27" r="8" fill="#2A1F18" />
       <ellipse cx="48" cy="44" rx="18" ry="20" fill="#E8D5C4" />

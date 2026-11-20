@@ -38,7 +38,7 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
           transition={{ duration: 0.35, ease: EASE }}
           className="fixed bottom-[86px] right-6 z-[69] hidden w-[min(300px,calc(100vw-3rem))] sm:block rounded-2xl rounded-br-md border border-border bg-beige-light p-4 shadow-xl shadow-black/15"
         >
-          <button type="button" onClick={dismiss} aria-label="Dismiss" className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full text-taupe transition-colors hover:bg-beige hover:text-charcoal">
+          <button type="button" onClick={dismiss} aria-label="Dismiss" className="absolute right-1 top-1 flex h-11 w-11 items-center justify-center rounded-full text-taupe transition-colors hover:bg-beige hover:text-charcoal">
             <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
           </button>
           <div className="flex items-start gap-3 pr-5">
@@ -48,7 +48,7 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
               <p className="mt-1 text-[13px] leading-relaxed text-taupe">Tell me the piece and the room and I will point you to the right collection, or give you a budget range.</p>
             </div>
           </div>
-          <button type="button" onClick={() => { dismiss(); onOpen(); }} className="mt-3 inline-flex min-h-[40px] items-center gap-2 rounded-full bg-charcoal px-4 font-dm text-[13px] font-medium text-beige-light transition-colors hover:bg-charcoal-light">
+          <button type="button" onClick={() => { dismiss(); onOpen(); }} className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-charcoal px-4 font-dm text-[13px] font-medium text-beige-light transition-colors hover:bg-charcoal-light">
             Ask {SITE.assistant.name} <span aria-hidden="true">&rarr;</span>
           </button>
         </motion.div>

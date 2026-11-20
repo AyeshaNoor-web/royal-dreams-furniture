@@ -5,7 +5,7 @@ import Link from "next/link";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import Turnstile from "@/components/shared/Turnstile";
 
-const field = "w-full border border-border bg-beige-light px-4 py-3 font-dm text-[16px] text-charcoal placeholder:text-taupe-light focus:border-gold-dark focus:outline-none";
+const field = "w-full border border-border bg-beige-light px-4 py-3 font-dm text-[16px] text-charcoal placeholder:text-taupe-light focus:border-gold-dark";
 const label = "block text-[14px] text-charcoal mb-1.5";
 
 /** Emails the estimate to the team with the visitor's details. The result is never gated behind this. */
@@ -56,15 +56,15 @@ export default function EstimateLeadForm({ summary, whatsapp }: { summary: strin
       </div>
       <div>
         <label htmlFor="est-name" className={label}>Name</label>
-        <input id="est-name" value={form.name} onChange={set("name")} className={field} autoComplete="name" required />
+        <input id="est-name" name="name" value={form.name} onChange={set("name")} className={field} autoComplete="name" required />
       </div>
       <div>
         <label htmlFor="est-phone" className={label}>Phone or WhatsApp</label>
-        <input id="est-phone" type="tel" value={form.phone} onChange={set("phone")} className={field} autoComplete="tel" placeholder="050 000 0000" required />
+        <input id="est-phone" name="phone" type="tel" value={form.phone} onChange={set("phone")} className={field} autoComplete="tel" placeholder="050 000 0000" required />
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="est-email" className={label}>Email, optional</label>
-        <input id="est-email" type="email" value={form.email} onChange={set("email")} className={field} autoComplete="email" />
+        <input id="est-email" name="email" type="email" value={form.email} onChange={set("email")} className={field} autoComplete="email" />
       </div>
       <div className="hidden" aria-hidden="true"><input tabIndex={-1} autoComplete="off" value={form.company} onChange={set("company")} /></div>
       <label className="flex items-start gap-3 text-[14px] text-taupe sm:col-span-2">
@@ -74,7 +74,7 @@ export default function EstimateLeadForm({ summary, whatsapp }: { summary: strin
       <div className="sm:col-span-2"><Turnstile onToken={setToken} /></div>
       {status === "error" && <p role="alert" className="text-[14px] text-red-800 sm:col-span-2">{errorText}</p>}
       <div className="flex flex-wrap gap-3 sm:col-span-2">
-        <button type="button" onClick={submit} disabled={status === "sending"} className="btn-dark min-h-[48px] disabled:opacity-60">{status === "sending" ? "Sending..." : "Send estimate"}</button>
+        <button type="button" onClick={submit} disabled={status === "sending"} className="btn-dark min-h-[48px] disabled:opacity-60">{status === "sending" ? "Sending\u2026" : "Send estimate"}</button>
         <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[48px]"><WhatsAppIcon className="h-4 w-4" /> WhatsApp instead</a>
       </div>
     </div>

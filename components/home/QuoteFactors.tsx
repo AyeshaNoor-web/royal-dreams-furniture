@@ -39,7 +39,7 @@ export default function QuoteFactors() {
                   aria-pressed={on}
                   onClick={() => setSlug(q.slug)}
                   className={
-                    "relative shrink-0 rounded-full px-4 py-2 text-left text-[15px] transition-colors duration-300 lg:w-full lg:rounded-none lg:border-b lg:border-border lg:px-0 lg:py-3.5 " +
+                    "relative min-h-[44px] shrink-0 rounded-full px-4 py-2 text-left text-[15px] transition-colors duration-300 lg:w-full lg:rounded-none lg:border-b lg:border-border lg:px-0 lg:py-3.5 " +
                     (on ? "bg-charcoal text-beige-light lg:bg-transparent lg:text-charcoal" : "text-taupe hover:text-charcoal")
                   }
                 >

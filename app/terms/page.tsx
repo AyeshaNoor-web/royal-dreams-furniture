@@ -57,7 +57,7 @@ export default function TermsPage() {
           heading: "Privacy and law",
           body: (
             <p>
-              How we handle your details is set out in the <Link href="/privacy-policy" className="text-link text-charcoal">privacy policy</Link>. These terms are governed by the laws of the United Arab Emirates and the courts of [EMIRATE, e.g. Dubai].
+              How we handle your details is set out in the <Link href="/privacy-policy" className="text-link-inline text-charcoal">privacy policy</Link>. These terms are governed by the laws of the United Arab Emirates and the courts of [EMIRATE, e.g. Dubai].
             </p>
           ),
         },

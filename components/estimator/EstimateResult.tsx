@@ -46,7 +46,7 @@ export default function EstimateResult({ result, loading, error, catalogue, onAd
       )}
       {result && (
         <>
-          <p className="mt-4 font-serif text-[2rem] leading-none text-charcoal sm:text-[2.5rem]">{aedRange(result.total.min, result.total.max)}</p>
+          <p className="tnum mt-4 font-serif text-[2rem] leading-none text-charcoal sm:text-[2.5rem]">{aedRange(result.total.min, result.total.max)}</p>
           <p className="mt-3 max-w-md text-[14px] leading-relaxed text-taupe">{result.disclaimer}</p>
 
           <ul className="mt-6 divide-y divide-border border-y border-border">

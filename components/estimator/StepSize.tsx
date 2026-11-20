@@ -12,7 +12,7 @@ interface Props {
   onBack: () => void;
 }
 
-const field = "w-28 border border-border bg-beige-light px-3 py-2.5 font-dm text-[16px] text-charcoal focus:border-gold-dark focus:outline-none";
+const field = "w-28 border border-border bg-beige-light px-3 py-2.5 font-dm text-[16px] text-charcoal focus:border-gold-dark";
 
 export default function StepSize({ collection, value, onChange, onNext, onBack }: Props) {
   const { min, max, step } = collection.size;

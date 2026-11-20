@@ -51,7 +51,7 @@ export default function ContactPage() {
                   <dt className="text-[14px] text-taupe">Instagram</dt>
                   <dd className="flex flex-col gap-1.5">
                     {SITE.instagramAccounts.map((ig) => (
-                      <a key={ig.handle} href={ig.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[16px] text-charcoal hover:text-gold-text">
+                      <a key={ig.handle} href={ig.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] min-w-0 items-center gap-2 break-all text-[16px] text-charcoal hover:text-gold-text">
                         <InstagramIcon className="h-4 w-4" /> {ig.handle}
                       </a>
                     ))}
@@ -62,7 +62,7 @@ export default function ContactPage() {
                   <dd className="text-[16px] text-charcoal">
                     {SITE.showroom.display}
                     <span className="mt-1 block text-[14px] text-taupe">Visits by appointment. Home measurement across all seven Emirates.</span>
-                    <a href={SITE.showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-link text-[14px] hover:text-gold-text">Open in Google Maps</a>
+                    <a href={SITE.showroom.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-1 text-link text-[14px] hover:text-gold-text">Open in Google Maps</a>
                   </dd>
                 </div>
                 <div className="grid grid-cols-[110px_1fr] gap-4 py-5">

@@ -32,13 +32,14 @@ export default function NewsletterForm() {
       <label htmlFor="newsletter-email" className="sr-only">Email address</label>
       <input
         id="newsletter-email"
+        name="email"
         type="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
         autoComplete="email"
-        className="flex-1 bg-transparent border border-beige/25 px-4 py-3 font-dm text-sm text-beige-light placeholder:text-beige/40 focus:outline-none focus:border-gold transition-colors"
+        className="flex-1 bg-transparent border border-beige/25 px-4 py-3 font-dm text-sm text-beige-light placeholder:text-beige/40 focus:border-gold transition-colors"
       />
       <button type="submit" disabled={status === "submitting"} className="px-6 py-3 bg-beige-light text-[14px] font-medium text-charcoal hover:bg-gold transition-colors disabled:opacity-60">
         {status === "submitting" ? "Joining" : "Subscribe"}

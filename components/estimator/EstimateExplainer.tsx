@@ -33,7 +33,7 @@ export default function EstimateExplainer() {
           ))}
         </div>
         <a href={APPOINTMENT_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark mt-10 min-h-[48px]">
-          <WhatsAppIcon className="h-[18px] w-[18px]" /> Book the free visit
+          <WhatsAppIcon className="h-[18px] w-[18px]" /> Book a free visit
         </a>
       </div>
     </section>

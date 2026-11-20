@@ -28,7 +28,7 @@ export default function BasketSummary({ result, count, loading, onView, onReset,
         <div className="min-w-0">
           <p className="text-[13px] text-taupe">{count} {count === 1 ? "item" : "items"} in your room</p>
           <p className="truncate font-serif text-[20px] leading-tight text-charcoal lg:text-2xl" aria-live="polite">
-            {loading && !result ? "Calculating..." : result ? aedRange(result.total.min, result.total.max) : ""}
+            {loading && !result ? "Calculating\u2026" : result ? aedRange(result.total.min, result.total.max) : ""}
           </p>
         </div>
         {!viewing && (

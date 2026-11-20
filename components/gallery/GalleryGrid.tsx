@@ -46,7 +46,7 @@ export default function GalleryGrid({ images, filters, paramKey = "c" }: Gallery
                 role="tab"
                 aria-selected={on}
                 onClick={() => select(f.slug)}
-                className={"-mb-px min-h-[44px] border-b text-[15px] transition-colors duration-200 " + (on ? "border-charcoal text-charcoal" : "border-transparent text-taupe hover:text-charcoal")}
+                className={"-mb-px min-h-[44px] min-w-[44px] border-b px-1 text-[15px] transition-colors duration-200 " + (on ? "border-charcoal text-charcoal" : "border-transparent text-taupe hover:text-charcoal")}
               >
                 {f.title}
               </button>

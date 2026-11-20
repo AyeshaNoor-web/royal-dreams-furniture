@@ -51,7 +51,7 @@ export default async function CollectionPage({ params }: Props) {
             <div className="flex flex-wrap gap-3">
               <a href={inquiry} target="_blank" rel="noopener noreferrer" className="btn-dark min-h-[48px]">
                 <WhatsAppIcon className="h-[18px] w-[18px]" />
-                Get a quote
+                Get a free quote
               </a>
               <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[48px]">
                 Book a free visit
@@ -71,7 +71,7 @@ export default async function CollectionPage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="font-serif text-3xl">More for the {group.title.toLowerCase()}</h2>
-            <Link href="/collections" className="text-link hover:text-gold-text">View all</Link>
+            <Link href="/collections" className="text-link px-1 hover:text-gold-text">View all</Link>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {others.map((o) => (
