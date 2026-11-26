@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background-color: #E8D5C4;
+  color: #2A1F18;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.1;
+}
+h3, h4 { font-weight: 500; }
+
+::selection { background-color: #2A1F18; color: #F9F3F0; }
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-[52px] items-center justify-center gap-2.5 px-7 font-dm text-[15px] font-medium transition-colors duration-200;
+  }
+  .btn-lit { @apply btn bg-gold text-charcoal hover:bg-gold-dark hover:text-beige-light; }
+  .btn-dark { @apply btn bg-charcoal text-beige-light hover:bg-charcoal-light; }
+  .btn-line { @apply btn border border-charcoal/35 text-charcoal hover:border-charcoal; }
+  .text-link {
+    @apply font-dm text-[15px] underline decoration-1 underline-offset-[6px] transition-colors duration-200;
+  }
+}
+
+:focus-visible { outline: 2px solid #A08070; outline-offset: 2px; }
+
+.skip-link {
+  position: fixed; top: 12px; left: 12px; z-index: 100;
+  transform: translateY(-200%);
+  background: #2A1F18; color: #F9F3F0;
+  padding: 12px 18px; font-size: 14px;
+  transition: transform 0.2s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pane-glass img { animation: none; transition: none; }
+}
+
+/* Chat bubble: a slow ring that fades out, until the visitor opens the chat */
+@keyframes chat-pulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  70%, 100% { transform: scale(1.55); opacity: 0; }
+}
+.chat-pulse { animation: chat-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+@media (prefers-reduced-motion: reduce) { .chat-pulse { animation: none; opacity: 0; } }
+
+/* Small section label (used sparingly above headings) */
+.eyebrow {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--eyebrow, #765542);
+}
+.on-dark { --eyebrow: #D4B8A8; }
+
+/* ─── Hero: looping stream of project cards ─────────────────────────────────── */
+.hero-stage { height: 50svh; min-height: 360px; max-height: 760px; }
+@media (min-width: 640px) { .hero-stage { height: 62svh; min-height: 440px; } }
+@media (min-width: 1024px) { .hero-stage { height: min(calc(100svh - 7.5rem), 860px); min-height: 620px; } }
+.hero-mask {
+  height: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+}
+.hero-stream {
+  display: flex;
+  flex-direction: column;
+  align-self: start; /* keep each column at its own content height so the -50% loop is seamless */
+  gap: 1rem;
+  will-change: transform;
+  animation: hero-drift 46s linear infinite;
+}
+.hero-stream-down { animation-direction: reverse; }
+.hero-stream:nth-child(2) { margin-top: -6rem; }
+@media (min-width: 1024px) { .hero-stream { gap: 1.25rem; } }
+.hero-stage:hover .hero-stream { animation-play-state: paused; }
+.hero-card {
+  flex: none;
+  padding: 6px;
+  background: #F9F3F0;
+  border: 1px solid #D4B8A8;
+  box-shadow: 0 22px 44px -30px rgba(42, 31, 24, 0.5);
+}
+
+/* Hero background: layered beige light with a faint fluted-panel texture on the left */
+.hero-bg {
+  background:
+    radial-gradient(55% 55% at 16% 28%, rgba(249, 243, 240, 0.95), rgba(249, 243, 240, 0) 70%),
+    radial-gradient(45% 60% at 88% 75%, rgba(196, 160, 144, 0.35), rgba(196, 160, 144, 0) 70%),
+    linear-gradient(135deg, #F3E8DE 0%, #E8D5C4 52%, #DFC9B6 100%);
+}
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(42, 31, 24, 0.05) 0 1px, transparent 1px 18px);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 35%, transparent 55%);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 35%, transparent 55%);
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(42, 31, 24, 0) 85%, rgba(42, 31, 24, 0.05) 100%);
+}
+.hero-bg > * { position: relative; z-index: 1; }
+
+
+@keyframes hero-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-stream { animation: none; }
+}
+
+/* ─── Glass ──────────────────────────────────────────────────────────────────── */
+.nav-glass {
+  background: rgba(249, 243, 240, 0.62);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 0 rgba(42, 31, 24, 0.06), 0 18px 40px -28px rgba(42, 31, 24, 0.35);
+  border-radius: 14px;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .nav-glass { background: rgba(249, 243, 240, 0.96); }
+}
+/* Frosted secondary button for light surfaces and photographs */
+.btn-glass {
+  @apply btn text-charcoal;
+  background: rgba(255, 255, 255, 0.28);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 24px -18px rgba(42, 31, 24, 0.4);
+}
+.btn-glass:hover { background: rgba(255, 255, 255, 0.5); }
+.btn-glass-light {
+  @apply btn text-beige-light;
+  background: rgba(249, 243, 240, 0.16);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(249, 243, 240, 0.45);
+}
+.group:hover .btn-glass-light, .btn-glass-light:hover { background: rgba(249, 243, 240, 0.3); }

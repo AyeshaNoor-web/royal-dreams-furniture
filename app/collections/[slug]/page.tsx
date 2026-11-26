@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/shared/PageHeader";
-import GalleryGrid from "@/components/gallery/GalleryGrid";
-import VideoGrid from "@/components/gallery/VideoGrid";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+import CategoryCard from "@/components/site/CategoryCard";
+import Estimator from "@/components/site/Estimator";
+import ProductGrid from "@/components/site/ProductGrid";
+import SectionHead from "@/components/site/SectionHead";
+import { Process, ReadyBand } from "@/components/site/Sections";
+import { toCard, toCategoryCard } from "@/lib/cards";
+import { estimatorItems } from "@/lib/estimator-items";
 import { categories, categoriesInGroup, getCategory, groups } from "@/lib/gallery";
+import { aed, factorsOf, priceOf } from "@/lib/pricing";
+import { productsOf } from "@/lib/products";
+import { quoteHref } from "@/lib/quote-link";
 import { whatsappLink } from "@/lib/site";
 
 interface Props {
@@ -21,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const cat = getCategory(slug);
   if (!cat) return {};
-  return { title: cat.title, description: cat.description, openGraph: { images: [{ url: cat.cover.src, alt: cat.cover.alt }] } };
+  return { title: cat.title, description: cat.description, alternates: { canonical: "/collections/" + cat.slug }, openGraph: { images: [{ url: cat.cover.src, alt: cat.cover.alt }] } };
 }
 
 export default async function CollectionPage({ params }: Props) {
@@ -30,52 +37,78 @@ export default async function CollectionPage({ params }: Props) {
   if (!cat) notFound();
 
   const group = groups.find((g) => g.slug === cat.group)!;
-  const siblings = categoriesInGroup(cat.group).filter((c) => c.slug !== cat.slug);
-  const others = [...siblings, ...categories.filter((c) => c.group !== cat.group)].slice(0, 3);
-  const inquiry = whatsappLink("Hello, I am interested in your " + cat.title.toLowerCase() + ". Could we discuss my room?");
-
-  // When a collection has sub-types (e.g. sofas), the grid filters by type instead of category
-  const hasTypes = Boolean(cat.types?.length);
-  const images = cat.images.map((img) => ({ ...img, category: hasTypes ? img.type ?? "other" : cat.slug, categoryTitle: cat.title }));
+  const list = productsOf(cat.slug);
+  const price = priceOf(cat.slug);
+  const factors = factorsOf(cat.slug);
+  const others = [...categoriesInGroup(cat.group).filter((c) => c.slug !== cat.slug), ...categories.filter((c) => c.group !== cat.group)].slice(0, 4);
+  const types = (cat.types ?? []).filter((t) => list.some((p) => p.type === t.slug)).map((t) => ({ id: t.slug, label: t.title }));
+  const ask = whatsappLink("Hello, I am interested in your " + cat.title.toLowerCase() + ". Could we discuss my room?");
 
   return (
     <>
-      <PageHeader eyebrow={group.title} title={cat.title} intro={cat.description} />
-
-      <section className="pb-section">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
-            <p className="text-[15px] text-taupe">{cat.short}</p>
-            <a href={inquiry} target="_blank" rel="noopener noreferrer" className="btn-dark">
-              <WhatsAppIcon className="h-[18px] w-[18px]" />
-              Enquire about {cat.title.toLowerCase()}
-            </a>
+      <PageHeader eyebrow={group.title} title={cat.title} intro={cat.description} crumbs={[{ label: "Products", href: "/collections" }, { label: cat.title }]}>
+        <div className="flex flex-col gap-5 rounded-2xl border border-border bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div>
+            <p className="font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-taupe">{price ? "Starting price" : "Pricing"}</p>
+            {price ? (
+              <p className="mt-1 font-accent text-3xl font-medium text-charcoal">From {aed(price.from)} <span className="text-xl text-taupe">/ {price.unit}</span></p>
+            ) : (
+              <p className="mt-1 font-accent text-2xl font-medium text-charcoal sm:text-3xl">Quoted after a free visit</p>
+            )}
+            <p className="mt-1 font-dm text-[13px] text-taupe">{price ? "By door type. " : "Made to your sizes. "}<a href="#price" className="font-semibold text-charcoal underline underline-offset-4">{price ? "Work out your budget" : "See what the price depends on"}</a></p>
           </div>
-          <GalleryGrid images={images} paramKey="type" filters={hasTypes ? cat.types : undefined} />
+          <div className="flex flex-col gap-2.5 sm:flex-row">
+            <Link href={quoteHref({ item: cat.slug })} className="btn-dark">Get a free quote <span aria-hidden="true">&#8599;</span></Link>
+            <a href={ask} target="_blank" rel="noopener noreferrer" className="btn-line"><WhatsAppIcon className="h-4 w-4 text-[#128C4B]" /> WhatsApp</a>
+          </div>
+        </div>
+      </PageHeader>
+
+      <section className="py-section-sm" aria-labelledby="designs-h">
+        <div className="wrap">
+          <div className="mb-7 flex flex-col gap-1.5 sm:flex-row sm:items-end sm:justify-between">
+            <h2 id="designs-h" className="h-md">{list.length} {list.length === 1 ? "design" : "designs"}</h2>
+            <p className="font-dm text-sm text-taupe">One photo per design. Open any design for all its photos and a quote.</p>
+          </div>
+          <ProductGrid items={list.map((p) => toCard(p, "price"))} filters={types} allLabel={"All " + cat.title.toLowerCase()} />
         </div>
       </section>
 
-      <VideoGrid videos={cat.videos} />
-
-      <section className="border-t border-border bg-beige-light py-section-sm">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="mb-8 flex items-end justify-between">
-            <h2 className="font-serif text-3xl">More for the {group.title.toLowerCase()}</h2>
-            <Link href="/collections" className="text-link hover:text-gold-text">View all</Link>
+      <section id="price" className="scroll-mt-24 bg-mist py-section-sm lg:py-section" aria-labelledby="price-h">
+        <div className="wrap">
+          <SectionHead eyebrow="Price guide" title={<span id="price-h">{price ? "Work out a starting budget" : "How " + cat.title.toLowerCase() + " are priced"}</span>} lede={price ? "Set the size of your wall and the door type. The exact quotation follows a free measurement." : "No shelf price, because nothing comes off a shelf. Here is what moves the figure and how to get one quickly."} />
+          <div className="mx-auto mt-10 max-w-4xl">
+            <Estimator items={estimatorItems.filter((i) => i.slug === cat.slug)} />
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {others.map((o) => (
-              <Link key={o.slug} href={"/collections/" + o.slug} className="group block">
-                <div className="relative aspect-[3/4] bg-beige-dark">
-                  <Image src={o.cover.src} alt={o.cover.alt} fill sizes="(min-width: 640px) 33vw, 100vw" className="object-cover" />
-                </div>
-                <p className="mt-3 font-serif text-xl group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{o.title}</p>
-                <p className="text-[15px] text-taupe">{o.short}</p>
-              </Link>
+          {factors && (
+            <dl className="mx-auto mt-5 grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-white p-6">
+                <dt className="font-accent text-xl font-medium text-charcoal">What we measure on the visit</dt>
+                <dd className="mt-2 font-dm text-[14.5px] leading-relaxed text-taupe">{factors.measure}</dd>
+              </div>
+              <div className="rounded-2xl border border-border bg-white p-6">
+                <dt className="font-accent text-xl font-medium text-charcoal">What to send for a first figure</dt>
+                <dd className="mt-2 font-dm text-[14.5px] leading-relaxed text-taupe">{factors.send}</dd>
+              </div>
+            </dl>
+          )}
+        </div>
+      </section>
+
+      <Process />
+
+      <section className="py-section-sm" aria-labelledby="more-h">
+        <div className="wrap">
+          <SectionHead align="left" title={<span id="more-h">Often ordered with {cat.title.toLowerCase()}</span>} action={<Link href="/collections" className="btn-line">All products <span aria-hidden="true">&#8599;</span></Link>} />
+          <ul className="mt-9 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-5 lg:grid-cols-4 lg:gap-x-6">
+            {others.map((c) => (
+              <li key={c.slug}><CategoryCard item={toCategoryCard(c)} /></li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
+
+      <ReadyBand item={cat.slug} />
     </>
   );
 }

@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/shared/PageHeader";
-import GalleryGrid from "@/components/gallery/GalleryGrid";
-import CtaBand from "@/components/home/CtaBand";
-import { allImages, categories } from "@/lib/gallery";
+import ProductGrid from "@/components/site/ProductGrid";
+import { ReadyBand } from "@/components/site/Sections";
+import { allCards } from "@/lib/cards";
+import { categories } from "@/lib/gallery";
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: "Browse every installation by Modern Furniture Collection: sofas, beds, dining tables, curtains, wardrobes, closets, media walls and paneling across the UAE.",
+  title: "Our work",
+  description: "Every piece we have made and fitted in homes across the UAE: sofas, beds, dining tables, curtains, wardrobes, closets, media walls and paneling. One photo per design; open any design for the rest.",
+  alternates: { canonical: "/gallery" },
 };
 
 export default function GalleryPage() {
+  const items = allCards();
   return (
     <>
-      <PageHeader title="Completed projects across the UAE." intro="Photographs from homes we have furnished across the UAE. Filter by collection or open any image to view it in full." />
-      <section className="pb-section">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <GalleryGrid images={allImages} paramKey="c" filters={categories.map((c) => ({ slug: c.slug, title: c.title }))} />
+      <PageHeader eyebrow="Our work" title="Pieces we have made and fitted" intro={"All " + items.length + " designs in one place. Each shows one photo; open a design to see every photo and video of it."} crumbs={[{ label: "Our work" }]} />
+      <section className="py-section-sm">
+        <div className="wrap">
+          <ProductGrid items={items} by="slug" param="c" allLabel="Everything" filters={categories.map((c) => ({ id: c.slug, label: c.title }))} />
         </div>
       </section>
-      <CtaBand />
+      <ReadyBand />
     </>
   );
 }

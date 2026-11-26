@@ -6,9 +6,8 @@ import { whatsappLink, services } from "@/lib/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const field =
-  "w-full bg-beige-light border border-border px-4 py-3.5 text-base text-charcoal placeholder:text-taupe focus:outline-none focus:border-charcoal focus:outline-none";
-const label = "block text-[15px] text-charcoal mb-2";
+const field = "field";
+const label = "field-label";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");

@@ -1,22 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Jost } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Header, { type MenuGroup } from "@/components/site/Header";
+import SiteFooter from "@/components/site/SiteFooter";
+import MobileTabBar from "@/components/site/MobileTabBar";
+import { categoriesInGroup, groups } from "@/lib/gallery";
+import { priceLabel, priceOf } from "@/lib/pricing";
 import ChatWidget from "@/components/chat/ChatWidget";
 import { SITE } from "@/lib/site";
 
-// Display: an elegant transitional serif that stays legible at card sizes. Body: geometric, quiet.
-const display = Playfair_Display({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Jost({
-  subsets: ["latin"],
-  variable: "--font-body",
+// Fonts are bundled in app/fonts: fetching Google Fonts at build time has stalled builds on the development machine.
+const body = localFont({ src: "./fonts/manrope.woff2", weight: "400 800", variable: "--font-body", display: "swap" });
+const accent = localFont({
+  src: [
+    { path: "./fonts/cormorant.woff2", weight: "400 700", style: "normal" },
+    { path: "./fonts/cormorant-italic.woff2", weight: "400 700", style: "italic" },
+  ],
+  variable: "--font-accent",
   display: "swap",
 });
 
@@ -49,16 +49,22 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#E8D5C4" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#262624" };
+
+const menu: MenuGroup[] = groups.map((g) => ({
+  title: g.title,
+  items: categoriesInGroup(g.slug).map((c) => ({ title: c.title, href: "/collections/" + c.slug, price: priceLabel(c.slug), priced: !!priceOf(c.slug) })),
+}));
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={display.variable + " " + body.variable}>
+    <html lang="en" className={body.variable + " " + accent.variable}>
       <body className="bg-beige font-dm text-charcoal antialiased">
         <a href="#main" className="skip-link">Skip to content</a>
-        <Navbar />
+        <Header menu={menu} />
         <main id="main">{children}</main>
-        <Footer />
+        <SiteFooter />
+        <MobileTabBar />
         <ChatWidget />
       </body>
     </html>

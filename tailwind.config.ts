@@ -1,8 +1,9 @@
 import type { Config } from "tailwindcss";
 
-// Palette from the client's swatch card:
-// #F9F3F0  #E8D5C4  #D4B8A8  #C4A090  #A08070
-// Text tones are darkened versions of the two deepest swatches so body copy meets WCAG AA on beige.
+// "Showroom" theme (27 Nov 2026): charcoal header and footer, near-white pages, a sand tint for alternate bands and
+// one bronze accent taken from the gold logo. Token names are kept from earlier themes so older pages keep working:
+// "beige" is the page surface, "charcoal" the text colour, "gold" the accent.
+// Contrast on the page colour #FAFAF8: charcoal 16:1, taupe 5.6:1, gold-dark 5.7:1. White on ink 14:1.
 const config: Config = {
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,26 +13,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        beige: { DEFAULT: "#E8D5C4", light: "#F9F3F0", dark: "#D4B8A8" },
-        charcoal: { DEFAULT: "#2A1F18", light: "#3D2F26" },
-        frame: "#1C140F",
-        door: "#2A1F18",
-        gold: { DEFAULT: "#C4A090", dark: "#A08070", text: "#765542" },
-        lit: "#D4B8A8",
-        taupe: { DEFAULT: "#6E584A", light: "#A08070" },
-        border: "#D4B8A8",
+        beige: { DEFAULT: "#FAFAF8", light: "#FFFFFF", dark: "#E7E4DE" },
+        sand: "#F3F0EA",
+        mist: "#EFEFEC",
+        ink: "#262624",
+        charcoal: { DEFAULT: "#1D1D1B", light: "#3A3A36" },
+        frame: "#1D1D1B",
+        door: "#1D1D1B",
+        gold: { DEFAULT: "#B8935A", dark: "#7A5C2E", text: "#7A5C2E", soft: "#F1E7D6" },
+        lit: "#B8935A",
+        taupe: { DEFAULT: "#66645E", light: "#9A978F" },
+        border: "#E4E1DA",
+        danger: "#A32B1C",
+        whatsapp: "#25D366",
       },
       fontFamily: {
-        serif: ["var(--font-display)", "Georgia", "Times New Roman", "serif"],
-        dm: ["var(--font-body)", "Futura", "sans-serif"],
+        serif: ["var(--font-body)", "system-ui", "sans-serif"],
+        accent: ["var(--font-accent)", "Georgia", "serif"],
+        dm: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.75rem, 5.6vw, 5.25rem)", { lineHeight: "1.06", letterSpacing: "-0.01em" }],
-        "display-lg": ["clamp(2.4rem, 4.4vw, 4rem)", { lineHeight: "1.08", letterSpacing: "-0.01em" }],
-        "display-md": ["clamp(1.9rem, 3vw, 2.75rem)", { lineHeight: "1.14", letterSpacing: "-0.005em" }],
+        "display-xl": ["clamp(2.25rem, 4.6vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.04em" }],
+        "display-lg": ["clamp(2rem, 3.6vw, 3.1rem)", { lineHeight: "1.1", letterSpacing: "-0.035em" }],
+        "display-md": ["clamp(1.6rem, 2.6vw, 2.25rem)", { lineHeight: "1.15", letterSpacing: "-0.03em" }],
       },
-      spacing: { section: "7rem", "section-sm": "4.5rem" },
+      spacing: { section: "6rem", "section-sm": "3.75rem" },
       maxWidth: { "8xl": "88rem" },
+      boxShadow: { card: "0 1px 2px rgba(29,29,27,0.04), 0 8px 24px -12px rgba(29,29,27,0.12)" },
     },
   },
   plugins: [],

@@ -44,7 +44,7 @@ function Widget() {
             animate={{ opacity: 1, scale: 1 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="fixed bottom-6 right-6 z-[70]"
+            className="fixed bottom-[76px] right-4 z-[55] lg:bottom-6 lg:right-6 lg:z-[70]"
           >
             {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-charcoal/35" />}
             <motion.button
