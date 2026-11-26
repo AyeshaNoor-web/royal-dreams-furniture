@@ -1,7 +1,7 @@
 // Estimator pricing. Read only on the server through lib/pricing.ts; the browser never receives rates.
 //
-// EVERY NUMBER BELOW IS A PLACEHOLDER. The client has not supplied prices. Replace each rate, keep the
-// structure, then set PLACEHOLDER_DATA to false. While it is true, `npm run build` fails on Vercel
+// MOST NUMBERS BELOW ARE PLACEHOLDERS. Entries with a `confirmed` note carry the client's own rates; every other
+// rate is a placeholder. Replace each rate, keep the structure, then set PLACEHOLDER_DATA to false. While it is true, `npm run build` fails on Vercel
 // production when ESTIMATOR_ENABLED=true, and a banner shows in development and preview builds.
 //
 // How to edit: one entry per collection. `unit` is what the visitor enters; `rates` is AED per unit
@@ -39,7 +39,26 @@ export interface CollectionPricing {
   hint: string;
   rates: Record<Tier, Range>;
   extras: Extra[];
+  /** Per-collection names for the three tiers, when the client prices by something other than finish level (e.g. door type). */
+  tierOptions?: Record<Tier, { label: string; blurb: string }>;
+  /** Question shown above the tier choice when tierOptions is set. */
+  tierPrompt?: { title: string; text: string };
+  /** Present when the rates are the client's own figures: who gave them and when. */
+  confirmed?: string;
 }
+
+/** Client rates for cabinets, 21 Nov 2026, AED per square metre of cabinet front, by door type. Exact, not a band. */
+const CABINET_RATES: Record<Tier, Range> = {
+  standard: { min: 700, max: 700 },
+  premium: { min: 900, max: 900 },
+  bespoke: { min: 1100, max: 1100 },
+};
+const cabinetDoors: Record<Tier, { label: string; blurb: string }> = {
+  standard: { label: "Simple wood doors", blurb: "Plain wood or lacquered doors, flush or fluted." },
+  premium: { label: "Wood-framed glass doors", blurb: "Wooden frames with clear, tinted or fluted glass." },
+  bespoke: { label: "Aluminium-framed glass doors", blurb: "Slim aluminium frames with glass, the boutique look." },
+};
+const cabinetPrompt = { title: "Which doors?", text: "The door type sets the rate per square metre. Samples of each come to your home before anything is decided." };
 
 export const tiers: { id: Tier; label: string; blurb: string }[] = [
   { id: "standard", label: "Standard", blurb: "Lacquer or painted finishes, standard fabrics, no lighting." },
@@ -85,10 +104,10 @@ export interface Preset {
 }
 
 export const presets: Preset[] = [
-  { id: "1-bed", label: "1-bed apartment", items: [{ collection: "curtains", size: 3, tier: "standard" }, { collection: "fitted-wardrobes", size: 2.4, tier: "standard" }, { collection: "tv-units", size: 3, tier: "standard" }] },
-  { id: "2-bed", label: "2-bed apartment", items: [{ collection: "curtains", size: 5, tier: "standard" }, { collection: "fitted-wardrobes", size: 5, tier: "premium" }, { collection: "tv-units", size: 3.5, tier: "premium" }, { collection: "beds", size: 1, tier: "premium" }] },
-  { id: "3-bed", label: "3-bed townhouse", items: [{ collection: "curtains", size: 8, tier: "premium" }, { collection: "fitted-wardrobes", size: 8, tier: "premium" }, { collection: "tv-units", size: 4, tier: "premium" }, { collection: "sofas", size: 6, tier: "premium" }, { collection: "dining-tables", size: 6, tier: "standard" }] },
-  { id: "5-bed", label: "5-bed villa", items: [{ collection: "curtains", size: 14, tier: "premium" }, { collection: "walk-in-closets", size: 10, tier: "premium" }, { collection: "fitted-wardrobes", size: 10, tier: "premium" }, { collection: "tv-units", size: 5, tier: "bespoke", extras: ["lighting"] }, { collection: "sofas", size: 8, tier: "bespoke" }, { collection: "dining-tables", size: 10, tier: "bespoke" }, { collection: "wall-paneling", size: 30, tier: "premium" }] },
+  { id: "1-bed", label: "1-bed apartment", items: [{ collection: "curtains", size: 3, tier: "standard" }, { collection: "fitted-wardrobes", size: 6, tier: "standard" }, { collection: "tv-units", size: 3, tier: "standard" }] },
+  { id: "2-bed", label: "2-bed apartment", items: [{ collection: "curtains", size: 5, tier: "standard" }, { collection: "fitted-wardrobes", size: 13, tier: "premium" }, { collection: "tv-units", size: 3.5, tier: "premium" }, { collection: "beds", size: 1, tier: "premium" }] },
+  { id: "3-bed", label: "3-bed townhouse", items: [{ collection: "curtains", size: 8, tier: "premium" }, { collection: "fitted-wardrobes", size: 21, tier: "premium" }, { collection: "tv-units", size: 4, tier: "premium" }, { collection: "sofas", size: 6, tier: "premium" }, { collection: "dining-tables", size: 6, tier: "standard" }] },
+  { id: "5-bed", label: "5-bed villa", items: [{ collection: "curtains", size: 14, tier: "premium" }, { collection: "walk-in-closets", size: 26, tier: "premium" }, { collection: "fitted-wardrobes", size: 26, tier: "premium" }, { collection: "tv-units", size: 5, tier: "bespoke", extras: ["lighting"] }, { collection: "sofas", size: 8, tier: "bespoke" }, { collection: "dining-tables", size: 10, tier: "bespoke" }, { collection: "wall-paneling", size: 30, tier: "premium" }] },
 ];
 
 const lighting = (rate: Range): Extra => ({ id: "lighting", label: "Integrated lighting", per: "item", rate });
@@ -136,16 +155,18 @@ export const pricing: CollectionPricing[] = [
     ],
   },
   {
-    slug: "walk-in-closets", unit: "metre", unitLabel: "metres of wardrobe run", perLabel: "per metre",
-    size: { min: 2, max: 24, step: 0.5, default: 8 }, hint: "Add up the length of every wall that gets units.",
-    rates: { standard: { min: 1800, max: 2600 }, premium: { min: 2600, max: 3800 }, bespoke: { min: 3800, max: 6000 } },
+    // Client rates (21 Nov 2026). Extras below are still placeholders.
+    slug: "walk-in-closets", unit: "sqm", unitLabel: "square metres of cabinet front", perLabel: "per square metre",
+    size: { min: 4, max: 100, step: 0.5, default: 20 }, hint: "Add up the length of every wall that gets units and multiply by the height. A 2.6 m ceiling gives about 2.6 square metres per metre of wall.",
+    rates: CABINET_RATES, tierOptions: cabinetDoors, tierPrompt: cabinetPrompt, confirmed: "Client, 21 Nov 2026: cabinet rates per square metre by door type",
     extras: [lighting({ min: 1200, max: 2500 }), { id: "island", label: "Central island", per: "item", rate: { min: 4000, max: 9000 } }],
   },
   {
-    slug: "fitted-wardrobes", unit: "metre", unitLabel: "metres of wardrobe", perLabel: "per metre",
-    size: { min: 1, max: 12, step: 0.1, default: 3 }, hint: "The width of the wall, floor to ceiling is assumed.",
-    rates: { standard: { min: 1600, max: 2400 }, premium: { min: 2400, max: 3400 }, bespoke: { min: 3400, max: 5500 } },
-    extras: [lighting({ min: 600, max: 1200 }), { id: "mirror-doors", label: "Mirrored doors", per: "unit", rate: { min: 300, max: 600 } }],
+    // Client rates (21 Nov 2026). Extras below are still placeholders.
+    slug: "fitted-wardrobes", unit: "sqm", unitLabel: "square metres of cabinet front", perLabel: "per square metre",
+    size: { min: 2, max: 60, step: 0.5, default: 8 }, hint: "Width of the wall times the height. A 3 m wall, floor to a 2.6 m ceiling, is about 8 square metres.",
+    rates: CABINET_RATES, tierOptions: cabinetDoors, tierPrompt: cabinetPrompt, confirmed: "Client, 21 Nov 2026: cabinet rates per square metre by door type",
+    extras: [lighting({ min: 600, max: 1200 })],
   },
   {
     slug: "dressing-tables", unit: "piece", unitLabel: "dressing tables", perLabel: "per table",

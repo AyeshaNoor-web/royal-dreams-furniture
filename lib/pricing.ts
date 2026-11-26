@@ -73,7 +73,8 @@ export function estimateLine(input: EstimateItemInput): EstimateLine {
   const rate = p.rates[input.tier];
   let min = size * rate.min;
   let max = size * rate.max;
-  const words = [`${trim(size)} ${unitWords(size, p.unitLabel)} x ${aed(rate.min)} to ${aed(rate.max)} ${p.perLabel}`];
+  const rateWords = (r: Range) => (r.min === r.max ? aed(r.min) : `${aed(r.min)} to ${aed(r.max)}`);
+  const words = [`${trim(size)} ${unitWords(size, p.unitLabel)} x ${rateWords(rate)} ${p.perLabel}`];
   const extras: { id: string; label: string }[] = [];
   for (const id of input.extras ?? []) {
     const e = p.extras.find((x) => x.id === id);
@@ -82,7 +83,7 @@ export function estimateLine(input: EstimateItemInput): EstimateLine {
     min += e.rate.min * mult;
     max += e.rate.max * mult;
     extras.push({ id: e.id, label: e.label });
-    words.push(e.per === "unit" ? `${e.label.toLowerCase()} ${aed(e.rate.min)} to ${aed(e.rate.max)} ${p.perLabel}` : `${e.label.toLowerCase()} ${aed(e.rate.min)} to ${aed(e.rate.max)}`);
+    words.push(e.per === "unit" ? `${e.label.toLowerCase()} ${rateWords(e.rate)} ${p.perLabel}` : `${e.label.toLowerCase()} ${rateWords(e.rate)}`);
   }
   if (emiratePricing.enabled && input.emirate) {
     const s = emiratePricing.surcharge[input.emirate as keyof typeof emiratePricing.surcharge];
@@ -93,7 +94,7 @@ export function estimateLine(input: EstimateItemInput): EstimateLine {
     }
   }
   const title = categories.find((c) => c.slug === p.slug)?.title ?? p.slug;
-  const tierLabel = tiers.find((t) => t.id === input.tier)?.label ?? input.tier;
+  const tierLabel = p.tierOptions?.[input.tier].label ?? tiers.find((t) => t.id === input.tier)?.label ?? input.tier;
   return {
     collection: p.slug,
     title,
@@ -125,6 +126,11 @@ export interface PublicCollection {
   size: CollectionPricing["size"];
   hint: string;
   extras: { id: string; label: string }[];
+  /** Set when this collection names its tiers differently (e.g. door types); otherwise use the catalogue's tiers. */
+  tiers?: { id: Tier; label: string; blurb: string }[];
+  tierPrompt?: { title: string; text: string };
+  /** True when the rates are the client's own figures rather than placeholders. */
+  confirmed: boolean;
 }
 
 export interface PublicCatalogue {
@@ -152,6 +158,9 @@ export function publicCatalogue(): PublicCatalogue {
       size: p.size,
       hint: p.hint,
       extras: p.extras.map((e) => ({ id: e.id, label: e.label })),
+      tiers: p.tierOptions ? tiers.map((t) => ({ id: t.id, ...p.tierOptions![t.id] })) : undefined,
+      tierPrompt: p.tierPrompt,
+      confirmed: Boolean(p.confirmed),
     };
   });
   return {

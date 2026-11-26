@@ -15,11 +15,25 @@ describe("estimateLine", () => {
     expect(line.range.min).toBeLessThanOrEqual(line.range.max);
   });
 
-  it("never returns a single number: min is below max for every collection and tier", () => {
+  it("placeholder collections return a band; confirmed exact rates return one figure", () => {
     for (const p of pricing) for (const t of tiers) {
       const line = estimateLine({ collection: p.slug, size: p.size.default, tier: t.id, extras: [] });
-      expect(line.range.min, `${p.slug}/${t.id}`).toBeLessThan(line.range.max);
+      if (p.rates[t.id].min === p.rates[t.id].max) {
+        expect(p.confirmed, `${p.slug}/${t.id} is exact but not marked confirmed`).toBeTruthy();
+        expect(line.range.min).toBe(line.range.max);
+      } else {
+        expect(line.range.min, `${p.slug}/${t.id}`).toBeLessThan(line.range.max);
+      }
     }
+  });
+
+  it("prices cabinets by door type per square metre of front, at the client's rates", () => {
+    const w = estimateLine({ collection: "fitted-wardrobes", size: 8, tier: "standard", extras: [] });
+    expect(w.range).toEqual({ min: 5600, max: 5600 });
+    expect(w.tierLabel).toBe("Simple wood doors");
+    expect(w.formula).toBe("8 square metres of cabinet front x AED 700 per square metre");
+    expect(estimateLine({ collection: "fitted-wardrobes", size: 8, tier: "premium", extras: [] }).range.min).toBe(7200);
+    expect(estimateLine({ collection: "walk-in-closets", size: 10, tier: "bespoke", extras: [] }).range.max).toBe(11000);
   });
 
   it("clamps sizes to the configured bounds and reports it", () => {
@@ -35,7 +49,7 @@ describe("estimateLine", () => {
   });
 
   it("snaps to the step so 2.34 metres becomes 2.3", () => {
-    const line = estimateLine({ collection: "fitted-wardrobes", size: 2.34, tier: "standard", extras: [] });
+    const line = estimateLine({ collection: "tv-units", size: 2.34, tier: "standard", extras: [] });
     expect(line.size).toBe(2.3);
   });
 
@@ -104,5 +118,9 @@ describe("publicCatalogue", () => {
     expect(JSON.stringify(c)).not.toMatch(/"rates"|"rate"|"min":\s*\d{3,}/);
     expect(c.collections[0]).toHaveProperty("size.min");
     expect(c.emirateStep).toBe(false);
+    const w = c.collections.find((x) => x.slug === "fitted-wardrobes")!;
+    expect(w.confirmed).toBe(true);
+    expect(w.tiers?.map((t) => t.label)).toEqual(["Simple wood doors", "Wood-framed glass doors", "Aluminium-framed glass doors"]);
+    expect(c.collections.find((x) => x.slug === "sofas")!.tiers).toBeUndefined();
   });
 });

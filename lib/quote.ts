@@ -46,13 +46,13 @@ export const quoteFactors: QuoteFactor[] = [
   },
   {
     slug: "walk-in-closets",
-    depends: ["Length of the run and ceiling height", "Glass, veneered or lacquered doors", "Lighting inside the units", "An island, drawers and accessories"],
+    depends: ["Square metres of cabinet front: length of the run times ceiling height", "Door type: simple wood, wood-framed glass or aluminium-framed glass", "Lighting inside the units", "An island, drawers and accessories"],
     measure: "Every wall of the room, the ceiling height and the door swing.",
     send: "Photos of the room and a rough sketch with sizes.",
   },
   {
     slug: "fitted-wardrobes",
-    depends: ["Width and height", "Flush, fluted or mirrored doors", "Internal layout: hanging, shelves and drawers", "Lighting"],
+    depends: ["Square metres of front: width times height", "Door type: simple wood, wood-framed glass or aluminium-framed glass", "Internal layout: hanging, shelves and drawers", "Lighting"],
     measure: "The wall, ceiling height and skirting.",
     send: "A photo of the wall and its width.",
   },

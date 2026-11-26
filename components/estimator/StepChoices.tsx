@@ -13,13 +13,13 @@ const Mark = ({ on, round }: { on: boolean; round: boolean }) => (
   </span>
 );
 
-interface TierProps { tiers: PublicCatalogue["tiers"]; value?: string; onChange: (t: PublicCatalogue["tiers"][number]["id"]) => void; onNext: () => void; onBack: () => void }
+interface TierProps { tiers: PublicCatalogue["tiers"]; prompt?: PublicCollection["tierPrompt"]; value?: string; onChange: (t: PublicCatalogue["tiers"][number]["id"]) => void; onNext: () => void; onBack: () => void }
 
-export function StepTier({ tiers, value, onChange, onNext, onBack }: TierProps) {
+export function StepTier({ tiers, prompt, value, onChange, onNext, onBack }: TierProps) {
   return (
     <div>
-      <h2 className="font-serif text-2xl text-charcoal sm:text-3xl">Which finish level?</h2>
-      <p className="mt-2 text-[15px] text-taupe">Samples come to your home before anything is decided. This only sets the range.</p>
+      <h2 className="font-serif text-2xl text-charcoal sm:text-3xl">{prompt?.title ?? "Which finish level?"}</h2>
+      <p className="mt-2 text-[15px] text-taupe">{prompt?.text ?? "Samples come to your home before anything is decided. This only sets the range."}</p>
       <div role="radiogroup" aria-label="Finish level" className="mt-6 flex flex-col gap-3">
         {tiers.map((t) => {
           const on = value === t.id;

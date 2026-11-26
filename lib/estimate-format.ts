@@ -2,7 +2,7 @@
 import type { EstimateResult } from "@/lib/pricing";
 
 export const aed = (n: number) => "AED " + Math.round(n).toLocaleString("en-US");
-export const aedRange = (min: number, max: number) => `${aed(min)} to ${aed(max).replace("AED ", "")}`;
+export const aedRange = (min: number, max: number) => (min === max ? aed(min) : `${aed(min)} to ${aed(max).replace("AED ", "")}`);
 export const trimNumber = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1).replace(/\.0$/, ""));
 
 /** "1 beds" reads badly: singularise the noun of a unit label when the count is exactly one. */

@@ -13,6 +13,13 @@ describe("unitWords", () => {
   });
 });
 
+describe("aedRange", () => {
+  it("shows one figure when both ends match", () => {
+    expect(aedRange(5600, 5600)).toBe("AED 5,600");
+    expect(aedRange(5600, 7200)).toBe("AED 5,600 to 7,200");
+  });
+});
+
 describe("summaryText", () => {
   it("lists every line, the total range and the VAT note, without rates", () => {
     const r = estimate({ items: [{ collection: "beds", size: 1, tier: "bespoke", extras: ["headboard-wall"] }, { collection: "curtains", size: 3, tier: "standard", extras: [] }] });

@@ -37,7 +37,7 @@ export default function QuickEstimate({ catalogue }: { catalogue: PublicCatalogu
         <div className="sm:col-span-2">
           <p className={label}>3. Finish level</p>
           <div role="radiogroup" aria-label="Finish level" className="mt-2 grid grid-cols-3 gap-2">
-            {catalogue.tiers.map((t) => (
+            {(q.collection.tiers ?? catalogue.tiers).map((t) => (
               <button key={t.id} type="button" role="radio" aria-checked={q.tier === t.id} onClick={() => q.setTier(t.id)} className={"min-h-[44px] border px-3 py-2 font-dm text-[14px] transition-colors [touch-action:manipulation] " + (q.tier === t.id ? "border-charcoal bg-charcoal text-beige-light" : "border-border bg-beige text-charcoal hover:border-charcoal/60")}>
                 {t.label}
               </button>

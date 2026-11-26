@@ -35,7 +35,7 @@ const handoffSchema = z.object({ summary: z.string().max(600) });
 export const toolDefinitions: Tool[] = [
   {
     name: "estimate",
-    description: "Indicative AED price range for one or more made-to-measure pieces, computed by the company's pricing engine. Use it instead of ever estimating yourself. Sizes: seats for sofas and dining tables, pieces for coffee tables, beds and dressing tables, metres for tv-units, display-shelving, walk-in-closets and fitted-wardrobes, square metres for wall-paneling, windows for curtains.",
+    description: "Indicative AED price range for one or more made-to-measure pieces, computed by the company's pricing engine. Use it instead of ever estimating yourself. Sizes: seats for sofas and dining tables, pieces for coffee tables, beds and dressing tables, metres for tv-units and display-shelving, square metres of cabinet front (width times height) for walk-in-closets and fitted-wardrobes, square metres for wall-paneling, windows for curtains. For walk-in-closets and fitted-wardrobes the tier means the door type: standard = simple wood doors, premium = wood-framed glass doors, bespoke = aluminium-framed glass doors.",
     input_schema: {
       type: "object",
       properties: {

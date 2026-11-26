@@ -3,7 +3,7 @@ import { quoteFactors } from "@/lib/quote";
 import { APPOINTMENT_LINK } from "@/lib/site";
 
 const steps = [
-  { title: "How the range is worked out", text: "Your size times a rate band for the finish level you chose, plus any options, rounded to the nearest 100 dirhams. Both ends of the band are shown because the real figure depends on things only a visit can confirm." },
+  { title: "How the range is worked out", text: "Your size times the rate for the finish or door type you chose, plus any options, rounded to the nearest 100 dirhams. Wardrobe and closet cabinets use the workshop's fixed rate per square metre of front; other pieces show a band because the real figure depends on things only a visit can confirm." },
   { title: "What moves the budget", text: "Finish and material above all: lacquer sits at one end, marble, stone and leather at the other. Then size, lighting, internal fittings and anything curved or unusual. The list under each collection on this page spells it out." },
   { title: "What happens next", text: "A free home visit to measure every wall and opening, a 3D design of the piece in your room, then a fixed written quotation. Nothing is built until you approve both." },
 ];
