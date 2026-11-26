@@ -9,7 +9,8 @@ interface Def {
   title: string;
   /** One line about what is in the photos. No prices, sizes or claims the photos do not show. */
   line: string;
-  photos?: number[];
+  /** File numbers in this collection, or "other-collection:number" for a photo filed under another collection. */
+  photos?: (number | string)[];
   videos?: number[];
 }
 
@@ -63,11 +64,21 @@ const defs: Record<string, Def[]> = {
     { id: "large-brown-marble-table", title: "Large brown marble table", line: "A large low table in polished brown marble for a classic sitting room.", photos: [6] },
     { id: "brown-marble-pedestal-table", title: "Brown marble pedestal table", line: "A brown marble top on a narrower marble pedestal.", photos: [7] },
   ],
+  // Grouping and photo order for the first six media walls follow the client's numbered WhatsApp list of 26 Nov 2026.
   "tv-units": [
-    { id: "backlit-media-wall-with-slats", title: "Backlit media wall with timber slats", line: "A floating TV panel with a halo of warm light, a timber slat column and a floating console.", photos: [2, 4, 3, 1], videos: [9, 4, 8] },
+    { id: "fireplace-media-wall", title: "Media wall with fireplace", line: "A TV wall with a built-in electric fireplace and lit display shelves on both sides.", photos: [14, 11, 7, 13, "display-shelving:4"], videos: [3] },
+    { id: "backlit-tv-wall-with-slat-column", title: "Backlit TV wall with slat column", line: "A backlit TV panel in front of a timber slat column, with a floating console.", photos: [18], videos: [11] },
+    { id: "media-wall-with-lit-shelf-column", title: "Media wall with lit shelf column", line: "A backlit TV panel with a slat strip behind it, a column of lit shelves and a floating console.", photos: [1, 3], videos: [8, 4] },
+    { id: "backlit-media-wall-with-slats", title: "Backlit media wall with timber slats", line: "A tall timber slat panel, a TV panel with a halo of warm light, a lit oak shelf tower and a floating console.", photos: [24, 25, 4, 2], videos: [13, 9] },
+    { id: "white-media-wall-with-side-shelves", title: "White media wall with side shelves", line: "A white TV wall with a backlit panel, lit shelves at the side and a floating console.", photos: [21, 19, 20] },
+    { id: "timber-framed-tv-unit", title: "Timber-framed TV unit", line: "A TV unit in a dark timber frame with a grey back panel, lines of light and glass shelves.", photos: [22, 23], videos: [12] },
+    { id: "fluted-tv-wall-with-floating-shelves", title: "Fluted TV wall with floating shelves", line: "A fluted wall with a backlit TV panel, a floating console and lit shelves beside it.", photos: [27, 26] },
+    { id: "slatted-tv-wall-with-dressing-niche", title: "Slatted TV wall with dressing niche", line: "A full slatted wall with a floating white console and a lit mirror niche for dressing.", photos: [29, 28] },
+    { id: "lit-slatted-tv-wall", title: "Lit slatted TV wall", line: "A slatted wall washed with warm light above and below, with a floating dark console.", photos: [30], videos: [14] },
+    { id: "side-lit-tv-panel-on-slats", title: "Side-lit TV panel on slats", line: "A TV panel lit from the side on a full-height slatted wall, with a floating shelf.", photos: [31, 32] },
+    { id: "cream-panelled-tv-wall", title: "Cream panelled TV wall", line: "Tall cream panels with a lit stone strip in the centre and a low timber console.", photos: [33, 34, 35] },
     { id: "fluted-beige-media-wall", title: "Fluted beige media wall", line: "A fluted wall in beige with a backlit TV panel and a floating shelf.", photos: [5, 9], videos: [1] },
     { id: "media-wall-with-oak-niches", title: "Media wall with oak niches", line: "A wide media wall with lit oak niches on both sides and a long floating console.", photos: [10, 6] },
-    { id: "fireplace-media-wall", title: "Media wall with fireplace", line: "A TV wall with a built-in electric fireplace and lit display shelves on both sides.", photos: [7, 14, 11, 13], videos: [3] },
     { id: "panelled-media-wall", title: "Panelled media wall", line: "A panelled TV wall with lines of warm light and a slatted side panel.", photos: [12, 8] },
     { id: "walnut-and-marble-media-wall", title: "Walnut and black marble media wall", line: "Walnut slats, a black marble TV panel, lit shelving and a floating console.", photos: [16, 17, 15], videos: [10] },
     { id: "walnut-slat-tv-wall", title: "Walnut slat TV wall", line: "A full-height walnut slat wall with a floating console beside the window.", videos: [2] },
@@ -85,7 +96,6 @@ const defs: Record<string, Def[]> = {
   ],
   "display-shelving": [
     { id: "lit-floating-shelves", title: "Lit floating shelves with base cabinets", line: "Floating shelves with hidden lighting over a row of base cabinets.", photos: [2, 1, 3] },
-    { id: "full-height-lit-shelving", title: "Full-height lit shelving", line: "Floor-to-ceiling lit shelves beside a media wall.", photos: [4] },
   ],
   beds: [
     { id: "channel-headboard-with-slat-panels", title: "Channel headboard with slat panels", line: "A wall-to-wall channel headboard with a line of warm light and slatted panels above.", photos: [1, 9] },
@@ -128,7 +138,7 @@ const defs: Record<string, Def[]> = {
   "dressing-tables": [
     { id: "kids-dressing-unit", title: "Kids dressing and display unit", line: "A dressing table with a house-shaped mirror between lit display towers in pink.", photos: [2, 1, 3], videos: [1, 2, 3] },
     { id: "round-mirror-dressing-table", title: "Round mirror dressing table", line: "A floating dressing shelf with a round mirror beside a fluted wardrobe.", photos: [4, 5] },
-    { id: "backlit-mirror-vanity", title: "Backlit mirror vanity", line: "A round backlit mirror over a floating vanity with a lit shelf tower.", photos: [6, 7] },
+    { id: "backlit-mirror-vanity", title: "Backlit mirror vanity", line: "A round backlit mirror over a fluted floating vanity, with a lit shelf tower beside it.", photos: [6, 8, 9, 7], videos: [4] },
   ],
   "dining-tables": [
     { id: "oval-table-with-boucle-chairs", title: "Oval table with boucle chairs", line: "A white oval table on a fluted base with boucle chairs on black frames.", photos: [1, 2, 14] },
@@ -167,26 +177,27 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 function build(): Product[] {
   const out: Product[] = [];
+  const usedP = new Set<string>();
+  const usedV = new Set<string>();
   for (const category of categories) {
     const list = defs[category.slug];
     if (!list) throw new Error("No products defined for " + category.slug);
-    const usedP = new Set<number>();
-    const usedV = new Set<number>();
     for (const d of list) {
-      const photos = (d.photos ?? []).map((n) => {
-        const src = "/images/" + category.slug + "/" + category.slug + "-" + pad(n) + ".jpg";
-        const hit = category.images.find((i) => i.src === src);
+      const photos = (d.photos ?? []).map((ref) => {
+        const [slug, num] = typeof ref === "number" ? [category.slug, ref] : [ref.split(":")[0], Number(ref.split(":")[1])];
+        const src = "/images/" + slug + "/" + slug + "-" + pad(num) + ".jpg";
+        const hit = categories.find((c) => c.slug === slug)?.images.find((i) => i.src === src);
         if (!hit) throw new Error("Missing photo " + src);
-        if (usedP.has(n)) throw new Error("Photo used twice: " + src);
-        usedP.add(n);
+        if (usedP.has(src)) throw new Error("Photo used twice: " + src);
+        usedP.add(src);
         return hit;
       });
       const videos = (d.videos ?? []).map((n) => {
         const src = "/video/" + category.slug + "/" + category.slug + "-" + pad(n) + ".mp4";
         const hit = category.videos.find((v) => v.src === src);
         if (!hit) throw new Error("Missing video " + src);
-        if (usedV.has(n)) throw new Error("Video used twice: " + src);
-        usedV.add(n);
+        if (usedV.has(src)) throw new Error("Video used twice: " + src);
+        usedV.add(src);
         return hit;
       });
       const cover: GalleryImage = photos[0] ?? { src: videos[0].poster, w: videos[0].w, h: videos[0].h, alt: videos[0].alt };
@@ -195,9 +206,12 @@ function build(): Product[] {
         type: photos[0]?.type, href: "/collections/" + category.slug + "/" + d.id,
       });
     }
-    // The client wants every asset shown: stop the build if one was left out.
-    if (usedP.size !== category.images.length) throw new Error(category.slug + ": " + (category.images.length - usedP.size) + " photo(s) not placed in a product");
-    if (usedV.size !== category.videos.length) throw new Error(category.slug + ": " + (category.videos.length - usedV.size) + " video(s) not placed in a product");
+  }
+  // The client wants every asset shown: stop the build if one was left out.
+  for (const c of categories) {
+    const lostP = c.images.filter((i) => !usedP.has(i.src)).map((i) => i.src);
+    const lostV = c.videos.filter((v) => !usedV.has(v.src)).map((v) => v.src);
+    if (lostP.length || lostV.length) throw new Error("Not placed in a product: " + [...lostP, ...lostV].join(", "));
   }
   return out;
 }

@@ -546,7 +546,25 @@ export const categories: Category[] = [
         "w": 960,
         "h": 1280,
         "alt": "Backlit TV wall with timber slats and floating console"
-      }
+      },
+      {"src": "/images/tv-units/tv-units-18.jpg", "w": 960, "h": 1280, "alt": "Backlit TV panel with a timber slat column and a floating console, lit in warm light"},
+      {"src": "/images/tv-units/tv-units-19.jpg", "w": 960, "h": 1280, "alt": "White media wall with a backlit TV panel, lit side shelves and a floating console, seen from the side"},
+      {"src": "/images/tv-units/tv-units-20.jpg", "w": 1280, "h": 960, "alt": "White media wall with a backlit TV panel and lit side shelves, seen from the front"},
+      {"src": "/images/tv-units/tv-units-21.jpg", "w": 960, "h": 1280, "alt": "Close view of the white media wall with its backlit TV panel and lit side shelf"},
+      {"src": "/images/tv-units/tv-units-22.jpg", "w": 1280, "h": 960, "alt": "TV unit in a dark timber frame with a grey stone-look back panel and lit glass shelves"},
+      {"src": "/images/tv-units/tv-units-23.jpg", "w": 960, "h": 1280, "alt": "Dark timber framed TV unit with vertical lines of light and glass shelves at the side"},
+      {"src": "/images/tv-units/tv-units-24.jpg", "w": 1600, "h": 1200, "alt": "Media wall with a tall timber slat panel, backlit TV panel and a lit oak shelf tower"},
+      {"src": "/images/tv-units/tv-units-25.jpg", "w": 1200, "h": 1600, "alt": "Backlit TV panel beside a lit oak shelf tower with a slat panel above"},
+      {"src": "/images/tv-units/tv-units-26.jpg", "w": 1280, "h": 960, "alt": "Fluted TV wall with a backlit panel and floating lit shelves in a living room with pendant lamps"},
+      {"src": "/images/tv-units/tv-units-27.jpg", "w": 1280, "h": 960, "alt": "Fluted TV wall with a backlit TV panel, floating console and lit shelves, seen from the front"},
+      {"src": "/images/tv-units/tv-units-28.jpg", "w": 960, "h": 1280, "alt": "Slatted TV wall with a floating white console and a lit mirror dressing niche"},
+      {"src": "/images/tv-units/tv-units-29.jpg", "w": 1280, "h": 960, "alt": "Full slatted wall with a wall-mounted TV, floating white console and a dressing niche"},
+      {"src": "/images/tv-units/tv-units-30.jpg", "w": 1024, "h": 1280, "alt": "Lit slatted TV wall with warm light above and below and a floating dark console"},
+      {"src": "/images/tv-units/tv-units-31.jpg", "w": 1024, "h": 1280, "alt": "Side-lit TV panel on a full-height slatted wall with a floating shelf"},
+      {"src": "/images/tv-units/tv-units-32.jpg", "w": 960, "h": 1280, "alt": "Slatted wall with a backlit TV panel beside the bedroom door"},
+      {"src": "/images/tv-units/tv-units-33.jpg", "w": 960, "h": 1280, "alt": "Cream panelled TV wall with a lit stone strip in the centre and a low timber console"},
+      {"src": "/images/tv-units/tv-units-34.jpg", "w": 960, "h": 1280, "alt": "Cream panelled TV wall with lines of warm light and a timber console"},
+      {"src": "/images/tv-units/tv-units-35.jpg", "w": 960, "h": 1280, "alt": "Close view of the cream panelled TV wall with its lit stone centre strip"}
     ],
     "group": "living",
     "videos": [
@@ -622,7 +640,11 @@ export const categories: Category[] = [
         "h": 1024,
         "duration": 15,
         "alt": "Study wall with slat panelling and desk"
-      }
+      },
+      {"src": "/video/tv-units/tv-units-11.mp4", "poster": "/video/tv-units/tv-units-11.jpg", "w": 576, "h": 1024, "duration": 12, "alt": "Walkthrough of the backlit TV panel with a timber slat column"},
+      {"src": "/video/tv-units/tv-units-12.mp4", "poster": "/video/tv-units/tv-units-12.jpg", "w": 576, "h": 1024, "duration": 17, "alt": "Walkthrough of the dark timber framed TV unit with lit glass shelves"},
+      {"src": "/video/tv-units/tv-units-13.mp4", "poster": "/video/tv-units/tv-units-13.jpg", "w": 576, "h": 1024, "duration": 10, "alt": "Walkthrough of the media wall with a slat panel and backlit TV, lights off"},
+      {"src": "/video/tv-units/tv-units-14.mp4", "poster": "/video/tv-units/tv-units-14.jpg", "w": 576, "h": 1024, "duration": 6, "alt": "Walkthrough of the lit slatted TV wall with a floating dark console"}
     ]
   },
   {
@@ -788,10 +810,10 @@ export const categories: Category[] = [
     "description": "Floating shelves and display units with concealed LED strips, set over matching base cabinets. Ideal for living rooms, studies and majlis where books, ceramics and framed pieces deserve a stage.",
     "size": "narrow",
     "cover": {
-      "src": "/images/display-shelving/display-shelving-04.jpg",
-      "w": 960,
-      "h": 1280,
-      "alt": "Lit display shelving unit beside a media wall"
+      "src": "/images/display-shelving/display-shelving-02.jpg",
+        "w": 1139,
+        "h": 1400,
+        "alt": "Floating display shelves with warm LED lighting"
     },
     "images": [
       {
@@ -1403,7 +1425,9 @@ export const categories: Category[] = [
         "w": 960,
         "h": 1280,
         "alt": "Custom dressing table with integrated backlit display"
-      }
+      },
+      {"src": "/images/dressing-tables/dressing-tables-08.jpg", "w": 960, "h": 1280, "alt": "Floating vanity with a lit shelf tower beside a wall-mounted TV and a long floating console"},
+      {"src": "/images/dressing-tables/dressing-tables-09.jpg", "w": 960, "h": 1280, "alt": "Round backlit mirror over a fluted floating vanity with drawers"}
     ],
     "group": "bedroom",
     "videos": [
@@ -1430,7 +1454,8 @@ export const categories: Category[] = [
         "h": 1024,
         "duration": 30,
         "alt": "Dressing unit with coloured display cubes"
-      }
+      },
+      {"src": "/video/dressing-tables/dressing-tables-04.mp4", "poster": "/video/dressing-tables/dressing-tables-04.jpg", "w": 576, "h": 1024, "duration": 13, "alt": "Walkthrough of the round backlit mirror vanity and its lit shelf tower"}
     ]
   },
   {
