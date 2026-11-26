@@ -66,7 +66,7 @@ describe("POST /api/chat", () => {
   });
 
   it("turns an SDK failure into a friendly message with a WhatsApp link, not a 500", async () => {
-    streamMock.mockImplementation(() => { throw new Error("boom 050 433 5872"); });
+    streamMock.mockImplementation(() => { throw Object.assign(new Error("boom 050 433 5872"), { status: 500 }); });
     const spy = vi.spyOn(console, "error").mockImplementation(() => undefined);
     const res = await post({ messages: [{ role: "user", content: "hello" }] });
     expect(res.status).toBe(200);
@@ -78,9 +78,9 @@ describe("POST /api/chat", () => {
   });
 
   it("turns a key, credits or permission rejection into a fallback event so the matcher answers", async () => {
-    for (const status of [401, 402, 403]) {
+    for (const [status, msg] of [[401, "rejected"], [402, "rejected"], [403, "rejected"], [400, "Your credit balance is too low to access the Anthropic API."]] as const) {
       resetMemoryLimiter();
-      streamMock.mockImplementation(() => { throw Object.assign(new Error("rejected"), { status }); });
+      streamMock.mockImplementation(() => { throw Object.assign(new Error(msg), { status }); });
       const spy = vi.spyOn(console, "error").mockImplementation(() => undefined);
       const ev = await events(await post({ messages: [{ role: "user", content: "hello" }] }));
       expect(ev.map((e) => e.type)).toEqual(["fallback", "done"]);

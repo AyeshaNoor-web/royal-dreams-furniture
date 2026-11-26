@@ -42,7 +42,10 @@ export async function POST(req: Request) {
         // No message content, phone numbers or emails in logs: only the error class.
         console.error("chat: " + redact(e instanceof Error ? e.name + ": " + e.message.slice(0, 120) : "unknown error"));
         const status = (e as { status?: number }).status;
-        if (status === 401 || status === 402 || status === 403) {
+        const message = e instanceof Error ? e.message : "";
+        // Anthropic reports an empty credit balance as a 400 with "credit balance is too low".
+        const ownerProblem = status === 401 || status === 402 || status === 403 || /credit balance|billing|invalid x-api-key|api key/i.test(message);
+        if (ownerProblem) {
           // Key, credits or permissions: nothing a visitor can fix. The keyword matcher takes over for the session.
           emit({ type: "fallback", reason: "unavailable" });
         } else {
