@@ -68,7 +68,7 @@ function Widget({ ai }: { ai: boolean }) {
             transition={{ duration: 0.25, ease: EASE }}
             className="fixed bottom-6 right-6 z-[70] hidden sm:block"
           >
-            {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-charcoal/35" />}
+            {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-gold/40" />}
             <motion.button
               ref={bubble}
               type="button"
@@ -79,14 +79,14 @@ function Widget({ ai }: { ai: boolean }) {
               whileHover={reduce ? undefined : { scale: 1.05, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.95 }}
               transition={{ duration: 0.2, ease: EASE }}
-              className="relative flex items-center gap-2.5 rounded-full bg-charcoal py-1.5 pl-1.5 pr-1.5 text-beige-light shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-charcoal-light sm:pr-5"
+              className="relative flex items-center gap-2.5 rounded-full border border-gold/50 bg-beige-light py-1.5 pl-1.5 pr-1.5 text-charcoal shadow-2xl shadow-black/60 transition-colors duration-300 hover:border-gold sm:pr-5"
             >
               <span className="relative">
                 <Mascot className="h-11 w-11" />
-                <span aria-hidden="true" className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-sm bg-charcoal px-1 py-px font-dm text-[9px] font-semibold uppercase leading-none tracking-wider text-beige-light ring-1 ring-beige-light">{ai ? "AI" : "Bot"}</span>
-                {fresh && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-charcoal" />}
+                <span aria-hidden="true" className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-sm bg-gold px-1 py-px font-dm text-[9px] font-semibold uppercase leading-none tracking-wider text-beige">{ai ? "AI" : "Bot"}</span>
+                {fresh && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-beige-light" />}
               </span>
-              <span className={"font-dm text-sm font-medium " + (chat.minimised ? "block pr-3 sm:pr-0" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask " + name}</span>
+              <span className={"font-dm text-sm font-medium text-gold-text " + (chat.minimised ? "block pr-3 sm:pr-0" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask " + name}</span>
             </motion.button>
           </motion.div>
         )}

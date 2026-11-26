@@ -22,7 +22,7 @@ export default function ChatHeader({ ai, onReset, onClose, canReset }: Props) {
         <div className="min-w-0">
           <p className="flex items-center gap-2 font-serif text-[17px] leading-tight text-charcoal">
             {SITE.assistant.name}
-            <span className="rounded-sm border border-charcoal/40 px-1.5 py-px font-dm text-[10px] font-semibold uppercase leading-none tracking-wider text-charcoal">{ai ? "AI" : "Bot"}</span>
+            <span className="rounded-sm border border-gold/60 px-1.5 py-px font-dm text-[10px] font-semibold uppercase leading-none tracking-wider text-gold-text">{ai ? "AI" : "Bot"}</span>
           </p>
           <p className="mt-0.5 truncate text-[12px] leading-none text-taupe">
             {ai ? "AI " + SITE.assistant.role : SITE.assistant.role} at {SITE.shortName}

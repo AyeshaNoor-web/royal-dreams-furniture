@@ -2,14 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { EASE } from "@/components/motion/Reveal";
 import { SITE } from "@/lib/site";
 import Mascot from "./Mascot";
 
 export const TEASER_KEY = "mfc-chat-teaser";
-const DELAY = 3500;
+const DELAY = 6000;
+const LINGER = 10000;
 
-/** A small greeting from the assistant beside the bubble, shown once per session to visitors who have not opened the chat. */
+/**
+ * A one-line greeting that rises out of the chat bubble on large screens, once per session, and leaves by itself.
+ * It never covers page content on phones or tablets, and it never appears again once the chat has been opened.
+ */
 export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen: () => void }) {
   const [show, setShow] = useState(false);
   const reduce = useReducedMotion();
@@ -17,8 +20,10 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
   useEffect(() => {
     if (!active) { setShow(false); return; }
     try { if (sessionStorage.getItem(TEASER_KEY)) return; } catch { /* storage blocked: show it anyway */ }
-    const t = setTimeout(() => setShow(true), DELAY);
-    return () => clearTimeout(t);
+    if (!window.matchMedia("(min-width: 1024px)").matches) return;
+    const on = setTimeout(() => setShow(true), DELAY);
+    const off = setTimeout(() => setShow(false), DELAY + LINGER);
+    return () => { clearTimeout(on); clearTimeout(off); };
   }, [active]);
 
   const dismiss = () => {
@@ -32,24 +37,20 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
         <motion.div
           key="teaser"
           role="status"
-          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.96 }}
+          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={reduce ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.96 }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="fixed bottom-[86px] right-6 z-[69] hidden w-[min(300px,calc(100vw-3rem))] sm:block rounded-2xl rounded-br-md border border-border bg-beige-light p-4 shadow-xl shadow-black/15"
+          exit={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
+          transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.8 }}
+          style={{ transformOrigin: "100% 100%" }}
+          className="fixed bottom-[92px] right-6 z-[69] hidden items-center gap-3 rounded-full border border-gold/40 bg-beige-light py-2 pl-2 pr-2 shadow-2xl shadow-black/50 lg:flex"
         >
-          <button type="button" onClick={dismiss} aria-label="Dismiss" className="absolute right-1 top-1 flex h-11 w-11 items-center justify-center rounded-full text-taupe transition-colors hover:bg-beige hover:text-charcoal">
-            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          <Mascot className="h-10 w-10 shrink-0" wave />
+          <button type="button" onClick={() => { dismiss(); onOpen(); }} className="min-h-[44px] pr-2 text-left font-dm text-[14px] text-charcoal [touch-action:manipulation]">
+            <span className="block leading-tight">Planning a room? Ask {SITE.assistant.name}.</span>
+            <span className="block text-[12px] leading-tight text-taupe">Instant answers, or a designer on WhatsApp.</span>
           </button>
-          <div className="flex items-start gap-3 pr-5">
-            <Mascot className="h-12 w-12 shrink-0" wave />
-            <div>
-              <p className="font-serif text-[17px] leading-snug text-charcoal">Hi, I&apos;m {SITE.assistant.name}. Planning a room?</p>
-              <p className="mt-1 text-[13px] leading-relaxed text-taupe">Tell me the piece and the room and I will point you to the right collection, or give you a budget range.</p>
-            </div>
-          </div>
-          <button type="button" onClick={() => { dismiss(); onOpen(); }} className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-charcoal px-4 font-dm text-[13px] font-medium text-beige-light transition-colors hover:bg-charcoal-light">
-            Ask {SITE.assistant.name} <span aria-hidden="true">&rarr;</span>
+          <button type="button" onClick={dismiss} aria-label="Dismiss" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-taupe transition-colors hover:bg-beige hover:text-charcoal">
+            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
           </button>
         </motion.div>
       )}

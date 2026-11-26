@@ -53,10 +53,28 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0C0B0A" };
 
+// Search engines: one FurnitureStore entity with a stable @id, referenced by the WebSite. Only facts the site states.
+const businessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FurnitureStore",
+  "@id": SITE.url + "/#business",
+  name: SITE.name,
+  url: SITE.url,
+  image: SITE.url + "/og-image.jpg",
+  telephone: "+" + SITE.phones[0].intl,
+  priceRange: "$$$",
+  address: { "@type": "PostalAddress", addressLocality: SITE.showroom.city, addressRegion: SITE.showroom.city, addressCountry: "AE", streetAddress: SITE.showroom.area },
+  areaServed: ["Dubai", "Sharjah", "Ajman", "Abu Dhabi", "Al Ain", "Ras Al Khaimah", "Umm Al Quwain", "Fujairah"],
+  sameAs: SITE.instagramAccounts.map((a) => a.url),
+  makesOffer: { "@type": "Offer", itemOffered: { "@type": "Service", name: "Made-to-measure furniture and joinery, designed in 3D and installed", areaServed: "United Arab Emirates" } },
+};
+const websiteJsonLd = { "@context": "https://schema.org", "@type": "WebSite", "@id": SITE.url + "/#website", url: SITE.url, name: SITE.name, publisher: { "@id": SITE.url + "/#business" } };
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={display.variable + " " + body.variable}>
       <body className="bg-beige pb-[calc(76px+env(safe-area-inset-bottom))] font-dm text-charcoal antialiased sm:pb-0">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([businessJsonLd, websiteJsonLd]) }} />
         <a href="#main" className="skip-link">Skip to content</a>
         <DevBanner />
         <Navbar />

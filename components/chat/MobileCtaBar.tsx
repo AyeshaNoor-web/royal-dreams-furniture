@@ -27,11 +27,11 @@ export default function MobileCtaBar({ onOpenChat, minimised, ai }: Props) {
           onClick={onOpenChat}
           aria-label={(minimised ? "Back to chat with " : "Chat with ") + (ai ? "our AI assistant" : "our automated assistant") + ", " + SITE.assistant.name}
           aria-haspopup="dialog"
-          className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-charcoal text-beige-light [touch-action:manipulation]"
+          className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border border-gold/50 bg-beige-light [touch-action:manipulation]"
         >
           <Mascot className="h-11 w-11" />
-          <span aria-hidden="true" className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-sm bg-charcoal px-1 py-px font-dm text-[9px] font-semibold uppercase leading-none tracking-wider text-beige-light ring-1 ring-beige-light">{kind}</span>
-          {minimised && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-beige-light" />}
+          <span aria-hidden="true" className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-sm bg-gold px-1 py-px font-dm text-[9px] font-semibold uppercase leading-none tracking-wider text-beige">{kind}</span>
+          {minimised && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-beige" />}
         </button>
       </div>
     </div>

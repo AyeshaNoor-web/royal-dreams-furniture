@@ -16,7 +16,7 @@ export default function Logo({ variant = "gold", className = "" }: LogoProps) {
   const text = "text-charcoal";
   return (
     <Link href="/" className={"flex shrink-0 items-center gap-3 " + className} aria-label={SITE.name + " home"}>
-      <Image src={"/brand/logo-mark-" + variant + ".png"} alt="" width={484} height={543} priority className="h-11 w-auto lg:h-12" />
+      <Image src={"/brand/logo-mark-" + variant + ".png"} alt="" width={484} height={543} priority unoptimized className="h-11 w-auto lg:h-12" />
       <span className={"font-serif text-[15px] font-medium uppercase leading-[1.2] tracking-[0.12em] " + text}>
         Modern Furniture
         <br />

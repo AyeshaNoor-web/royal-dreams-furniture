@@ -30,7 +30,7 @@ const config: Config = {
         dm: ["var(--font-body)", "Futura", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.9rem, 6vw, 5.75rem)", { lineHeight: "1.0", letterSpacing: "-0.025em" }],
+        "display-xl": ["clamp(2.75rem, 5.2vw, 5.25rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
         "display-lg": ["clamp(2.5rem, 4.6vw, 4.25rem)", { lineHeight: "1.04", letterSpacing: "-0.02em" }],
         "display-md": ["clamp(1.95rem, 3.1vw, 2.85rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
       },

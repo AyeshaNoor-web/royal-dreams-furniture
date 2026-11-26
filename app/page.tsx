@@ -1,4 +1,4 @@
-import HeroEditorial from "@/components/home/HeroEditorial";
+import HeroCinematic from "@/components/home/HeroCinematic";
 import UspStrip from "@/components/home/UspStrip";
 import WhatWeMake from "@/components/home/WhatWeMake";
 import PlanByRoom from "@/components/home/PlanByRoom";
@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <HeroEditorial />
+      <HeroCinematic />
       <UspStrip />
       <WhatWeMake />
       <PlanByRoom />

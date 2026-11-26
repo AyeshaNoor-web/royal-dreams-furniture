@@ -171,6 +171,7 @@ h2 { text-wrap: balance; }
 /* Gold wave texture for page headers (the client's reference look): flowing lines over black, fading out to the right. */
 .wave-gold {
   background-color: #0C0B0A;
+  background-position: right center;
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1500' height='720' viewBox='0 0 1500 720' fill='none' stroke='%23B8965A' stroke-width='1.1' stroke-opacity='0.6'%3E%3Cpath d='M-200 -60 C 250 -210, 650 80, 1050 -100 S 1500 -180, 1700 -30'/%3E%3Cpath d='M-200 -14 C 250 -164, 650 126, 1050 -54 S 1500 -134, 1700 16'/%3E%3Cpath d='M-200 32 C 250 -118, 650 172, 1050 -8 S 1500 -88, 1700 62'/%3E%3Cpath d='M-200 78 C 250 -72, 650 218, 1050 38 S 1500 -42, 1700 108'/%3E%3Cpath d='M-200 124 C 250 -26, 650 264, 1050 84 S 1500 4, 1700 154'/%3E%3Cpath d='M-200 170 C 250 20, 650 310, 1050 130 S 1500 50, 1700 200'/%3E%3Cpath d='M-200 216 C 250 66, 650 356, 1050 176 S 1500 96, 1700 246'/%3E%3Cpath d='M-200 262 C 250 112, 650 402, 1050 222 S 1500 142, 1700 292'/%3E%3Cpath d='M-200 308 C 250 158, 650 448, 1050 268 S 1500 188, 1700 338'/%3E%3Cpath d='M-200 354 C 250 204, 650 494, 1050 314 S 1500 234, 1700 384'/%3E%3Cpath d='M-200 400 C 250 250, 650 540, 1050 360 S 1500 280, 1700 430'/%3E%3Cpath d='M-200 446 C 250 296, 650 586, 1050 406 S 1500 326, 1700 476'/%3E%3Cpath d='M-200 492 C 250 342, 650 632, 1050 452 S 1500 372, 1700 522'/%3E%3Cpath d='M-200 538 C 250 388, 650 678, 1050 498 S 1500 418, 1700 568'/%3E%3Cpath d='M-200 584 C 250 434, 650 724, 1050 544 S 1500 464, 1700 614'/%3E%3Cpath d='M-200 630 C 250 480, 650 770, 1050 590 S 1500 510, 1700 660'/%3E%3Cpath d='M-200 676 C 250 526, 650 816, 1050 636 S 1500 556, 1700 706'/%3E%3Cpath d='M-200 722 C 250 572, 650 862, 1050 682 S 1500 602, 1700 752'/%3E%3Cpath d='M-200 768 C 250 618, 650 908, 1050 728 S 1500 648, 1700 798'/%3E%3C/svg%3E");
   background-size: cover;
   background-position: center;
@@ -180,9 +181,23 @@ h2 { text-wrap: balance; }
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(12, 11, 10, 0.2) 0%, rgba(12, 11, 10, 0.75) 55%, rgba(12, 11, 10, 0.95) 100%);
+  /* Solid over the text column, the lines only breathe in on the right third, and faintly. */
+  background: linear-gradient(90deg, #0C0B0A 0%, #0C0B0A 48%, rgba(12, 11, 10, 0.82) 70%, rgba(12, 11, 10, 0.6) 100%);
 }
 .wave-gold > * { position: relative; }
+
+/* Cinematic hero: a single gold glow top-right and a slow drift on the photograph. */
+.hero-glow {
+  background:
+    radial-gradient(42% 55% at 82% 18%, rgba(184, 150, 90, 0.14), rgba(184, 150, 90, 0) 70%),
+    radial-gradient(60% 50% at 10% 90%, rgba(184, 150, 90, 0.06), rgba(184, 150, 90, 0) 70%);
+}
+@keyframes hero-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+.hero-kenburns { animation: hero-kenburns 22s ease-in-out infinite alternate; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .hero-kenburns { animation: none; } }
 
 /* Small section label (used sparingly above headings) */
 .eyebrow {
