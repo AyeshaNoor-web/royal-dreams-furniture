@@ -13,7 +13,7 @@ interface RevealProps {
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
 
-export default function Reveal({ children, className, delay = 0, y = 24, once = true }: RevealProps) {
+export default function Reveal({ children, className, delay = 0, y = 28, once = true }: RevealProps) {
   const reduce = useReducedMotion();
   return (
     <motion.div

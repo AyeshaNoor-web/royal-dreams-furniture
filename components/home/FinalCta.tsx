@@ -12,12 +12,12 @@ export default function FinalCta() {
   return (
     <section className="bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="grid grid-cols-1 overflow-hidden bg-ink text-beige on-dark lg:grid-cols-12">
+        <div className="grid grid-cols-1 overflow-hidden bg-charcoal text-beige-light on-dark lg:grid-cols-12">
           <Reveal className="relative aspect-[4/3] lg:col-span-5 lg:aspect-auto lg:min-h-[480px]">
             <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
           </Reveal>
           <Reveal delay={0.08} className="flex flex-col justify-center p-6 sm:p-10 lg:col-span-7 lg:p-14">
-            <h2 className="ruled-heading font-serif text-display-md text-beige">Ready when you are</h2>
+            <h2 className="font-serif text-display-md text-beige-light">Ready when you are</h2>
             <p className="mt-4 max-w-lg text-[16px] leading-relaxed text-beige/70">
               Send a photo of the room today and we will reply within one working day with ideas and a time to visit.
             </p>

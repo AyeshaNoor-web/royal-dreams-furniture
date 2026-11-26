@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHeader from "@/components/shared/PageHeader";
-import Steps from "@/components/home/Steps";
-import Planner from "@/components/plan/Planner";
+import Process from "@/components/home/Process";
+import CtaBand from "@/components/home/CtaBand";
 import { pick } from "@/lib/gallery";
 import { SITE } from "@/lib/site";
 
@@ -27,24 +27,24 @@ export default function AboutPage() {
         intro={SITE.name + " designs and makes furniture to order for villas and apartments across the UAE. Every sofa, bed, wardrobe and media wall begins with a visit to your home and a 3D design, and ends with our own team fitting it in place."}
       />
 
-      <section className="pb-section-sm pt-8 lg:pt-12">
-        <div className="mx-auto grid max-w-5xl grid-cols-3 items-end gap-3 px-5 sm:px-6 lg:gap-6 lg:px-10">
+      <section className="pb-section">
+        <div className="mx-auto grid max-w-7xl grid-cols-3 gap-3 px-6 lg:gap-6 lg:px-10">
           {shots.map((s) => (
-            <div key={s.src} className="relative aspect-[3/5] overflow-hidden arch bg-beige-dark even:mb-8 lg:even:mb-14">
+            <div key={s.src} className="relative aspect-[3/4] bg-beige-dark">
               <Image src={s.src} alt={s.alt} fill sizes="33vw" className="object-cover" />
             </div>
           ))}
         </div>
       </section>
 
-      <section className="bg-beige-light py-section-sm lg:py-section">
+      <section className="border-y border-border bg-beige-light py-section">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 lg:grid-cols-12 lg:px-10">
           <div className="lg:col-span-4">
             <h2 className="font-serif text-display-md">What sets our work apart</h2>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
+          <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {values.map((v) => (
-              <div key={v.title} className="rounded-4xl bg-beige p-6">
+              <div key={v.title} className="border-t border-border pt-4">
                 <h3 className="font-serif text-2xl">{v.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-taupe">{v.desc}</p>
               </div>
@@ -53,12 +53,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="py-section-sm"><Steps /></div>
+      <Process />
 
-      <section className="pb-section-sm">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-5 sm:px-6 lg:px-10">
+      <section className="py-section-sm">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-6 lg:px-10">
           <div>
-            <h2 className="ruled-heading max-w-xl font-serif text-display-md">Follow our latest installations</h2>
+            <h2 className="max-w-xl font-serif text-display-md">Follow our latest installations</h2>
           </div>
           <div className="flex flex-wrap gap-3">
             {SITE.instagramAccounts.map((ig) => (
@@ -68,7 +68,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Planner />
+      <CtaBand />
     </>
   );
 }

@@ -6,7 +6,7 @@ import { WHATSAPP_LINK } from "@/lib/site";
 export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <section className="mx-auto flex min-h-[70svh] max-w-xl flex-col items-start justify-center px-6 py-16">
-      <h1 className="ruled-heading font-serif text-display-md text-charcoal">Something went wrong loading this page.</h1>
+      <h1 className="font-serif text-display-md text-charcoal">Something went wrong loading this page.</h1>
       <p className="mt-4 text-[16px] leading-relaxed text-taupe">
         This usually clears with a reload. If it keeps happening, message us on WhatsApp and we will help you directly.
       </p>

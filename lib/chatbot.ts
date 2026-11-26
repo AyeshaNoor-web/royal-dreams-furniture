@@ -3,8 +3,6 @@
 import { FALLBACK_ANSWER, WHATSAPP_CHAT, areaPlaces, intents, whatsappFor, type ChatLink, type Intent } from "./chatbot-intents";
 import { quoteFactors } from "./quote";
 import { categories } from "./gallery";
-import { estimatorEnabled } from "./flags";
-import { SITE } from "./site";
 
 export interface Reply {
   text: string;
@@ -72,12 +70,6 @@ const priceFor = (slug: string): Reply | null => {
   const c = categories.find((x) => x.slug === slug);
   if (!q || !c) return null;
   const title = c.title.toLowerCase();
-  if (estimatorEnabled) {
-    return {
-      text: `We do not list fixed prices for ${title}, because each one is made to your sizes and finish. The price depends on: ${q.depends.join("; ").toLowerCase()}. The estimator gives you an indicative range now, and the team confirms a fixed quotation after the free site measurement.`,
-      link: { label: "Estimate " + title, href: "/estimator?c=" + slug },
-    };
-  }
   return {
     text: `We do not list prices for ${title}, because each one is made to your sizes and finish. The price depends on: ${q.depends.join("; ").toLowerCase()}. For a first estimate send ${q.send.charAt(0).toLowerCase() + q.send.slice(1)} The team replies within a working day with a rough budget, and the fixed quotation follows the free site measurement.`,
     link: whatsappFor(`Hello, I would like a quotation for made-to-measure ${title}. I will send ${q.send.charAt(0).toLowerCase() + q.send.slice(1)}`),
@@ -122,24 +114,9 @@ export const answer = (text: string): Reply => {
 };
 
 export const WELCOME =
-  `Hi, I'm ${SITE.assistant.name}. Ask me about our collections, the free home visit, finishes, where we work or how to start. Everything is made to measure in our Dubai workshop.`;
+  "Welcome to Modern Furniture Collection. I can answer questions about our collections, the free home visit, finishes, where we work and how to start. Everything is made to measure in our Dubai workshop.";
 
-export const WELCOME_AI =
-  `Hi, I'm ${SITE.assistant.name}, the design assistant here. Tell me about the room you are planning and I will point you to the right pieces, give you a budget range, and hand you to a designer on WhatsApp whenever you like.`;
-
-export interface QuickAction { label: string; message?: string; action?: "whatsapp" | "ask" }
-
-/** Openers for the AI assistant: each one starts the conversation with a room, so the first question is already answered. */
-export const aiQuickActions: QuickAction[] = [
-  { label: "Living room", message: "I am planning my living room." },
-  { label: "Bedroom", message: "I am planning a bedroom." },
-  { label: "Dining room", message: "I am planning my dining room." },
-  { label: "Curtains", message: "I need curtains made." },
-  { label: "Get an estimate", message: "I would like an indicative estimate." },
-  { label: "Talk to a designer", action: "whatsapp" },
-];
-
-export const quickActions: QuickAction[] = [
+export const quickActions: { label: string; message?: string; action?: "whatsapp" | "ask" }[] = [
   { label: "Browse collections", message: "What do you make?" },
   { label: "Where we work", message: "Where are you located and which areas do you cover?" },
   { label: "Ask a question", action: "ask" },

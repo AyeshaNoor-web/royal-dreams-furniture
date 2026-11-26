@@ -1,15 +1,17 @@
-import HeroStart from "@/components/home/HeroStart";
-import TrustTicker from "@/components/home/TrustTicker";
-import PieceGrid from "@/components/home/PieceGrid";
-import Steps from "@/components/home/Steps";
-import WorkWall from "@/components/home/WorkWall";
-import PriceGuide from "@/components/home/PriceGuide";
-import WhyUs from "@/components/home/WhyUs";
+import HeroEditorial from "@/components/home/HeroEditorial";
+import UspStrip from "@/components/home/UspStrip";
+import WhatWeMake from "@/components/home/WhatWeMake";
+import PlanByRoom from "@/components/home/PlanByRoom";
+import HowItWorks from "@/components/home/HowItWorks";
+import QuoteFactors from "@/components/home/QuoteFactors";
+import InquiryBand from "@/components/home/InquiryBand";
+import RecentWork from "@/components/home/RecentWork";
 import Reviews from "@/components/home/Reviews";
-import Answers from "@/components/home/Answers";
-import FinalStart from "@/components/home/FinalStart";
-import Planner from "@/components/plan/Planner";
-import { SHOW_CABINET_RATES } from "@/lib/cabinet-rates";
+import Workshop from "@/components/home/Workshop";
+import WhereWeWork from "@/components/home/WhereWeWork";
+import Faq from "@/components/home/Faq";
+import FinalCta from "@/components/home/FinalCta";
+import InstagramStrip from "@/components/home/InstagramStrip";
 import { faqs } from "@/lib/faq";
 
 // Lets search engines show the questions below the listing.
@@ -19,24 +21,26 @@ const faqSchema = {
   mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
 };
 
-// The page is one funnel. Promise and first question (hero) -> what we make -> how it works and what is free ->
-// proof -> a real price -> why trust us -> the planner (the ask) -> last objections -> the ask again.
-// Every button on the way feeds the planner or opens WhatsApp.
+// Order follows the enquiry path: what we make, which room, how it works, what it costs, ask,
+// then proof (work, workshop, areas, questions) and a last invitation.
 export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <HeroStart />
-      <TrustTicker />
-      <PieceGrid />
-      <Steps />
-      <WorkWall />
-      {SHOW_CABINET_RATES && <PriceGuide />}
-      <WhyUs />
+      <HeroEditorial />
+      <UspStrip />
+      <WhatWeMake />
+      <PlanByRoom />
+      <HowItWorks />
+      <QuoteFactors />
+      <InquiryBand />
+      <RecentWork />
       <Reviews />
-      <Planner />
-      <Answers />
-      <FinalStart />
+      <Workshop />
+      <WhereWeWork />
+      <Faq />
+      <FinalCta />
+      <InstagramStrip />
     </>
   );
 }

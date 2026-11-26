@@ -4,7 +4,6 @@
 import { categories, groups } from "./gallery";
 import { faqs } from "./faq";
 import { SITE, areas, whatsappLink } from "./site";
-import { estimatorEnabled } from "./flags";
 
 export interface ChatLink {
   label: string;
@@ -93,19 +92,6 @@ const faqIntents: Intent[] = faqs.map((f, i) => ({
   answer: f.a,
   link: faqLinks[i],
 }));
-
-const estimatorIntents: Intent[] = estimatorEnabled
-  ? [
-      {
-        id: "estimator",
-        kind: "faq",
-        priority: 3,
-        keywords: ["estimate", "estimator", "estimation", "calculator", "calculate", "budget range", "rough cost", "ballpark figure", "price range", "indicative"],
-        answer: "The budget estimator gives an indicative range in dirhams for any of our collections from the size and finish level you choose, with no contact details needed. The exact quotation still follows the free site measurement and 3D design.",
-        link: { label: "Open the estimator", href: "/estimator" },
-      },
-    ]
-  : [];
 
 const extraIntents: Intent[] = [
   {
@@ -201,7 +187,7 @@ const extraIntents: Intent[] = [
   },
 ];
 
-export const intents: Intent[] = [...estimatorIntents, ...extraIntents, ...faqIntents, ...productIntents, ...roomIntents];
+export const intents: Intent[] = [...extraIntents, ...faqIntents, ...productIntents, ...roomIntents];
 
 export const FALLBACK_ANSWER =
   "I do not have an answer for that yet. I can only answer from what is on this site. Send your question to the team on WhatsApp below and they will reply within a working day.";

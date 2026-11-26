@@ -18,7 +18,7 @@ export default function TrendingNow() {
     <section className="bg-beige py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-10 flex items-end justify-between gap-6">
-          <h2 className="ruled-heading font-serif text-display-md text-charcoal">Our most requested designs</h2>
+          <h2 className="font-serif text-display-md text-charcoal">Our most requested designs</h2>
           <Link href="/gallery" className="hidden text-link hover:text-gold-text sm:inline-block">View full gallery</Link>
         </Reveal>
 

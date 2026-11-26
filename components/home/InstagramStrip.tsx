@@ -15,7 +15,7 @@ const shots = [
 
 export default function InstagramStrip() {
   return (
-    <section className="section-rule bg-beige-light py-12 sm:py-16 lg:py-20">
+    <section className="border-t border-border bg-beige-light py-12 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
           <div>

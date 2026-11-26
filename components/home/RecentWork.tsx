@@ -20,8 +20,7 @@ export default function RecentWork() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 flex items-end justify-between gap-6 sm:mb-10">
           <div>
-            <p className="eyebrow mb-4">Gallery</p>
-          <h2 className="font-serif text-display-md text-charcoal">Recent work</h2>
+            <h2 className="font-serif text-display-md text-charcoal">Recent work</h2>
             <p className="mt-3 max-w-lg text-[15px] text-taupe">Rooms we have finished for clients across the UAE.</p>
           </div>
           <Link href="/gallery" className="hidden text-link hover:text-gold-text sm:inline-block">See the full gallery</Link>
@@ -31,8 +30,8 @@ export default function RecentWork() {
           {work.map((w, i) => (
             <StaggerItem key={w.image.src} className={i >= 4 ? "hidden sm:block" : ""}>
               <Link href={"/gallery?c=" + w.slug} className="group block">
-                <div className="mount relative aspect-[4/5] overflow-hidden bg-beige-dark">
-                  <Image src={w.image.src} alt="" fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]" />
+                <div className="relative aspect-[4/5] overflow-hidden bg-beige-dark">
+                  <Image src={w.image.src} alt={w.image.alt} fill sizes="(min-width: 1024px) 33vw, 50vw" className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]" />
                 </div>
                 <p className="mt-3 text-[14px] leading-snug text-charcoal">{w.image.alt}</p>
               </Link>

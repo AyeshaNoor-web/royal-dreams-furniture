@@ -8,34 +8,18 @@ import { getCategory } from "@/lib/gallery";
 import { quoteFactors } from "@/lib/quote";
 import { whatsappLink } from "@/lib/site";
 
-/** Finish options we are asked about most, by collection. The choice is carried into the WhatsApp message; the price follows the measurement. */
-const FINISHES: Record<string, string[] | undefined> = {
-  sofas: ["Bouclé", "Velvet", "Linen", "Leather"],
-  beds: ["Bouclé", "Velvet", "Linen", "Leather"],
-  "dressing-tables": ["Lacquer", "Veneer", "Stone top"],
-  "dining-tables": ["Marble", "Oak veneer", "Walnut veneer"],
-  "tv-units": ["Walnut veneer", "Lacquer", "Marble panel"],
-  "wall-paneling": ["Veneer", "Lacquer", "Fluted"],
-  "fitted-wardrobes": ["Lacquer", "Veneer", "Glass doors"],
-  "walk-in-closets": ["Lacquer", "Veneer", "Glass doors"],
-  curtains: ["Sheer", "Blackout", "Velvet"],
-};
-
 /** Sets expectations before the visitor asks "how much": what moves the price, what we measure, what to send. */
 export default function QuoteFactors() {
   const [slug, setSlug] = useState(quoteFactors[0].slug);
-  const [finish, setFinish] = useState("");
   const reduce = useReducedMotion();
   const f = quoteFactors.find((x) => x.slug === slug) ?? quoteFactors[0];
   const c = getCategory(f.slug)!;
-  const finishes = FINISHES[f.slug];
-  const ask = whatsappLink("Hello, I would like a quotation for a made-to-measure " + c.title.toLowerCase() + (finish && finishes ? " in " + finish.toLowerCase() : "") + ". I can send photos and sizes.");
+  const ask = whatsappLink("Hello, I would like a quotation for a made-to-measure " + c.title.toLowerCase() + ". I can send photos and sizes.");
 
   return (
-    <section className="section-rule section-rule-b bg-beige-light py-12 sm:py-16 lg:py-24">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 max-w-2xl sm:mb-10">
-          <p className="eyebrow mb-4">Pricing</p>
           <h2 className="font-serif text-display-md text-charcoal">What shapes your quotation</h2>
           <p className="mt-4 text-[16px] leading-relaxed text-taupe">
             Every piece is priced on its own measurements and finishes, so there is no price list. Choose a collection to see what changes the price and what to send us for a first estimate.
@@ -55,7 +39,7 @@ export default function QuoteFactors() {
                   aria-pressed={on}
                   onClick={() => setSlug(q.slug)}
                   className={
-                    "relative min-h-[44px] shrink-0 rounded-full px-4 py-2 text-left text-[15px] transition-colors duration-300 lg:w-full lg:rounded-none lg:border-b lg:border-border lg:px-0 lg:py-3.5 " +
+                    "relative shrink-0 rounded-full px-4 py-2 text-left text-[15px] transition-colors duration-300 lg:w-full lg:rounded-none lg:border-b lg:border-border lg:px-0 lg:py-3.5 " +
                     (on ? "bg-charcoal text-beige-light lg:bg-transparent lg:text-charcoal" : "text-taupe hover:text-charcoal")
                   }
                 >
@@ -100,24 +84,9 @@ export default function QuoteFactors() {
                     </div>
                   </div>
                 </div>
-                {finishes && (
-                  <div className="mt-6">
-                    <p className="eyebrow mb-3">Finish you have in mind</p>
-                    <div role="radiogroup" aria-label="Finish" className="flex flex-wrap gap-2">
-                      {finishes.map((x) => {
-                        const on = finish === x;
-                        return (
-                          <button key={x} type="button" role="radio" aria-checked={on} onClick={() => setFinish(on ? "" : x)} className={"min-h-[44px] rounded-full border px-4 text-[14px] transition-colors [touch-action:manipulation] " + (on ? "border-charcoal bg-charcoal text-beige" : "border-border bg-beige-light text-charcoal hover:border-charcoal/60")}>
-                            {x}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
                 <div className="mt-7 flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-[13px] text-taupe">The exact quotation follows the site measurement and your finish choices.</p>
-                  <a href={ask} target="_blank" rel="noopener noreferrer" className="btn-wa shrink-0">
+                  <a href={ask} target="_blank" rel="noopener noreferrer" className="btn-dark shrink-0">
                     <WhatsAppIcon className="h-[18px] w-[18px]" /> Ask for a quotation
                   </a>
                 </div>

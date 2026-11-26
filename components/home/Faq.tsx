@@ -12,10 +12,9 @@ export default function Faq() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="section-rule section-rule-b bg-beige-light py-12 sm:py-16 lg:py-24">
+    <section className="border-y border-border bg-beige-light py-12 sm:py-16 lg:py-24">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
         <Reveal className="lg:col-span-4">
-          <p className="eyebrow mb-4">Questions</p>
           <h2 className="font-serif text-display-md text-charcoal">Common questions</h2>
           <p className="mt-4 max-w-sm text-[16px] leading-relaxed text-taupe">Straight answers to what we are asked most. Anything else, ask us on WhatsApp.</p>
           <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-line mt-6">

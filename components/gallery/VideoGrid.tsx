@@ -4,12 +4,12 @@ import type { GalleryVideo } from "@/lib/gallery";
 export default function VideoGrid({ videos, title = "Watch the work" }: { videos: GalleryVideo[]; title?: string }) {
   if (!videos.length) return null;
   return (
-    <section className="py-section-sm">
+    <section className="border-t border-border py-section-sm">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <h2 className="mb-8 font-serif text-3xl text-charcoal">{title}</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 lg:gap-5">
           {videos.map((v) => (
-            <figure key={v.src} className="overflow-hidden rounded-3xl bg-ink">
+            <figure key={v.src} className="bg-charcoal">
               <video
                 controls
                 preload="none"
