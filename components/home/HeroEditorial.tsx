@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { pick, type GalleryImage } from "@/lib/gallery";
-import { APPOINTMENT_LINK } from "@/lib/site";
+import { estimatorEnabled } from "@/lib/flags";
+import { QUOTE_LINK, VISIT_LINK } from "@/lib/site";
 
 // Two streams of project cards. Each list is rendered twice so the CSS loop is seamless.
 const streamA: GalleryImage[] = [
@@ -56,17 +57,25 @@ export default function HeroEditorial() {
           <h1 className="font-serif text-display-xl text-charcoal">
             Every piece, made to fit <em className="italic text-gold-text">your</em> home.
           </h1>
-          <p className="mt-7 max-w-lg text-[17px] leading-relaxed text-taupe">
+          <p className="lede mt-7 max-w-lg text-taupe">
             Sofas, beds, dining tables, curtains, wardrobes and media walls, designed in 3D around your
             rooms, built in our Dubai workshop and fitted by our own team anywhere in the UAE.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/collections" className="btn-dark">Explore collections</Link>
-            <a href={APPOINTMENT_LINK} target="_blank" rel="noopener noreferrer" className="btn-glass">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark whitespace-nowrap">
               <WhatsAppIcon className="h-[18px] w-[18px]" />
-              Book a free consultation
+              Get a free quote
+            </a>
+            <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-glass whitespace-nowrap">
+              Book a free visit
             </a>
           </div>
+          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+            <Link href="/collections" className="inline-flex min-h-[44px] items-center text-link text-charcoal hover:text-gold-text">Explore collections <span aria-hidden="true">&nbsp;&rarr;</span></Link>
+            {estimatorEnabled && (
+              <Link href="/estimator" className="inline-flex min-h-[44px] items-center text-link text-charcoal hover:text-gold-text">Get an instant budget range <span aria-hidden="true">&nbsp;&rarr;</span></Link>
+            )}
+          </p>
           <ul className="mt-10 hidden flex-wrap gap-x-8 gap-y-2 border-t border-border pt-6 text-[14px] text-taupe sm:flex">
             <li>Free home consultation</li>
             <li>3D design before production</li>

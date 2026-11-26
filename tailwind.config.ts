@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
-// Palette from the client's swatch card:
-// #F9F3F0  #E8D5C4  #D4B8A8  #C4A090  #A08070
+// Palette: near-black surfaces #0C0B0A #161412 #221E1A, cream text #F3EBDD #B9AD9B, gold #B8965A #D4AF7A #D9B86A.
+// Contrast: cream on black 17:1, muted text 9.5:1, gold text 10:1, black on gold buttons 7.9:1.
 // Text tones are darkened versions of the two deepest swatches so body copy meets WCAG AA on beige.
 const config: Config = {
   content: [
@@ -12,23 +12,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        beige: { DEFAULT: "#E8D5C4", light: "#F9F3F0", dark: "#D4B8A8" },
-        charcoal: { DEFAULT: "#2A1F18", light: "#3D2F26" },
-        frame: "#1C140F",
-        door: "#2A1F18",
-        gold: { DEFAULT: "#C4A090", dark: "#A08070", text: "#765542" },
-        lit: "#D4B8A8",
-        taupe: { DEFAULT: "#6E584A", light: "#A08070" },
-        border: "#D4B8A8",
+        // Black and gold (client request, 26 Nov 2026). "beige" is the page surface and "charcoal" the text colour,
+        // so the names read inverted on purpose: every component keeps working.
+        beige: { DEFAULT: "#0C0B0A", light: "#161412", dark: "#221E1A" },
+        ink: "#070606",
+        charcoal: { DEFAULT: "#F3EBDD", light: "#E4D9C6" },
+        frame: "#050505",
+        door: "#0C0B0A",
+        gold: { DEFAULT: "#B8965A", dark: "#D4AF7A", text: "#D9B86A" },
+        lit: "#D4AF7A",
+        taupe: { DEFAULT: "#B9AD9B", light: "#8F8473" },
+        border: "#2E2823",
+        danger: "#F2A59E",
       },
       fontFamily: {
         serif: ["var(--font-display)", "Georgia", "Times New Roman", "serif"],
         dm: ["var(--font-body)", "Futura", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.75rem, 5.6vw, 5.25rem)", { lineHeight: "1.06", letterSpacing: "-0.01em" }],
-        "display-lg": ["clamp(2.4rem, 4.4vw, 4rem)", { lineHeight: "1.08", letterSpacing: "-0.01em" }],
-        "display-md": ["clamp(1.9rem, 3vw, 2.75rem)", { lineHeight: "1.14", letterSpacing: "-0.005em" }],
+        "display-xl": ["clamp(2.9rem, 6vw, 5.75rem)", { lineHeight: "1.0", letterSpacing: "-0.025em" }],
+        "display-lg": ["clamp(2.5rem, 4.6vw, 4.25rem)", { lineHeight: "1.04", letterSpacing: "-0.02em" }],
+        "display-md": ["clamp(1.95rem, 3.1vw, 2.85rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
       },
       spacing: { section: "7rem", "section-sm": "4.5rem" },
       maxWidth: { "8xl": "88rem" },

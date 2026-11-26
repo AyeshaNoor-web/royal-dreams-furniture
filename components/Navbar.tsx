@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { WHATSAPP_LINK, navLinks } from "@/lib/site";
+import { QUOTE_LINK, VISIT_LINK, navLinks } from "@/lib/site";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     aria-current={active ? "page" : undefined}
-                    className={"block py-2 text-[15px] transition-colors duration-200 hover:text-charcoal " + (active ? "text-charcoal" : "text-taupe")}
+                    className={"block px-1 py-3 text-[15px] transition-colors duration-200 hover:text-charcoal " + (active ? "text-charcoal" : "text-taupe")}
                   >
                     {link.label}
                   </Link>
@@ -43,17 +43,22 @@ export default function Navbar() {
             })}
           </ul>
 
-          <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark hidden min-h-[44px] px-5 text-[14px] md:inline-flex">
-            <WhatsAppIcon className="h-[17px] w-[17px]" />
-            Get a quote
-          </a>
+          <div className="hidden items-center gap-2 md:flex">
+            <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[44px] px-4 text-[14px]">
+              Book a free visit
+            </a>
+            <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark min-h-[44px] px-5 text-[14px]">
+              <WhatsAppIcon className="h-[17px] w-[17px]" />
+              Get a free quote
+            </a>
+          </div>
 
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            className="relative z-[60] -mr-2 flex flex-col gap-1.5 p-2 text-charcoal md:hidden"
+            className="relative z-[60] -mr-3 flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-1.5 p-3 text-charcoal md:hidden"
           >
             <span className={"block h-px w-6 bg-current transition-transform duration-300 " + (menuOpen ? "translate-y-[3.5px] rotate-45" : "")} />
             <span className={"block h-px w-6 bg-current transition-transform duration-300 " + (menuOpen ? "-translate-y-[3.5px] -rotate-45" : "")} />
@@ -77,10 +82,15 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark w-fit">
-              <WhatsAppIcon className="h-[18px] w-[18px]" />
-              Get a quote
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="btn-dark">
+                <WhatsAppIcon className="h-[18px] w-[18px]" />
+                Get a free quote
+              </a>
+              <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line">
+                Book a free visit
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -11,7 +11,7 @@ export default function WhatWeMake() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-10 flex items-end justify-between gap-6 lg:mb-12">
           <div>
-            <h2 className="font-serif text-display-lg text-charcoal">What we make</h2>
+            <h2 className="ruled-heading font-serif text-display-lg text-charcoal">What we make</h2>
             <p className="mt-3 max-w-lg text-[15px] text-taupe">Eleven collections, all made to measure in our Dubai workshop and fitted by our own team.</p>
           </div>
           <Link href="/collections" className="hidden text-link hover:text-gold-text sm:inline-block">View all collections</Link>
@@ -23,7 +23,7 @@ export default function WhatWeMake() {
             return (
               <StaggerItem key={c.slug} className={"w-[64vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none " + (wide ? "sm:col-span-2" : "")}>
                 <Link href={"/collections/" + c.slug} className="group block h-full">
-                  <div className={"relative overflow-hidden bg-beige-dark " + (wide ? "aspect-square sm:aspect-[16/10] lg:aspect-[2/1]" : "aspect-square")}>
+                  <div className={"mount relative overflow-hidden bg-beige-dark " + (wide ? "aspect-square sm:aspect-[16/10] lg:aspect-[2/1]" : "aspect-square")}>
                     <Image
                       src={c.cover.src}
                       alt={c.cover.alt}

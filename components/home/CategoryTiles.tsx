@@ -18,7 +18,7 @@ function MiniSpread({ g }: { g: Group }) {
   return (
     <div>
       <Reveal>
-        <h3 className="font-serif text-display-md text-charcoal">{g.title}</h3>
+        <h3 className="ruled-heading font-serif text-display-md text-charcoal">{g.title}</h3>
         <p className="mt-2 max-w-sm text-[15px] text-taupe">{g.blurb}</p>
       </Reveal>
       <div className="mt-6 grid h-[460px] grid-cols-12 gap-4 sm:h-[520px] lg:gap-5">
@@ -43,7 +43,7 @@ export default function CategoryTiles() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-14 flex items-end justify-between gap-6 lg:mb-20">
           <div>
-            <h2 className="font-serif text-display-lg text-charcoal">Explore by room</h2>
+            <h2 className="ruled-heading font-serif text-display-lg text-charcoal">Explore by room</h2>
             <p className="mt-3 max-w-lg text-[15px] text-taupe">Every piece below is made to measure. Choose a room, then a collection, to see completed projects.</p>
           </div>
           <Link href="/collections" className="hidden text-link hover:text-gold-text sm:inline-block">View all collections</Link>

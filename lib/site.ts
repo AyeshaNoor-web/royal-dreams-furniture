@@ -1,3 +1,5 @@
+import { estimatorEnabled } from "./flags";
+
 export const SITE = {
   name: "Modern Furniture Collection",
   shortName: "MFC",
@@ -20,6 +22,8 @@ export const SITE = {
   phones: [
     { display: "050 433 5872", intl: "971504335872" },
   ],
+  // The website assistant's character. PLACEHOLDER name until the client approves one; change it here only.
+  assistant: { name: "Noor", role: "design assistant" },
 } as const;
 
 /** Where the team measures and installs. The workshop is in Dubai, so the first group gets the most visit slots. */
@@ -36,12 +40,21 @@ export const WHATSAPP_LINK = whatsappLink(
 );
 
 export const APPOINTMENT_LINK = whatsappLink(
-  "Hello, I would like to book a complimentary consultation and site measurement."
+  "Hello, I would like to book a free site visit and measurement for my home."
+);
+
+/** "Book a free visit" buttons. Same as APPOINTMENT_LINK, named for what the button says. */
+export const VISIT_LINK = APPOINTMENT_LINK;
+
+/** "Get a quote" buttons. */
+export const QUOTE_LINK = whatsappLink(
+  "Hello, I would like a free quotation for made-to-measure furniture. I can send photos and sizes of the room."
 );
 
 export const navLinks = [
   { label: "Collections", href: "/collections" },
   { label: "Gallery", href: "/gallery" },
+  ...(estimatorEnabled ? [{ label: "Estimate", href: "/estimator" }] : []),
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

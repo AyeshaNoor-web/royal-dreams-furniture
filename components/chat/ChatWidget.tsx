@@ -4,81 +4,104 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
+import { CHAT_EVENT, type ChatOpenDetail } from "@/lib/chat-events";
+import { SITE } from "@/lib/site";
 import ChatBoundary from "./ChatBoundary";
 import ChatTeaser, { TEASER_KEY } from "./ChatTeaser";
+import Mascot from "./Mascot";
+import MobileCtaBar from "./MobileCtaBar";
 import { useChat } from "./useChat";
 
 // The panel, matcher and lead form only load the first time someone opens the chat.
 const ChatPanel = dynamic(() => import("./ChatPanel"), { ssr: false });
 
-function Widget() {
-  const chat = useChat();
+function Widget({ ai }: { ai: boolean }) {
+  const chat = useChat(ai);
   const reduce = useReducedMotion();
   const bubble = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
+  const sendRef = useRef(chat.send);
+  sendRef.current = chat.send;
+  const showPanel = chat.open && !chat.minimised;
   // Visitors who have not chatted yet get a slow pulse and the greeting card.
   const fresh = !chat.open && chat.messages.length === 1;
 
   const openChat = () => {
+    chat.setMinimised(false);
     chat.setOpen(true);
     try { sessionStorage.setItem(TEASER_KEY, "1"); } catch { /* ignore */ }
   };
+  const openRef = useRef(openChat);
+  openRef.current = openChat;
+
+  // Any section of the site can open the assistant with a first message (see lib/chat-events.ts).
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const detail = (e as CustomEvent<ChatOpenDetail>).detail;
+      openRef.current();
+      if (detail?.message) setTimeout(() => sendRef.current(detail.message!), 450);
+    };
+    window.addEventListener(CHAT_EVENT, onOpen);
+    return () => window.removeEventListener(CHAT_EVENT, onOpen);
+  }, []);
 
   // Return focus to the bubble after the panel closes.
   useEffect(() => {
-    if (wasOpen.current && !chat.open) {
+    if (wasOpen.current && !showPanel) {
       const t = setTimeout(() => bubble.current?.focus(), 50);
       return () => clearTimeout(t);
     }
-    wasOpen.current = chat.open;
-  }, [chat.open]);
+    wasOpen.current = showPanel;
+  }, [showPanel]);
 
+  const name = SITE.assistant.name;
   return (
     <>
       <ChatTeaser active={fresh} onOpen={openChat} />
       <AnimatePresence>
-        {!chat.open && (
+        {!showPanel && (
           <motion.div
             key="bubble"
             initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="fixed bottom-6 right-6 z-[70]"
+            className="fixed bottom-6 right-6 z-[70] hidden sm:block"
           >
             {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-charcoal/35" />}
             <motion.button
               ref={bubble}
               type="button"
               onClick={openChat}
-              aria-label="Ask us a question"
+              aria-label={(chat.minimised ? "Back to chat with " : "Chat with ") + (ai ? "our AI assistant" : "our automated assistant") + ", " + name}
               aria-haspopup="dialog"
+              aria-expanded={showPanel}
               whileHover={reduce ? undefined : { scale: 1.05, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.95 }}
               transition={{ duration: 0.2, ease: EASE }}
-              className="relative flex items-center gap-3 rounded-full bg-charcoal py-3 pl-4 pr-4 text-beige-light shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-charcoal-light sm:pr-5"
+              className="relative flex items-center gap-2.5 rounded-full bg-charcoal py-1.5 pl-1.5 pr-1.5 text-beige-light shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-charcoal-light sm:pr-5"
             >
               <span className="relative">
-                <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v8a2.5 2.5 0 01-2.5 2.5H10l-4.5 3.5V17H6.5A2.5 2.5 0 014 14.5v-8z" />
-                  <path d="M8 9h8M8 12.5h5" />
-                </svg>
-                {fresh && <span aria-hidden="true" className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-charcoal" />}
+                <Mascot className="h-11 w-11" />
+                <span aria-hidden="true" className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-sm bg-charcoal px-1 py-px font-dm text-[9px] font-semibold uppercase leading-none tracking-wider text-beige-light ring-1 ring-beige-light">{ai ? "AI" : "Bot"}</span>
+                {fresh && <span aria-hidden="true" className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-gold ring-2 ring-charcoal" />}
               </span>
-              <span className="hidden font-dm text-sm font-medium sm:block">Ask us</span>
+              <span className={"font-dm text-sm font-medium " + (chat.minimised ? "block pr-3 sm:pr-0" : "hidden sm:block")}>{chat.minimised ? "Back to chat" : "Ask " + name}</span>
             </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
-      <AnimatePresence>{chat.open && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
+      {!showPanel && <MobileCtaBar onOpenChat={openChat} minimised={chat.minimised} ai={ai} />}
+      <AnimatePresence>{showPanel && <ChatPanel key="panel" chat={chat} />}</AnimatePresence>
     </>
   );
 }
 
-export default function ChatWidget() {
+/** `ai` is decided on the server: AI_CHAT_ENABLED and an API key. Off means the keyword matcher answers. */
+export default function ChatWidget({ ai = false }: { ai?: boolean }) {
   return (
     <ChatBoundary>
-      <Widget />
+      <Widget ai={ai} />
     </ChatBoundary>
   );
 }

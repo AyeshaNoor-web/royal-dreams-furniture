@@ -4,7 +4,7 @@ import { APPOINTMENT_LINK } from "@/lib/site";
 
 export default function CtaBand() {
   return (
-    <section className="border-t border-border py-section-sm">
+    <section className="section-rule py-section-sm">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 md:flex-row md:items-end lg:px-10">
         <div>
           <h2 className="font-serif text-display-md">Ready to begin?</h2>

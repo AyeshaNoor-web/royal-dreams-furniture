@@ -4,7 +4,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
+import DevBanner from "@/components/shared/DevBanner";
 import { SITE } from "@/lib/site";
+import { aiChatEnabled } from "@/lib/flags";
 
 // Display: an elegant transitional serif that stays legible at card sizes. Body: geometric, quiet.
 const display = Playfair_Display({
@@ -49,17 +51,18 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#E8D5C4" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0C0B0A" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={display.variable + " " + body.variable}>
-      <body className="bg-beige font-dm text-charcoal antialiased">
+      <body className="bg-beige pb-[calc(76px+env(safe-area-inset-bottom))] font-dm text-charcoal antialiased sm:pb-0">
         <a href="#main" className="skip-link">Skip to content</a>
+        <DevBanner />
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
-        <ChatWidget />
+        <ChatWidget ai={aiChatEnabled && Boolean(process.env.ANTHROPIC_API_KEY)} />
       </body>
     </html>
   );

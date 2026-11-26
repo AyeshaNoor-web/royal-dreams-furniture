@@ -72,3 +72,39 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Domain registrar login stays with whoever will renew it; note the renewal date.
 - [ ] A one-page guide on how to update content: photos live in `public/images/<collection>/`, text in `lib/gallery.ts` and `lib/site.ts`, and any change pushed to `main` deploys automatically.
 - [ ] Confirm who will handle future changes and how to reach them.
+
+## 8. Budget estimator (branch feature/estimator-assistant)
+
+- [ ] **Needs client, blocks production:** real rates. Open `config/pricing.config.ts`. For each of the 11 collections set the three tiers' min and max AED per unit (seat, piece, metre, square metre or window), adjust the size bounds and the optional extras, then set `PLACEHOLDER_DATA = false`. Every number in the file today is a placeholder chosen only so the flow can be tested.
+- [ ] Confirm the tier descriptions (Standard, Premium, Bespoke), the "included" and "not included" lists, and whether price changes by emirate (`emiratePricing.enabled`, off by default).
+- [ ] Vercel environment variables: `ESTIMATOR_ENABLED=true` to show the /estimator page, the home section and the chat links. A production build fails while this is true and placeholders remain. Preview builds always pass.
+- [ ] Rate limiting: create an Upstash Redis database from the Vercel Marketplace and set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`. Without them a per-instance memory limiter runs and a warning is logged once.
+- [ ] Bot protection: create a Cloudflare Turnstile widget for the domain and set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`. Without them the widget is not shown and tokens are not checked.
+- [ ] `/api/contact` now answers 503 while the Resend keys are missing and the forms tell the visitor to use WhatsApp. Nothing is silently lost, but nothing is emailed either until section 3 is done.
+- [ ] Email deliverability once Resend is live: add the DNS records Resend shows for the sending domain. SPF: a TXT record on the sending subdomain, `v=spf1 include:amazonses.com ~all` (Resend's value, copy from their dashboard). DKIM: the three CNAME records Resend lists. DMARC: TXT on `_dmarc`, start with `v=DMARC1; p=none; rua=mailto:[REPORTS MAILBOX]`, move to `p=quarantine` after two clean weeks.
+- [ ] Legal drafts at /privacy-policy and /terms carry a DRAFT strip and `noindex`. Replace the [square bracket] items, have the lawyer review, then remove the strip, the `robots` line in each page and add both pages to `app/sitemap.ts`.
+- [ ] Knowledge for the assistant (Phase 2) lives in `content/knowledge.md`. Replace every PLACEHOLDER line before the AI is enabled.
+
+## 9. AI assistant (branch feature/estimator-assistant, Phase 2)
+
+- [ ] **Needs client:** the assistant's name. It is "Noor" as a placeholder, set once in `lib/site.ts` (`SITE.assistant`) and used by the bubble, the greeting card, the chat header, the "Meet Noor" home section and the AI's own introduction. The face is an original SVG in `components/chat/Mascot.tsx`; change the colours or swap it for a commissioned illustration there. Whatever the name, the assistant says it is an AI assistant whenever someone asks, which is both the brief and good practice under UAE consumer rules.
+- [ ] Off by default. The same bubble runs the keyword matcher until two Vercel variables are set: `AI_CHAT_ENABLED=true` and `ANTHROPIC_API_KEY`. `CHAT_MODEL` defaults to `claude-haiku-5-5`. The assistant also falls back to the matcher by itself if the API answers 503, and shows a WhatsApp fallback on any timeout or error.
+- [ ] **Needs client, before enabling:** replace every PLACEHOLDER line in `content/knowledge.md` (showroom hours and street, lead email, support hours, brand voice, what is not included). The assistant is told not to state placeholder lines, but the answers are better with the facts in.
+- [ ] **Cost:** this is a metered API. The client was told the chatbot has no monthly cost, so agree a budget first. Each reply is capped at 400 output tokens and each visitor at 20 messages a minute; the knowledge text is sent with every call.
+- [ ] Guardrails: answers only from `content/knowledge.md` and tool results; prices only through the shared pricing engine, always as a range with "indicative" and "excludes 5% VAT"; no discounts, dates, stock or warranty; English only; declines off-topic; never reveals its instructions; user text and tool output are wrapped as untrusted; leads are sent only after explicit consent in the chat and are validated server-side. Transcripts are not stored anywhere; logs carry no message text, phone numbers or emails.
+- [ ] Before go-live run `node scripts/chat-redteam.mjs https://www.modernfurniturecollection.online` with the assistant enabled on a preview deployment. It sends 25 adversarial prompts and prints PASS or FAIL per case. Review any FAIL and tighten `lib/ai/prompt.ts`.
+- [ ] Test on a real iPhone: open the chat, tap the input, confirm the card lifts above the keyboard and the input stays visible; tap a collection link, confirm the page opens with a "Back to chat" pill; tap it, confirm the conversation is intact.
+
+## 10. Client-requested changes, 20 Nov 2026 (branch feature/estimator-assistant)
+
+- [ ] Theme moved to warm off-white (`tailwind.config.ts`: surfaces #FBF9F5, #F4EFE8, #E7DFD4; border #DDD3C7). Charcoal text and gold accents unchanged. WhatsApp buttons use the brand teal #128C7E because white on the light green fails WCAG AA (2:1). Confirm the client is happy with the lighter look.
+- [ ] "Book a free visit" and "Get a quote" buttons sit in the navbar, hero, every collection page, the estimator result and the chat card, plus a phone-only bottom bar. Both open WhatsApp with a pre-written message (`VISIT_LINK`, `QUOTE_LINK` in `lib/site.ts`). The visit message makes no promise about hours or coverage; add those to `lib/site.ts` and `content/knowledge.md` when the client supplies them.
+- [ ] Estimator quick-start presets (1-bed, 2-bed, 3-bed, 5-bed) are PLACEHOLDER baskets in `config/pricing.config.ts` (`presets`). Ask the client what a typical home of each size actually orders and replace the sizes.
+- [ ] "Custom or ready-made?" on the TV unit, fitted wardrobe and walk-in closet pages, and the four-step "How it goes" timeline on every collection page, are PLACEHOLDER copy in `lib/collection-notes.ts`, written in the site's voice from facts already on the site. The client should rewrite them in their own words. Both sections carry a `data-placeholder-copy` attribute until then.
+
+## 11. Black-and-gold theme and project sets, 26 Nov 2026 (branch feature/estimator-assistant)
+
+- [ ] The client asked for the dark look back (screenshot of the earlier black site with the gold wave header). Tokens in `tailwind.config.ts` are now near-black surfaces, cream text and the brand gold; the token names (`beige` for surfaces, `charcoal` for text) are unchanged so every component kept working. Contrast was recomputed: cream on black 16.6:1, muted text 8.9:1, gold text 10.3:1, black on gold buttons 7.1:1, white on the WhatsApp teal 5.6:1. If the client changes their mind again, the off-white values are in the git history of commit aa5ad14.
+- [ ] The gold wave texture (`.wave-gold`, and the hero background) is an inline SVG of flowing lines, no image file. Opacity and spacing are set in `app/globals.css`.
+- [ ] Project sets: photos and videos of one project share a `set` id in `lib/gallery.ts`. Opening any photo of a set shows the others as thumbnails under it, including the video, which plays inside the lightbox. First set: the walnut-and-black-marble media wall, three photos and one video received on 26 Nov (files `tv-units-15` to `17.jpg`, `tv-units-10.mp4`). To group future projects, add the same `set` value to each entry.
+

@@ -7,7 +7,9 @@ import GalleryGrid from "@/components/gallery/GalleryGrid";
 import VideoGrid from "@/components/gallery/VideoGrid";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { categories, categoriesInGroup, getCategory, groups } from "@/lib/gallery";
-import { whatsappLink } from "@/lib/site";
+import { VISIT_LINK, whatsappLink } from "@/lib/site";
+import CustomOrReadyMade from "@/components/collections/CustomOrReadyMade";
+import ProcessTimeline from "@/components/collections/ProcessTimeline";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -32,7 +34,7 @@ export default async function CollectionPage({ params }: Props) {
   const group = groups.find((g) => g.slug === cat.group)!;
   const siblings = categoriesInGroup(cat.group).filter((c) => c.slug !== cat.slug);
   const others = [...siblings, ...categories.filter((c) => c.group !== cat.group)].slice(0, 3);
-  const inquiry = whatsappLink("Hello, I am interested in your " + cat.title.toLowerCase() + ". Could we discuss my room?");
+  const inquiry = whatsappLink("Hello, I would like a free quotation for " + cat.title.toLowerCase() + ". I can send photos and sizes of the room.");
 
   // When a collection has sub-types (e.g. sofas), the grid filters by type instead of category
   const hasTypes = Boolean(cat.types?.length);
@@ -46,22 +48,30 @@ export default async function CollectionPage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
             <p className="text-[15px] text-taupe">{cat.short}</p>
-            <a href={inquiry} target="_blank" rel="noopener noreferrer" className="btn-dark">
-              <WhatsAppIcon className="h-[18px] w-[18px]" />
-              Enquire about {cat.title.toLowerCase()}
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a href={inquiry} target="_blank" rel="noopener noreferrer" className="btn-dark min-h-[48px]">
+                <WhatsAppIcon className="h-[18px] w-[18px]" />
+                Get a free quote
+              </a>
+              <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[48px]">
+                Book a free visit
+              </a>
+            </div>
           </div>
-          <GalleryGrid images={images} paramKey="type" filters={hasTypes ? cat.types : undefined} />
+          <GalleryGrid images={images} videos={cat.videos} paramKey="type" filters={hasTypes ? cat.types : undefined} />
         </div>
       </section>
 
       <VideoGrid videos={cat.videos} />
 
-      <section className="border-t border-border bg-beige-light py-section-sm">
+      <CustomOrReadyMade slug={cat.slug} />
+      <ProcessTimeline />
+
+      <section className="section-rule bg-beige-light py-section-sm">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="font-serif text-3xl">More for the {group.title.toLowerCase()}</h2>
-            <Link href="/collections" className="text-link hover:text-gold-text">View all</Link>
+            <Link href="/collections" className="text-link px-1 hover:text-gold-text">View all</Link>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {others.map((o) => (

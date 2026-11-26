@@ -26,7 +26,7 @@ export default function UspStrip() {
   }, [held, reduce]);
 
   return (
-    <section className="border-y border-border bg-beige-light" aria-label="Why choose us">
+    <section className="section-rule section-rule-b bg-beige-light" aria-label="Why choose us">
       <ol
         className="mx-auto grid max-w-7xl grid-cols-2 gap-2 px-4 py-3 lg:grid-cols-4 lg:gap-3 lg:px-8"
         onMouseLeave={() => setHeld(false)}
