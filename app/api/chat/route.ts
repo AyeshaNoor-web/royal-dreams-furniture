@@ -41,8 +41,14 @@ export async function POST(req: Request) {
       } catch (e) {
         // No message content, phone numbers or emails in logs: only the error class.
         console.error("chat: " + redact(e instanceof Error ? e.name + ": " + e.message.slice(0, 120) : "unknown error"));
-        emit({ type: "error", message: "I lost the connection for a moment. You can try again, or continue with a designer on WhatsApp." });
-        emit({ type: "link", label: "Talk to a designer on WhatsApp", href: FALLBACK, external: true });
+        const status = (e as { status?: number }).status;
+        if (status === 401 || status === 402 || status === 403) {
+          // Key, credits or permissions: nothing a visitor can fix. The keyword matcher takes over for the session.
+          emit({ type: "fallback", reason: "unavailable" });
+        } else {
+          emit({ type: "error", message: "I lost the connection for a moment. You can try again, or continue with a designer on WhatsApp." });
+          emit({ type: "link", label: "Talk to a designer on WhatsApp", href: FALLBACK, external: true });
+        }
         emit({ type: "done" });
       } finally {
         clearTimeout(timer);

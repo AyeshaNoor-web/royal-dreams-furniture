@@ -108,6 +108,7 @@ export function useChat(ai: boolean) {
         for (const line of lines) {
           if (!line.trim()) continue;
           const e = JSON.parse(line) as { type: string; text?: string; label?: string; href?: string; external?: boolean; message?: string };
+          if (e.type === "fallback") { setMode("matcher"); setTyping(false); setMessages((ms) => ms.filter((m) => m.id !== id)); answerLocally(text); return; }
           if (e.type === "text") { setTyping(false); patch(id, (m) => ({ ...m, text: m.text + e.text })); }
           else if (e.type === "link" && e.href) patch(id, (m) => ({ ...m, links: [...(m.links ?? []), { label: e.label ?? "Open", href: e.href!, external: e.external }] }));
           else if (e.type === "error") { setTyping(false); patch(id, (m) => ({ ...m, text: (m.text ? m.text + "\n" : "") + (e.message ?? ERROR_TEXT) })); }

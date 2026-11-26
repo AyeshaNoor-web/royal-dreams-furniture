@@ -77,6 +77,17 @@ describe("POST /api/chat", () => {
     spy.mockRestore();
   });
 
+  it("turns a key, credits or permission rejection into a fallback event so the matcher answers", async () => {
+    for (const status of [401, 402, 403]) {
+      resetMemoryLimiter();
+      streamMock.mockImplementation(() => { throw Object.assign(new Error("rejected"), { status }); });
+      const spy = vi.spyOn(console, "error").mockImplementation(() => undefined);
+      const ev = await events(await post({ messages: [{ role: "user", content: "hello" }] }));
+      expect(ev.map((e) => e.type)).toEqual(["fallback", "done"]);
+      spy.mockRestore();
+    }
+  });
+
   it("rate limits after 20 messages a minute from one IP", async () => {
     streamMock.mockReturnValue(scripted("ok"));
     let last = 0;

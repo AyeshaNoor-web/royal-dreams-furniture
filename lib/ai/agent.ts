@@ -10,7 +10,9 @@ export type ChatEvent =
   | { type: "text"; text: string }
   | { type: "link"; label: string; href: string; external?: boolean }
   | { type: "done" }
-  | { type: "error"; message: string };
+  | { type: "error"; message: string }
+  /** The API refused us (no credits, bad key, no permission): the browser should answer with the keyword matcher instead. */
+  | { type: "fallback"; reason: string };
 
 /** The narrow slice of the SDK the agent needs, so tests can inject a fake. */
 export interface ChatClient {
