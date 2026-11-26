@@ -102,3 +102,9 @@ Status as of 14 Nov 2026. Tick items off as they are completed. Items marked **n
 - [ ] Estimator quick-start presets (1-bed, 2-bed, 3-bed, 5-bed) are PLACEHOLDER baskets in `config/pricing.config.ts` (`presets`). Ask the client what a typical home of each size actually orders and replace the sizes.
 - [ ] "Custom or ready-made?" on the TV unit, fitted wardrobe and walk-in closet pages, and the four-step "How it goes" timeline on every collection page, are PLACEHOLDER copy in `lib/collection-notes.ts`, written in the site's voice from facts already on the site. The client should rewrite them in their own words. Both sections carry a `data-placeholder-copy` attribute until then.
 
+## 11. Black-and-gold theme and project sets, 26 Nov 2026 (branch feature/estimator-assistant)
+
+- [ ] The client asked for the dark look back (screenshot of the earlier black site with the gold wave header). Tokens in `tailwind.config.ts` are now near-black surfaces, cream text and the brand gold; the token names (`beige` for surfaces, `charcoal` for text) are unchanged so every component kept working. Contrast was recomputed: cream on black 16.6:1, muted text 8.9:1, gold text 10.3:1, black on gold buttons 7.1:1, white on the WhatsApp teal 5.6:1. If the client changes their mind again, the off-white values are in the git history of commit aa5ad14.
+- [ ] The gold wave texture (`.wave-gold`, and the hero background) is an inline SVG of flowing lines, no image file. Opacity and spacing are set in `app/globals.css`.
+- [ ] Project sets: photos and videos of one project share a `set` id in `lib/gallery.ts`. Opening any photo of a set shows the others as thumbnails under it, including the video, which plays inside the lightbox. First set: the walnut-and-black-marble media wall, three photos and one video received on 26 Nov (files `tv-units-15` to `17.jpg`, `tv-units-10.mp4`). To group future projects, add the same `set` value to each entry.
+

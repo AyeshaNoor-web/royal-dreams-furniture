@@ -41,10 +41,10 @@ export default function NewsletterForm() {
         autoComplete="email"
         className="flex-1 bg-transparent border border-beige/25 px-4 py-3 font-dm text-sm text-beige-light placeholder:text-beige/40 focus:border-gold transition-colors"
       />
-      <button type="submit" disabled={status === "submitting"} className="px-6 py-3 bg-beige-light text-[14px] font-medium text-charcoal hover:bg-gold transition-colors disabled:opacity-60">
+      <button type="submit" disabled={status === "submitting"} className="min-h-[48px] bg-gold px-6 py-3 text-[14px] font-medium text-beige transition-colors hover:bg-gold-dark disabled:opacity-60">
         {status === "submitting" ? "Joining" : "Subscribe"}
       </button>
-      {status === "error" && <p role="alert" className="sm:basis-full font-dm text-xs text-red-300">{errorText || "Please check the address and try again."}</p>}
+      {status === "error" && <p role="alert" className="sm:basis-full font-dm text-xs text-danger">{errorText || "Please check the address and try again."}</p>}
     </form>
   );
 }

@@ -58,7 +58,7 @@ export default async function CollectionPage({ params }: Props) {
               </a>
             </div>
           </div>
-          <GalleryGrid images={images} paramKey="type" filters={hasTypes ? cat.types : undefined} />
+          <GalleryGrid images={images} videos={cat.videos} paramKey="type" filters={hasTypes ? cat.types : undefined} />
         </div>
       </section>
 

@@ -10,7 +10,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ eyebrow, title, intro }: PageHeaderProps) {
   return (
-    <section className="bg-beige-light border-b border-border">
+    <section className="wave-gold relative overflow-hidden border-b border-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-10 lg:pt-16 lg:pb-14">
         <Reveal y={12}>
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}

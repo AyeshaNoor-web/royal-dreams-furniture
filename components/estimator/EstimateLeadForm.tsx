@@ -72,7 +72,7 @@ export default function EstimateLeadForm({ summary, whatsapp }: { summary: strin
         <span>I agree that Modern Furniture Collection may contact me about this estimate, as described in the <Link href="/privacy-policy" className="underline underline-offset-4 hover:text-charcoal">privacy policy</Link>.</span>
       </label>
       <div className="sm:col-span-2"><Turnstile onToken={setToken} /></div>
-      {status === "error" && <p role="alert" className="text-[14px] text-red-800 sm:col-span-2">{errorText}</p>}
+      {status === "error" && <p role="alert" className="text-[14px] text-danger sm:col-span-2">{errorText}</p>}
       <div className="flex flex-wrap gap-3 sm:col-span-2">
         <button type="button" onClick={submit} disabled={status === "sending"} className="btn-dark min-h-[48px] disabled:opacity-60">{status === "sending" ? "Sending\u2026" : "Send estimate"}</button>
         <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[48px]"><WhatsAppIcon className="h-4 w-4" /> WhatsApp instead</a>

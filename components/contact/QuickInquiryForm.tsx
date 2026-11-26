@@ -74,7 +74,7 @@ export default function QuickInquiryForm() {
         <textarea id="q-message" rows={3} value={form.message} onChange={update("message")} className={field + " resize-y"} placeholder="Room size, finishes you like, timeline" />
       </div>
       <input type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={update("company")} className="hidden" aria-hidden="true" />
-      {status === "error" && <p role="alert" className="sm:col-span-2 font-dm text-sm text-red-700">{errorText || "Something went wrong. Please try again or use WhatsApp."}</p>}
+      {status === "error" && <p role="alert" className="sm:col-span-2 font-dm text-sm text-danger">{errorText || "Something went wrong. Please try again or use WhatsApp."}</p>}
       <div className="sm:col-span-2"><Turnstile onToken={setTurnstileToken} /></div>
       <div className="sm:col-span-2 flex flex-col sm:flex-row gap-3 pt-1">
         <button type="submit" disabled={status === "submitting"} className="btn-dark disabled:opacity-60">

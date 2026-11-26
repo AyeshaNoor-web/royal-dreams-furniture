@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useMemo, useEffect } from "react";
 import Lightbox from "@/components/motion/Lightbox";
-import type { GalleryImage } from "@/lib/gallery";
+import type { GalleryImage, GalleryVideo } from "@/lib/gallery";
 
 export interface GridImage extends GalleryImage {
   category: string;
@@ -12,6 +12,8 @@ export interface GridImage extends GalleryImage {
 
 interface GalleryGridProps {
   images: GridImage[];
+  /** Videos of the same projects, shown in the lightbox next to their photos. */
+  videos?: GalleryVideo[];
   filters?: { slug: string; title: string }[];
   /** Query-string key that pre-selects a filter, e.g. /gallery?c=sofas. Read on the client so the page itself stays static. */
   paramKey?: string;
@@ -19,7 +21,7 @@ interface GalleryGridProps {
 
 const PAGE = 24;
 
-export default function GalleryGrid({ images, filters, paramKey = "c" }: GalleryGridProps) {
+export default function GalleryGrid({ images, videos, filters, paramKey = "c" }: GalleryGridProps) {
   const [active, setActive] = useState<string>("all");
   const [open, setOpen] = useState<number | null>(null);
   const [limit, setLimit] = useState(PAGE);
@@ -81,7 +83,7 @@ export default function GalleryGrid({ images, filters, paramKey = "c" }: Gallery
         </div>
       )}
 
-      <Lightbox images={visible} index={open} onClose={() => setOpen(null)} onChange={setOpen} />
+      <Lightbox images={visible} videos={videos} index={open} onClose={() => setOpen(null)} onChange={setOpen} />
     </div>
   );
 }

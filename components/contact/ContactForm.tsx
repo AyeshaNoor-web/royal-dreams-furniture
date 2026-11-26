@@ -76,7 +76,7 @@ export default function ContactForm() {
             <input type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={update("company")} className="hidden" aria-hidden="true" />
 
             {status === "error" && (
-              <p role="alert" className="sm:col-span-2 text-[15px] text-red-800">{errorText || "Something went wrong sending your message. Please try again or use WhatsApp below."}</p>
+              <p role="alert" className="sm:col-span-2 text-[15px] text-danger">{errorText || "Something went wrong sending your message. Please try again or use WhatsApp below."}</p>
             )}
 
             <div className="sm:col-span-2"><Turnstile onToken={setTurnstileToken} /></div>

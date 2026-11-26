@@ -7,6 +7,8 @@ export interface GalleryImage {
   alt: string;
   /** Sub-type within the category, e.g. "l-shape" or "kids-bed" */
   type?: string;
+  /** Photos and videos of the same project share a set id; the lightbox shows them together. */
+  set?: string;
 }
 
 export interface GalleryVideo {
@@ -16,6 +18,7 @@ export interface GalleryVideo {
   h: number;
   duration: number;
   alt: string;
+  set?: string;
 }
 
 export interface CategoryType {
@@ -457,6 +460,9 @@ export const categories: Category[] = [
       "alt": "Fluted beige media wall with backlit TV panel and floating console"
     },
     "images": [
+      {"src": "/images/tv-units/tv-units-15.jpg", "w": 1200, "h": 1600, "alt": "Walnut slat media wall with a black marble TV panel and a floating console, before the lighting is switched on", "set": "tv-units-walnut-marble"},
+      {"src": "/images/tv-units/tv-units-16.jpg", "w": 960, "h": 1280, "alt": "Walnut slat media wall with black marble TV panel, lit display shelving and a glowing console", "set": "tv-units-walnut-marble"},
+      {"src": "/images/tv-units/tv-units-17.jpg", "w": 960, "h": 1280, "alt": "The same walnut and marble media wall in the evening, slats and shelves backlit in warm light", "set": "tv-units-walnut-marble"},
       {
         "src": "/images/tv-units/tv-units-05.jpg",
         "w": 960,
@@ -544,6 +550,7 @@ export const categories: Category[] = [
     ],
     "group": "living",
     "videos": [
+      {"src": "/video/tv-units/tv-units-10.mp4", "poster": "/video/tv-units/tv-units-10.jpg", "w": 576, "h": 1024, "duration": 9, "alt": "Walkthrough of the walnut slat and black marble media wall with its lighting on", "set": "tv-units-walnut-marble"},
       {
         "src": "/video/tv-units/tv-units-08.mp4",
         "poster": "/video/tv-units/tv-units-08.jpg",

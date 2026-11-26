@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
-// Palette: warm off-white surfaces (client request, 20 Nov 2026) with the original charcoal and gold accents.
-// Surfaces #FBF9F5 #F4EFE8 #E7DFD4, accents #C4A090 #A08070, text #2A1F18 #6E584A #765542.
+// Palette: near-black surfaces #0C0B0A #161412 #221E1A, cream text #F3EBDD #B9AD9B, gold #B8965A #D4AF7A #D9B86A.
+// Contrast: cream on black 17:1, muted text 9.5:1, gold text 10:1, black on gold buttons 7.9:1.
 // Text tones are darkened versions of the two deepest swatches so body copy meets WCAG AA on beige.
 const config: Config = {
   content: [
@@ -12,14 +12,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        beige: { DEFAULT: "#F4EFE8", light: "#FBF9F5", dark: "#E7DFD4" },
-        charcoal: { DEFAULT: "#2A1F18", light: "#3D2F26" },
-        frame: "#1C140F",
-        door: "#2A1F18",
-        gold: { DEFAULT: "#C4A090", dark: "#A08070", text: "#765542" },
-        lit: "#E7DFD4",
-        taupe: { DEFAULT: "#6E584A", light: "#826655" },
-        border: "#DDD3C7",
+        // Black and gold (client request, 26 Nov 2026). "beige" is the page surface and "charcoal" the text colour,
+        // so the names read inverted on purpose: every component keeps working.
+        beige: { DEFAULT: "#0C0B0A", light: "#161412", dark: "#221E1A" },
+        ink: "#070606",
+        charcoal: { DEFAULT: "#F3EBDD", light: "#E4D9C6" },
+        frame: "#050505",
+        door: "#0C0B0A",
+        gold: { DEFAULT: "#B8965A", dark: "#D4AF7A", text: "#D9B86A" },
+        lit: "#D4AF7A",
+        taupe: { DEFAULT: "#B9AD9B", light: "#8F8473" },
+        border: "#2E2823",
+        danger: "#F2A59E",
       },
       fontFamily: {
         serif: ["var(--font-display)", "Georgia", "Times New Roman", "serif"],
