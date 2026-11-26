@@ -20,7 +20,8 @@ export default function RecentWork() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-8 flex items-end justify-between gap-6 sm:mb-10">
           <div>
-            <h2 className="ruled-heading font-serif text-display-md text-charcoal">Recent work</h2>
+            <p className="eyebrow mb-4">Gallery</p>
+          <h2 className="font-serif text-display-md text-charcoal">Recent work</h2>
             <p className="mt-3 max-w-lg text-[15px] text-taupe">Rooms we have finished for clients across the UAE.</p>
           </div>
           <Link href="/gallery" className="hidden text-link hover:text-gold-text sm:inline-block">See the full gallery</Link>

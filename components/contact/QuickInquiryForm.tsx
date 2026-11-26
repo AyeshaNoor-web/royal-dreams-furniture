@@ -3,13 +3,14 @@
 import { useState } from "react";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import Turnstile from "@/components/shared/Turnstile";
-import { whatsappLink, services } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
+import InterestChips from "./InterestChips";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const field =
-  "w-full bg-beige-light border border-border px-4 py-3 font-dm text-sm text-charcoal placeholder:text-taupe-light focus:border-gold-dark transition-colors";
-const label = "block text-[14px] text-charcoal mb-1.5";
+  "w-full border border-border bg-beige px-4 py-3.5 font-dm text-[16px] text-charcoal placeholder:text-taupe-light transition-[border-color,box-shadow] focus:border-gold focus:shadow-[0_0_0_3px_rgba(185,138,82,0.25)]";
+const label = "eyebrow mb-2 block";
 
 export default function QuickInquiryForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -49,7 +50,7 @@ export default function QuickInquiryForm() {
   }
 
   return (
-    <form onSubmit={submit} className="bg-beige-light border border-border p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-2 gap-4" noValidate>
+    <form onSubmit={submit} className="grid grid-cols-1 gap-5 border border-border bg-beige-light p-6 sm:grid-cols-2 sm:p-8" noValidate>
       <div className="sm:col-span-2">
         <h3 className="font-serif text-2xl text-charcoal">What are you planning?</h3>
       </div>
@@ -62,12 +63,8 @@ export default function QuickInquiryForm() {
         <input id="q-phone" name="phone" required type="tel" value={form.phone} onChange={update("phone")} className={field} placeholder="050 000 0000" autoComplete="tel" />
       </div>
       <div className="sm:col-span-2">
-        <label htmlFor="q-interest" className={label}>Interest</label>
-        <select id="q-interest" value={form.interest} onChange={update("interest")} className={field}>
-          <option value="">Select a speciality</option>
-          {services.map((s) => <option key={s}>{s}</option>)}
-          <option>Full Villa Joinery</option>
-        </select>
+        <p id="q-interest-label" className={label}>What are you planning?</p>
+        <InterestChips idPrefix="q-interest" value={form.interest} onChange={(v) => setForm((f) => ({ ...f, interest: v }))} />
       </div>
       <div className="sm:col-span-2">
         <label htmlFor="q-message" className={label}>Message (optional)</label>

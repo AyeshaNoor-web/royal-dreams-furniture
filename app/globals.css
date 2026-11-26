@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html { -webkit-text-size-adjust: 100%; overflow-x: clip; -webkit-tap-highlight-color: transparent; color-scheme: dark; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; -webkit-tap-highlight-color: transparent; color-scheme: light; }
 
 body {
-  background-color: #0C0B0A;
-  color: #F3EBDD;
+  background-color: #FAF5EF;
+  color: #241A12;
   font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,33 +23,43 @@ h3, h4 { font-weight: 500; }
 h2 { text-wrap: balance; }
 .tnum { font-variant-numeric: tabular-nums; }
 
-::selection { background-color: #B8965A; color: #0C0B0A; }
+::selection { background-color: #B98A52; color: #1C140E; }
 
 @layer components {
   .btn {
     @apply inline-flex min-h-[52px] items-center justify-center gap-2.5 px-7 font-dm text-[15px] font-medium transition-colors duration-200;
   }
-  /* Primary: gold on black. Secondary: gold hairline. Tertiary: cream fill. */
-  .btn-dark { @apply btn bg-gold text-beige hover:bg-gold-dark; }
-  .btn-line { @apply btn border border-gold/60 text-charcoal hover:border-gold hover:bg-gold/10; }
-  .btn-lit { @apply btn bg-charcoal text-beige hover:bg-charcoal-light; }
-  /* WhatsApp: a dark teal, because white on the light green (#25D366) is 2:1 and on #128C7E only 4.1:1. #0E7566 gives 5.6:1. */
-  .btn-wa { @apply btn bg-[#0E7566] text-white hover:bg-[#0B5F53]; }
+  /* Primary: espresso ink. Secondary: ink hairline. Brass fill is for the rare moment. WhatsApp buttons are ink
+     with a green icon only, never a green slab. On dark sections use the -light variants. */
+  .btn-dark { @apply btn bg-charcoal text-beige hover:bg-charcoal-light; }
+  .btn-line { @apply btn border border-charcoal/40 text-charcoal hover:border-charcoal hover:bg-charcoal/[0.04]; }
+  .btn-lit { @apply btn bg-gold text-charcoal hover:bg-gold-dark hover:text-beige; }
+  .btn-wa { @apply btn bg-charcoal text-beige hover:bg-charcoal-light; }
+  .btn-wa svg, .btn-wa-light svg { color: #25D366; }
+  .btn-wa-light { @apply btn bg-beige text-charcoal hover:bg-beige-light; }
+  .btn-line-light { @apply btn border border-beige/50 text-beige hover:border-beige hover:bg-beige/10; }
   /* Standalone text links: a 44px tall hit area without changing the type. Inline links inside sentences use .text-link-inline. */
+  /* Brass underline that sweeps in from the left on hover. */
   .text-link {
-    @apply inline-flex min-h-[44px] items-center font-dm text-[15px] underline decoration-1 underline-offset-[6px] transition-colors duration-200;
+    @apply relative inline-flex min-h-[44px] items-center font-dm text-[15px] no-underline transition-colors duration-200;
+    background-image: linear-gradient(#B98A52, #B98A52), linear-gradient(#E3D7C9, #E3D7C9);
+    background-size: 0% 1px, 100% 1px;
+    background-position: 0 calc(100% - 10px), 0 calc(100% - 10px);
+    background-repeat: no-repeat;
+    transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s;
   }
+  .text-link:hover { background-size: 100% 1px, 100% 1px; }
   .text-link-inline {
     @apply underline decoration-1 underline-offset-4 transition-colors duration-200;
   }
 }
 
-:focus-visible { outline: 2px solid #D4AF7A; outline-offset: 2px; }
+:focus-visible { outline: 2px solid #8A5A2B; outline-offset: 2px; }
 
 .skip-link {
   position: fixed; top: 12px; left: 12px; z-index: 100;
   transform: translateY(-200%);
-  background: #B8965A; color: #0C0B0A;
+  background: #241A12; color: #FAF5EF;
   padding: 12px 18px; font-size: 14px;
   transition: transform 0.2s ease;
 }
@@ -88,9 +98,9 @@ h2 { text-wrap: balance; }
    gold tick that draws in as it scrolls into view. Pure CSS; the draw uses scroll-driven animation where
    supported and is simply present elsewhere. */
 :root {
-  --rule: #2E2823;
-  --rule-dark: rgba(212, 175, 122, 0.28);
-  --tick: #B8965A;
+  --rule: #E3D7C9;
+  --rule-dark: rgba(185, 138, 82, 0.35);
+  --tick: #B98A52;
 }
 .section-rule { position: relative; }
 .section-rule::before {
@@ -135,8 +145,8 @@ h2 { text-wrap: balance; }
 
 /* First paragraph under a display heading: a size up, looser, in the body face. */
 .lede {
-  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  line-height: 1.55;
 }
 
 /* Picture mount: a thin off-white mat and hairline around key photographs, without touching layout. */
@@ -145,7 +155,7 @@ h2 { text-wrap: balance; }
   position: absolute;
   inset: 0;
   pointer-events: none;
-  border: 6px solid #161412;
+  border: 6px solid #FAF5EF;
   outline: 1px solid var(--rule);
   outline-offset: -7px;
 }
@@ -158,8 +168,8 @@ h2 { text-wrap: balance; }
     inset: 0;
     z-index: 2147483000;
     pointer-events: none;
-    opacity: 0.05;
-    mix-blend-mode: screen;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
     background-size: 160px 160px;
   }
@@ -203,11 +213,12 @@ h2 { text-wrap: balance; }
 .eyebrow {
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 12px;
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--eyebrow, #D9B86A);
+  color: var(--eyebrow, #8A5A2B);
 }
-.on-dark { --eyebrow: #D4AF7A; }
+.on-dark { --eyebrow: #B98A52; }
 
 /* ─── Hero: looping stream of project cards ─────────────────────────────────── */
 .hero-stage { height: 50svh; min-height: 360px; max-height: 760px; }
@@ -234,9 +245,9 @@ h2 { text-wrap: balance; }
 .hero-card {
   flex: none;
   padding: 6px;
-  background: #161412;
-  border: 1px solid #2E2823;
-  box-shadow: 0 22px 44px -30px rgba(0, 0, 0, 0.8);
+  background: #FAF5EF;
+  border: 1px solid #E3D7C9;
+  box-shadow: 0 22px 44px -30px rgba(36, 26, 18, 0.45);
 }
 
 /* Hero background: layered beige light with a faint fluted-panel texture on the left */
@@ -275,26 +286,30 @@ h2 { text-wrap: balance; }
 
 /* ─── Glass ──────────────────────────────────────────────────────────────────── */
 .nav-glass {
-  background: rgba(12, 11, 10, 0.72);
+  background: rgba(250, 245, 239, 0.72);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid rgba(212, 175, 122, 0.22);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 18px 40px -28px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(36, 26, 18, 0.08);
+  box-shadow: 0 1px 0 rgba(36, 26, 18, 0.04), 0 18px 40px -28px rgba(36, 26, 18, 0.25);
+  transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
   border-radius: 14px;
 }
+/* Over the dark hero at the top of the home page: no glass, cream text; the frost returns on scroll. */
+.nav-glass.nav-clear { background: transparent; border-color: transparent; box-shadow: none; }
 @supports not (backdrop-filter: blur(1px)) {
-  .nav-glass { background: rgba(12, 11, 10, 0.97); }
+  .nav-glass { background: rgba(250, 245, 239, 0.97); }
 }
 /* Frosted secondary button for light surfaces and photographs */
 .btn-glass {
   @apply btn text-charcoal;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(250, 245, 239, 0.1);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(212, 175, 122, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 24px -18px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(250, 245, 239, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 10px 24px -18px rgba(0, 0, 0, 0.6);
+  color: #FAF5EF;
 }
-.btn-glass:hover { background: rgba(184, 150, 90, 0.16); }
+.btn-glass:hover { background: rgba(250, 245, 239, 0.2); }
 .btn-glass-light {
   @apply btn text-beige-light;
   background: rgba(249, 243, 240, 0.16);

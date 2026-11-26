@@ -42,7 +42,7 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
           exit={reduce ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
           transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.8 }}
           style={{ transformOrigin: "100% 100%" }}
-          className="fixed bottom-[92px] right-6 z-[69] hidden items-center gap-3 rounded-full border border-gold/40 bg-beige-light py-2 pl-2 pr-2 shadow-2xl shadow-black/50 lg:flex"
+          className="fixed bottom-[92px] right-6 z-[69] hidden items-center gap-3 rounded-full border border-border bg-beige py-2 pl-2 pr-2 shadow-2xl shadow-charcoal/20 lg:flex"
         >
           <Mascot className="h-10 w-10 shrink-0" wave />
           <button type="button" onClick={() => { dismiss(); onOpen(); }} className="min-h-[44px] pr-2 text-left font-dm text-[14px] text-charcoal [touch-action:manipulation]">

@@ -3,13 +3,14 @@
 import { useState } from "react";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import Turnstile from "@/components/shared/Turnstile";
-import { whatsappLink, services } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
+import InterestChips from "./InterestChips";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const field =
-  "w-full bg-beige-light border border-border px-4 py-3.5 text-base text-charcoal placeholder:text-taupe focus:border-charcoal";
-const label = "block text-[15px] text-charcoal mb-2";
+  "w-full border border-border bg-beige px-4 py-3.5 font-dm text-[16px] text-charcoal placeholder:text-taupe-light transition-[border-color,box-shadow] focus:border-gold focus:shadow-[0_0_0_3px_rgba(185,138,82,0.25)]";
+const label = "eyebrow mb-2 block";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -60,14 +61,9 @@ export default function ContactForm() {
               <label htmlFor="email" className={label}>Email</label>
               <input id="email" name="email" required type="email" value={form.email} onChange={update("email")} className={field} placeholder="you@example.com" autoComplete="email" />
             </div>
-            <div>
-              <label htmlFor="interest" className={label}>Interest</label>
-              <select id="interest" value={form.interest} onChange={update("interest")} className={field}>
-                <option value="">Select a speciality</option>
-                {services.map((s) => <option key={s}>{s}</option>)}
-                <option>Full Villa Joinery</option>
-                <option>Something else</option>
-              </select>
+            <div className="sm:col-span-2">
+              <p id="interest-label" className={label}>What are you planning?</p>
+              <InterestChips idPrefix="interest" value={form.interest} onChange={(v) => setForm((f) => ({ ...f, interest: v }))} />
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="message" className={label}>Message</label>

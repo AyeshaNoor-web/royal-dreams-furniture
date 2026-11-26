@@ -1,11 +1,10 @@
-import HeroCinematic from "@/components/home/HeroCinematic";
+import HeroGallery from "@/components/home/HeroGallery";
 import UspStrip from "@/components/home/UspStrip";
 import WhatWeMake from "@/components/home/WhatWeMake";
 import PlanByRoom from "@/components/home/PlanByRoom";
-import HowItWorks from "@/components/home/HowItWorks";
+import ProcessSticky from "@/components/home/ProcessSticky";
 import QuoteFactors from "@/components/home/QuoteFactors";
 import EstimatorTeaser from "@/components/home/EstimatorTeaser";
-import MeetAssistant from "@/components/home/MeetAssistant";
 import InquiryBand from "@/components/home/InquiryBand";
 import RecentWork from "@/components/home/RecentWork";
 import Reviews from "@/components/home/Reviews";
@@ -29,14 +28,13 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <HeroCinematic />
+      <HeroGallery />
       <UspStrip />
       <WhatWeMake />
       <PlanByRoom />
-      <HowItWorks />
+      <ProcessSticky />
       <QuoteFactors />
       <EstimatorTeaser />
-      <MeetAssistant />
       <InquiryBand />
       <RecentWork />
       <Reviews />

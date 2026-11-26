@@ -32,7 +32,7 @@ export default function LightboxStrip({ images, videos, currentSrc, onImage, onV
             <button type="button" onClick={() => onVideo(v)} aria-label={"Play video: " + v.alt} aria-current={v.src === currentSrc ? "true" : undefined} className={thumb(v.src === currentSrc)}>
               <Image src={v.poster} alt="" fill sizes="80px" className="object-cover" />
               <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-black/30">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-charcoal/90 text-beige">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-beige/90 text-charcoal">
                   <svg className="ml-0.5 h-3 w-3" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z" /></svg>
                 </span>
               </span>

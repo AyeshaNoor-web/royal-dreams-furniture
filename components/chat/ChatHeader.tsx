@@ -35,7 +35,7 @@ export default function ChatHeader({ ai, onReset, onClose, canReset }: Props) {
             <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 109-9 9 9 0 00-7 3.3M3 4v5h5" /></svg>
           </button>
         )}
-        <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" aria-label="Talk to a designer on WhatsApp" className={iconBtn + " text-[#128C7E]"}>
+        <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" aria-label="Talk to a designer on WhatsApp" className={iconBtn + " text-whatsapp"}>
           <WhatsAppIcon className="h-5 w-5" />
         </a>
         <button type="button" onClick={onClose} aria-label="Close chat" className={iconBtn + " text-charcoal"}>

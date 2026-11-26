@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Jost } from "next/font/google";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,16 +8,17 @@ import DevBanner from "@/components/shared/DevBanner";
 import { SITE } from "@/lib/site";
 import { aiChatEnabled } from "@/lib/flags";
 
-// Display: an elegant transitional serif that stays legible at card sizes. Body: geometric, quiet.
-const display = Playfair_Display({
+// Display: Fraunces, a high-contrast serif with a real italic. Body and labels: Instrument Sans, 400 and 500 only.
+const display = Fraunces({
   subsets: ["latin"],
   style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Jost({
+const body = Instrument_Sans({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-body",
   display: "swap",
 });
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#0C0B0A" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#FAF5EF" };
 
 // Search engines: one FurnitureStore entity with a stable @id, referenced by the WebSite. Only facts the site states.
 const businessJsonLd = {

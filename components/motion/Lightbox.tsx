@@ -15,7 +15,7 @@ interface LightboxProps {
   onChange: (next: number) => void;
 }
 
-const ctrl = "absolute flex h-11 w-11 items-center justify-center border border-charcoal/25 text-charcoal/90 transition-colors hover:border-lit hover:text-lit [touch-action:manipulation]";
+const ctrl = "absolute flex h-11 w-11 items-center justify-center border border-beige/25 text-beige/90 transition-colors hover:border-lit hover:text-lit [touch-action:manipulation]";
 
 export default function Lightbox({ images, videos = [], index, onClose, onChange }: LightboxProps) {
   const open = index !== null;
@@ -89,7 +89,7 @@ export default function Lightbox({ images, videos = [], index, onClose, onChange
             onVideo={setVideo}
           />
 
-          <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-[15px] tabular-nums text-charcoal/70">
+          <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-[15px] tabular-nums text-beige/70">
             {video ? "Video" : `${index! + 1} / ${total}`}
           </p>
 

@@ -35,7 +35,7 @@ export default function ContactPage() {
               <div className="bg-charcoal p-7 text-beige-light lg:p-8">
                 <h2 className="font-serif text-2xl">Quickest reply: WhatsApp</h2>
                 <p className="mt-2 text-[15px] text-beige/70">Message us with a photo of the room and we will come back to you the same working day.</p>
-                <a href={whatsappLink("Hello, I would like a free consultation for made-to-measure furniture.")} target="_blank" rel="noopener noreferrer" className="btn mt-6 w-full bg-[#0E7566] text-white hover:bg-[#0B5F53] sm:w-auto">
+                <a href={whatsappLink("Hello, I would like a free consultation for made-to-measure furniture.")} target="_blank" rel="noopener noreferrer" className="btn mt-6 w-full bg-charcoal text-beige hover:bg-charcoal-light [&_svg]:text-whatsapp sm:w-auto">
                   <WhatsAppIcon className="h-[18px] w-[18px]" /> Chat on WhatsApp
                 </a>
               </div>

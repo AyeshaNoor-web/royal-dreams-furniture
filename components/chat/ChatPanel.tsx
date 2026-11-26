@@ -101,7 +101,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
       <div className="border-t border-border bg-beige-light px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <div className="mb-2 flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-taupe">
           <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center gap-1.5 underline-offset-4 hover:text-charcoal hover:underline">
-            <WhatsAppIcon className="h-3.5 w-3.5 text-[#128C7E]" /> Talk to a designer
+            <WhatsAppIcon className="h-3.5 w-3.5 text-whatsapp" /> Talk to a designer
           </a>
           <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Book a free visit</a>
           <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center underline-offset-4 hover:text-charcoal hover:underline">Get a free quote</a>

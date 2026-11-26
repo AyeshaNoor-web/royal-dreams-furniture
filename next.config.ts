@@ -45,12 +45,12 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_ESTIMATOR_ENABLED: process.env.ESTIMATOR_ENABLED === "true" ? "true" : "false",
   },
   images: {
-    // Vercel's optimizer answered 402 (Hobby quota exhausted) on 26 Nov 2026 and every photo broke. The photos are
-    // already resized to 1600px or less, so they are served as-is until a self-hosted pipeline replaces this.
-    unoptimized: true,
-    formats: ["image/webp"],
-    deviceSizes: [360, 640, 768, 1024, 1280, 1536],
-    minimumCacheTTL: 31536000,
+    // Vercel's optimizer answered 402 (Hobby quota exhausted) on 26 Nov 2026 and every photo broke. Photos are now
+    // served as pre-made WebP siblings through lib/image-loader.ts; no optimizer, no quota.
+    loader: "custom",
+    loaderFile: "./lib/image-loader.ts",
+    deviceSizes: [480, 960, 1600],
+    imageSizes: [480],
   },
   async headers() {
     return [

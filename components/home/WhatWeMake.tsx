@@ -11,7 +11,8 @@ export default function WhatWeMake() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-10 flex items-end justify-between gap-6 lg:mb-12">
           <div>
-            <h2 className="ruled-heading font-serif text-display-lg text-charcoal">What we make</h2>
+            <p className="eyebrow mb-4">Collections</p>
+          <h2 className="font-serif text-display-lg text-charcoal">What we make</h2>
             <p className="mt-3 max-w-lg text-[15px] text-taupe">Eleven collections, all made to measure in our Dubai workshop and fitted by our own team.</p>
           </div>
           <Link href="/collections" className="hidden text-link hover:text-gold-text sm:inline-block">View all collections</Link>
