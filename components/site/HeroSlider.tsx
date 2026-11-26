@@ -42,35 +42,23 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/60 via-black/45 to-black/75" aria-hidden="true" />
 
       <div className="wrap flex min-h-[calc(100svh-4rem-60px)] flex-col justify-center pb-28 pt-14 text-center sm:min-h-[600px] lg:min-h-[min(calc(100svh-4.5rem),780px)] lg:pb-36">
-        <p className="mx-auto inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-black/30 px-4 py-1.5 font-dm text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-          Measured and fitted across the UAE
-        </p>
-        <h1 className="mx-auto mt-6 max-w-4xl font-dm text-[clamp(2.25rem,5.4vw,4.25rem)] font-medium leading-[1.05] tracking-[-0.04em]">
+        <h1 className="mx-auto max-w-4xl font-serif text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[1.1]">
           Made-to-measure furniture, built for your room
         </h1>
-        <p className="mx-auto mt-5 max-w-xl font-dm text-base leading-relaxed text-white/85 sm:text-lg">
+        <p className="mx-auto mt-5 max-w-xl font-dm text-lg leading-relaxed text-white/90 sm:text-xl">
           Sofas, beds, wardrobes, walk-in closets, media walls and curtains. One team measures, designs, builds and fits.
         </p>
         <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-stretch gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
           <Link href="/quote" className="btn-white">
             Get a free quote
-            <span className="btn-dot" aria-hidden="true">&#8599;</span>
           </Link>
           <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-glass"><WhatsAppIcon className="h-4 w-4" /> Discuss on WhatsApp</a>
         </div>
-        <p className="mt-5 font-dm text-sm text-white/80">
+        <p className="mt-5 font-dm text-base text-white/85">
           Want us to measure first?{" "}
           <a href={APPOINTMENT_LINK} target="_blank" rel="noopener noreferrer" className="font-semibold text-white underline underline-offset-4">Book a free home visit</a>
         </p>
-        <ul className="mx-auto mt-6 flex flex-col items-center gap-x-6 gap-y-2 font-dm text-[13px] text-white/85 sm:flex-row">
-          {ticks.map((t) => (
-            <li key={t} className="flex items-center gap-2">
-              <svg className="h-4 w-4 text-gold" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.2l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7z" /></svg>
-              {t}
-            </li>
-          ))}
-        </ul>
+        <p className="mx-auto mt-6 max-w-2xl font-dm text-[15px] text-white/80">{ticks.join(". ")}.</p>
       </div>
 
       <div className="absolute inset-x-0 bottom-0">

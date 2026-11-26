@@ -70,14 +70,14 @@ export default function HomePage() {
             {cats.slice(8).map((c) => (
               <Link key={c.slug} href={c.href} className="text-link">{c.title}</Link>
             ))}
-            <Link href="/collections" className="btn-line">View all products <span aria-hidden="true">&#8599;</span></Link>
+            <Link href="/collections" className="btn-line">View all products</Link>
           </div>
         </div>
       </section>
 
       <section className="bg-sand py-section-sm" aria-labelledby="rooms-h">
         <div className="wrap">
-          <h2 id="rooms-h" className="font-accent text-[2rem] font-medium leading-tight text-charcoal sm:text-[2.5rem]">Plan by room</h2>
+          <h2 id="rooms-h" className="h-lg">Plan by room</h2>
           <p className="lede mb-6 mt-2">Choose a room to see what we usually make for it.</p>
           <RoomTabs rooms={rooms} />
         </div>
@@ -85,7 +85,7 @@ export default function HomePage() {
 
       <section className="py-section-sm lg:py-section" aria-labelledby="designs-h">
         <div className="wrap">
-          <SectionHead align="left" eyebrow="Recent designs" title={<span id="designs-h">Open a design to see it in detail</span>} lede="One photo here. More photos, videos and a quote button on its own page." action={<Link href="/gallery" className="btn-line">See all our work <span aria-hidden="true">&#8599;</span></Link>} />
+          <SectionHead align="left" eyebrow="Recent designs" title={<span id="designs-h">Open a design to see it in detail</span>} lede="One photo here. More photos, videos and a quote button on its own page." action={<Link href="/gallery" className="btn-line">See all our work</Link>} />
           <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-5 md:grid-cols-4 lg:gap-x-6 lg:gap-y-12">
             {picks.map((p) => (
               <li key={p.href}><ProductCard item={p} /></li>

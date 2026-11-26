@@ -12,11 +12,10 @@ export default function FaqBlock({ faqs, title = "Frequently asked questions", l
     <section className="py-section-sm lg:py-section" aria-labelledby="faq-h">
       <div className="wrap grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="lg:col-span-5">
-          <p className="eyebrow mb-5">Got questions?</p>
-          <h2 id="faq-h" className="font-accent text-[2.25rem] font-medium leading-[1.05] text-charcoal sm:text-5xl">{title}</h2>
+          <h2 id="faq-h" className="h-lg">{title}</h2>
           <p className="mt-4 max-w-md font-dm text-[15px] leading-relaxed text-charcoal">{lede}</p>
-          <div className="mt-7 max-w-md rounded-2xl border border-border bg-white p-6">
-            <p className="font-accent text-xl font-medium text-charcoal">Something else?</p>
+          <div className="mt-7 max-w-md rounded-lg border border-border bg-white p-6">
+            <p className="font-serif text-lg font-medium text-charcoal">Something else?</p>
             <p className="mt-1.5 font-dm text-sm leading-relaxed text-taupe">Ask on WhatsApp, or use the chat button in the corner of the page. We reply within a working day.</p>
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-line mt-4"><WhatsAppIcon className="h-4 w-4 text-[#128C4B]" /> Ask a question</a>
           </div>
@@ -25,7 +24,7 @@ export default function FaqBlock({ faqs, title = "Frequently asked questions", l
           {faqs.map((f, i) => {
             const on = open === i;
             return (
-              <li key={f.q} className="rounded-2xl bg-mist">
+              <li key={f.q} className="rounded-lg bg-mist">
                 <h3>
                   <button type="button" aria-expanded={on} aria-controls={"faq-" + i} onClick={() => setOpen(on ? null : i)} className="flex w-full items-center justify-between gap-5 px-5 py-5 text-left font-dm text-[16px] font-medium leading-snug text-charcoal sm:px-7 sm:text-[17px]">
                     {f.q}

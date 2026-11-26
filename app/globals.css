@@ -4,19 +4,18 @@
 
 @layer base {
   html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
-  body { font-feature-settings: "ss01", "cv11"; }
-  ::selection { background: #7A5C2E; color: #fff; }
-  :focus-visible { outline: 2px solid #7A5C2E; outline-offset: 3px; border-radius: 4px; }
+    ::selection { background: #7D5740; color: #fff; }
+  :focus-visible { outline: 2px solid #7D5740; outline-offset: 3px; border-radius: 4px; }
   h1, h2, h3 { text-wrap: balance; }
 }
 
 @layer components {
   .wrap { @apply mx-auto w-full max-w-8xl px-5 sm:px-8 lg:px-10; }
 
-  .btn { @apply inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-6 py-3 font-dm text-sm font-semibold transition-colors duration-200; min-height: 46px; }
-  .btn-dark { @apply btn bg-charcoal text-white hover:bg-charcoal-light; }
-  .btn-accent { @apply btn bg-gold-dark text-white hover:bg-[#654b24]; }
-  .btn-lit { @apply btn bg-gold-dark text-white hover:bg-[#654b24]; }
+  .btn { @apply inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-md px-6 py-3 font-dm text-[15px] font-medium transition-colors duration-200; min-height: 46px; }
+  .btn-dark { @apply btn bg-ink text-white hover:bg-charcoal-light; }
+  .btn-accent { @apply btn bg-gold-dark text-white hover:bg-[#674632]; }
+  .btn-lit { @apply btn bg-gold-dark text-white hover:bg-[#674632]; }
   .btn-white { @apply btn bg-white text-charcoal hover:bg-sand; }
   .btn-line { @apply btn border border-charcoal/25 bg-white text-charcoal hover:border-charcoal; }
   .btn-glass { @apply btn border border-white/45 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20; }
@@ -31,23 +30,23 @@
   .eyebrow::after { content: ""; display: block; width: 2rem; height: 1px; margin-top: 0.75rem; background: currentColor; opacity: 0.55; }
   .eyebrow-center { @apply text-center; }
   .eyebrow-center::after { margin-left: auto; margin-right: auto; }
-  .on-dark .eyebrow { color: #D9C6A5; }
+  .on-dark .eyebrow { color: #E8D5C4; }
 
-  .h-xl { @apply font-dm text-display-xl font-medium text-charcoal; }
-  .h-lg { @apply font-dm text-display-lg font-medium text-charcoal; }
-  .h-md { @apply font-dm text-display-md font-medium text-charcoal; }
-  .lede { @apply font-dm text-base leading-relaxed text-taupe sm:text-[1.0625rem]; }
-  .card-title { @apply font-accent text-2xl font-medium leading-tight text-charcoal; letter-spacing: -0.01em; }
+  .h-xl { @apply font-serif text-display-xl font-medium text-charcoal; }
+  .h-lg { @apply font-serif text-display-lg font-medium text-charcoal; }
+  .h-md { @apply font-serif text-display-md font-medium text-charcoal; }
+  .lede { @apply font-dm text-[17px] leading-relaxed text-taupe sm:text-lg; }
+  .card-title { @apply font-serif text-xl font-medium leading-snug text-charcoal; }
 
   .card { @apply rounded-2xl border border-border bg-white; }
-  .chip { @apply inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2 font-dm text-sm font-medium text-charcoal transition-colors hover:border-charcoal/50; min-height: 40px; }
+  .chip { @apply inline-flex items-center gap-2 rounded-md border border-border bg-white px-4 py-2 font-dm text-sm font-medium text-charcoal transition-colors hover:border-charcoal/50; min-height: 40px; }
   .chip-on { @apply border-charcoal bg-charcoal text-white hover:border-charcoal; }
-  .field { @apply w-full rounded-xl border border-border bg-white px-4 py-3 font-dm text-base text-charcoal placeholder:text-taupe-light focus:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark/20; }
+  .field { @apply w-full rounded-md border border-border bg-white px-4 py-3 font-dm text-base text-charcoal placeholder:text-taupe-light focus:border-gold-dark focus:outline-none focus:ring-2 focus:ring-gold-dark/20; }
   .field-label { @apply mb-2 block font-dm text-sm font-semibold text-charcoal; }
   .price { @apply font-accent text-charcoal; }
 }
 
-.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: #1D1D1B; color: #fff; padding: 0.75rem 1rem; }
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: #2E211A; color: #fff; padding: 0.75rem 1rem; }
 .skip-link:focus { left: 0.5rem; top: 0.5rem; }
 
 .no-scrollbar { scrollbar-width: none; }
@@ -60,18 +59,18 @@
 .hero-bar { transform-origin: left; animation: hero-bar 6s linear both; }
 
 /* Range slider used by the estimator. */
-.range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: #E4E1DA; }
-.range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #1D1D1B; border: 4px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer; }
-.range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #1D1D1B; border: 4px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer; }
+.range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: #DCC9B8; }
+.range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #2E211A; border: 4px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer; }
+.range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #2E211A; border: 4px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); cursor: pointer; }
 
 /* Faint lattice behind the closing band. */
-.lattice { background-image: radial-gradient(circle at 1px 1px, rgba(122,92,46,0.16) 1px, transparent 0); background-size: 22px 22px; }
+.lattice { background-image: radial-gradient(circle at 1px 1px, rgba(125,87,64,0.16) 1px, transparent 0); background-size: 22px 22px; }
 
 @keyframes chat-pulse { 0% { transform: scale(1); opacity: 0.5; } 70%, 100% { transform: scale(1.5); opacity: 0; } }
 .chat-pulse { animation: chat-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
 
 /* Kept for older components that are still on disk. */
-.nav-glass { background: rgba(255,255,255,0.86); backdrop-filter: blur(14px); border: 1px solid #E4E1DA; }
+.nav-glass { background: rgba(255,255,255,0.86); backdrop-filter: blur(14px); border: 1px solid #DCC9B8; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

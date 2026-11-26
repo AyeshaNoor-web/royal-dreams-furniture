@@ -10,15 +10,15 @@ import ChatWidget from "@/components/chat/ChatWidget";
 import { SITE } from "@/lib/site";
 
 // Fonts are bundled in app/fonts: fetching Google Fonts at build time has stalled builds on the development machine.
-const body = localFont({ src: "./fonts/manrope.woff2", weight: "400 800", variable: "--font-body", display: "swap" });
-const accent = localFont({
+const display = localFont({
   src: [
-    { path: "./fonts/cormorant.woff2", weight: "400 700", style: "normal" },
-    { path: "./fonts/cormorant-italic.woff2", weight: "400 700", style: "italic" },
+    { path: "./fonts/playfair.woff2", weight: "400 700", style: "normal" },
+    { path: "./fonts/playfair-italic.woff2", weight: "400 700", style: "italic" },
   ],
-  variable: "--font-accent",
+  variable: "--font-display",
   display: "swap",
 });
+const body = localFont({ src: "./fonts/jost.woff2", weight: "400 600", variable: "--font-body", display: "swap" });
 
 const title = SITE.name + " | Made-to-Measure Furniture, Sofas, Beds & Wardrobes in the UAE";
 const description =
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#262624" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#6B5344" };
 
 const menu: MenuGroup[] = groups.map((g) => ({
   title: g.title,
@@ -58,7 +58,7 @@ const menu: MenuGroup[] = groups.map((g) => ({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={body.variable + " " + accent.variable}>
+    <html lang="en" className={display.variable + " " + body.variable}>
       <body className="bg-beige font-dm text-charcoal antialiased">
         <a href="#main" className="skip-link">Skip to content</a>
         <Header menu={menu} />

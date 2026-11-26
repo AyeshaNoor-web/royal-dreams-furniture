@@ -31,7 +31,7 @@ export default function AboutPage() {
       <section className="py-section-sm">
         <div className="wrap grid grid-cols-3 gap-3 lg:gap-6">
           {shots.map((s) => (
-            <div key={s.src} className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-mist">
+            <div key={s.src} className="relative aspect-[3/4] overflow-hidden rounded-lg bg-mist">
               <Image src={s.src} alt={s.alt} fill sizes="33vw" className="object-cover" />
             </div>
           ))}
@@ -41,13 +41,12 @@ export default function AboutPage() {
       <section className="py-section-sm lg:py-section">
         <div className="wrap grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-5">How we work</p>
             <h2 className="h-lg">What sets our work apart</h2>
           </div>
           <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
             {values.map((v) => (
               <div key={v.title} className="border-t border-border pt-4">
-                <h3 className="font-accent text-2xl font-medium">{v.title}</h3>
+                <h3 className="font-serif text-xl font-medium">{v.title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-taupe">{v.desc}</p>
               </div>
             ))}

@@ -28,10 +28,10 @@ export default function RoomTabs({ rooms }: { rooms: Room[] }) {
           {room.tiles.map((t) => (
             <li key={t.href} className="w-[62%] shrink-0 snap-start sm:w-auto">
               <Link href={t.href} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-mist">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-mist">
                   <Image src={t.src} alt={t.alt} fill sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 62vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
                 </div>
-                <p className="mt-3 font-accent text-[1.35rem] font-medium leading-tight text-charcoal group-hover:text-gold-dark">{t.title}</p>
+                <p className="mt-3 font-serif text-[1.125rem] font-medium leading-tight text-charcoal group-hover:text-gold-dark">{t.title}</p>
                 <p className={"mt-1 font-dm text-[13px] " + (t.priced ? "font-semibold text-gold-dark" : "text-taupe")}>{t.price}</p>
               </Link>
             </li>

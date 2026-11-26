@@ -38,17 +38,16 @@ export default function PricingPage() {
         <div className="wrap">
           <SectionHead align="left" eyebrow="Published rates" title={<span id="rates-h">Wardrobes and walk-in closets</span>} lede="Priced per square metre of cabinet front: the width of the wall times its height. The door type sets the rate." />
           <div className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {cabinetRates.map((r, n) => (
-              <div key={r.id} className={"flex flex-col rounded-3xl border p-7 " + (n === 0 ? "border-charcoal bg-charcoal text-white" : "border-border bg-white text-charcoal")}>
-                <p className={"font-dm text-[11px] font-semibold uppercase tracking-[0.18em] " + (n === 0 ? "text-gold" : "text-taupe")}>{n === 0 ? "Starting from" : "Door option " + (n + 1)}</p>
-                <p className="mt-3 font-accent text-5xl font-medium leading-none">{aed(r.rate)}</p>
-                <p className={"mt-1.5 font-dm text-sm " + (n === 0 ? "text-white/70" : "text-taupe")}>per square metre of cabinet front</p>
-                <h3 className="mt-6 font-accent text-2xl font-medium leading-tight">{r.label}</h3>
-                <p className={"mt-1.5 flex-1 font-dm text-[14.5px] leading-relaxed " + (n === 0 ? "text-white/75" : "text-taupe")}>{r.blurb}</p>
+            {cabinetRates.map((r) => (
+              <div key={r.id} className="flex flex-col rounded-lg border border-border bg-white p-7 text-charcoal">
+                <h3 className="font-serif text-xl leading-snug">{r.label}</h3>
+                <p className="mt-4 font-serif text-4xl leading-none">{aed(r.rate)}</p>
+                <p className="mt-2 font-dm text-[15px] text-taupe">per square metre of cabinet front</p>
+                <p className="mt-5 flex-1 border-t border-border pt-4 font-dm text-[16px] leading-relaxed text-taupe">{r.blurb}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 flex flex-col gap-4 rounded-2xl bg-sand p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="mt-5 flex flex-col gap-4 rounded-lg bg-sand p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <p className="max-w-2xl font-dm text-[14px] leading-relaxed text-charcoal">These rates are a guide for the cabinets. Lighting, islands, drawers and accessories are quoted after the free measurement, and your written quotation is the price you pay.</p>
             <div className="flex shrink-0 flex-wrap gap-2.5">
               {priced.map((c) => (
@@ -73,11 +72,11 @@ export default function PricingPage() {
             {unpriced.map((c) => {
               const f = factorsOf(c.slug);
               return (
-                <li key={c.slug} className="flex flex-col rounded-2xl border border-border bg-white p-5">
+                <li key={c.slug} className="flex flex-col rounded-lg border border-border bg-white p-5">
                   <div className="flex items-center gap-4">
-                    <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-mist"><Image src={c.cover.src} alt="" fill sizes="64px" className="object-cover" /></span>
+                    <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md bg-mist"><Image src={c.cover.src} alt="" fill sizes="64px" className="object-cover" /></span>
                     <div>
-                      <h3 className="font-accent text-2xl font-medium leading-tight text-charcoal">{c.title}</h3>
+                      <h3 className="font-serif text-xl font-medium leading-tight text-charcoal">{c.title}</h3>
                       <p className="font-dm text-[13px] text-taupe">Quoted after a free visit</p>
                     </div>
                   </div>

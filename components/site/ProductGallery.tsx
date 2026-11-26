@@ -43,7 +43,7 @@ export default function ProductGallery({ media, title }: { media: Media[]; title
 
   return (
     <div>
-      <div className="relative overflow-hidden rounded-3xl bg-mist">
+      <div className="relative overflow-hidden rounded-lg bg-mist">
         <div className="relative mx-auto aspect-[4/5] max-h-[78svh] w-full sm:aspect-[5/4] lg:aspect-[4/3]">
           {m.kind === "photo" ? (
             <button type="button" onClick={() => setZoom(true)} aria-label={"Enlarge photo " + (i + 1) + " of " + title} className="absolute inset-0 cursor-zoom-in">
@@ -69,7 +69,7 @@ export default function ProductGallery({ media, title }: { media: Media[]; title
       {many && (
         <div ref={strip} className="no-scrollbar mt-3 flex gap-2.5 overflow-x-auto pb-1" role="tablist" aria-label={"Photos and videos of " + title}>
           {media.map((t, n) => (
-            <button key={t.src} type="button" role="tab" aria-selected={n === i} data-on={n === i} onClick={() => setI(n)} aria-label={(t.kind === "video" ? "Video " : "Photo ") + (n + 1)} className={"relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-mist transition-opacity sm:h-24 sm:w-24 " + (n === i ? "ring-2 ring-charcoal ring-offset-2 ring-offset-beige" : "opacity-70 hover:opacity-100")}>
+            <button key={t.src} type="button" role="tab" aria-selected={n === i} data-on={n === i} onClick={() => setI(n)} aria-label={(t.kind === "video" ? "Video " : "Photo ") + (n + 1)} className={"relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-mist transition-opacity sm:h-24 sm:w-24 " + (n === i ? "ring-2 ring-charcoal ring-offset-2 ring-offset-beige" : "opacity-70 hover:opacity-100")}>
               <Image src={t.thumb} alt="" fill sizes="96px" className="object-cover" />
               {t.kind === "video" && (
                 <span className="absolute inset-0 flex items-center justify-center bg-black/25">

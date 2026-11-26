@@ -85,16 +85,16 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-28">
-                <Link href={"/collections/" + cat.slug} className="font-dm text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-dark hover:underline">{cat.title}</Link>
-                <h1 className="mt-3 font-accent text-[2.5rem] font-medium leading-[1.02] text-charcoal sm:text-5xl">{p.title}</h1>
+                <Link href={"/collections/" + cat.slug} className="font-dm text-sm font-medium text-gold-dark hover:underline">{cat.title}</Link>
+                <h1 className="mt-3 font-serif text-[1.9rem] font-medium leading-[1.12] text-charcoal sm:text-[2.5rem]">{p.title}</h1>
                 <p className="mt-4 font-dm text-[16px] leading-relaxed text-taupe">{p.line}</p>
                 <p className="mt-2 font-dm text-[13px] text-taupe">{mediaLabel(p)} of this design</p>
 
-                <div className="mt-6 rounded-2xl bg-sand p-5">
+                <div className="mt-6 rounded-lg bg-sand p-5">
                   {price ? (
                     <>
-                      <p className="font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-taupe">Starting price</p>
-                      <p className="mt-1 font-accent text-3xl font-medium text-charcoal">From {aed(price.from)} <span className="text-xl text-taupe">/ {price.unit}</span></p>
+                      <p className="font-dm text-sm font-medium text-taupe">Starting price</p>
+                      <p className="mt-1 font-serif text-2xl font-medium text-charcoal">From {aed(price.from)} <span className="text-xl text-taupe">/ {price.unit}</span></p>
                       <ul className="mt-3 flex flex-col gap-1.5 border-t border-charcoal/10 pt-3">
                         {price.rates.map((r) => (
                           <li key={r.id} className="flex items-baseline justify-between gap-4 font-dm text-[14px]">
@@ -107,15 +107,15 @@ export default async function ProductPage({ params }: Props) {
                     </>
                   ) : (
                     <>
-                      <p className="font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-taupe">Pricing</p>
-                      <p className="mt-1 font-accent text-[1.75rem] font-medium leading-tight text-charcoal">Quoted after a free visit</p>
+                      <p className="font-dm text-sm font-medium text-taupe">Pricing</p>
+                      <p className="mt-1 font-serif text-[1.5rem] font-medium leading-tight text-charcoal">Quoted after a free visit</p>
                       <p className="mt-2 font-dm text-[13.5px] leading-relaxed text-taupe">Made to your sizes, so the price follows the measurement. For a first rough figure, send: {factors ? factors.send.charAt(0).toLowerCase() + factors.send.slice(1) : "a photo of the room and rough sizes."}</p>
                     </>
                   )}
                 </div>
 
                 <div className="mt-5 flex flex-col gap-2.5">
-                  <Link href={quoteHref({ item: cat.slug, design: p.id })} className="btn-dark w-full">Get a quote for this design <span aria-hidden="true">&#8599;</span></Link>
+                  <Link href={quoteHref({ item: cat.slug, design: p.id })} className="btn-dark w-full">Get a quote for this design</Link>
                   <a href={ask} target="_blank" rel="noopener noreferrer" className="btn-wa w-full"><WhatsAppIcon className="h-4 w-4" /> Ask about it on WhatsApp</a>
                 </div>
 
@@ -124,10 +124,7 @@ export default async function ProductPage({ params }: Props) {
                     <h2 className="font-dm text-sm font-semibold text-charcoal">Made to order: you choose</h2>
                     <ul className="mt-3 grid grid-cols-1 gap-2">
                       {factors.depends.map((d) => (
-                        <li key={d} className="flex gap-2.5 font-dm text-[14.5px] leading-snug text-charcoal">
-                          <svg className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                          {d}
-                        </li>
+                        <li key={d} className="border-t border-border pt-2 font-dm text-[16px] leading-snug text-charcoal">{d}</li>
                       ))}
                     </ul>
                     <p className="mt-4 font-dm text-[13px] leading-relaxed text-taupe">The photos show a piece we made for another home. Yours is drawn to your room, in the size, colour and finish you pick.</p>
@@ -144,9 +141,9 @@ export default async function ProductPage({ params }: Props) {
           <h2 id="order-h" className="h-md">How to order this design</h2>
           <ol className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map(([t, d], n) => (
-              <li key={t} className="rounded-2xl border border-border bg-white p-5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-charcoal font-dm text-xs font-bold text-white">{n + 1}</span>
-                <h3 className="mt-3 font-accent text-[1.35rem] font-medium leading-tight text-charcoal">{t}</h3>
+              <li key={t} className="rounded-lg border border-border bg-white p-5">
+                <span className="font-serif text-3xl text-gold-dark">{n + 1}</span>
+                <h3 className="mt-3 font-serif text-[1.125rem] font-medium leading-tight text-charcoal">{t}</h3>
                 <p className="mt-1.5 font-dm text-[14px] leading-relaxed text-taupe">{d}</p>
               </li>
             ))}
@@ -157,7 +154,7 @@ export default async function ProductPage({ params }: Props) {
       {more.length > 0 && (
         <section className="py-section-sm" aria-labelledby="more-h">
           <div className="wrap">
-            <SectionHead align="left" title={<span id="more-h">More {cat.title.toLowerCase()}</span>} action={<Link href={"/collections/" + cat.slug} className="btn-line">All {list.length} designs <span aria-hidden="true">&#8599;</span></Link>} />
+            <SectionHead align="left" title={<span id="more-h">More {cat.title.toLowerCase()}</span>} action={<Link href={"/collections/" + cat.slug} className="btn-line">All {list.length} designs</Link>} />
             <ul className="mt-9 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-5 md:grid-cols-4 lg:gap-x-6">
               {more.map((m) => (
                 <li key={m.id}><ProductCard item={toCard(m, "price")} /></li>

@@ -18,7 +18,6 @@ export default function QuotePage() {
       <div className="wrap">
         <Breadcrumbs items={[{ label: "Get a quote" }]} />
         <div className="mb-9 mt-8 max-w-2xl">
-          <p className="eyebrow mb-5">Free quote</p>
           <h1 className="h-xl">Three short steps to your quote</h1>
           <p className="lede mt-4">It takes about a minute. Prefer to talk? <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="font-semibold text-charcoal underline underline-offset-4">WhatsApp {SITE.phones[0].display}</a>.</p>
         </div>

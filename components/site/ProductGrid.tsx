@@ -36,15 +36,14 @@ export default function ProductGrid({ items, filters = [], by = "type", param = 
   };
 
   const shown = f === "all" ? items : items.filter((i) => i[by] === f);
-  const count = (id: string) => items.filter((i) => i[by] === id).length;
 
   return (
     <div>
       {filters.length > 1 && (
         <div className="no-scrollbar -mx-5 mb-7 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Filter">
-          <button type="button" aria-pressed={f === "all"} onClick={() => pick("all")} className={"chip shrink-0 " + (f === "all" ? "chip-on" : "")}>{allLabel} <span className="opacity-60">{items.length}</span></button>
+          <button type="button" aria-pressed={f === "all"} onClick={() => pick("all")} className={"chip shrink-0 " + (f === "all" ? "chip-on" : "")}>{allLabel}</button>
           {filters.map((x) => (
-            <button key={x.id} type="button" aria-pressed={f === x.id} onClick={() => pick(x.id)} className={"chip shrink-0 " + (f === x.id ? "chip-on" : "")}>{x.label} <span className="opacity-60">{count(x.id)}</span></button>
+            <button key={x.id} type="button" aria-pressed={f === x.id} onClick={() => pick(x.id)} className={"chip shrink-0 " + (f === x.id ? "chip-on" : "")}>{x.label}</button>
           ))}
         </div>
       )}

@@ -76,7 +76,7 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
                 <div className="col-span-9 grid grid-cols-4 gap-8">
                   {menu.map((g) => (
                     <div key={g.title}>
-                      <p className="mb-4 font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-taupe">{g.title}</p>
+                      <p className="mb-4 font-dm text-sm font-medium text-taupe">{g.title}</p>
                       <ul className="flex flex-col gap-3.5">
                         {g.items.map((it) => (
                           <li key={it.href}>
@@ -90,9 +90,9 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
                     </div>
                   ))}
                 </div>
-                <div className="col-span-3 flex flex-col justify-between rounded-2xl bg-sand p-6">
+                <div className="col-span-3 flex flex-col justify-between rounded-lg bg-sand p-6">
                   <div>
-                    <p className="font-accent text-2xl font-medium leading-tight text-charcoal">Not sure where to start?</p>
+                    <p className="font-serif text-xl font-medium leading-tight text-charcoal">Not sure where to start?</p>
                     <p className="mt-2 font-dm text-sm leading-relaxed text-taupe">Answer three short questions and send your brief on WhatsApp. The visit and the quote are free.</p>
                   </div>
                   <div className="mt-5 flex flex-col gap-2.5">
@@ -110,8 +110,8 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a href={"tel:+" + SITE.phones[0].intl} className="hidden font-dm text-sm font-medium text-white/80 hover:text-white xl:block">{SITE.phones[0].display}</a>
-          <Link href="/quote" aria-label="Get a quote" className="inline-flex min-h-[40px] items-center gap-2 whitespace-nowrap rounded-full border border-white/40 px-3.5 py-2 font-dm text-[13px] font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-charcoal sm:px-5">
-            <span className="sm:hidden">Quote</span><span className="hidden sm:inline">Get a quote</span> <span aria-hidden="true">&#8599;</span>
+          <Link href="/quote" aria-label="Get a quote" className="inline-flex min-h-[40px] items-center gap-2 whitespace-nowrap rounded-md border border-white/40 px-3.5 py-2 font-dm text-[13px] font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-charcoal sm:px-5">
+            <span className="sm:hidden">Quote</span><span className="hidden sm:inline">Get a quote</span>
           </Link>
           <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full text-white hover:bg-white/10 lg:hidden" aria-label={drawer ? "Close menu" : "Open menu"} aria-expanded={drawer} aria-controls="mobile-menu" onClick={() => setDrawer((v) => !v)}>
             <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
@@ -125,7 +125,7 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
         <div className="wrap py-6">
           {menu.map((g) => (
             <div key={g.title} className="border-b border-white/10 py-5 first:pt-0">
-              <p className="mb-3 font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">{g.title}</p>
+              <p className="mb-3 font-dm text-sm font-medium text-gold">{g.title}</p>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
                 {g.items.map((it) => (
                   <li key={it.href}>

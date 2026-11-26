@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 interface Props {
+  /** Accepted for older call sites; headings stand alone, so it is not shown. */
   eyebrow?: string;
   title: ReactNode;
   lede?: ReactNode;
@@ -11,20 +12,18 @@ interface Props {
   className?: string;
 }
 
-export default function SectionHead({ eyebrow, title, lede, align = "center", action, as: Tag = "h2", className = "" }: Props) {
+export default function SectionHead({ title, lede, align = "center", action, as: Tag = "h2", className = "" }: Props) {
   if (align === "center") {
     return (
       <div className={"mx-auto max-w-2xl text-center " + className}>
-        {eyebrow && <p className="eyebrow eyebrow-center mb-5">{eyebrow}</p>}
         <Tag className="h-lg">{title}</Tag>
-        {lede && <p className="lede mt-5">{lede}</p>}
+        {lede && <p className="lede mt-4">{lede}</p>}
       </div>
     );
   }
   return (
     <div className={"flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between " + className}>
       <div className="max-w-2xl">
-        {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
         <Tag className="h-lg">{title}</Tag>
         {lede && <p className="lede mt-4">{lede}</p>}
       </div>

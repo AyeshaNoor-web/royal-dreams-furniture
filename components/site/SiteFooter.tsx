@@ -38,7 +38,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="lg:col-span-2 lg:col-start-6">
-          <p className="mb-5 font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-white">Explore</p>
+          <p className="mb-5 font-dm text-sm font-medium text-white">Explore</p>
           <ul className="flex flex-col gap-3">
             {explore.map((l) => (
               <li key={l.href}><Link href={l.href} className="font-dm text-sm text-white/70 hover:text-white">{l.label}</Link></li>
@@ -47,7 +47,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="lg:col-span-2">
-          <p className="mb-5 font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-white">Products</p>
+          <p className="mb-5 font-dm text-sm font-medium text-white">Products</p>
           <ul className="flex flex-col gap-3">
             {categories.map((c) => (
               <li key={c.slug}><Link href={"/collections/" + c.slug} className="font-dm text-sm text-white/70 hover:text-white">{c.title}</Link></li>
@@ -56,7 +56,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="col-span-2 lg:col-span-3">
-          <p className="mb-5 font-dm text-[11px] font-semibold uppercase tracking-[0.18em] text-white">Contact</p>
+          <p className="mb-5 font-dm text-sm font-medium text-white">Contact</p>
           <ul className="flex flex-col gap-4 font-dm text-sm text-white/70">
             <li>
               <a href={"tel:+" + SITE.phones[0].intl} className="hover:text-white">{SITE.phones[0].display}</a>

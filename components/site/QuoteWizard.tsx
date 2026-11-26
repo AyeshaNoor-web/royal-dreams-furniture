@@ -59,13 +59,13 @@ function Summary({ s, design, extra }: { s: State; design: DesignRef | null; ext
     </div>
   );
   return (
-    <aside className="rounded-3xl border border-border bg-white p-5 shadow-card sm:p-6" aria-label="Your brief so far">
-      <p className="font-accent text-2xl font-medium text-charcoal">Your brief</p>
+    <aside className="rounded-lg border border-border bg-white p-5 sm:p-6" aria-label="Your brief so far">
+      <p className="font-serif text-xl font-medium text-charcoal">Your brief</p>
       {design && (
-        <Link href={design.href} className="mt-4 flex items-center gap-3 rounded-2xl bg-sand p-2.5 hover:bg-beige-dark/60">
-          <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-mist"><Image src={design.src} alt="" fill sizes="64px" className="object-cover" /></span>
+        <Link href={design.href} className="mt-4 flex items-center gap-3 rounded-lg bg-sand p-2.5 hover:bg-beige-dark/60">
+          <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md bg-mist"><Image src={design.src} alt="" fill sizes="64px" className="object-cover" /></span>
           <span className="min-w-0">
-            <span className="block font-dm text-[11px] font-semibold uppercase tracking-[0.14em] text-taupe">Design you liked</span>
+            <span className="block font-dm text-sm font-medium text-taupe">Design you liked</span>
             <span className="block truncate font-dm text-[14px] font-semibold text-charcoal">{design.title}</span>
           </span>
         </Link>
@@ -77,12 +77,9 @@ function Summary({ s, design, extra }: { s: State; design: DesignRef | null; ext
         {row("Timing", s.timing)}
         {row("Start with", s.start === "visit" ? "Free home visit" : "Photos first")}
       </dl>
-      <ul className="mt-4 flex flex-col gap-2 rounded-2xl bg-sand p-4 font-dm text-[13px] text-charcoal">
+      <ul className="mt-4 flex flex-col gap-1.5 border-t border-border pt-4 font-dm text-[15px] text-taupe">
         {["Home visit and measurement: free", "3D design before anything is built", "Written quotation, no obligation"].map((t) => (
-          <li key={t} className="flex items-start gap-2">
-            <svg className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.2l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7z" /></svg>
-            {t}
-          </li>
+          <li key={t}>{t}</li>
         ))}
       </ul>
     </aside>
@@ -149,14 +146,13 @@ export default function QuoteWizard({ designs }: { designs: DesignRef[] }) {
 
   if (sent) {
     return (
-      <div ref={top} className="mx-auto max-w-2xl scroll-mt-28 rounded-3xl border border-border bg-white p-7 text-center shadow-card sm:p-10">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-[#0B2E18]"><WhatsAppIcon className="h-6 w-6" /></span>
-        <h2 className="h-md mt-5">Your brief is ready in WhatsApp</h2>
+      <div ref={top} className="mx-auto max-w-2xl scroll-mt-28 rounded-lg border border-border bg-white p-7 text-center sm:p-10">
+        <h2 className="h-md">Your brief is ready in WhatsApp</h2>
         <p className="lede mx-auto mt-3 max-w-md">Press send in WhatsApp and it reaches our team. If WhatsApp did not open, use the button below.</p>
         <ol className="mx-auto mt-7 flex max-w-md flex-col gap-3 text-left">
           {["We reply on WhatsApp within a working day.", "We agree a time to visit and measure, free of charge.", "You receive a 3D design and a written quotation."].map((t, n) => (
             <li key={t} className="flex items-start gap-3 font-dm text-[15px] text-charcoal">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sand font-dm text-xs font-bold">{n + 1}</span>{t}
+              <span className="font-serif text-xl text-gold-dark">{n + 1}.</span>{t}
             </li>
           ))}
         </ol>
@@ -176,14 +172,14 @@ export default function QuoteWizard({ designs }: { designs: DesignRef[] }) {
             <li key={t}>
               <button type="button" disabled={n >= step} onClick={() => goto(n)} aria-current={n === step ? "step" : undefined} className="block w-full text-left disabled:cursor-default">
                 <span className={"block h-1 rounded-full " + (n <= step ? "bg-charcoal" : "bg-beige-dark")} />
-                <span className={"mt-2.5 block font-dm text-[11px] font-semibold uppercase tracking-[0.14em] " + (n === step ? "text-charcoal" : "text-taupe")}>Step {n + 1}</span>
+                <span className={"mt-2.5 block font-dm text-sm font-medium " + (n === step ? "text-charcoal" : "text-taupe")}>Step {n + 1}</span>
                 <span className={"block font-dm text-[13px] sm:text-sm " + (n === step ? "font-semibold text-charcoal" : "text-taupe")}>{t}</span>
               </button>
             </li>
           ))}
         </ol>
 
-        <div className="rounded-3xl border border-border bg-white p-5 shadow-card sm:p-8">
+        <div className="rounded-lg border border-border bg-white p-5 sm:p-8">
           {step === 0 && (
             <div>
               <h2 ref={heading} tabIndex={-1} className="h-md outline-none">What would you like made?</h2>
@@ -192,7 +188,7 @@ export default function QuoteWizard({ designs }: { designs: DesignRef[] }) {
                 {quoteItems.map((q) => {
                   const on = s.items.includes(q.id);
                   return (
-                    <button key={q.id} type="button" aria-pressed={on} onClick={() => toggle(q.id)} className={"flex min-h-[56px] items-center justify-between gap-2 rounded-xl border px-4 py-3 text-left font-dm text-[14px] font-semibold transition-colors " + (on ? "border-charcoal bg-charcoal text-white" : "border-border bg-white text-charcoal hover:border-charcoal/50")}>
+                    <button key={q.id} type="button" aria-pressed={on} onClick={() => toggle(q.id)} className={"flex min-h-[56px] items-center justify-between gap-2 rounded-md border px-4 py-3 text-left font-dm text-[14px] font-semibold transition-colors " + (on ? "border-charcoal bg-charcoal text-white" : "border-border bg-white text-charcoal hover:border-charcoal/50")}>
                       {q.label}
                       <span className={"flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] " + (on ? "border-white bg-white text-charcoal" : "border-charcoal/30 text-transparent")} aria-hidden="true">&#10003;</span>
                     </button>
@@ -229,7 +225,7 @@ export default function QuoteWizard({ designs }: { designs: DesignRef[] }) {
                 {starts.map((o) => {
                   const on = s.start === o.id;
                   return (
-                    <button key={o.id} type="button" role="radio" aria-checked={on} onClick={() => set("start", o.id)} className={"rounded-xl border p-4 text-left transition-colors " + (on ? "border-charcoal bg-charcoal text-white" : "border-border bg-white text-charcoal hover:border-charcoal/50")}>
+                    <button key={o.id} type="button" role="radio" aria-checked={on} onClick={() => set("start", o.id)} className={"rounded-md border p-4 text-left transition-colors " + (on ? "border-charcoal bg-charcoal text-white" : "border-border bg-white text-charcoal hover:border-charcoal/50")}>
                       <span className="block font-dm text-[15px] font-semibold">{o.title}</span>
                       <span className={"mt-1 block font-dm text-[13px] leading-snug " + (on ? "text-white/75" : "text-taupe")}>{o.text}</span>
                     </button>

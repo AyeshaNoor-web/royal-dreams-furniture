@@ -35,8 +35,7 @@ export default function CollectionsPage() {
             <div className="wrap">
               <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <p className="font-dm text-[11px] font-semibold uppercase tracking-[0.2em] text-taupe">Room {gi + 1} of {groups.length}</p>
-                  <h2 id={"room-" + g.slug} className="h-md mt-2">{g.title}</h2>
+                  <h2 id={"room-" + g.slug} className="h-md">{g.title}</h2>
                 </div>
                 <p className="max-w-md font-dm text-[15px] text-taupe sm:text-right">{g.blurb}</p>
               </div>
@@ -52,12 +51,12 @@ export default function CollectionsPage() {
 
       <section className="py-section-sm">
         <div className="wrap">
-          <div className="flex flex-col items-start justify-between gap-5 rounded-3xl border border-border bg-white p-7 sm:flex-row sm:items-center sm:p-9">
+          <div className="flex flex-col items-start justify-between gap-5 rounded-lg border border-border bg-white p-7 sm:flex-row sm:items-center sm:p-9">
             <div>
-              <h2 className="font-accent text-3xl font-medium text-charcoal">Kitchen cabinets, or something you cannot see here?</h2>
+              <h2 className="font-serif text-2xl font-medium text-charcoal">Kitchen cabinets, or something you cannot see here?</h2>
               <p className="mt-2 max-w-xl font-dm text-[15px] text-taupe">We build custom joinery to order. Tell us what you have in mind and we will say plainly whether we can make it.</p>
             </div>
-            <Link href="/quote?item=other" className="btn-dark shrink-0">Ask for a quote <span aria-hidden="true">&#8599;</span></Link>
+            <Link href="/quote?item=other" className="btn-dark shrink-0">Ask for a quote</Link>
           </div>
         </div>
       </section>

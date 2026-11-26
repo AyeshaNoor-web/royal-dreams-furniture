@@ -1,9 +1,9 @@
 import type { Config } from "tailwindcss";
 
-// "Showroom" theme (27 Nov 2026): charcoal header and footer, near-white pages, a sand tint for alternate bands and
-// one bronze accent taken from the gold logo. Token names are kept from earlier themes so older pages keep working:
-// "beige" is the page surface, "charcoal" the text colour, "gold" the accent.
-// Contrast on the page colour #FAFAF8: charcoal 16:1, taupe 5.6:1, gold-dark 5.7:1. White on ink 14:1.
+// "Beige and brown" theme (27 Nov 2026), from the client's own swatch card (#F9F3F0 #E8D5C4 #D4B8A8 #C4A090 #A08070).
+// Token names are kept from earlier themes: "beige" is the page, "charcoal" the text, "ink" the brown header and
+// footer, "gold" the light-brown accent. Contrast on the page colour: charcoal 14:1, taupe 5.9:1, gold-dark 5.3:1.
+// White on ink 7:1.
 const config: Config = {
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,29 +13,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        beige: { DEFAULT: "#FAFAF8", light: "#FFFFFF", dark: "#E7E4DE" },
-        sand: "#F3F0EA",
-        mist: "#EFEFEC",
-        ink: "#262624",
-        charcoal: { DEFAULT: "#1D1D1B", light: "#3A3A36" },
-        frame: "#1D1D1B",
-        door: "#1D1D1B",
-        gold: { DEFAULT: "#B8935A", dark: "#7A5C2E", text: "#7A5C2E", soft: "#F1E7D6" },
-        lit: "#B8935A",
-        taupe: { DEFAULT: "#66645E", light: "#9A978F" },
-        border: "#E4E1DA",
+        beige: { DEFAULT: "#F5ECE3", light: "#FBF7F2", dark: "#E8D5C4" },
+        sand: "#EDE0D2",
+        mist: "#F0E6DB",
+        ink: "#6B5344",
+        charcoal: { DEFAULT: "#2E211A", light: "#4A372B" },
+        frame: "#2E211A",
+        door: "#2E211A",
+        gold: { DEFAULT: "#D4B8A8", dark: "#7D5740", text: "#7D5740", soft: "#F1E4D8" },
+        lit: "#D4B8A8",
+        taupe: { DEFAULT: "#6E584A", light: "#A08070" },
+        border: "#DCC9B8",
         danger: "#A32B1C",
         whatsapp: "#25D366",
       },
       fontFamily: {
-        serif: ["var(--font-body)", "system-ui", "sans-serif"],
-        accent: ["var(--font-accent)", "Georgia", "serif"],
+        serif: ["var(--font-display)", "Georgia", "serif"],
+        accent: ["var(--font-display)", "Georgia", "serif"],
         dm: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.25rem, 4.6vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.04em" }],
-        "display-lg": ["clamp(2rem, 3.6vw, 3.1rem)", { lineHeight: "1.1", letterSpacing: "-0.035em" }],
-        "display-md": ["clamp(1.6rem, 2.6vw, 2.25rem)", { lineHeight: "1.15", letterSpacing: "-0.03em" }],
+        "display-xl": ["clamp(2.1rem, 4.2vw, 3.6rem)", { lineHeight: "1.1", letterSpacing: "-0.01em" }],
+        "display-lg": ["clamp(1.85rem, 3.2vw, 2.75rem)", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
+        "display-md": ["clamp(1.5rem, 2.3vw, 2rem)", { lineHeight: "1.2", letterSpacing: "-0.005em" }],
       },
       spacing: { section: "6rem", "section-sm": "3.75rem" },
       maxWidth: { "8xl": "88rem" },
