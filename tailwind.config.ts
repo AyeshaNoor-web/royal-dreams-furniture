@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
 
-// Contrast on plaster #FAF5EF: ink 14:1, taupe 5.4:1, bronze 5.9:1. Brass #B98A52 is 3:1 on plaster, so it is used for
-// large text and rules only; small labels use bronze. Cream on umber 16:1, brass on umber 5.5:1.
-// Text tones are darkened versions of the two deepest swatches so body copy meets WCAG AA on beige.
+// "Pine & Amber" (27 Nov 2026). Token names are kept from earlier themes so every page keeps working:
+// "beige" is the page surface (ivory), "charcoal" the text colour, "ink" the deepest band, "gold" the warm accent.
+// Contrast on ivory #F7F2E7: charcoal 15:1, taupe 5.3:1, gold-text 5.2:1. Ivory on pine 11:1, amber on pine 6:1.
 const config: Config = {
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,30 +12,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Black and gold (client request, 26 Nov 2026). "beige" is the page surface and "charcoal" the text colour,
-        // so the names read inverted on purpose: every component keeps working.
-        // "The Atelier": warm plaster canvas, oat surfaces, espresso ink, brass accents, deep umber for the dark moments.
-        beige: { DEFAULT: "#FAF5EF", light: "#F0E6DB", dark: "#E3D7C9" },
-        ink: "#1C140E",
-        charcoal: { DEFAULT: "#241A12", light: "#3A2C22" },
-        frame: "#1C140E",
-        door: "#241A12",
-        gold: { DEFAULT: "#B98A52", dark: "#8A5A2B", text: "#8A5A2B" },
-        lit: "#B98A52",
-        taupe: { DEFAULT: "#7A6655", light: "#9A8673" },
-        border: "#E3D7C9",
-        danger: "#9B2C20",
+        beige: { DEFAULT: "#F7F2E7", light: "#EFE8D8", dark: "#DDD3BE" },
+        ink: "#0A2319",
+        charcoal: { DEFAULT: "#13241D", light: "#1F4636" },
+        pine: { DEFAULT: "#123A2B", soft: "#1B4B39", deep: "#0A2319" },
+        sage: { DEFAULT: "#DCE8DC", deep: "#C5D8C7" },
+        clay: "#D4623A",
+        frame: "#0A2319",
+        door: "#13241D",
+        gold: { DEFAULT: "#EBA63A", dark: "#8C570E", text: "#8C570E", soft: "#F8DFAE" },
+        lit: "#EBA63A",
+        taupe: { DEFAULT: "#56655D", light: "#8C9891" },
+        border: "#DDD3BE",
+        danger: "#A32B1C",
         whatsapp: "#25D366",
       },
       fontFamily: {
-        serif: ["var(--font-display)", "Georgia", "Times New Roman", "serif"],
-        dm: ["var(--font-body)", "Futura", "sans-serif"],
+        serif: ["var(--font-display)", "system-ui", "sans-serif"],
+        accent: ["var(--font-accent)", "Georgia", "serif"],
+        dm: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        "display-xl": ["clamp(2.75rem, 5.6vw, 5.25rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(2.4rem, 4.2vw, 3.75rem)", { lineHeight: "1.06", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(2rem, 3.2vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
+        "display-2xl": ["clamp(2.9rem, 7.2vw, 6.75rem)", { lineHeight: "0.96", letterSpacing: "-0.045em" }],
+        "display-xl": ["clamp(2.6rem, 5.6vw, 5rem)", { lineHeight: "1", letterSpacing: "-0.04em" }],
+        "display-lg": ["clamp(2.25rem, 4.2vw, 3.75rem)", { lineHeight: "1.02", letterSpacing: "-0.035em" }],
+        "display-md": ["clamp(1.9rem, 3.2vw, 2.9rem)", { lineHeight: "1.06", letterSpacing: "-0.03em" }],
       },
+      borderRadius: { "4xl": "2rem", "5xl": "2.75rem" },
       spacing: { section: "7rem", "section-sm": "4.5rem" },
       maxWidth: { "8xl": "88rem" },
     },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/shared/PageHeader";
 import { CollectionCard } from "@/components/home/Collections";
-import CtaBand from "@/components/home/CtaBand";
+import Planner from "@/components/plan/Planner";
 import Image from "next/image";
 import Link from "next/link";
 import { groups, categoriesInGroup, roomTiles } from "@/lib/gallery";
@@ -28,7 +28,7 @@ export default function CollectionsPage() {
         intro="Each collection is designed, built and installed by our own team. Browse by room, open a collection to view completed projects, then request a quotation for your space."
       />
       {rows.map((row, ri) => (
-        <section key={ri} className={(ri % 2 ? "bg-beige-light " : "") + "border-b border-border py-section-sm"}>
+        <section key={ri} className={(ri % 2 ? "bg-beige-light " : "") + "py-10 lg:py-16"}>
           <div className={"mx-auto max-w-7xl px-6 lg:px-10 " + (row.length > 1 ? "grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-10" : "")}>
             {row.map((g) => (
               <div key={g.slug} id={g.slug} className="scroll-mt-24">
@@ -40,7 +40,7 @@ export default function CollectionsPage() {
                   <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
                     {roomTiles(g.slug).map((t) => (
                       <Link key={t.key} href={t.href} className="group block">
-                        <div className="relative aspect-[3/4] overflow-hidden bg-beige-dark">
+                        <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-beige-dark">
                           <Image src={t.image.src} alt={t.image.alt} fill sizes="(min-width: 1024px) 16vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                         </div>
                         <p className="mt-2 font-serif text-base leading-tight group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4 sm:mt-3 sm:text-xl">{t.title}</p>
@@ -58,7 +58,7 @@ export default function CollectionsPage() {
           </div>
         </section>
       ))}
-      <CtaBand />
+      <div className="pt-section-sm"><Planner /></div>
     </>
   );
 }

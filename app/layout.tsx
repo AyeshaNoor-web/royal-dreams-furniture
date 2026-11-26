@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Instrument_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,20 +8,12 @@ import DevBanner from "@/components/shared/DevBanner";
 import { SITE } from "@/lib/site";
 import { aiChatEnabled } from "@/lib/flags";
 
-// Display: Fraunces, a high-contrast serif with a real italic. Body and labels: Instrument Sans, 400 and 500 only.
-const display = Fraunces({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Instrument_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-body",
-  display: "swap",
-});
+// Display: Bricolage Grotesque, a grotesque with character. Accent: Instrument Serif italic for the one emphasised
+// word in a headline. Body: Figtree. The files are bundled in app/fonts (latin subset, from Google Fonts, all under
+// the SIL Open Font License) so a build never depends on reaching Google.
+const display = localFont({ src: "./fonts/bricolage-grotesque.woff2", weight: "500 700", variable: "--font-display", display: "swap", fallback: ["system-ui", "Arial", "sans-serif"] });
+const accent = localFont({ src: "./fonts/instrument-serif-italic.woff2", weight: "400", style: "italic", variable: "--font-accent", display: "swap", fallback: ["Georgia", "serif"] });
+const body = localFont({ src: "./fonts/figtree.woff2", weight: "400 700", variable: "--font-body", display: "swap", fallback: ["system-ui", "Arial", "sans-serif"] });
 
 const title = SITE.name + " | Made-to-Measure Furniture, Sofas, Beds & Wardrobes in the UAE";
 const description =
@@ -52,7 +44,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#FAF5EF" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#123A2B" };
 
 // Search engines: one FurnitureStore entity with a stable @id, referenced by the WebSite. Only facts the site states.
 const businessJsonLd = {
@@ -73,7 +65,7 @@ const websiteJsonLd = { "@context": "https://schema.org", "@type": "WebSite", "@
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={display.variable + " " + body.variable}>
+    <html lang="en" className={display.variable + " " + accent.variable + " " + body.variable}>
       <body className="bg-beige pb-[calc(76px+env(safe-area-inset-bottom))] font-dm text-charcoal antialiased sm:pb-0">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([businessJsonLd, websiteJsonLd]) }} />
         <a href="#main" className="skip-link">Skip to content</a>

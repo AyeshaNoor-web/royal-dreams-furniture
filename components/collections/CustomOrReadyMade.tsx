@@ -19,11 +19,11 @@ export default function CustomOrReadyMade({ slug }: { slug: string }) {
           </a>
         </Reveal>
         <Reveal delay={0.08} className="grid gap-6 sm:grid-cols-2 lg:col-span-8">
-          <div className="border border-border bg-beige-light p-6">
+          <div className="rounded-4xl bg-beige-light p-6 lg:p-8">
             <p className="text-[13px] uppercase tracking-wider text-taupe">Ready-made</p>
             <p className="mt-3 text-[16px] leading-relaxed text-charcoal">{note.readyMade}</p>
           </div>
-          <div className="border border-charcoal/30 bg-beige-light p-6">
+          <div className="rounded-4xl bg-sage p-6 lg:p-8">
             <p className="text-[13px] uppercase tracking-wider text-taupe">Made to measure</p>
             <p className="mt-3 text-[16px] leading-relaxed text-charcoal">{note.madeToMeasure}</p>
           </div>
