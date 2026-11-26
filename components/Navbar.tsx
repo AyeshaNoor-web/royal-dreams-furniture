@@ -6,90 +6,83 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "@/components/Logo";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { QUOTE_LINK, VISIT_LINK, navLinks } from "@/lib/site";
+import PlanButton from "@/components/plan/PlanButton";
+import { QUOTE_LINK, SITE, navLinks } from "@/lib/site";
 
-/** Slim frosted bar. Over a dark hero ([data-nav-dark] at the top of the page) it is transparent with cream text until the page scrolls. */
+/** One ivory pill that floats over every page. Left: logo. Middle: pages. Right: the two ways to start, quote first. */
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  // The home page opens on a dark hero, so the first paint is already transparent; the effect below keeps it in step with scrolling.
-  const [clear, setClear] = useState(pathname === "/");
 
   useEffect(() => setMenuOpen(false), [pathname]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
-  useEffect(() => {
-    const hasDarkHero = () => Boolean(document.querySelector("[data-nav-dark]"));
-    const update = () => setClear(hasDarkHero() && window.scrollY < 48 && !menuOpen);
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, [pathname, menuOpen]);
-
-  const linkTone = clear ? "text-beige/80 hover:text-beige" : "text-taupe hover:text-charcoal";
-  const activeTone = clear ? "text-beige" : "text-charcoal";
 
   return (
     <>
       <header className="sticky top-0 z-50 px-3 pt-3 lg:px-5 lg:pt-4">
-        <nav className={"nav-glass mx-auto flex h-[68px] max-w-7xl items-center justify-between px-5 lg:px-7 " + (clear ? "nav-clear" : "")}>
-          <Logo variant={clear ? "gold" : "dark"} />
+        <nav className="nav-glass mx-auto flex h-[60px] max-w-7xl items-center justify-between pl-3 pr-2 sm:pl-4 lg:h-[68px] lg:pl-6 lg:pr-2.5">
+          <Logo variant="dark" />
 
-          <ul className="hidden items-center gap-8 md:flex">
-            {navLinks.map((link) => {
-              const active = pathname === link.href || pathname.startsWith(link.href + "/");
+          <ul className="hidden items-center gap-1 md:flex">
+            {navLinks.map((l) => {
+              const on = pathname === l.href || pathname.startsWith(l.href + "/");
               return (
-                <li key={link.href} className="relative">
-                  <Link href={link.href} aria-current={active ? "page" : undefined} className={"block px-1 py-3 text-[15px] transition-colors duration-200 " + (active ? activeTone : linkTone)}>
-                    {link.label}
+                <li key={l.href}>
+                  <Link href={l.href} aria-current={on ? "page" : undefined} className={"inline-flex min-h-[44px] items-center rounded-full px-4 text-[15px] font-medium transition-colors " + (on ? "bg-charcoal/[0.07] text-charcoal" : "text-taupe hover:text-charcoal")}>
+                    {l.label}
                   </Link>
-                  {active && <motion.span layoutId="nav-underline" className={"absolute inset-x-0 -bottom-0.5 h-px " + (clear ? "bg-beige" : "bg-charcoal")} />}
                 </li>
               );
             })}
           </ul>
 
-          <div className="hidden items-center gap-2 md:flex">
-            <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className={(clear ? "btn-line-light" : "btn-line") + " min-h-[44px] px-4 text-[14px]"}>
-              Book a visit
+          <div className="flex items-center gap-2">
+            <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" aria-label={"WhatsApp " + SITE.phones[0].display} className="hidden h-12 items-center gap-2 rounded-full border border-charcoal/15 px-4 text-[14px] font-semibold text-charcoal transition-colors hover:border-charcoal/50 lg:inline-flex">
+              <WhatsAppIcon className="h-[18px] w-[18px] text-[#128C4B]" /> {SITE.phones[0].display}
             </a>
-            <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className={(clear ? "btn-wa-light" : "btn-wa") + " min-h-[44px] px-5 text-[14px]"}>
-              <WhatsAppIcon className="h-[17px] w-[17px]" />
-              Free consultation
-            </a>
+            <PlanButton className="btn-lit min-h-[44px] whitespace-nowrap px-4 text-[13.5px] sm:px-5 lg:min-h-[48px] lg:px-6 lg:text-[15px]">
+              Free quote
+            </PlanButton>
+            <button type="button" onClick={() => setMenuOpen((v) => !v)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} className="flex h-11 w-11 items-center justify-center rounded-full bg-charcoal/[0.06] md:hidden">
+              <span className="relative block h-3 w-5">
+                <span className={"absolute left-0 h-[2px] w-5 rounded bg-charcoal transition-transform duration-300 " + (menuOpen ? "top-[5px] rotate-45" : "top-0")} />
+                <span className={"absolute left-0 h-[2px] w-5 rounded bg-charcoal transition-transform duration-300 " + (menuOpen ? "top-[5px] -rotate-45" : "top-[10px]")} />
+              </span>
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            className={"relative z-[60] -mr-3 flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-1.5 p-3 md:hidden " + (clear && !menuOpen ? "text-beige" : "text-charcoal")}
-          >
-            <span className={"block h-px w-6 bg-current transition-transform duration-300 " + (menuOpen ? "translate-y-[3.5px] rotate-45" : "")} />
-            <span className={"block h-px w-6 bg-current transition-transform duration-300 " + (menuOpen ? "-translate-y-[3.5px] -rotate-45" : "")} />
-          </button>
         </nav>
       </header>
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-40 flex flex-col justify-center bg-beige/95 px-8 backdrop-blur-xl md:hidden">
-            <ul className="mb-12 flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="font-serif text-4xl text-charcoal">{link.label}</Link>
-                </li>
+          <motion.div
+            key="menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="pine-stage on-dark fixed inset-0 z-40 flex flex-col px-6 pb-8 pt-28 md:hidden"
+          >
+            <ul className="flex flex-col">
+              {[{ label: "Home", href: "/" }, ...navLinks].map((l, i) => (
+                <motion.li key={l.href} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.04 * i + 0.05, duration: 0.35 }} className="border-b border-beige/10">
+                  <Link href={l.href} className="flex min-h-[64px] items-center justify-between font-serif text-[32px] font-semibold tracking-tight text-beige">
+                    {l.label}
+                    <span aria-hidden="true" className="text-gold">&rarr;</span>
+                  </Link>
+                </motion.li>
               ))}
             </ul>
-            <div className="flex flex-wrap gap-3">
-              <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="btn-wa">
-                <WhatsAppIcon className="h-[18px] w-[18px]" />
-                Free consultation
+            <div className="mt-auto flex flex-col gap-3">
+              <span onClick={() => setMenuOpen(false)} className="contents">
+                <PlanButton className="btn-lit w-full">Start my free quote</PlanButton>
+              </span>
+              <a href={QUOTE_LINK} target="_blank" rel="noopener noreferrer" className="btn-wa w-full">
+                <WhatsAppIcon className="h-5 w-5" /> WhatsApp {SITE.phones[0].display}
               </a>
-              <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line">Book a visit</a>
             </div>
           </motion.div>
         )}

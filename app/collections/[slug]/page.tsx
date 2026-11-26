@@ -7,9 +7,11 @@ import GalleryGrid from "@/components/gallery/GalleryGrid";
 import VideoGrid from "@/components/gallery/VideoGrid";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { categories, categoriesInGroup, getCategory, groups } from "@/lib/gallery";
-import { VISIT_LINK, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 import CustomOrReadyMade from "@/components/collections/CustomOrReadyMade";
 import ProcessTimeline from "@/components/collections/ProcessTimeline";
+import Planner from "@/components/plan/Planner";
+import PlanButton from "@/components/plan/PlanButton";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,17 +46,15 @@ export default async function CollectionPage({ params }: Props) {
     <>
       <PageHeader eyebrow={group.title} title={cat.title} intro={cat.description} />
 
-      <section className="pb-section">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
+      <section className="pb-section-sm pt-8 lg:pt-10">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-4xl bg-beige-light p-4 pl-6">
             <p className="text-[15px] text-taupe">{cat.short}</p>
             <div className="flex flex-wrap gap-3">
-              <a href={inquiry} target="_blank" rel="noopener noreferrer" className="btn-dark min-h-[48px]">
+              <PlanButton pieces={[cat.slug]} className="btn-lit min-h-[48px]">Get a free quote <span aria-hidden="true">&rarr;</span></PlanButton>
+              <a href={inquiry} target="_blank" rel="noopener noreferrer" className="btn-wa min-h-[48px]">
                 <WhatsAppIcon className="h-[18px] w-[18px]" />
-                Get a free quote
-              </a>
-              <a href={VISIT_LINK} target="_blank" rel="noopener noreferrer" className="btn-line min-h-[48px]">
-                Book a free visit
+                Ask on WhatsApp
               </a>
             </div>
           </div>
@@ -66,8 +66,9 @@ export default async function CollectionPage({ params }: Props) {
 
       <CustomOrReadyMade slug={cat.slug} />
       <ProcessTimeline />
+      <Planner initial={[cat.slug]} />
 
-      <section className="section-rule bg-beige-light py-section-sm">
+      <section className="py-section-sm">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="font-serif text-3xl">More for the {group.title.toLowerCase()}</h2>
@@ -76,7 +77,7 @@ export default async function CollectionPage({ params }: Props) {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {others.map((o) => (
               <Link key={o.slug} href={"/collections/" + o.slug} className="group block">
-                <div className="relative aspect-[3/4] bg-beige-dark">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-4xl bg-beige-dark">
                   <Image src={o.cover.src} alt={o.cover.alt} fill sizes="(min-width: 640px) 33vw, 100vw" className="object-cover" />
                 </div>
                 <p className="mt-3 font-serif text-xl group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">{o.title}</p>
