@@ -52,6 +52,12 @@
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Sideways rows show a thin scroll line under them, so it is clear there is more. */
+.row-scroll { scrollbar-width: thin; scrollbar-color: #6B5344 #DCC9B8; }
+.row-scroll::-webkit-scrollbar { height: 3px; }
+.row-scroll::-webkit-scrollbar-track { background: #DCC9B8; }
+.row-scroll::-webkit-scrollbar-thumb { background: #6B5344; }
+
 /* Hero slides cross-fade; the active one drifts slowly. */
 @keyframes hero-zoom { from { transform: scale(1.02); } to { transform: scale(1.09); } }
 .hero-zoom { animation: hero-zoom 9s ease-out both; }

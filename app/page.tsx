@@ -1,49 +1,47 @@
 import Link from "next/link";
-import Reviews from "@/components/home/Reviews";
-import CategoryCard from "@/components/site/CategoryCard";
+import ContactBand from "@/components/site/ContactBand";
 import Estimator from "@/components/site/Estimator";
 import FaqBlock from "@/components/site/FaqBlock";
-import HeroSlider, { type HeroSlide } from "@/components/site/HeroSlider";
-import ProductCard from "@/components/site/ProductCard";
-import RoomTabs, { type Room } from "@/components/site/RoomTabs";
+import { BrowseByCategory, DesignRow, HappyCustomers, HaveQuestions, HomeHero, LatestProject, ShopByRoom, ShowroomBand, StartOptions, WhyBand, type RoomTile } from "@/components/site/HomeSections";
 import SectionHead from "@/components/site/SectionHead";
-import { Process, ReadyBand, WhereWeWork, WhyUs } from "@/components/site/Sections";
+import { Process } from "@/components/site/Sections";
 import { categoryCards, toCard } from "@/lib/cards";
 import { estimatorItems } from "@/lib/estimator-items";
 import { faqs } from "@/lib/faq";
 import { categoriesInGroup, groups } from "@/lib/gallery";
 import { getProduct } from "@/lib/products";
-import { priceLabel, priceOf } from "@/lib/pricing";
+import { quoteHref } from "@/lib/quote-link";
 
-const slide = (slug: string, id: string, lead: string, text: string): HeroSlide => {
-  const p = getProduct(slug, id)!;
-  return { src: p.cover.src, alt: p.cover.alt, lead, text, href: p.href };
-};
-
-const slides: HeroSlide[] = [
-  slide("sofas", "cream-u-shaped-sectional", "Sofas and majlis.", "Made to the length of your wall, in the fabric and seat depth you choose."),
-  slide("walk-in-closets", "oak-closet-with-island", "Walk-in closets.", "Glass doors, lit interiors and an island, planned around how you dress."),
-  slide("tv-units", "walnut-and-marble-media-wall", "Media walls.", "Sized to your screen, with hidden cables and soft backlighting."),
-];
+const hero = getProduct("sofas", "cream-u-shaped-sectional")!;
+const heroSmall = getProduct("tv-units", "fluted-beige-media-wall")!;
+const latest = getProduct("tv-units", "walnut-and-marble-media-wall")!;
 
 // A short, mixed row of designs so the home page shows the range without showing everything.
 const picks = [
   ["beds", "walnut-and-marble-headboard-wall"],
-  ["tv-units", "backlit-media-wall-with-slats"],
+  ["tv-units", "fireplace-media-wall"],
   ["fitted-wardrobes", "glass-display-wardrobe"],
   ["dining-tables", "oval-table-with-boucle-chairs"],
   ["sofas", "beige-velvet-corner-sofa"],
   ["walk-in-closets", "black-framed-glass-closet"],
   ["curtains", "grey-wave-curtains"],
+  ["tv-units", "white-media-wall-with-side-shelves"],
   ["wall-paneling", "greige-stairwell-paneling"],
+  ["dressing-tables", "backlit-mirror-vanity"],
 ].map(([s, id]) => toCard(getProduct(s, id)!));
 
-const rooms: Room[] = groups.map((g) => ({
-  slug: g.slug,
-  title: g.title,
-  blurb: g.blurb,
-  tiles: categoriesInGroup(g.slug).map((c) => ({ href: "/collections/" + c.slug, title: c.title, price: priceLabel(c.slug), priced: !!priceOf(c.slug), src: c.cover.src, alt: c.cover.alt })),
-}));
+const roomPhoto: Record<string, [string, string]> = {
+  living: ["sofas", "grey-tufted-l-shape"],
+  bedroom: ["beds", "channel-headboard-with-slat-panels"],
+  dining: ["dining-tables", "oval-table-with-boucle-chairs"],
+  windows: ["curtains", "beige-curtains-with-sheers"],
+};
+
+const rooms: RoomTile[] = groups.map((g) => {
+  const p = getProduct(...roomPhoto[g.slug])!;
+  const cats = categoriesInGroup(g.slug);
+  return { href: "/collections#" + g.slug, title: g.title, line: cats.map((c) => c.title).slice(0, 3).join(", ") + (cats.length > 3 ? " and more" : ""), src: p.cover.src, alt: p.cover.alt };
+});
 
 const faqLd = {
   "@context": "https://schema.org",
@@ -52,63 +50,31 @@ const faqLd = {
 };
 
 export default function HomePage() {
-  const cats = categoryCards();
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      <HeroSlider slides={slides} />
+      <HomeHero main={hero.cover} small={heroSmall.cover} />
+      <WhyBand />
+      <BrowseByCategory items={categoryCards()} />
+      <ShopByRoom rooms={rooms} />
+      <ShowroomBand />
+      <DesignRow items={picks} />
+      <LatestProject title={latest.title} line={latest.line} href={latest.href} a={latest.photos[0]} b={latest.photos[1] ?? latest.cover} quoteHref={quoteHref({ item: latest.slug, design: latest.id })} />
 
-      <section className="py-section-sm lg:py-section" aria-labelledby="make-h">
+      <section id="estimate" className="scroll-mt-24 py-section-sm lg:py-section" aria-labelledby="est-h">
         <div className="wrap">
-          <SectionHead eyebrow="What we make" title={<span id="make-h">Everything for the room, under one roof</span>} lede="Choose a collection to see its designs. Each one opens to show a single photo per design, so you can compare them at a glance." />
-          <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-5 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-12">
-            {cats.slice(0, 8).map((c, n) => (
-              <li key={c.slug}><CategoryCard item={c} priority={n < 4} /></li>
-            ))}
-          </ul>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            {cats.slice(8).map((c) => (
-              <Link key={c.slug} href={c.href} className="text-link">{c.title}</Link>
-            ))}
-            <Link href="/collections" className="btn-line">View all products</Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-sand py-section-sm" aria-labelledby="rooms-h">
-        <div className="wrap">
-          <h2 id="rooms-h" className="h-lg">Plan by room</h2>
-          <p className="lede mb-6 mt-2">Choose a room to see what we usually make for it.</p>
-          <RoomTabs rooms={rooms} />
-        </div>
-      </section>
-
-      <section className="py-section-sm lg:py-section" aria-labelledby="designs-h">
-        <div className="wrap">
-          <SectionHead align="left" eyebrow="Recent designs" title={<span id="designs-h">Open a design to see it in detail</span>} lede="One photo here. More photos, videos and a quote button on its own page." action={<Link href="/gallery" className="btn-line">See all our work</Link>} />
-          <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-5 md:grid-cols-4 lg:gap-x-6 lg:gap-y-12">
-            {picks.map((p) => (
-              <li key={p.href}><ProductCard item={p} /></li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <WhyUs />
-
-      <section id="estimate" className="scroll-mt-24 bg-mist py-section-sm lg:py-section" aria-labelledby="est-h">
-        <div className="wrap">
-          <SectionHead eyebrow="Price guide" title={<span id="est-h">Estimate your budget</span>} lede="Choose what you need. Where we have a published rate you get a starting figure straight away; for everything else you see exactly what the price depends on." />
+          <SectionHead title={<span id="est-h">Estimate your budget</span>} lede="Choose what you need. Where we have a published rate you get a starting figure straight away; for everything else you see exactly what the price depends on." />
           <div className="mt-10"><Estimator items={estimatorItems} initial="fitted-wardrobes" /></div>
-          <p className="mt-5 text-center font-dm text-sm text-taupe">See every published rate on the <Link href="/pricing" className="font-semibold text-charcoal underline underline-offset-4">pricing page</Link>.</p>
+          <p className="mt-5 text-center font-dm text-base text-taupe">See every published rate on the <Link href="/pricing" className="font-medium text-charcoal underline underline-offset-4">pricing page</Link>.</p>
         </div>
       </section>
 
       <Process />
-      <Reviews />
-      <WhereWeWork />
+      <HappyCustomers />
+      <StartOptions />
+      <HaveQuestions />
       <FaqBlock faqs={faqs} />
-      <ReadyBand />
+      <ContactBand />
     </>
   );
 }

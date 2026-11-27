@@ -13,6 +13,8 @@ export interface Review {
   piece: string;
   /** Where the words came from, shown under the name so visitors can trust them. */
   source: "WhatsApp" | "Instagram" | "Google";
+  /** Star rating out of 5, only when the client actually gave one (a Google review, for example). */
+  stars?: 1 | 2 | 3 | 4 | 5;
 }
 
 export const reviews: Review[] = [];
