@@ -14,6 +14,9 @@ export interface HeroShot {
   /** Shown as a small caption: what the photo is, linking to the design. */
   label: string;
   href: string;
+  /** Optional Tailwind object-position classes, for photos whose subject is not in the middle. */
+  widePos?: string;
+  tallPos?: string;
 }
 
 const HOLD = 6500;
@@ -36,19 +39,19 @@ export default function HeroPhoto({ shots }: { shots: HeroShot[] }) {
 
   return (
     <section data-hero className="relative isolate -mt-16 overflow-hidden bg-charcoal text-white lg:-mt-[4.5rem]">
+      {/* Phones: the photo fills the top of the hero, so the whole room is seen above the text, and melts into brown below.
+          Wide screens: the photo fills the hero and a brown wash from the left carries the text. */}
       {shots.map((sh, n) => (
-        <div key={sh.wide.src} className={"absolute inset-0 -z-20 transition-opacity duration-[1400ms] ease-in-out " + (n === i ? "opacity-100" : "opacity-0")} aria-hidden={n !== i}>
-          <Image src={sh.tall.src} alt={n === i ? sh.tall.alt : ""} fill priority={n === 0} sizes="100vw" className={"object-cover md:hidden " + (n === i ? "hero-zoom" : "")} />
-          <Image src={sh.wide.src} alt={n === i ? sh.wide.alt : ""} fill priority={n === 0} sizes="100vw" className={"hidden object-cover md:block " + (n === i ? "hero-zoom" : "")} />
+        <div key={sh.wide.src} className={"absolute inset-x-0 top-0 -z-20 h-[60%] transition-opacity duration-[1400ms] ease-in-out md:inset-0 md:h-auto " + (n === i ? "opacity-100" : "opacity-0")} aria-hidden={n !== i}>
+          <Image src={sh.tall.src} alt={n === i ? sh.tall.alt : ""} fill priority={n === 0} sizes="100vw" className={"object-cover md:hidden " + (sh.tallPos ?? "")} />
+          <Image src={sh.wide.src} alt={n === i ? sh.wide.alt : ""} fill priority={n === 0} sizes="100vw" className={"hidden object-cover md:block " + (sh.widePos ?? "") + (n === i ? " hero-zoom" : "")} />
         </div>
       ))}
-      {/* Phones: dark at the top for the header, clear in the middle, deep brown at the bottom for the text. */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(46,33,26,0.62)_0%,rgba(46,33,26,0.08)_26%,rgba(46,33,26,0.18)_44%,rgba(46,33,26,0.9)_78%,rgba(46,33,26,0.97)_100%)] md:hidden" aria-hidden="true" />
-      {/* Wide screens: brown from the left, fading out so the room stays clear on the right. */}
-      <div className="absolute inset-0 -z-10 hidden bg-[linear-gradient(to_right,rgba(46,33,26,0.93)_0%,rgba(46,33,26,0.8)_32%,rgba(46,33,26,0.28)_62%,rgba(46,33,26,0.1)_100%)] md:block" aria-hidden="true" />
+      <div className="absolute inset-x-0 top-0 -z-10 h-[60%] bg-[linear-gradient(to_bottom,rgba(46,33,26,0.6)_0%,rgba(46,33,26,0)_24%,rgba(46,33,26,0)_58%,rgba(46,33,26,0.75)_86%,#2E211A_100%)] md:hidden" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 hidden bg-[linear-gradient(to_right,rgba(46,33,26,0.92)_0%,rgba(46,33,26,0.78)_30%,rgba(46,33,26,0.22)_60%,rgba(46,33,26,0.05)_100%)] md:block" aria-hidden="true" />
       <div className="absolute inset-x-0 top-0 -z-10 hidden h-40 bg-gradient-to-b from-charcoal/60 to-transparent md:block" aria-hidden="true" />
 
-      <div className="wrap flex min-h-[calc(100svh-60px)] flex-col justify-end pb-9 pt-28 md:min-h-[640px] md:justify-center md:pb-24 md:pt-40 lg:min-h-[min(100svh,820px)]">
+      <div className="wrap flex min-h-[calc(100svh-60px)] flex-col justify-end pb-8 pt-28 md:min-h-[640px] md:justify-center md:pb-24 md:pt-40 lg:min-h-[min(100svh,820px)]">
         <div className="max-w-xl">
           <h1 className="font-serif text-[clamp(2.3rem,9.5vw,3rem)] font-medium leading-[1.08] md:text-[clamp(3rem,4.8vw,4.25rem)]">Your dream interior starts here</h1>
           <p className="mt-4 max-w-md font-dm text-[17px] leading-relaxed text-white/90 md:mt-5 md:text-xl">Sofas, beds, wardrobes, closets, media walls and curtains, made to the measurements of your room and fitted by our own team across the UAE.</p>

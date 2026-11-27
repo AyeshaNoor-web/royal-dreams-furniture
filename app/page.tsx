@@ -14,15 +14,16 @@ import { quoteHref } from "@/lib/quote-link";
 
 // Each hero photo has a landscape version for wide screens and a portrait one for phones, from the same collection.
 const photoNo = (slug: string, n: number) => getCategory(slug)!.images.find((i) => i.src.endsWith("-" + String(n).padStart(2, "0") + ".jpg"))!;
-const shot = (slug: string, wide: number, tall: number): HeroShot => {
+const shot = (slug: string, wide: number, tall: number, widePos?: string): HeroShot => {
   const c = getCategory(slug)!;
   const w = photoNo(slug, wide);
   const t = photoNo(slug, tall);
-  return { wide: { src: w.src, alt: w.alt }, tall: { src: t.src, alt: t.alt }, label: c.title, href: "/collections/" + slug };
+  return { wide: { src: w.src, alt: w.alt }, tall: { src: t.src, alt: t.alt }, label: c.title, href: "/collections/" + slug, widePos };
 };
-const shots: HeroShot[] = [shot("sofas", 5, 1), shot("walk-in-closets", 4, 1), shot("tv-units", 10, 16)];
+// Chosen for being the most finished-looking rooms: styled, well lit and free of clutter.
+const shots: HeroShot[] = [shot("walk-in-closets", 4, 1, "md:object-[center_60%]"), shot("beds", 9, 3, "md:object-[center_82%]"), shot("sofas", 13, 3), shot("tv-units", 26, 16, "md:object-[center_70%]")];
 
-const latest = getProduct("tv-units", "walnut-and-marble-media-wall")!;
+const latest = getProduct("tv-units", "fireplace-media-wall")!;
 
 // A short, mixed row of designs so the home page shows the range without showing everything.
 const picks = [
@@ -67,7 +68,7 @@ export default function HomePage() {
       <ShopByRoom rooms={rooms} />
       <ShowroomBand />
       <DesignRow items={picks} />
-      <LatestProject title={latest.title} line={latest.line} href={latest.href} a={latest.photos[0]} b={latest.photos[1] ?? latest.cover} quoteHref={quoteHref({ item: latest.slug, design: latest.id })} />
+      <LatestProject title={latest.title} line={latest.line} href={latest.href} a={latest.photos[0]} b={latest.photos[3] ?? latest.cover} quoteHref={quoteHref({ item: latest.slug, design: latest.id })} />
 
       <section id="estimate" className="scroll-mt-24 py-section-sm lg:py-section" aria-labelledby="est-h">
         <div className="wrap">

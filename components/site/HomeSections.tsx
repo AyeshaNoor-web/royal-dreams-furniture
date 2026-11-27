@@ -201,20 +201,20 @@ export function DesignRow({ items }: { items: CardItem[] }) {
   );
 }
 
-/** One recent piece shown large: two photos and a short invitation. */
+/** One recent piece shown large: a wide photo of the room, a close-up beside it, and a short invitation. */
 export function LatestProject({ title, line, href, a, b, quoteHref }: { title: string; line: string; href: string; a: GalleryImage; b: GalleryImage; quoteHref: string }) {
   return (
     <section className="bg-beige-dark" aria-labelledby="latest-h">
       <div className="wrap grid grid-cols-1 items-center gap-10 py-section-sm lg:grid-cols-12 lg:py-20">
-        <div className="relative lg:col-span-6">
-          <div className="relative aspect-[4/5] w-[62%] overflow-hidden rounded-lg bg-mist">
-            <Image src={a.src} alt={a.alt} fill sizes="(min-width: 1024px) 30vw, 62vw" className="object-cover" />
+        <div className="relative pb-[9%] lg:col-span-7">
+          <div className="relative aspect-[4/3] w-[88%] overflow-hidden rounded-lg bg-mist">
+            <Image src={a.src} alt={a.alt} fill sizes="(min-width: 1024px) 50vw, 88vw" className="object-cover" />
           </div>
-          <div className="absolute bottom-[-8%] right-0 aspect-[4/5] w-[50%] overflow-hidden rounded-lg border-4 border-beige-dark bg-mist">
-            <Image src={b.src} alt={b.alt} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" />
+          <div className="absolute bottom-0 right-0 aspect-[4/5] w-[34%] overflow-hidden rounded-lg border-4 border-beige-dark bg-mist">
+            <Image src={b.src} alt={b.alt} fill sizes="(min-width: 1024px) 20vw, 34vw" className="object-cover" />
           </div>
         </div>
-        <div className="pt-6 lg:col-span-5 lg:col-start-8 lg:pt-0">
+        <div className="lg:col-span-4 lg:col-start-9">
           <h2 id="latest-h" className="h-lg">Our latest project. Yours could be next.</h2>
           <p className="mt-5 font-serif text-xl text-charcoal">{title}</p>
           <p className="lede mt-2">{line} Every piece starts with a visit to your home and a 3D design you approve.</p>
