@@ -9,11 +9,11 @@ import { SITE, WHATSAPP_LINK } from "@/lib/site";
 
 export interface MenuGroup {
   title: string;
-  items: { title: string; href: string; price: string; priced: boolean }[];
+  items: { title: string; href: string }[];
 }
 
 const links = [
-  { label: "Pricing", href: "/pricing" },
+  { label: "Budget calculator", href: "/pricing" },
   { label: "Our work", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -82,7 +82,6 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
                           <li key={it.href}>
                             <Link href={it.href} className="group block">
                               <span className="block font-dm text-[15px] font-semibold text-charcoal group-hover:text-gold-dark">{it.title}</span>
-                              <span className={"block font-dm text-[12.5px] " + (it.priced ? "font-semibold text-gold-dark" : "text-taupe")}>{it.price}</span>
                             </Link>
                           </li>
                         ))}
@@ -131,7 +130,6 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
                   <li key={it.href}>
                     <Link href={it.href} className="block py-1">
                       <span className="block font-dm text-[15px] font-semibold text-white">{it.title}</span>
-                      <span className="block font-dm text-[12px] text-white/60">{it.price}</span>
                     </Link>
                   </li>
                 ))}

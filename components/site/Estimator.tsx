@@ -134,7 +134,7 @@ export default function Estimator({ items, initial }: { items: EstimatorItem[]; 
           <label htmlFor="est-item" className="field-label lg:hidden">What do you need?</label>
           <select id="est-item" className="field lg:hidden" value={slug} onChange={(e) => setSlug(e.target.value)}>
             {items.map((i) => (
-              <option key={i.slug} value={i.slug}>{i.title + (i.priced ? " · from " + aed(i.priced.from) : "")}</option>
+              <option key={i.slug} value={i.slug}>{i.title}</option>
             ))}
           </select>
           <ul className="hidden flex-col gap-1 lg:flex" role="tablist" aria-label="What do you need?">
@@ -144,7 +144,6 @@ export default function Estimator({ items, initial }: { items: EstimatorItem[]; 
                 <li key={i.slug}>
                   <button type="button" role="tab" aria-selected={on} onClick={() => setSlug(i.slug)} className={"flex w-full items-center justify-between gap-3 rounded-md px-4 py-3 text-left font-dm text-[14.5px] transition-colors " + (on ? "bg-charcoal font-semibold text-white" : "text-charcoal hover:bg-sand")}>
                     <span>{i.title}</span>
-                    <span className={"shrink-0 text-right text-[13px] " + (on ? "text-white/85" : i.priced ? "font-semibold text-gold-dark" : "text-taupe")}>{i.priced ? "from " + i.priced.from.toLocaleString("en-US") : "After visit"}</span>
                   </button>
                 </li>
               );

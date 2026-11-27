@@ -96,7 +96,7 @@ export function WhyBand() {
   );
 }
 
-/** Every collection as a small tile: photo, name, price line. */
+/** Every collection as a small tile: photo and name. */
 export function BrowseByCategory({ items }: { items: CategoryCardItem[] }) {
   return (
     <section className="py-section-sm lg:py-section" aria-labelledby="browse-h">
@@ -110,7 +110,6 @@ export function BrowseByCategory({ items }: { items: CategoryCardItem[] }) {
                   <Image src={c.src} alt={c.alt} fill sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
                 </div>
                 <h3 className="mt-3 font-dm text-[17px] font-medium text-charcoal underline-offset-4 group-hover:underline">{c.title}</h3>
-                <p className={"font-dm text-sm " + (c.priced ? "text-gold-dark" : "text-taupe")}>{c.priced ? c.price : ""}</p>
               </Link>
             </li>
           ))}

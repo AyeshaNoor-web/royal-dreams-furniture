@@ -11,7 +11,7 @@ import { Process, ReadyBand } from "@/components/site/Sections";
 import { toCard, toCategoryCard } from "@/lib/cards";
 import { estimatorItems } from "@/lib/estimator-items";
 import { categories, categoriesInGroup, getCategory, groups } from "@/lib/gallery";
-import { aed, factorsOf, priceOf } from "@/lib/pricing";
+import { factorsOf, priceOf } from "@/lib/pricing";
 import { productsOf } from "@/lib/products";
 import { quoteHref } from "@/lib/quote-link";
 import { whatsappLink } from "@/lib/site";
@@ -47,20 +47,10 @@ export default async function CollectionPage({ params }: Props) {
   return (
     <>
       <PageHeader eyebrow={group.title} title={cat.title} intro={cat.description} crumbs={[{ label: "Products", href: "/collections" }, { label: cat.title }]}>
-        <div className="flex flex-col gap-5 rounded-lg border border-border bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-          <div>
-            <p className="font-dm text-sm font-medium text-taupe">{price ? "Starting price" : "Pricing"}</p>
-            {price ? (
-              <p className="mt-1 font-serif text-2xl font-medium text-charcoal">From {aed(price.from)} <span className="text-xl text-taupe">/ {price.unit}</span></p>
-            ) : (
-              <p className="mt-1 font-serif text-xl font-medium text-charcoal sm:text-2xl">Quoted after a free visit</p>
-            )}
-            <p className="mt-1 font-dm text-[13px] text-taupe">{price ? "By door type. " : "Made to your sizes. "}<a href="#price" className="font-semibold text-charcoal underline underline-offset-4">{price ? "Work out your budget" : "See what the price depends on"}</a></p>
-          </div>
-          <div className="flex flex-col gap-2.5 sm:flex-row">
-            <Link href={quoteHref({ item: cat.slug })} className="btn-dark">Get a free quote</Link>
-            <a href={ask} target="_blank" rel="noopener noreferrer" className="btn-line"><WhatsAppIcon className="h-4 w-4 text-[#128C4B]" /> WhatsApp</a>
-          </div>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Link href={quoteHref({ item: cat.slug })} className="btn-dark">Get a free quote</Link>
+          <a href={ask} target="_blank" rel="noopener noreferrer" className="btn-line"><WhatsAppIcon className="h-4 w-4 text-[#128C4B]" /> Ask on WhatsApp</a>
+          {price && <a href="#price" className="btn-line">Calculate a budget</a>}
         </div>
       </PageHeader>
 
@@ -68,15 +58,15 @@ export default async function CollectionPage({ params }: Props) {
         <div className="wrap">
           <div className="mb-7 flex flex-col gap-1.5 sm:flex-row sm:items-end sm:justify-between">
             <h2 id="designs-h" className="h-md">Designs</h2>
-            <p className="font-dm text-sm text-taupe">One photo per design. Open any design for all its photos and a quote.</p>
+            <p className="font-dm text-base text-taupe">Open a design to see it in detail.</p>
           </div>
-          <ProductGrid items={list.map((p) => toCard(p, "price"))} filters={types} allLabel={"All " + cat.title.toLowerCase()} />
+          <ProductGrid items={list.map((p) => toCard(p, "none"))} filters={types} allLabel={"All " + cat.title.toLowerCase()} />
         </div>
       </section>
 
       <section id="price" className="scroll-mt-24 bg-mist py-section-sm lg:py-section" aria-labelledby="price-h">
         <div className="wrap">
-          <SectionHead eyebrow="Price guide" title={<span id="price-h">{price ? "Work out a starting budget" : "How " + cat.title.toLowerCase() + " are priced"}</span>} lede={price ? "Set the size of your wall and the door type. The exact quotation follows a free measurement." : "No shelf price, because nothing comes off a shelf. Here is what moves the figure and how to get one quickly."} />
+          <SectionHead eyebrow="Price guide" title={<span id="price-h">{price ? "Calculate your budget" : "How " + cat.title.toLowerCase() + " are priced"}</span>} lede={price ? "Set the size of your wall and the door type. The exact quotation follows a free measurement." : "No shelf price, because nothing comes off a shelf. Here is what moves the figure and how to get one quickly."} />
           <div className="mx-auto mt-10 max-w-4xl">
             <Estimator items={estimatorItems.filter((i) => i.slug === cat.slug)} />
           </div>

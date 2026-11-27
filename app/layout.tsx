@@ -5,7 +5,6 @@ import Header, { type MenuGroup } from "@/components/site/Header";
 import SiteFooter from "@/components/site/SiteFooter";
 import MobileTabBar from "@/components/site/MobileTabBar";
 import { categoriesInGroup, groups } from "@/lib/gallery";
-import { priceLabel, priceOf } from "@/lib/pricing";
 import ChatWidget from "@/components/chat/ChatWidget";
 import { SITE } from "@/lib/site";
 
@@ -53,7 +52,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 const menu: MenuGroup[] = groups.map((g) => ({
   title: g.title,
-  items: categoriesInGroup(g.slug).map((c) => ({ title: c.title, href: "/collections/" + c.slug, price: priceLabel(c.slug), priced: !!priceOf(c.slug) })),
+  items: categoriesInGroup(g.slug).map((c) => ({ title: c.title, href: "/collections/" + c.slug })),
 }));
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

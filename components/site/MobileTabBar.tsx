@@ -8,7 +8,7 @@ import { WHATSAPP_LINK } from "@/lib/site";
 const tabs = [
   { label: "Home", href: "/", icon: "M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6h-6v6H5a1 1 0 01-1-1v-8z" },
   { label: "Products", href: "/collections", icon: "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" },
-  { label: "Pricing", href: "/pricing", icon: "M12 3v18M16.5 7.5c-.8-1.2-2.4-2-4.5-2-2.5 0-4.5 1.2-4.5 3.2 0 4.6 9.5 2 9.5 6.6 0 2-2 3.2-5 3.2-2.3 0-4.2-.9-5-2.3" },
+  { label: "Budget", href: "/pricing", icon: "M12 3v18M16.5 7.5c-.8-1.2-2.4-2-4.5-2-2.5 0-4.5 1.2-4.5 3.2 0 4.6 9.5 2 9.5 6.6 0 2-2 3.2-5 3.2-2.3 0-4.2-.9-5-2.3" },
   { label: "Quote", href: "/quote", icon: "M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6" },
 ];
 

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import ContactBand from "@/components/site/ContactBand";
 import Estimator from "@/components/site/Estimator";
 import FaqBlock from "@/components/site/FaqBlock";
@@ -65,7 +64,7 @@ export default function HomePage() {
         <div className="wrap">
           <SectionHead title={<span id="est-h">Estimate your budget</span>} lede="Choose what you need. Where we have a published rate you get a starting figure straight away; for everything else you see exactly what the price depends on." />
           <div className="mt-10"><Estimator items={estimatorItems} initial="fitted-wardrobes" /></div>
-          <p className="mt-5 text-center font-dm text-base text-taupe">See every published rate on the <Link href="/pricing" className="font-medium text-charcoal underline underline-offset-4">pricing page</Link>.</p>
+          <p className="mt-5 text-center font-dm text-base text-taupe">Your exact quotation follows a free home visit.</p>
         </div>
       </section>
 

@@ -8,7 +8,7 @@ import { SITE, WHATSAPP_LINK } from "@/lib/site";
 const explore = [
   { label: "Home", href: "/" },
   { label: "All products", href: "/collections" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Budget calculator", href: "/pricing" },
   { label: "Our work", href: "/gallery" },
   { label: "Get a quote", href: "/quote" },
   { label: "About us", href: "/about" },
@@ -73,7 +73,7 @@ export default function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="wrap flex flex-col gap-2 py-6 font-dm text-[13px] text-white/50 sm:flex-row sm:items-center sm:gap-8 lg:pr-36">
           <p>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p>Prices on this site are starting guides. Your quotation follows a free measurement.</p>
+          <p>Your quotation follows a free home measurement.</p>
         </div>
       </div>
     </footer>
