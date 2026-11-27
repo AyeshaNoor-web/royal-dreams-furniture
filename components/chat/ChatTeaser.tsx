@@ -52,7 +52,7 @@ export default function ChatTeaser({ active, onOpen }: { active: boolean; onOpen
           <p className="pr-6 font-serif text-[17px] leading-snug text-charcoal">Need a sofa, wardrobe or curtains made to measure?</p>
           <p className="mt-1 text-[13px] leading-relaxed text-taupe">Ask here and get an instant answer, or message the team on WhatsApp.</p>
           <button type="button" onClick={() => { dismiss(); onOpen(); }} className="mt-3 inline-flex min-h-[40px] items-center gap-2 rounded-full bg-charcoal px-4 font-dm text-[13px] font-medium text-beige-light transition-colors hover:bg-charcoal-light">
-            Ask a question <span aria-hidden="true">&rarr;</span>
+            Ask a question
           </button>
         </motion.div>
       )}

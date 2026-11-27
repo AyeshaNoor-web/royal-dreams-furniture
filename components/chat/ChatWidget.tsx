@@ -46,7 +46,7 @@ function Widget() {
             transition={{ duration: 0.25, ease: EASE }}
             className="fixed bottom-[76px] right-4 z-[55] lg:bottom-6 lg:right-6 lg:z-[70]"
           >
-            {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-charcoal/35" />}
+            {fresh && <span aria-hidden="true" className="chat-pulse absolute inset-0 rounded-full bg-beige-light/60" />}
             <motion.button
               ref={bubble}
               type="button"
@@ -56,16 +56,16 @@ function Widget() {
               whileHover={reduce ? undefined : { scale: 1.05, y: -2 }}
               whileTap={reduce ? undefined : { scale: 0.95 }}
               transition={{ duration: 0.2, ease: EASE }}
-              className="relative flex items-center gap-3 rounded-full bg-charcoal py-3 pl-4 pr-4 text-beige-light shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-charcoal-light sm:pr-5"
+              className="relative flex items-center gap-2.5 rounded-full border border-border bg-beige-light py-3 pl-4 pr-5 text-charcoal shadow-lg shadow-black/25 transition-colors duration-300 hover:bg-white"
             >
               <span className="relative">
                 <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v8a2.5 2.5 0 01-2.5 2.5H10l-4.5 3.5V17H6.5A2.5 2.5 0 014 14.5v-8z" />
                   <path d="M8 9h8M8 12.5h5" />
                 </svg>
-                {fresh && <span aria-hidden="true" className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-gold ring-2 ring-charcoal" />}
+                {fresh && <span aria-hidden="true" className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-gold-dark ring-2 ring-beige-light" />}
               </span>
-              <span className="hidden font-dm text-sm font-medium sm:block">Ask us</span>
+              <span className="font-dm text-sm font-medium">Ask us</span>
             </motion.button>
           </motion.div>
         )}
