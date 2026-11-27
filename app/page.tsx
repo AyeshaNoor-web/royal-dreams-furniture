@@ -8,20 +8,17 @@ import { Process } from "@/components/site/Sections";
 import { categoryCards, toCard } from "@/lib/cards";
 import { estimatorItems } from "@/lib/estimator-items";
 import { faqs } from "@/lib/faq";
-import { categoriesInGroup, getCategory, groups } from "@/lib/gallery";
+import { categoriesInGroup, groups } from "@/lib/gallery";
 import { getProduct } from "@/lib/products";
 import { quoteHref } from "@/lib/quote-link";
 
-// Each hero photo has a landscape version for wide screens and a portrait one for phones, from the same collection.
-const photoNo = (slug: string, n: number) => getCategory(slug)!.images.find((i) => i.src.endsWith("-" + String(n).padStart(2, "0") + ".jpg"))!;
-const shot = (slug: string, wide: number, tall: number, widePos?: string): HeroShot => {
-  const c = getCategory(slug)!;
-  const w = photoNo(slug, wide);
-  const t = photoNo(slug, tall);
-  return { wide: { src: w.src, alt: w.alt }, tall: { src: t.src, alt: t.alt }, label: c.title, href: "/collections/" + slug, widePos };
-};
-// Chosen for being the most finished-looking rooms: styled, well lit and free of clutter.
-const shots: HeroShot[] = [shot("walk-in-closets", 4, 1, "md:object-[center_60%]"), shot("beds", 9, 3, "md:object-[center_82%]"), shot("sofas", 13, 3), shot("tv-units", 26, 16, "md:object-[center_70%]")];
+// Hero photos are the client's sharpest originals (up to 1600px tall), kept at full size in public/images/hero.
+const shots: HeroShot[] = [
+  { src: "/images/hero/hero-01.jpg", alt: "White boucle bed in a panelled bedroom", label: "Beds", href: "/collections/beds" },
+  { src: "/images/hero/hero-02.jpg", alt: "Modular sofa with a curved armchair and a city view", label: "Sofas & Majlis", href: "/collections/sofas", pos: "md:object-[center_70%]" },
+  { src: "/images/hero/hero-03.jpg", alt: "Floating display shelves with warm lighting over base cabinets", label: "Display Shelving", href: "/collections/display-shelving" },
+  { src: "/images/hero/hero-04.jpg", alt: "Backlit TV panel beside a lit oak shelf tower", label: "TV Units & Media Walls", href: "/collections/tv-units", pos: "md:object-[center_60%]" },
+];
 
 const latest = getProduct("tv-units", "fireplace-media-wall")!;
 
