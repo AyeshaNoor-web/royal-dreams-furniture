@@ -278,7 +278,7 @@ export function HappyCustomers() {
               <p className="font-dm text-[17px] font-medium text-charcoal">{r.name}</p>
               <blockquote className="mt-3 flex-1 font-dm text-[16px] leading-relaxed text-taupe">{r.quote}</blockquote>
               {r.stars ? <p className="mt-4 text-lg tracking-widest text-gold-dark" aria-label={r.stars + " out of 5 stars"}>{"★".repeat(r.stars)}</p> : null}
-              <p className="mt-3 border-t border-border pt-3 font-dm text-sm text-taupe">{r.piece}, {r.area}. From {r.source}.</p>
+              <p className="mt-3 border-t border-border pt-3 font-dm text-sm text-taupe">{r.piece}, {r.area}{r.source ? ". From " + r.source : ""}.</p>
             </li>
           ))}
         </ul>

@@ -11,8 +11,8 @@ export interface Review {
   name: string;
   area: string;
   piece: string;
-  /** Where the words came from, shown under the name so visitors can trust them. */
-  source: "WhatsApp" | "Instagram" | "Google";
+  /** Where the words came from. Optional: leave it out and nothing about the source is shown. */
+  source?: "WhatsApp" | "Instagram" | "Google";
   /** Star rating out of 5, only when the client actually gave one (a Google review, for example). */
   stars?: 1 | 2 | 3 | 4 | 5;
 }
