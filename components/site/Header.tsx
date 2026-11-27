@@ -50,12 +50,22 @@ export default function Header({ menu }: { menu: MenuGroup[] }) {
     return () => { document.body.style.overflow = ""; };
   }, [drawer]);
 
+  // Over the home hero the bar is frosted glass; once the page scrolls, or on any other page, it is solid brown.
+  const [top, setTop] = useState(true);
+  useEffect(() => {
+    const onScroll = () => setTop(window.scrollY < 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const glass = path === "/" && top && !mega && !drawer;
+
   const hoverOpen = () => { if (closeTimer.current) clearTimeout(closeTimer.current); setMega(true); };
   const hoverClose = () => { closeTimer.current = setTimeout(() => setMega(false), 160); };
   const active = (href: string) => (path === href || path.startsWith(href + "/") ? "text-white" : "text-white/75");
 
   return (
-    <header className="sticky top-0 z-50 bg-ink text-white">
+    <header className={"sticky top-0 z-50 text-white transition-[background-color,border-color,backdrop-filter] duration-300 " + (glass ? "border-b border-white/15 bg-charcoal/25 backdrop-blur-md" : "border-b border-transparent bg-ink")}>
       <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
         <Link href="/" className="flex shrink-0 items-center gap-3" aria-label={SITE.name + " home"}>
           <Image src="/brand/logo-mark-gold.png" alt="" width={484} height={543} priority className="h-9 w-auto lg:h-10" />

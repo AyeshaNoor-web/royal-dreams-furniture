@@ -1,18 +1,27 @@
 import ContactBand from "@/components/site/ContactBand";
 import Estimator from "@/components/site/Estimator";
 import FaqBlock from "@/components/site/FaqBlock";
-import { BrowseByCategory, DesignRow, HappyCustomers, HaveQuestions, HomeHero, LatestProject, ShopByRoom, ShowroomBand, StartOptions, WhyBand, type RoomTile } from "@/components/site/HomeSections";
+import HeroPhoto, { type HeroShot } from "@/components/site/HeroPhoto";
+import { BrowseByCategory, DesignRow, HappyCustomers, HaveQuestions, LatestProject, ShopByRoom, ShowroomBand, StartOptions, WhyBand, type RoomTile } from "@/components/site/HomeSections";
 import SectionHead from "@/components/site/SectionHead";
 import { Process } from "@/components/site/Sections";
 import { categoryCards, toCard } from "@/lib/cards";
 import { estimatorItems } from "@/lib/estimator-items";
 import { faqs } from "@/lib/faq";
-import { categoriesInGroup, groups } from "@/lib/gallery";
+import { categoriesInGroup, getCategory, groups } from "@/lib/gallery";
 import { getProduct } from "@/lib/products";
 import { quoteHref } from "@/lib/quote-link";
 
-const hero = getProduct("sofas", "cream-u-shaped-sectional")!;
-const heroSmall = getProduct("tv-units", "fluted-beige-media-wall")!;
+// Each hero photo has a landscape version for wide screens and a portrait one for phones, from the same collection.
+const photoNo = (slug: string, n: number) => getCategory(slug)!.images.find((i) => i.src.endsWith("-" + String(n).padStart(2, "0") + ".jpg"))!;
+const shot = (slug: string, wide: number, tall: number): HeroShot => {
+  const c = getCategory(slug)!;
+  const w = photoNo(slug, wide);
+  const t = photoNo(slug, tall);
+  return { wide: { src: w.src, alt: w.alt }, tall: { src: t.src, alt: t.alt }, label: c.title, href: "/collections/" + slug };
+};
+const shots: HeroShot[] = [shot("sofas", 5, 1), shot("walk-in-closets", 4, 1), shot("tv-units", 10, 16)];
+
 const latest = getProduct("tv-units", "walnut-and-marble-media-wall")!;
 
 // A short, mixed row of designs so the home page shows the range without showing everything.
@@ -52,7 +61,7 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      <HomeHero main={hero.cover} small={heroSmall.cover} />
+      <HeroPhoto shots={shots} />
       <WhyBand />
       <BrowseByCategory items={categoryCards()} />
       <ShopByRoom rooms={rooms} />
