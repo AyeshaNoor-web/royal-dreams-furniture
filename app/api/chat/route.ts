@@ -53,6 +53,20 @@ const parse = (raw: string, lastQuestion: string) => {
   return label ? { text, link: { label, href: path } } : { text };
 };
 
+// Small models often drift back to English, so the language of the latest question is worked out here
+// and stated to the model outright.
+const ROMAN_URDU = new Set(["hai", "hain", "kya", "mujhe", "mujhay", "chahiye", "chahiay", "kitna", "kitni", "kitne", "liye", "liay", "aap", "ap", "mein", "main", "karte", "karta", "karti", "hoga", "hogi", "nahi", "nahin", "kaise", "kaisay", "kahan", "bhi", "aur", "kar", "raha", "rahi", "sakta", "sakte", "sakti", "hum", "humein", "apna", "apni", "ghar", "kharcha", "qeemat", "kab", "kyun", "tak", "wala", "wali", "banwana", "banana", "dikhao", "batao", "bataye", "milega", "chahte", "chahta", "se", "ko", "ka", "ki", "ke", "ho", "hu", "hoon", "tha", "thi", "yeh", "ye", "woh", "koi", "kuch", "acha", "theek", "shukriya"]);
+
+const languageOf = (text: string): string | null => {
+  if (/[\u0900-\u097F]/.test(text)) return "Hindi, in Devanagari script";
+  if (/[\u0600-\u06FF]/.test(text)) return /[\u0679\u067E\u0686\u0688\u0691\u0698\u06A9\u06AF\u06BA\u06BE\u06C1\u06CC\u06D2]/.test(text) ? "Urdu, in Urdu script" : "Arabic";
+  const words = text.toLowerCase().split(/[^a-z]+/).filter(Boolean);
+  if (words.length === 0) return null;
+  const hits = words.filter((w) => ROMAN_URDU.has(w)).length;
+  if (hits >= 2 && hits / words.length >= 0.25) return "Roman Urdu (Urdu or Hindi written in English letters, exactly as the visitor typed), not English and not Devanagari";
+  return null;
+};
+
 async function ask(key: string, model: string, messages: { role: string; content: string }[]) {
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -87,13 +101,20 @@ export async function POST(req: Request) {
   const focus: string[] = [];
   for (const q of asked) for (const s of topicsFor(q)) if (!focus.includes(s) && focus.length < 2) focus.push(s);
 
-  const messages = [{ role: "system", content: systemPrompt(focus) }, ...turns];
+  const language = languageOf(last.content);
+  const question = last.content;
+  if (language) last.content = `${question}
+
+[Write your whole reply in ${language}.]`;
+  const messages = [{ role: "system", content: systemPrompt(focus) + (language ? `
+
+The visitor's latest message is in ${language}. Write your whole reply in that language.` : "") }, ...turns];
   // Why each model did not answer (an HTTP status, or 0 for a timeout or empty reply), to make limits easy to spot.
   const tried: Record<string, number> = {};
   for (const model of MODELS) {
     try {
       const raw = await ask(key, model, messages);
-      if (typeof raw === "string") return NextResponse.json({ ok: true, ...parse(raw, last.content) });
+      if (typeof raw === "string") return NextResponse.json({ ok: true, ...parse(raw, question) });
       tried[model] = raw;
     } catch {
       tried[model] = 0;
