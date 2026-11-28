@@ -105,6 +105,19 @@ const designFor = (t: string[]): Product | null => {
   return best;
 };
 
+/** The collections a piece of conversation is about, most likely first. Used to pick what the AI is told. */
+export const topicsFor = (text: string, max = 2): string[] => {
+  const found: string[] = [];
+  const design = designFor(tokens(text));
+  if (design) found.push(design.slug);
+  for (const m of match(text)) {
+    if (m.intent.kind !== "product" || !m.intent.id.startsWith("product:")) continue;
+    const slug = m.intent.id.replace("product:", "");
+    if (!found.includes(slug)) found.push(slug);
+  }
+  return found.slice(0, max);
+};
+
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 const describe = (p: Product) => (p.line ? `${p.title}: ${lower(p.line).replace(/\.$/, "")}.` : `${p.title}.`);
 

@@ -29,8 +29,10 @@ export const knownPages: KnownPage[] = [
   ...products.map((p) => ({ path: p.href, label: p.title })),
 ];
 
-const collectionBlock = () =>
+/** Full detail, with every design, for the collections the visitor is asking about. Kept short because free AI plans cap the words per minute. */
+const collectionBlock = (focus: string[]) =>
   categories
+    .filter((c) => focus.includes(c.slug))
     .map((c) => {
       const f = quoteFactors.find((q) => q.slug === c.slug);
       const room = groups.find((g) => g.slug === c.group)?.title ?? "";
@@ -48,7 +50,7 @@ const collectionBlock = () =>
     })
     .join("\n\n");
 
-export const knowledge = () => `
+export const knowledge = (focus: string[] = []) => `
 # ${SITE.name} (${SITE.shortName})
 ${SITE.tagline}. A made-to-measure furniture business. Everything is built to order in its own workshop in Dubai and fitted by its own team. Nothing is sold ready-made from stock.
 
@@ -94,13 +96,13 @@ Walnut and oak veneers, lacquer in any colour, marble and stone tops, boucle, ve
 - /quote: the quote form.
 - /about, /contact.
 
-## Collections and their designs
-Each design has its own page with all of its photos and videos.
-
-${collectionBlock()}
+## Collections
+Each collection page lists its designs, and each design has its own page with all of its photos and videos.
+${categories.map((c) => `- ${c.title} [/collections/${c.slug}]: ${c.short}`).join("\n")}
+${focus.length ? "\n## Detail for what the visitor is asking about\n\n" + collectionBlock(focus) : ""}
 `.trim();
 
-export const systemPrompt = () => `
+export const systemPrompt = (focus: string[] = []) => `
 You are the assistant on the website of ${SITE.name}, a made-to-measure furniture business in the UAE. You talk with people who are thinking about furniture for their home. Sound like a warm, knowledgeable member of the showroom team: natural, friendly, direct.
 
 How to answer
@@ -123,5 +125,5 @@ LINK: <path>
 where <path> is a page path that appears in the site knowledge (for example /collections/sofas, a design path, /pricing, /quote, /quote?item=beds), or the single word whatsapp when talking to the team is the best next step. Leave the line out when no link helps. Do not write URLs or paths anywhere else in the answer; refer to pages by name.
 
 SITE KNOWLEDGE
-${knowledge()}
+${knowledge(focus)}
 `.trim();
