@@ -13,14 +13,15 @@ interface Props {
   hideLink?: boolean;
 }
 
-const linkClass = "mt-2 inline-flex min-h-[44px] items-center gap-2 px-4 font-dm text-[13px] font-medium transition-colors [touch-action:manipulation] ";
-const siteLink = linkClass + "border border-charcoal/35 text-charcoal hover:border-charcoal hover:bg-beige";
+const linkClass = "mt-3.5 flex min-h-[46px] w-full items-center justify-center gap-2 rounded-md px-4 text-center font-dm text-[15px] font-medium transition-colors [touch-action:manipulation] ";
+const siteLink = linkClass + "bg-ink text-white hover:bg-charcoal";
 const waLink = linkClass + "bg-[#25D366] text-white hover:bg-[#1ebe5b]";
 
 export default function ChatMessage({ message, onChip, onNavigate, hideLink = false }: Props) {
   const reduce = useReducedMotion();
   const bot = message.role === "bot";
   const wa = Boolean(message.link?.external && message.link.href.startsWith("https://wa.me"));
+  // Arabic and Urdu read right to left; let each message set its own direction.
   return (
     <motion.li
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
@@ -30,11 +31,11 @@ export default function ChatMessage({ message, onChip, onNavigate, hideLink = fa
     >
       <div
         className={
-          "max-w-[88%] px-4 py-3 text-[14px] leading-relaxed " +
-          (bot ? "rounded-2xl rounded-bl-md border border-border bg-beige-light text-charcoal" : "rounded-2xl rounded-br-md bg-charcoal text-beige-light")
+          "max-w-[86%] px-4 py-3 font-dm text-[15px] leading-relaxed " +
+          (bot ? "rounded-lg rounded-tl-sm bg-beige-light text-charcoal" : "rounded-lg rounded-tr-sm bg-ink text-white")
         }
       >
-        <p className="whitespace-pre-line">{message.text}</p>
+        <p dir="auto" className="whitespace-pre-line break-words">{message.text}</p>
         {message.link && !hideLink && (
           <a
             href={message.link.href}
@@ -43,16 +44,16 @@ export default function ChatMessage({ message, onChip, onNavigate, hideLink = fa
             rel={message.link.external ? "noopener noreferrer" : undefined}
             className={wa ? waLink : siteLink}
           >
-            {wa && <WhatsAppIcon className="h-4 w-4" />}
+            {wa && <WhatsAppIcon className="h-4 w-4 shrink-0" />}
             {message.link.label}
           </a>
         )}
       </div>
       {message.chips && message.chips.length > 0 && (
-        <ul className="mt-2 flex max-w-[92%] flex-wrap gap-2" aria-label="Collections">
+        <ul className="mt-2.5 flex max-w-full flex-wrap gap-2" aria-label="Collections">
           {message.chips.map((c) => (
             <li key={c}>
-              <button type="button" onClick={() => onChip(c)} className="min-h-[36px] rounded-full border border-border bg-beige-light px-3 py-1.5 font-dm text-[13px] text-charcoal transition-colors [touch-action:manipulation] hover:border-charcoal">
+              <button type="button" onClick={() => onChip(c)} className="min-h-[40px] rounded-md border border-border bg-beige-light px-3 py-1.5 font-dm text-sm text-charcoal transition-colors [touch-action:manipulation] hover:border-ink">
                 {c}
               </button>
             </li>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
@@ -13,6 +14,7 @@ import type { Chat } from "./useChat";
 
 const isPhone = () => typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches;
 
+/** The chat window. A full-screen sheet on phones, a card in the corner on larger screens. */
 export default function ChatPanel({ chat }: { chat: Chat }) {
   const { messages, typing, send, push, leadDone, setLeadDone, setOpen } = chat;
   const reduce = useReducedMotion();
@@ -21,13 +23,36 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
   const list = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
-  // Focus the panel and close on Escape. The page behind stays scrollable: the chat is a card, not a sheet.
+  // Focus the panel and close on Escape.
   useEffect(() => {
     root.current?.focus();
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [setOpen]);
+
+  // On phones the chat covers the screen: stop the page behind from scrolling, and keep the sheet exactly as tall as
+  // the visible area so the input stays above the on-screen keyboard.
+  useEffect(() => {
+    if (!isPhone()) return;
+    const el = root.current;
+    const vv = window.visualViewport;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const fit = () => {
+      if (!el || !vv) return;
+      el.style.height = vv.height + "px";
+      el.style.top = vv.offsetTop + "px";
+    };
+    fit();
+    vv?.addEventListener("resize", fit);
+    vv?.addEventListener("scroll", fit);
+    return () => {
+      document.body.style.overflow = prev;
+      vv?.removeEventListener("resize", fit);
+      vv?.removeEventListener("scroll", fit);
+    };
+  }, []);
 
   useEffect(() => {
     list.current?.scrollTo({ top: list.current.scrollHeight, behavior: reduce ? "auto" : "smooth" });
@@ -64,43 +89,51 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
     }
   };
 
+  const headBtn = "flex h-11 w-10 items-center justify-center rounded-md text-white/85 transition-colors hover:bg-white/10 hover:text-white";
+
   return (
     <motion.div
       ref={root}
       tabIndex={-1}
       role="dialog"
+      aria-modal="true"
       aria-label={"Chat with " + SITE.name}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.97 }}
+      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
       transition={{ duration: 0.3, ease: EASE }}
-      className="fixed bottom-4 left-4 right-4 z-[70] flex h-[min(64svh,540px)] flex-col overflow-hidden rounded-2xl border border-border bg-beige shadow-2xl shadow-black/30 outline-none sm:bottom-6 sm:left-auto sm:right-6 sm:h-[600px] sm:max-h-[calc(100svh-3rem)] sm:w-[380px]"
+      className="fixed inset-x-0 top-0 z-[80] flex h-[100dvh] flex-col overflow-hidden bg-beige outline-none sm:inset-x-auto sm:bottom-6 sm:right-6 sm:top-auto sm:h-[640px] sm:max-h-[calc(100dvh-3rem)] sm:w-[400px] sm:rounded-xl sm:border sm:border-border sm:shadow-[0_28px_70px_-24px_rgba(46,33,26,0.55)]"
     >
-      <div className="flex items-center justify-between gap-3 border-b border-border bg-beige-light px-4 py-3">
-        <div>
-          <p className="font-serif text-[17px] leading-tight text-charcoal">{SITE.name}</p>
-          <p className="mt-0.5 text-[12px] text-taupe">Instant answers from our website</p>
+      <div className="flex shrink-0 items-center justify-between gap-3 bg-ink pl-4 pr-2 pb-3.5 pt-[max(0.875rem,env(safe-area-inset-top))] text-white">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <Image src="/brand/logo-mark-gold.png" alt="" width={484} height={543} className="h-9 w-auto shrink-0" />
+          <div className="min-w-0">
+            <p className="truncate font-serif text-base leading-tight sm:text-[17px]">{SITE.name}</p>
+            <p className="mt-0.5 font-dm text-[13px] text-white/75">Ask us anything about our furniture</p>
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-          <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" className="flex h-10 w-10 items-center justify-center rounded-full text-[#1ebe5b] transition-colors hover:bg-beige">
+        <div className="flex shrink-0 items-center">
+          <a href={WHATSAPP_CHAT.href} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" className={headBtn}>
             <WhatsAppIcon className="h-5 w-5" />
           </a>
-          <button type="button" onClick={() => setOpen(false)} aria-label="Close chat" className="flex h-10 w-10 items-center justify-center rounded-full text-charcoal transition-colors hover:bg-beige">
+          <button type="button" onClick={() => setOpen(false)} aria-label="Close chat" className={headBtn}>
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
           </button>
         </div>
       </div>
 
-      <div ref={list} className="flex-1 overflow-y-auto px-4 py-4">
-        <ul className="flex flex-col gap-3" aria-live="polite" aria-relevant="additions">
+      <div ref={list} className="chat-scroll flex-1 overflow-y-auto px-4 py-5">
+        <ul className="flex flex-col gap-4" aria-live="polite" aria-relevant="additions">
           {messages.map((m) => (
             <ChatMessage key={m.id} message={m} onChip={send} onNavigate={onNavigate} hideLink={showLead && m.id === last.id} />
           ))}
           {typing && (
-            <li className="flex items-center gap-1 px-4 py-3 text-taupe" aria-label="Typing">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-taupe" />
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-taupe [animation-delay:150ms]" />
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-taupe [animation-delay:300ms]" />
+            <li className="flex items-start" aria-label="Typing">
+              <span className="flex items-center gap-1.5 rounded-lg rounded-tl-sm bg-beige-light px-4 py-4">
+                <span className="chat-dot h-1.5 w-1.5 rounded-full bg-taupe" />
+                <span className="chat-dot h-1.5 w-1.5 rounded-full bg-taupe [animation-delay:150ms]" />
+                <span className="chat-dot h-1.5 w-1.5 rounded-full bg-taupe [animation-delay:300ms]" />
+              </span>
             </li>
           )}
         </ul>
@@ -108,7 +141,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
         {showLead && <ChatLeadForm question={lastQuestion} waBase={waBase} onDone={(r) => { setLeadDone(true); push(r); }} />}
       </div>
 
-      <div className="flex items-center gap-2 border-t border-border bg-beige-light px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div className="flex shrink-0 items-center gap-2 border-t border-border bg-beige-light px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <label className="sr-only" htmlFor="chat-input">Type your question</label>
         <input
           id="chat-input"
@@ -119,10 +152,10 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
           placeholder="Ask anything about our furniture"
           autoComplete="off"
           enterKeyHint="send"
-          className="min-h-[44px] flex-1 border border-border bg-beige px-3 font-dm text-[14px] text-charcoal placeholder:text-taupe-light transition-colors focus:border-gold-dark focus:outline-none"
+          className="min-h-[48px] min-w-0 flex-1 rounded-md border border-border bg-white px-3.5 font-dm text-base text-charcoal placeholder:text-taupe-light transition-colors focus:border-ink focus:outline-none"
         />
-        <button type="button" onClick={submit} aria-label="Send" disabled={!draft.trim()} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-charcoal text-beige-light transition-colors hover:bg-charcoal-light disabled:opacity-40">
-          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        <button type="button" onClick={submit} aria-label="Send" disabled={!draft.trim() || typing} className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-ink text-white transition-colors hover:bg-charcoal disabled:bg-border disabled:text-taupe">
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
         </button>
       </div>
     </motion.div>

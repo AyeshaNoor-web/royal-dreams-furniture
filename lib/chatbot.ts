@@ -93,14 +93,16 @@ const slugOf = (m?: Match) => m?.intent.id.replace("product:", "");
 // Words that appear in almost every design name and say nothing about which one is meant.
 const COMMON = new Set(["with", "and", "the", "for", "wall", "unit", "table", "bed", "sofa", "set", "room", "in", "a", "of", "to"]);
 
-/** A design whose name shares at least two telling words with the question, for example "fireplace media wall". */
+/** A design named in the question, for example "fireplace media wall": at least two of its words match, and at least
+ *  one of them is a word of its own rather than the name of its collection ("walk in closet" alone is the collection). */
 const designFor = (t: string[]): Product | null => {
   let best: Product | null = null;
   let bestScore = 1;
   for (const p of products) {
+    const generic = new Set(tokens(p.category.title));
     const words = tokens(p.title).filter((w) => !COMMON.has(w));
-    const score = words.filter((w) => hasWord(t, w)).length;
-    if (score > bestScore) { best = p; bestScore = score; }
+    const hits = words.filter((w) => hasWord(t, w));
+    if (hits.length > bestScore && hits.some((w) => !generic.has(w))) { best = p; bestScore = hits.length; }
   }
   return best;
 };
@@ -163,6 +165,12 @@ export const answer = (text: string, topic?: string): Reply => {
     return { text: FALLBACK_ANSWER, link: WHATSAPP_CHAT, lead: true, topic };
   }
   const top = ranked[0].intent;
+
+  // A price question about a named piece is a price question, even when the piece scores higher than the word "price".
+  if (slug && ranked.some((m) => m.intent.id === "price")) {
+    const r = priceFor(slug);
+    if (r) return r;
+  }
 
   if (top.id === "price" || top.id === "stock" || top.id === "timing") {
     if (top.id === "price" && slug) {
