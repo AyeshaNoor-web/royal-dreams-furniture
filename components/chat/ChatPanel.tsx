@@ -116,7 +116,7 @@ export default function ChatPanel({ chat }: { chat: Chat }) {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); submit(); } }}
-          placeholder="Type a question, e.g. sofa, curtains, areas"
+          placeholder="Ask anything about our furniture"
           autoComplete="off"
           enterKeyHint="send"
           className="min-h-[44px] flex-1 border border-border bg-beige px-3 font-dm text-[14px] text-charcoal placeholder:text-taupe-light transition-colors focus:border-gold-dark focus:outline-none"

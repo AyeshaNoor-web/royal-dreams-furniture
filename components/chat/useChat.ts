@@ -16,8 +16,26 @@ interface Stored {
 }
 
 const KEY = "mfc-chat";
-const REPLY_DELAY = 450;
+const MIN_DELAY = 450;
 const welcome = (): ChatMessage => ({ id: 1, role: "bot", text: WELCOME });
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Asks the AI route. Returns null when it is not set up or did not answer, so the caller can fall back. */
+async function askAi(history: ChatMessage[]): Promise<Reply | "off" | null> {
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: history.slice(-12).map((m) => ({ role: m.role, text: m.text })) }),
+    });
+    const data = (await res.json().catch(() => null)) as ({ ok?: boolean; configured?: boolean } & Partial<Reply>) | null;
+    if (res.status === 503 && data?.configured === false) return "off";
+    if (!res.ok || !data?.ok || typeof data.text !== "string" || !data.text) return null;
+    return { text: data.text, link: data.link, lead: data.lead };
+  } catch {
+    return null;
+  }
+}
 
 /** Conversation state for the chat widget. Kept in sessionStorage so moving between pages does not reset it. */
 export function useChat() {
@@ -27,7 +45,12 @@ export function useChat() {
   const [leadDone, setLeadDone] = useState(false);
   const [ready, setReady] = useState(false);
   const next = useRef(2);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const latest = useRef<ChatMessage[]>(messages);
+  const busy = useRef(false);
+  // Set once the server says the AI is not configured, so later questions skip the wasted request.
+  const aiOff = useRef(false);
+
+  useEffect(() => { latest.current = messages; }, [messages]);
 
   useEffect(() => {
     try {
@@ -47,7 +70,6 @@ export function useChat() {
       // Private mode or blocked storage: the chat still works for this page view.
     }
     setReady(true);
-    return () => { if (timer.current) clearTimeout(timer.current); };
   }, []);
 
   useEffect(() => {
@@ -63,17 +85,25 @@ export function useChat() {
     setMessages((ms) => [...ms, { ...m, id: next.current++ }]);
   }, []);
 
-  const send = useCallback((text: string) => {
+  const send = useCallback(async (text: string) => {
     const t = text.trim();
-    if (!t) return;
-    const reply = answer(t);
-    setMessages((ms) => [...ms, { id: next.current++, role: "user", text: t }]);
+    if (!t || busy.current) return;
+    busy.current = true;
+    const history = [...latest.current, { id: next.current++, role: "user" as const, text: t }];
+    latest.current = history;
+    setMessages(history);
     setTyping(true);
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => {
-      setMessages((ms) => [...ms, { id: next.current++, role: "bot", ...reply }]);
-      setTyping(false);
-    }, REPLY_DELAY);
+
+    // The collection the conversation was last about, for the built-in answers.
+    const topic = [...history].reverse().find((m) => m.role === "bot" && m.topic)?.topic;
+    const [ai] = await Promise.all([aiOff.current ? Promise.resolve(null) : askAi(history), wait(MIN_DELAY)]);
+    if (ai === "off") aiOff.current = true;
+    const local = answer(t, topic);
+    const reply: Reply = ai && ai !== "off" ? { ...ai, topic: local.topic } : local;
+
+    setMessages((ms) => [...ms, { id: next.current++, role: "bot", ...reply }]);
+    setTyping(false);
+    busy.current = false;
   }, []);
 
   return { open, setOpen, messages, typing, send, push, leadDone, setLeadDone };

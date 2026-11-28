@@ -45,7 +45,6 @@ export default function ChatMessage({ message, onChip, onNavigate, hideLink = fa
           >
             {wa && <WhatsAppIcon className="h-4 w-4" />}
             {message.link.label}
-            <span aria-hidden="true">&rarr;</span>
           </a>
         )}
       </div>
