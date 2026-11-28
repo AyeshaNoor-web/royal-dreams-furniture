@@ -84,17 +84,10 @@ The first visit and the 3D design are free.
 The quote page (/quote) takes three short steps: what you need, the room and sizes, and your contact details. It then opens WhatsApp with the brief already written. A visitor can also open any design and press "Get a free quote" to attach that design to the brief.
 
 ## Questions and answers published on the site
-${faqs.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n\n")}
+${faqs.filter((_, n) => [1, 5, 6, 7].includes(n)).map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n\n")}
 
 ## Finishes
 Walnut and oak veneers, lacquer in any colour, marble and stone tops, boucle, velvet, leather and linen. Samples are brought to the home.
-
-## Pages
-- /collections: every collection, grouped by room (${groups.map((g) => g.title).join(", ")}).
-- /gallery: every design with a filter by collection.
-- /pricing: the budget calculator.
-- /quote: the quote form.
-- /about, /contact.
 
 ## Collections
 Each collection page lists its designs, and each design has its own page with all of its photos and videos.

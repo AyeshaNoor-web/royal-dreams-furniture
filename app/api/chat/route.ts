@@ -62,9 +62,9 @@ async function ask(key: string, model: string, messages: { role: string; content
     body: JSON.stringify({ model, messages, temperature: 0.4, max_tokens: 350 }),
     signal: AbortSignal.timeout(8000),
   });
-  if (!res.ok) return null;
+  if (!res.ok) return res.status;
   const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-  return data.choices?.[0]?.message?.content?.trim() || null;
+  return data.choices?.[0]?.message?.content?.trim() || 0;
 }
 
 export async function POST(req: Request) {
@@ -90,13 +90,16 @@ export async function POST(req: Request) {
   for (const q of asked) for (const s of topicsFor(q)) if (!focus.includes(s) && focus.length < 2) focus.push(s);
 
   const messages = [{ role: "system", content: systemPrompt(focus) }, ...turns];
+  // Why each model did not answer (an HTTP status, or 0 for a timeout or empty reply), to make limits easy to spot.
+  const tried: Record<string, number> = {};
   for (const model of MODELS) {
     try {
       const raw = await ask(key, model, messages);
-      if (raw) return NextResponse.json({ ok: true, ...parse(raw, last.content) });
+      if (typeof raw === "string") return NextResponse.json({ ok: true, ...parse(raw, last.content) });
+      tried[model] = raw;
     } catch {
-      // Timed out or unreachable: try the next model.
+      tried[model] = 0;
     }
   }
-  return NextResponse.json({ ok: false }, { status: 502 });
+  return NextResponse.json({ ok: false, tried }, { status: 502 });
 }
