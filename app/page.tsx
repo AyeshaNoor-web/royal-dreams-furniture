@@ -20,7 +20,7 @@ const shots: HeroShot[] = [
   { src: "/images/hero/hero-04.jpg", alt: "Backlit TV panel beside a lit oak shelf tower", label: "TV Units & Media Walls", href: "/collections/tv-units", pos: "md:object-[center_60%]" },
 ];
 
-const latest = getProduct("tv-units", "fireplace-media-wall")!;
+const latest = getProduct("walk-in-closets", "oak-closet-with-island")!;
 
 // A short, mixed row of designs so the home page shows the range without showing everything.
 const picks = [
