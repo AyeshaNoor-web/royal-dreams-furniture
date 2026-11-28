@@ -16,7 +16,7 @@ interface Turn {
 
 // Tried in order. Each model has its own free allowance, so when one is used up the next still answers,
 // and a retired model name does not break the chat. Override with CHAT_MODELS="model-a,model-b".
-const MODELS = (process.env.CHAT_MODELS ?? "llama-3.3-70b-versatile,openai/gpt-oss-120b,llama-3.1-8b-instant").split(",").map((m) => m.trim()).filter(Boolean);
+const MODELS = (process.env.CHAT_MODELS ?? "openai/gpt-oss-120b,openai/gpt-oss-20b,qwen/qwen3.8-27b").split(",").map((m) => m.trim()).filter(Boolean);
 const MAX_TURNS = 8;
 const MAX_CHARS = 500;
 
@@ -39,6 +39,8 @@ const pages = new Map(knownPages.map((p) => [p.path, p.label]));
 /** Splits the model reply into the text and the optional "LINK: path" line, and keeps only links to real pages. */
 const parse = (raw: string, lastQuestion: string) => {
   // The link line is normally last and on its own, but small models sometimes tack it onto the final sentence.
+  // Some models show their working first; drop it.
+  raw = raw.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
   const m = /\s*\**LINK:\**\s*<?([^\s>]+)>?[\s.]*$/i.exec(raw.trim());
   const target = m ? m[1] : "";
   const text = (m ? raw.trim().slice(0, m.index) : raw).replace(/\*\*/g, "").trim();
@@ -55,7 +57,7 @@ async function ask(key: string, model: string, messages: { role: string; content
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model, messages, temperature: 0.4, max_tokens: 350 }),
+    body: JSON.stringify({ model, messages, temperature: 0.4, max_tokens: 500 }),
     signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) return res.status;
