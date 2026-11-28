@@ -38,14 +38,10 @@ const pages = new Map(knownPages.map((p) => [p.path, p.label]));
 
 /** Splits the model reply into the text and the optional "LINK: path" line, and keeps only links to real pages. */
 const parse = (raw: string, lastQuestion: string) => {
-  let target = "";
-  const kept: string[] = [];
-  for (const line of raw.trim().split("\n")) {
-    const m = /^\s*\**LINK:\**\s*<?([^\s>]+)>?\s*$/i.exec(line);
-    if (m) target = m[1];
-    else kept.push(line);
-  }
-  const text = kept.join("\n").replace(/\*\*/g, "").trim();
+  // The link line is normally last and on its own, but small models sometimes tack it onto the final sentence.
+  const m = /\s*\**LINK:\**\s*<?([^\s>]+)>?[\s.]*$/i.exec(raw.trim());
+  const target = m ? m[1] : "";
+  const text = (m ? raw.trim().slice(0, m.index) : raw).replace(/\*\*/g, "").trim();
   if (!target) return { text };
   if (target.toLowerCase() === "whatsapp") {
     return { text, lead: true, link: { label: "Chat on WhatsApp", href: whatsappLink(`Hello, I asked on your website: "${lastQuestion}".`), external: true } };
